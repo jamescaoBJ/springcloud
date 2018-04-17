@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeSubjectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeSubject">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ORG_PROJECT_ID" jdbcType="INTEGER" property="orgProjectId" />
+		<result column="SUBJECT_NAME" jdbcType="VARCHAR" property="subjectName" />
+		<result column="SUBJECT_TEACHER_NAME" jdbcType="VARCHAR"
+			property="subjectTeacherName" />
+		<result column="SUBJECT_TEACHER_ORG" jdbcType="VARCHAR"
+			property="subjectTeacherOrg" />
+		<result column="SUBJECT_TEACHER_RANK" jdbcType="VARCHAR"
+			property="subjectTeacherRank" />
+		<result column="SUBJECT_HOLDER" jdbcType="VARCHAR" property="subjectHolder" />
+		<result column="SUBJECT_CLASS_SCORE" jdbcType="DOUBLE"
+			property="subjectClassScore" />
+		<result column="SUBJECT_CLASS_HOUR" jdbcType="DOUBLE" property="subjectClassHour" />
+		<result column="SUBJECT_BEGIN_DATE" jdbcType="DATE" property="subjectBeginDate" />
+		<result column="SUBJECT_END_DATE" jdbcType="DATE" property="subjectEndDate" />
+		<result column="SUBJECT_CARD_BEGIN_DATE" jdbcType="DATE"
+			property="subjectCardBeginDate" />
+		<result column="SUBJECT_CARD_END_DATE" jdbcType="DATE"
+			property="subjectCardEndDate" />
+		<result column="SUBJECT_REMARK" jdbcType="VARCHAR" property="subjectRemark" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="CREATE_ORG_ID" jdbcType="INTEGER" property="createOrgId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="LAST_UPDATE_DATE" jdbcType="DATE" property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SUBJECT_SEQ" jdbcType="INTEGER" property="subjectSeq" />
+		<result column="SUBJECT_TYPE" jdbcType="INTEGER" property="subjectType" />
+		<result column="COURSE_ID" jdbcType="INTEGER" property="courseId" />
+		<result column="EXPECT_INT" jdbcType="INTEGER" property="expectInt" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ORG_PROJECT_ID, SUBJECT_NAME, SUBJECT_TEACHER_NAME,
+		SUBJECT_TEACHER_ORG, SUBJECT_TEACHER_RANK,
+		SUBJECT_HOLDER,
+		SUBJECT_CLASS_SCORE, SUBJECT_CLASS_HOUR, SUBJECT_BEGIN_DATE,
+		SUBJECT_END_DATE,
+		SUBJECT_CARD_BEGIN_DATE, SUBJECT_CARD_END_DATE,
+		SUBJECT_REMARK, CREATE_USER_ID, CREATE_ORG_ID,
+		CREATE_DATE,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, STATUS,
+		SUBJECT_SEQ,
+		SUBJECT_TYPE,
+		COURSE_ID, EXPECT_INT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_subject
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_subject
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeSubject">
+		insert into icme_subject (ID,
+		ORG_PROJECT_ID, SUBJECT_NAME,
+		SUBJECT_TEACHER_NAME,
+		SUBJECT_TEACHER_ORG,
+		SUBJECT_TEACHER_RANK, SUBJECT_HOLDER,
+		SUBJECT_CLASS_SCORE,
+		SUBJECT_CLASS_HOUR, SUBJECT_BEGIN_DATE,
+		SUBJECT_END_DATE,
+		SUBJECT_CARD_BEGIN_DATE, SUBJECT_CARD_END_DATE,
+		SUBJECT_REMARK,
+		CREATE_USER_ID, CREATE_ORG_ID, CREATE_DATE,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, STATUS,
+		SUBJECT_SEQ,
+		SUBJECT_TYPE, COURSE_ID,
+		EXPECT_INT)
+		values (#{id,jdbcType=INTEGER},
+		#{orgProjectId,jdbcType=INTEGER},
+		#{subjectName,jdbcType=VARCHAR},
+		#{subjectTeacherName,jdbcType=VARCHAR},
+		#{subjectTeacherOrg,jdbcType=VARCHAR},
+		#{subjectTeacherRank,jdbcType=VARCHAR},
+		#{subjectHolder,jdbcType=VARCHAR},
+		#{subjectClassScore,jdbcType=DOUBLE},
+		#{subjectClassHour,jdbcType=DOUBLE},
+		#{subjectBeginDate,jdbcType=DATE}, #{subjectEndDate,jdbcType=DATE},
+		#{subjectCardBeginDate,jdbcType=DATE},
+		#{subjectCardEndDate,jdbcType=DATE},
+		#{subjectRemark,jdbcType=VARCHAR},
+		#{createUserId,jdbcType=INTEGER},
+		#{createOrgId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{lastUpdateDate,jdbcType=DATE}, #{lastUpdateUserId,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{subjectSeq,jdbcType=INTEGER},
+		#{subjectType,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER},
+		#{expectInt,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeSubject">
+		insert into icme_subject
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orgProjectId != null">
+				ORG_PROJECT_ID,
+			</if>
+			<if test="subjectName != null">
+				SUBJECT_NAME,
+			</if>
+			<if test="subjectTeacherName != null">
+				SUBJECT_TEACHER_NAME,
+			</if>
+			<if test="subjectTeacherOrg != null">
+				SUBJECT_TEACHER_ORG,
+			</if>
+			<if test="subjectTeacherRank != null">
+				SUBJECT_TEACHER_RANK,
+			</if>
+			<if test="subjectHolder != null">
+				SUBJECT_HOLDER,
+			</if>
+			<if test="subjectClassScore != null">
+				SUBJECT_CLASS_SCORE,
+			</if>
+			<if test="subjectClassHour != null">
+				SUBJECT_CLASS_HOUR,
+			</if>
+			<if test="subjectBeginDate != null">
+				SUBJECT_BEGIN_DATE,
+			</if>
+			<if test="subjectEndDate != null">
+				SUBJECT_END_DATE,
+			</if>
+			<if test="subjectCardBeginDate != null">
+				SUBJECT_CARD_BEGIN_DATE,
+			</if>
+			<if test="subjectCardEndDate != null">
+				SUBJECT_CARD_END_DATE,
+			</if>
+			<if test="subjectRemark != null">
+				SUBJECT_REMARK,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="createOrgId != null">
+				CREATE_ORG_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="subjectSeq != null">
+				SUBJECT_SEQ,
+			</if>
+			<if test="subjectType != null">
+				SUBJECT_TYPE,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="expectInt != null">
+				EXPECT_INT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orgProjectId != null">
+				#{orgProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="subjectName != null">
+				#{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectTeacherName != null">
+				#{subjectTeacherName,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectTeacherOrg != null">
+				#{subjectTeacherOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectTeacherRank != null">
+				#{subjectTeacherRank,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectHolder != null">
+				#{subjectHolder,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectClassScore != null">
+				#{subjectClassScore,jdbcType=DOUBLE},
+			</if>
+			<if test="subjectClassHour != null">
+				#{subjectClassHour,jdbcType=DOUBLE},
+			</if>
+			<if test="subjectBeginDate != null">
+				#{subjectBeginDate,jdbcType=DATE},
+			</if>
+			<if test="subjectEndDate != null">
+				#{subjectEndDate,jdbcType=DATE},
+			</if>
+			<if test="subjectCardBeginDate != null">
+				#{subjectCardBeginDate,jdbcType=DATE},
+			</if>
+			<if test="subjectCardEndDate != null">
+				#{subjectCardEndDate,jdbcType=DATE},
+			</if>
+			<if test="subjectRemark != null">
+				#{subjectRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createOrgId != null">
+				#{createOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=DATE},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="subjectSeq != null">
+				#{subjectSeq,jdbcType=INTEGER},
+			</if>
+			<if test="subjectType != null">
+				#{subjectType,jdbcType=INTEGER},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="expectInt != null">
+				#{expectInt,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeSubject">
+		update icme_subject
+		<set>
+			<if test="orgProjectId != null">
+				ORG_PROJECT_ID = #{orgProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="subjectName != null">
+				SUBJECT_NAME = #{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectTeacherName != null">
+				SUBJECT_TEACHER_NAME =
+				#{subjectTeacherName,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectTeacherOrg != null">
+				SUBJECT_TEACHER_ORG =
+				#{subjectTeacherOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectTeacherRank != null">
+				SUBJECT_TEACHER_RANK =
+				#{subjectTeacherRank,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectHolder != null">
+				SUBJECT_HOLDER = #{subjectHolder,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectClassScore != null">
+				SUBJECT_CLASS_SCORE =
+				#{subjectClassScore,jdbcType=DOUBLE},
+			</if>
+			<if test="subjectClassHour != null">
+				SUBJECT_CLASS_HOUR = #{subjectClassHour,jdbcType=DOUBLE},
+			</if>
+			<if test="subjectBeginDate != null">
+				SUBJECT_BEGIN_DATE = #{subjectBeginDate,jdbcType=DATE},
+			</if>
+			<if test="subjectEndDate != null">
+				SUBJECT_END_DATE = #{subjectEndDate,jdbcType=DATE},
+			</if>
+			<if test="subjectCardBeginDate != null">
+				SUBJECT_CARD_BEGIN_DATE =
+				#{subjectCardBeginDate,jdbcType=DATE},
+			</if>
+			<if test="subjectCardEndDate != null">
+				SUBJECT_CARD_END_DATE =
+				#{subjectCardEndDate,jdbcType=DATE},
+			</if>
+			<if test="subjectRemark != null">
+				SUBJECT_REMARK = #{subjectRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createOrgId != null">
+				CREATE_ORG_ID = #{createOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=DATE},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID =
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="subjectSeq != null">
+				SUBJECT_SEQ = #{subjectSeq,jdbcType=INTEGER},
+			</if>
+			<if test="subjectType != null">
+				SUBJECT_TYPE = #{subjectType,jdbcType=INTEGER},
+			</if>
+			<if test="courseId != null">
+				COURSE_ID = #{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="expectInt != null">
+				EXPECT_INT = #{expectInt,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeSubject">
+		update
+		icme_subject
+		set ORG_PROJECT_ID = #{orgProjectId,jdbcType=INTEGER},
+		SUBJECT_NAME = #{subjectName,jdbcType=VARCHAR},
+		SUBJECT_TEACHER_NAME =
+		#{subjectTeacherName,jdbcType=VARCHAR},
+		SUBJECT_TEACHER_ORG =
+		#{subjectTeacherOrg,jdbcType=VARCHAR},
+		SUBJECT_TEACHER_RANK =
+		#{subjectTeacherRank,jdbcType=VARCHAR},
+		SUBJECT_HOLDER =
+		#{subjectHolder,jdbcType=VARCHAR},
+		SUBJECT_CLASS_SCORE =
+		#{subjectClassScore,jdbcType=DOUBLE},
+		SUBJECT_CLASS_HOUR =
+		#{subjectClassHour,jdbcType=DOUBLE},
+		SUBJECT_BEGIN_DATE =
+		#{subjectBeginDate,jdbcType=DATE},
+		SUBJECT_END_DATE =
+		#{subjectEndDate,jdbcType=DATE},
+		SUBJECT_CARD_BEGIN_DATE =
+		#{subjectCardBeginDate,jdbcType=DATE},
+		SUBJECT_CARD_END_DATE =
+		#{subjectCardEndDate,jdbcType=DATE},
+		SUBJECT_REMARK =
+		#{subjectRemark,jdbcType=VARCHAR},
+		CREATE_USER_ID =
+		#{createUserId,jdbcType=INTEGER},
+		CREATE_ORG_ID =
+		#{createOrgId,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_DATE =
+		#{lastUpdateDate,jdbcType=DATE},
+		LAST_UPDATE_USER_ID =
+		#{lastUpdateUserId,jdbcType=INTEGER},
+		STATUS =
+		#{status,jdbcType=INTEGER},
+		SUBJECT_SEQ =
+		#{subjectSeq,jdbcType=INTEGER},
+		SUBJECT_TYPE =
+		#{subjectType,jdbcType=INTEGER},
+		COURSE_ID =
+		#{courseId,jdbcType=INTEGER},
+		EXPECT_INT =
+		#{expectInt,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentSubMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentSub">
+		<result column="SUB_ID" jdbcType="INTEGER" property="subId" />
+		<result column="USER_NUM" jdbcType="VARCHAR" property="userNum" />
+		<result column="SUB_NAME" jdbcType="VARCHAR" property="subName" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentSub">
+		insert into train_content_sub (SUB_ID, USER_NUM, SUB_NAME
+		)
+		values (#{subId,jdbcType=INTEGER}, #{userNum,jdbcType=VARCHAR},
+		#{subName,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentSub">
+		insert into train_content_sub
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="subId != null">
+				SUB_ID,
+			</if>
+			<if test="userNum != null">
+				USER_NUM,
+			</if>
+			<if test="subName != null">
+				SUB_NAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="subId != null">
+				#{subId,jdbcType=INTEGER},
+			</if>
+			<if test="userNum != null">
+				#{userNum,jdbcType=VARCHAR},
+			</if>
+			<if test="subName != null">
+				#{subName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

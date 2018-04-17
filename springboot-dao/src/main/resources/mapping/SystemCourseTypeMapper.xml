@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCourseTypeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCourseType">
+		<result column="COURSE_TYPE" jdbcType="INTEGER" property="courseType" />
+		<result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName" />
+		<result column="WEIGHT" jdbcType="INTEGER" property="weight" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCourseType">
+		insert into system_course_type (COURSE_TYPE, TYPE_NAME, WEIGHT,
+		REMARK)
+		values (#{courseType,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR},
+		#{weight,jdbcType=INTEGER},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCourseType">
+		insert into system_course_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="courseType != null">
+				COURSE_TYPE,
+			</if>
+			<if test="typeName != null">
+				TYPE_NAME,
+			</if>
+			<if test="weight != null">
+				WEIGHT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="courseType != null">
+				#{courseType,jdbcType=INTEGER},
+			</if>
+			<if test="typeName != null">
+				#{typeName,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				#{weight,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

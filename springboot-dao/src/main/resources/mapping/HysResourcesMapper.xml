@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.HysResourcesMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.HysResources">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="VALUE" jdbcType="VARCHAR" property="value" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE, NAME, VALUE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hys_resources
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		hys_resources
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.HysResources">
+		insert into hys_resources (ID,
+		TYPE, NAME,
+		VALUE)
+		values (#{id,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{value,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.HysResources">
+		insert into hys_resources
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="value != null">
+				VALUE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="value != null">
+				#{value,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.HysResources">
+		update hys_resources
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="value != null">
+				VALUE = #{value,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.HysResources">
+		update
+		hys_resources
+		set TYPE = #{type,jdbcType=INTEGER},
+		NAME =
+		#{name,jdbcType=VARCHAR},
+		VALUE = #{value,jdbcType=VARCHAR}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

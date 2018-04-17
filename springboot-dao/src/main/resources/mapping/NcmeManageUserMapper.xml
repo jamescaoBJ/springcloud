@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeManageUserMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeManageUser">
+		<result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="ORDER_ID" jdbcType="INTEGER" property="orderId" />
+		<result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
+		<result column="DEPT" jdbcType="VARCHAR" property="dept" />
+		<result column="JOBTITLE" jdbcType="VARCHAR" property="jobtitle" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="DISTRICT_ID" jdbcType="VARCHAR" property="districtId" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeManageUser">
+		insert into ncme_manage_user (LOGIN_NAME, PASSWORD, ORDER_ID,
+		REAL_NAME, DEPT, JOBTITLE,
+		DESCRIPTION, DISTRICT_ID, TYPE,
+		STATUS)
+		values (#{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{orderId,jdbcType=INTEGER},
+		#{realName,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{jobtitle,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR}, #{districtId,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeManageUser">
+		insert into ncme_manage_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="loginName != null">
+				LOGIN_NAME,
+			</if>
+			<if test="password != null">
+				PASSWORD,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="realName != null">
+				REAL_NAME,
+			</if>
+			<if test="dept != null">
+				DEPT,
+			</if>
+			<if test="jobtitle != null">
+				JOBTITLE,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="districtId != null">
+				DISTRICT_ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="dept != null">
+				#{dept,jdbcType=VARCHAR},
+			</if>
+			<if test="jobtitle != null">
+				#{jobtitle,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="districtId != null">
+				#{districtId,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

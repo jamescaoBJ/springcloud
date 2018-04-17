@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeExamOrgprojectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeExamOrgproject">
+		<result column="EXAM_ID" jdbcType="INTEGER" property="examId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="ORGPROJECT_ID" jdbcType="INTEGER" property="orgprojectId" />
+		<result column="TOTAL_SCORE" jdbcType="DOUBLE" property="totalScore" />
+		<result column="STANDARD_SCORE" jdbcType="DOUBLE" property="standardScore" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeExamOrgproject">
+		insert into
+		icme_exam_orgproject (EXAM_ID, SITE_ID, ORGPROJECT_ID,
+		TOTAL_SCORE,
+		STANDARD_SCORE, CREATE_DATE
+		)
+		values (#{examId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{orgprojectId,jdbcType=INTEGER},
+		#{totalScore,jdbcType=DOUBLE}, #{standardScore,jdbcType=DOUBLE},
+		#{createDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeExamOrgproject">
+		insert into icme_exam_orgproject
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="examId != null">
+				EXAM_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="orgprojectId != null">
+				ORGPROJECT_ID,
+			</if>
+			<if test="totalScore != null">
+				TOTAL_SCORE,
+			</if>
+			<if test="standardScore != null">
+				STANDARD_SCORE,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="examId != null">
+				#{examId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="orgprojectId != null">
+				#{orgprojectId,jdbcType=INTEGER},
+			</if>
+			<if test="totalScore != null">
+				#{totalScore,jdbcType=DOUBLE},
+			</if>
+			<if test="standardScore != null">
+				#{standardScore,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeOrgProjectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeOrgProject">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="PROJECT_ID" jdbcType="INTEGER" property="projectId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ORG_ID, PROJECT_ID, CREATE_DATE, CREATE_USER_ID,
+		STATUS,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID,
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_org_project
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_org_project
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeOrgProject">
+		insert into icme_org_project
+		(ID, ORG_ID, PROJECT_ID,
+		CREATE_DATE, CREATE_USER_ID, STATUS,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, REMARK
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER},
+		#{projectId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{lastUpdateUserId,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeOrgProject">
+		insert into icme_org_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="projectId != null">
+				PROJECT_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="projectId != null">
+				#{projectId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeOrgProject">
+		update icme_org_project
+		<set>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="projectId != null">
+				PROJECT_ID = #{projectId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID =
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeOrgProject">
+		update
+		icme_org_project
+		set ORG_ID = #{orgId,jdbcType=INTEGER},
+		PROJECT_ID =
+		#{projectId,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		CREATE_USER_ID =
+		#{createUserId,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+		REMARK =
+		#{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

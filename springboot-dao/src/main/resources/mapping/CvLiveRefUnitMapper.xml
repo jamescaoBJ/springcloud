@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvLiveRefUnitMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvLiveRefUnit">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="cv_id" jdbcType="INTEGER" property="cvId" />
+		<result column="unit_id" jdbcType="INTEGER" property="unitId" />
+		<result column="courseware_no" jdbcType="VARCHAR" property="coursewareNo" />
+		<result column="class_no" jdbcType="VARCHAR" property="classNo" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, cv_id, unit_id, courseware_no, class_no
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_live_ref_unit
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_live_ref_unit
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvLiveRefUnit">
+		insert into cv_live_ref_unit
+		(id, cv_id, unit_id,
+		courseware_no, class_no)
+		values
+		(#{id,jdbcType=INTEGER}, #{cvId,jdbcType=INTEGER},
+		#{unitId,jdbcType=INTEGER},
+		#{coursewareNo,jdbcType=VARCHAR},
+		#{classNo,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvLiveRefUnit">
+		insert into cv_live_ref_unit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cvId != null">
+				cv_id,
+			</if>
+			<if test="unitId != null">
+				unit_id,
+			</if>
+			<if test="coursewareNo != null">
+				courseware_no,
+			</if>
+			<if test="classNo != null">
+				class_no,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="unitId != null">
+				#{unitId,jdbcType=INTEGER},
+			</if>
+			<if test="coursewareNo != null">
+				#{coursewareNo,jdbcType=VARCHAR},
+			</if>
+			<if test="classNo != null">
+				#{classNo,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvLiveRefUnit">
+		update cv_live_ref_unit
+		<set>
+			<if test="cvId != null">
+				cv_id = #{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="unitId != null">
+				unit_id = #{unitId,jdbcType=INTEGER},
+			</if>
+			<if test="coursewareNo != null">
+				courseware_no = #{coursewareNo,jdbcType=VARCHAR},
+			</if>
+			<if test="classNo != null">
+				class_no = #{classNo,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvLiveRefUnit">
+		update
+		cv_live_ref_unit
+		set cv_id = #{cvId,jdbcType=INTEGER},
+		unit_id =
+		#{unitId,jdbcType=INTEGER},
+		courseware_no =
+		#{coursewareNo,jdbcType=VARCHAR},
+		class_no =
+		#{classNo,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

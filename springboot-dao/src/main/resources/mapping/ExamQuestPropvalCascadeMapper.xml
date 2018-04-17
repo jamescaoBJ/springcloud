@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamQuestPropvalCascadeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.ExamQuestPropvalCascade">
+		<result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
+		<result column="PROPVAL_NAME" jdbcType="VARCHAR" property="propvalName" />
+		<result column="PROPVAL_ID" jdbcType="VARCHAR" property="propvalId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamQuestPropvalCascade">
+		insert into
+		exam_quest_propval_cascade (QUESTION_ID, PROPVAL_NAME,
+		PROPVAL_ID
+		)
+		values (#{questionId,jdbcType=INTEGER},
+		#{propvalName,jdbcType=VARCHAR},
+		#{propvalId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamQuestPropvalCascade">
+		insert into exam_quest_propval_cascade
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="questionId != null">
+				QUESTION_ID,
+			</if>
+			<if test="propvalName != null">
+				PROPVAL_NAME,
+			</if>
+			<if test="propvalId != null">
+				PROPVAL_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="questionId != null">
+				#{questionId,jdbcType=INTEGER},
+			</if>
+			<if test="propvalName != null">
+				#{propvalName,jdbcType=VARCHAR},
+			</if>
+			<if test="propvalId != null">
+				#{propvalId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

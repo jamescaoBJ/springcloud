@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtSqlStatementMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooAtSqlStatement">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="HASH_VALUE" jdbcType="INTEGER" property="hashValue" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="SQL_STATEMENT_FIRST2000" jdbcType="VARCHAR"
+			property="sqlStatementFirst2000" />
+		<result column="PARSE_COUNT" jdbcType="INTEGER" property="parseCount" />
+		<result column="PARSE_ELAPSED" jdbcType="INTEGER" property="parseElapsed" />
+		<result column="PARSE_CPU" jdbcType="INTEGER" property="parseCpu" />
+		<result column="PARSE_PHYSICAL_READS" jdbcType="INTEGER"
+			property="parsePhysicalReads" />
+		<result column="PARSE_CURRENT_READS" jdbcType="INTEGER"
+			property="parseCurrentReads" />
+		<result column="PARSE_CONSISTENT_READS" jdbcType="INTEGER"
+			property="parseConsistentReads" />
+		<result column="PARSE_ROWS" jdbcType="INTEGER" property="parseRows" />
+		<result column="EXECUTE_COUNT" jdbcType="INTEGER" property="executeCount" />
+		<result column="EXECUTE_ELAPSED" jdbcType="INTEGER" property="executeElapsed" />
+		<result column="EXECUTE_CPU" jdbcType="INTEGER" property="executeCpu" />
+		<result column="EXECUTE_PHYSICAL_READS" jdbcType="INTEGER"
+			property="executePhysicalReads" />
+		<result column="EXECUTE_CURRENT_READS" jdbcType="INTEGER"
+			property="executeCurrentReads" />
+		<result column="EXECUTE_CONSISTENT_READS" jdbcType="INTEGER"
+			property="executeConsistentReads" />
+		<result column="EXECUTE_ROWS" jdbcType="INTEGER" property="executeRows" />
+		<result column="FETCH_COUNT" jdbcType="INTEGER" property="fetchCount" />
+		<result column="FETCH_ELAPSED" jdbcType="INTEGER" property="fetchElapsed" />
+		<result column="FETCH_CPU" jdbcType="INTEGER" property="fetchCpu" />
+		<result column="FETCH_PHYSICAL_READS" jdbcType="INTEGER"
+			property="fetchPhysicalReads" />
+		<result column="FETCH_CURRENT_READS" jdbcType="INTEGER"
+			property="fetchCurrentReads" />
+		<result column="FETCH_CONSISTENT_READS" jdbcType="INTEGER"
+			property="fetchConsistentReads" />
+		<result column="FETCH_ROWS" jdbcType="INTEGER" property="fetchRows" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtSqlStatement">
+		insert into quest_soo_at_sql_statement (TRACE_FILE_ID, SQL_ID, HASH_VALUE,
+		ADDRESS, SQL_STATEMENT_FIRST2000, PARSE_COUNT,
+		PARSE_ELAPSED, PARSE_CPU, PARSE_PHYSICAL_READS,
+		PARSE_CURRENT_READS, PARSE_CONSISTENT_READS,
+		PARSE_ROWS, EXECUTE_COUNT, EXECUTE_ELAPSED,
+		EXECUTE_CPU, EXECUTE_PHYSICAL_READS, EXECUTE_CURRENT_READS,
+		EXECUTE_CONSISTENT_READS, EXECUTE_ROWS, FETCH_COUNT,
+		FETCH_ELAPSED, FETCH_CPU, FETCH_PHYSICAL_READS,
+		FETCH_CURRENT_READS, FETCH_CONSISTENT_READS,
+		FETCH_ROWS)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{hashValue,jdbcType=INTEGER},
+		#{address,jdbcType=VARCHAR}, #{sqlStatementFirst2000,jdbcType=VARCHAR},
+		#{parseCount,jdbcType=INTEGER},
+		#{parseElapsed,jdbcType=INTEGER}, #{parseCpu,jdbcType=INTEGER}, #{parsePhysicalReads,jdbcType=INTEGER},
+		#{parseCurrentReads,jdbcType=INTEGER},
+		#{parseConsistentReads,jdbcType=INTEGER},
+		#{parseRows,jdbcType=INTEGER}, #{executeCount,jdbcType=INTEGER},
+		#{executeElapsed,jdbcType=INTEGER},
+		#{executeCpu,jdbcType=INTEGER}, #{executePhysicalReads,jdbcType=INTEGER},
+		#{executeCurrentReads,jdbcType=INTEGER},
+		#{executeConsistentReads,jdbcType=INTEGER},
+		#{executeRows,jdbcType=INTEGER}, #{fetchCount,jdbcType=INTEGER},
+		#{fetchElapsed,jdbcType=INTEGER}, #{fetchCpu,jdbcType=INTEGER},
+		#{fetchPhysicalReads,jdbcType=INTEGER},
+		#{fetchCurrentReads,jdbcType=INTEGER},
+		#{fetchConsistentReads,jdbcType=INTEGER},
+		#{fetchRows,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtSqlStatement">
+		insert into quest_soo_at_sql_statement
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="hashValue != null">
+				HASH_VALUE,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="sqlStatementFirst2000 != null">
+				SQL_STATEMENT_FIRST2000,
+			</if>
+			<if test="parseCount != null">
+				PARSE_COUNT,
+			</if>
+			<if test="parseElapsed != null">
+				PARSE_ELAPSED,
+			</if>
+			<if test="parseCpu != null">
+				PARSE_CPU,
+			</if>
+			<if test="parsePhysicalReads != null">
+				PARSE_PHYSICAL_READS,
+			</if>
+			<if test="parseCurrentReads != null">
+				PARSE_CURRENT_READS,
+			</if>
+			<if test="parseConsistentReads != null">
+				PARSE_CONSISTENT_READS,
+			</if>
+			<if test="parseRows != null">
+				PARSE_ROWS,
+			</if>
+			<if test="executeCount != null">
+				EXECUTE_COUNT,
+			</if>
+			<if test="executeElapsed != null">
+				EXECUTE_ELAPSED,
+			</if>
+			<if test="executeCpu != null">
+				EXECUTE_CPU,
+			</if>
+			<if test="executePhysicalReads != null">
+				EXECUTE_PHYSICAL_READS,
+			</if>
+			<if test="executeCurrentReads != null">
+				EXECUTE_CURRENT_READS,
+			</if>
+			<if test="executeConsistentReads != null">
+				EXECUTE_CONSISTENT_READS,
+			</if>
+			<if test="executeRows != null">
+				EXECUTE_ROWS,
+			</if>
+			<if test="fetchCount != null">
+				FETCH_COUNT,
+			</if>
+			<if test="fetchElapsed != null">
+				FETCH_ELAPSED,
+			</if>
+			<if test="fetchCpu != null">
+				FETCH_CPU,
+			</if>
+			<if test="fetchPhysicalReads != null">
+				FETCH_PHYSICAL_READS,
+			</if>
+			<if test="fetchCurrentReads != null">
+				FETCH_CURRENT_READS,
+			</if>
+			<if test="fetchConsistentReads != null">
+				FETCH_CONSISTENT_READS,
+			</if>
+			<if test="fetchRows != null">
+				FETCH_ROWS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="hashValue != null">
+				#{hashValue,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="sqlStatementFirst2000 != null">
+				#{sqlStatementFirst2000,jdbcType=VARCHAR},
+			</if>
+			<if test="parseCount != null">
+				#{parseCount,jdbcType=INTEGER},
+			</if>
+			<if test="parseElapsed != null">
+				#{parseElapsed,jdbcType=INTEGER},
+			</if>
+			<if test="parseCpu != null">
+				#{parseCpu,jdbcType=INTEGER},
+			</if>
+			<if test="parsePhysicalReads != null">
+				#{parsePhysicalReads,jdbcType=INTEGER},
+			</if>
+			<if test="parseCurrentReads != null">
+				#{parseCurrentReads,jdbcType=INTEGER},
+			</if>
+			<if test="parseConsistentReads != null">
+				#{parseConsistentReads,jdbcType=INTEGER},
+			</if>
+			<if test="parseRows != null">
+				#{parseRows,jdbcType=INTEGER},
+			</if>
+			<if test="executeCount != null">
+				#{executeCount,jdbcType=INTEGER},
+			</if>
+			<if test="executeElapsed != null">
+				#{executeElapsed,jdbcType=INTEGER},
+			</if>
+			<if test="executeCpu != null">
+				#{executeCpu,jdbcType=INTEGER},
+			</if>
+			<if test="executePhysicalReads != null">
+				#{executePhysicalReads,jdbcType=INTEGER},
+			</if>
+			<if test="executeCurrentReads != null">
+				#{executeCurrentReads,jdbcType=INTEGER},
+			</if>
+			<if test="executeConsistentReads != null">
+				#{executeConsistentReads,jdbcType=INTEGER},
+			</if>
+			<if test="executeRows != null">
+				#{executeRows,jdbcType=INTEGER},
+			</if>
+			<if test="fetchCount != null">
+				#{fetchCount,jdbcType=INTEGER},
+			</if>
+			<if test="fetchElapsed != null">
+				#{fetchElapsed,jdbcType=INTEGER},
+			</if>
+			<if test="fetchCpu != null">
+				#{fetchCpu,jdbcType=INTEGER},
+			</if>
+			<if test="fetchPhysicalReads != null">
+				#{fetchPhysicalReads,jdbcType=INTEGER},
+			</if>
+			<if test="fetchCurrentReads != null">
+				#{fetchCurrentReads,jdbcType=INTEGER},
+			</if>
+			<if test="fetchConsistentReads != null">
+				#{fetchConsistentReads,jdbcType=INTEGER},
+			</if>
+			<if test="fetchRows != null">
+				#{fetchRows,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

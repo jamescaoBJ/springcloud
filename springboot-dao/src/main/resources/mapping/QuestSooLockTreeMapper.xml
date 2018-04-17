@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooLockTreeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooLockTree">
+		<result column="USER_AUDSID" jdbcType="INTEGER" property="userAudsid" />
+		<result column="SEQUENCE_ID" jdbcType="INTEGER" property="sequenceId" />
+		<result column="AGENT_ID" jdbcType="VARCHAR" property="agentId" />
+		<result column="TREE_DEPTH" jdbcType="INTEGER" property="treeDepth" />
+		<result column="SID" jdbcType="INTEGER" property="sid" />
+		<result column="SERIAL" jdbcType="INTEGER" property="serial" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="username" />
+		<result column="PID" jdbcType="VARCHAR" property="pid" />
+		<result column="LOCK_TYPE" jdbcType="VARCHAR" property="lockType" />
+		<result column="REQUEST_MODE" jdbcType="VARCHAR" property="requestMode" />
+		<result column="OBJECT_NAME" jdbcType="VARCHAR" property="objectName" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooLockTree">
+		insert into quest_soo_lock_tree (USER_AUDSID, SEQUENCE_ID, AGENT_ID,
+		TREE_DEPTH, SID, SERIAL,
+		USERNAME, PID, LOCK_TYPE,
+		REQUEST_MODE, OBJECT_NAME)
+		values (#{userAudsid,jdbcType=INTEGER}, #{sequenceId,jdbcType=INTEGER},
+		#{agentId,jdbcType=VARCHAR},
+		#{treeDepth,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{serial,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR},
+		#{lockType,jdbcType=VARCHAR},
+		#{requestMode,jdbcType=VARCHAR}, #{objectName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooLockTree">
+		insert into quest_soo_lock_tree
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userAudsid != null">
+				USER_AUDSID,
+			</if>
+			<if test="sequenceId != null">
+				SEQUENCE_ID,
+			</if>
+			<if test="agentId != null">
+				AGENT_ID,
+			</if>
+			<if test="treeDepth != null">
+				TREE_DEPTH,
+			</if>
+			<if test="sid != null">
+				SID,
+			</if>
+			<if test="serial != null">
+				SERIAL,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="pid != null">
+				PID,
+			</if>
+			<if test="lockType != null">
+				LOCK_TYPE,
+			</if>
+			<if test="requestMode != null">
+				REQUEST_MODE,
+			</if>
+			<if test="objectName != null">
+				OBJECT_NAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userAudsid != null">
+				#{userAudsid,jdbcType=INTEGER},
+			</if>
+			<if test="sequenceId != null">
+				#{sequenceId,jdbcType=INTEGER},
+			</if>
+			<if test="agentId != null">
+				#{agentId,jdbcType=VARCHAR},
+			</if>
+			<if test="treeDepth != null">
+				#{treeDepth,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="serial != null">
+				#{serial,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=VARCHAR},
+			</if>
+			<if test="lockType != null">
+				#{lockType,jdbcType=VARCHAR},
+			</if>
+			<if test="requestMode != null">
+				#{requestMode,jdbcType=VARCHAR},
+			</if>
+			<if test="objectName != null">
+				#{objectName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemAdminOrganMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemAdminOrgan">
+		<result column="ORGAN_ID" jdbcType="VARCHAR" property="organId" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="SHORTNAME" jdbcType="VARCHAR" property="shortname" />
+		<result column="DISTRICT_ID" jdbcType="VARCHAR" property="districtId" />
+		<result column="POLICY_TITLE" jdbcType="VARCHAR" property="policyTitle" />
+		<result column="POLICY_CONTENT" jdbcType="VARCHAR" property="policyContent" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="USER_PASSWD" jdbcType="VARCHAR" property="userPasswd" />
+		<result column="FORCE_TYPE" jdbcType="INTEGER" property="forceType" />
+		<result column="FORCE_CONTENT" jdbcType="VARCHAR" property="forceContent" />
+		<result column="OFFICE_TEL" jdbcType="VARCHAR" property="officeTel" />
+		<result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemAdminOrgan">
+		insert into system_admin_organ (ORGAN_ID, NAME, DESCRIPTION,
+		SHORTNAME, DISTRICT_ID, POLICY_TITLE,
+		POLICY_CONTENT, USER_NAME, USER_PASSWD,
+		FORCE_TYPE, FORCE_CONTENT, OFFICE_TEL,
+		CARD_TYPE, ORG_ID, STATUS
+		)
+		values (#{organId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{shortname,jdbcType=VARCHAR}, #{districtId,jdbcType=VARCHAR}, #{policyTitle,jdbcType=VARCHAR},
+		#{policyContent,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+		#{userPasswd,jdbcType=VARCHAR},
+		#{forceType,jdbcType=INTEGER}, #{forceContent,jdbcType=VARCHAR}, #{officeTel,jdbcType=VARCHAR},
+		#{cardType,jdbcType=VARCHAR}, #{orgId,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemAdminOrgan">
+		insert into system_admin_organ
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="organId != null">
+				ORGAN_ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="shortname != null">
+				SHORTNAME,
+			</if>
+			<if test="districtId != null">
+				DISTRICT_ID,
+			</if>
+			<if test="policyTitle != null">
+				POLICY_TITLE,
+			</if>
+			<if test="policyContent != null">
+				POLICY_CONTENT,
+			</if>
+			<if test="userName != null">
+				USER_NAME,
+			</if>
+			<if test="userPasswd != null">
+				USER_PASSWD,
+			</if>
+			<if test="forceType != null">
+				FORCE_TYPE,
+			</if>
+			<if test="forceContent != null">
+				FORCE_CONTENT,
+			</if>
+			<if test="officeTel != null">
+				OFFICE_TEL,
+			</if>
+			<if test="cardType != null">
+				CARD_TYPE,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="organId != null">
+				#{organId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="shortname != null">
+				#{shortname,jdbcType=VARCHAR},
+			</if>
+			<if test="districtId != null">
+				#{districtId,jdbcType=VARCHAR},
+			</if>
+			<if test="policyTitle != null">
+				#{policyTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="policyContent != null">
+				#{policyContent,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPasswd != null">
+				#{userPasswd,jdbcType=VARCHAR},
+			</if>
+			<if test="forceType != null">
+				#{forceType,jdbcType=INTEGER},
+			</if>
+			<if test="forceContent != null">
+				#{forceContent,jdbcType=VARCHAR},
+			</if>
+			<if test="officeTel != null">
+				#{officeTel,jdbcType=VARCHAR},
+			</if>
+			<if test="cardType != null">
+				#{cardType,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,58 @@
+ ${AnsiColor.BRIGHT_YELLOW}
+               K..::::.,G.                                                                          
+            :::::::::::.,:G                                                                         
+           L,::::::::.::::.Dij#                                                                     
+       tttt.:::::::::::.:::.ttjiW                                                                   
+      ttiDi::::::::::::::::.Gf#i;#                                                                  
+     ,t#jfW:::::::::::::::::Dittit                                                                  
+    jiftii;.:::::::::::::::.iiii#tW                                                                 
+    KtDii;t#,::::::::::::::KtiiiiiE                                                                 
+    Li;i;Kt;:::::::::::::::;tE;iLt#                                                                 
+    KLGii;ttj:::::::::::::.tttiitt:                                                                 
+    Lffi,itt,::::::::,::,:jtttj#ji                                                                  
+     GLGLtttt#:,:f.::K,::#ttttjtt;                                                                  
+      fGtttttjG::.::::::jtjtttijK                                                         .         
+       jjtttt#.G,..:.::E jjttttL                                                              .#    
+       WfttttE WW K:.:#W;Ktttttt                                                          :.  Wf    
+       #LttttDDDttKGEttKEEDtttt#                                                     .   .:;. :t    
+       tLttttDEWt#:;i,ttEK;ttttj                                                     ;,E G:: f:;    
+        LftttDG,tDiiiitt##ttttt;                                                      .:#E::W.::    
+        fLtttttttjiGfittitttttjtE                                                     D:::::i:::    
+        LGfttiLKL,      :#ftfL#tt.                  :                                  ::::::::;    
+         fLf E       j  .W ijL;tii            . # :::::,:t                             f:::::::t    
+         iL..j. E #   #  ;  L#tttttE.         #;;;;Wt;itK:                             ;:::::::G    
+          #i:GL L:: #: :L#::fjttttttiK      t.;iWittttttttD.W                           :::::::#    
+          .j ., ., :: ,:,;.WLttttttttttfG,:.:KjtittttttitttiLK                          :::::::G    
+             # iGitttii,fGELtttttttttittttttttttttttttttiitttWG                         ,:::::;     
+               D#fi;;tE#jfDftttttttttttttttttttttttttttttttttt#E                        :::t:::     
+               GDWLLLLLLLLEtttttttttttttttttttttttttttttttttttj##                      ,:i:.::E     
+               EGGfLLLLLLjKttttttttttttttttttttttttttttttttttttt,D                     K:..::;      
+               .GGLLLLftttDtttttttttttttttttttttttttttttttttttttt ,                    .;:::::      
+                LGDLftttttjtttttttttttttttttttttttttttttttttttttt;.,                  W,::::#K      
+                EGGttftitt;ttttttttttttttttttttttttttttttttiitttttt L                L:::::.,       
+                 Lf,titittttttttttttttttttttttttttttttttttttt;ttttttf#              j,::::.i#       
+                 LLDttittttttttttttttttttttttttttttttttttttttEjttttttf            .#.:::: ;:        
+                  LGfttiittWitttttitttttttttttttttttttttttttt#LLjttttjtWt        W.:,:::WtDK        
+                  GGf,tttttjtttttt;tttttttttttttttDttttttttttfLLLLttttttjW.iE#E::::::. ;jft         
+                  KLLfiiiit,ttttttKtttttttttttttjLLittttttttt;fGLLLLjttttttjj.:::::. Gjif,          
+                   LLLf:tii;ttttttjtttttttttttfLGjW#jttttttttitDGLLLLLftttttttt#W##iitfGiE          
+                   jLLLLWtiDtttttiftittttttffLEfittiDjttttttttttiWGLLLLLLjttttttttttfLLi#           
+                   ELLGLLfittttttDiiiK####KjiiiiitiiiLttttttttEfjjtWfLLLLLLLLLLLLLLLLf,#:           
+                   ,LLLLLLWttttt#iitiitittiititti;GL  Wjtttttt   GittiWfLLLLLLLLLLLfEiD             
+                    tLLLLLDtiiE#itiitttttttittt#        jLjttt      jttti;EWWKEEKKiiG               
+                    #LLLLLD;f#G: :#f,:,,,;f#GDD#        DLjttt      . ;K;ittttiii,W .               
+                     LLLLL;KDjEG          DDDDGt        fLtttt              .,,                     
+                     #LGLL E#           jEDGDDG         LftttD                                      
+                   ,DKW#LG             DDKEEDE#        Kfttji                                       
+                  fW.DE#                            .iDKtitt#                                       
+                                                   :EGDLGG,t                                        
+                                                       t        
+                                                       
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Coding is an art, never a bug!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+${AnsiColor.BRIGHT_RED}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+
+
+

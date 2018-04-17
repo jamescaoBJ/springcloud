@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPropValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamPropVal">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="C_TYPE" jdbcType="INTEGER" property="cType" />
+		<result column="EXT_TYPE" jdbcType="INTEGER" property="extType" />
+		<result column="IMG_TYPE" jdbcType="INTEGER" property="imgType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE, NAME, CODE, C_TYPE, EXT_TYPE, IMG_TYPE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_prop_val
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 获取职位类型 -->
+	<select id="getPostType" resultType="com.ncme.springboot.footstone.response.Record">
+		<!-- SELECT t.id,t.name,t.code FROM exam_prop_val t,sub_sys_prop_val v,sub_sys_prop 
+			p,exam_prop_type tt WHERE t.id = v.prop_val_id AND p.id = v.sys_prop_id AND 
+			tt.prop_type = t.c_type AND t.type = 24 -->
+		SELECT t.id,t.name,t.code
+		from exam_prop_val t, sub_sys_prop_val v,
+		sub_sys_prop p, exam_prop_type
+		tt
+		where t.id = v.prop_val_id and p.id =
+		v.sys_prop_id and tt.prop_type =
+		t.c_type and t.type = 24
+		and t.code in
+		(select l.img_type from exam_prop_val l where l.type=1)
+		<if test="id != null">
+			and t.id = #{id,jdbcType=INTEGER}
+		</if>
+		order by t.code
+	</select>
+
+	<!-- 获取职位 -->
+	<select id="getPost" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id,t.name from
+		exam_prop_val t, exam_prop_val tt where t.type =9 and t.ext_type =
+		tt.code and tt.id = #{id,jdbcType=INTEGER};
+
+	</select>
+	<!-- 根据id，name查询省信息，无参默认查询全部 -->
+	<select id="getProvince" resultType="com.ncme.springboot.footstone.response.Record">
+
+
+		SELECT
+		<!-- t.*, v.id AS prop_val_id,p. NAME AS typeName,tt.prop_type_name AS 
+			c_type_name -->
+		t.id provinceId,t.`NAME` provinceName
+		FROM
+		exam_prop_val t,
+		sub_sys_prop_val v,
+		sub_sys_prop p,
+		exam_prop_type tt
+		WHERE
+		t.id =
+		v.prop_val_id
+		AND p.id = v.sys_prop_id
+		AND tt.prop_type = t.c_type
+		AND
+		t.type = 20
+
+		<if test="provinceName != null and provinceName != ''">
+			AND t.NAME LIKE CONCAT('%',
+			#{provinceName,jdbcType=VARCHAR}, '%')
+		</if>
+
+		<if test="provinceId != null and provinceId != ''">
+			AND t.id = #{provinceId,jdbcType=INTEGER}
+		</if>
+
+		ORDER BY
+		cast(t. CODE AS signed)
+
+	</select>
+	<!-- 根据省id获取市信息 -->
+	<select id="getCityByProvinceId" resultType="com.ncme.springboot.footstone.response.Record">
+
+		select tt.id as
+		cityId,tt.name as cityName from prop_val_ref t
+		,exam_prop_val tt where
+		t.PROP_VAL2 = tt.ID and t.PROP_VAL1=
+		#{provinceId,jdbcType=INTEGER} and
+		tt.type =21
+	</select>
+	<!-- 根据市id获取县镇区信息 -->
+	<select id="getCountyByCityId" resultType="com.ncme.springboot.footstone.response.Record">
+
+		select tt.id as
+		countyId,tt.name as countyName from prop_val_ref t
+		,exam_prop_val tt
+		where t.PROP_VAL2 = tt.ID and t.PROP_VAL1=
+		#{provinceId,jdbcType=INTEGER} and tt.type =22
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_prop_val
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPropVal">
+		insert into exam_prop_val (ID,
+		TYPE, NAME,
+		CODE, C_TYPE, EXT_TYPE,
+		IMG_TYPE)
+		values
+		(#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{cType,jdbcType=INTEGER}, #{extType,jdbcType=INTEGER},
+		#{imgType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPropVal">
+		insert into exam_prop_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="cType != null">
+				C_TYPE,
+			</if>
+			<if test="extType != null">
+				EXT_TYPE,
+			</if>
+			<if test="imgType != null">
+				IMG_TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="cType != null">
+				#{cType,jdbcType=INTEGER},
+			</if>
+			<if test="extType != null">
+				#{extType,jdbcType=INTEGER},
+			</if>
+			<if test="imgType != null">
+				#{imgType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamPropVal">
+		update exam_prop_val
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="cType != null">
+				C_TYPE = #{cType,jdbcType=INTEGER},
+			</if>
+			<if test="extType != null">
+				EXT_TYPE = #{extType,jdbcType=INTEGER},
+			</if>
+			<if test="imgType != null">
+				IMG_TYPE = #{imgType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamPropVal">
+		update
+		exam_prop_val
+		set TYPE = #{type,jdbcType=INTEGER},
+		NAME =
+		#{name,jdbcType=VARCHAR},
+		CODE = #{code,jdbcType=VARCHAR},
+		C_TYPE =
+		#{cType,jdbcType=INTEGER},
+		EXT_TYPE = #{extType,jdbcType=INTEGER},
+		IMG_TYPE = #{imgType,jdbcType=INTEGER}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getExamPropValByCvSetId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from exam_prop_val t where exists (
+		SELECT
+		1
+		FROM
+		cv_set_user_image t2
+		JOIN qm_user_image t3 ON t2.userimage_id = t3.id
+		JOIN
+		qm_user_image_prop t4 ON t3.id = t4.userimage_id
+		WHERE
+		t2.cv_set_id
+		=#{cvSetId,jdbcType=INTEGER}
+		AND t.id = t4.prop_id
+		)
+	</select>
+	<!-- 根据prop_id和name查询学科 -->
+	<select id="getSubjectByIdAndName" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		t.*, v.id AS prop_val_id,
+		p. NAME AS typeName,
+		tt.prop_type_name
+		AS c_type_name
+		FROM
+		exam_prop_val t,
+		sub_sys_prop_val v,
+		prop_val_ref r,
+		sub_sys_prop p,
+		exam_prop_type tt
+		WHERE
+		t.id = v.prop_val_id
+		AND v.id =
+		r.prop_val2
+		AND p.id = v.sys_prop_id
+		AND
+		tt.prop_type = t.c_type
+		AND
+		r.prop_val1 = #{propId,jdbcType=INTEGER}
+		AND t. NAME LIKE CONCAT('%',
+		#{name,jdbcType=VARCHAR}, '%')
+		<if test="extType != null">
+			AND t.EXT_TYPE = #{extType,jdbcType=INTEGER}
+		</if>
+
+	</select>
+	<!-- 一级学科 -->
+	<select id="getSubject" resultType="com.ncme.springboot.footstone.response.Record">
+		select id,name from
+		exam_prop_val tt where tt.type in (1,2,3) and id = #{id}
+	</select>
+	<!-- 根据用户id查询用户学科 -->
+	<select id="getSubjectByUserId" resultMap="BaseResultMap">
+		SELECT p.* from
+		exam_prop_val p
+		left join sub_sys_prop_val s on p.ID=s.PROP_VAL_ID
+		LEFT
+		JOIN system_user_prop_val v on v.PROP_ID=s.id
+		where v.USER_ID =
+		#{userId,jdbcType=INTEGER}
+	</select>
+	<!-- 根据职务类型获取一级学科 -->
+	<select id="getSubjectByPostType" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t.id,t.name
+		FROM exam_prop_val t,sub_sys_prop_val
+		v,sub_sys_prop p,exam_prop_type tt
+		WHERE
+		t.id = v.prop_val_id AND p.id =
+		v.sys_prop_id AND tt.prop_type =
+		t.c_type
+		AND t.type = 1 AND t.ext_type
+		= 1 AND t.img_type =
+		#{postType,jdbcType=INTEGER} and t.C_TYPE = 0 
+		ORDER BY t. CODE
+	</select>
+	<!-- 根据父学科查询子学科,即根据一级学科ID查询其二级学科、根据二级学科ID查询其三级学科 -->
+	<select id="getSubjectById" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id
+		subjectId,t.`NAME` subjectName
+		from exam_prop_val t, sub_sys_prop_val
+		v, prop_val_ref r,sub_sys_prop
+		p,exam_prop_type tt
+		where t.id =
+		v.prop_val_id and v.id = r.prop_val2 and p.id = v.sys_prop_id
+		and
+		tt.prop_type = t.c_type and r.prop_val1 = #{parentId}
+	</select>
+
+	<!-- 根据子学科查询其父学科,即根据三级学科ID查询其二级学科、根据二级学科ID查询其一级学科 -->
+	<select id="getSubjectBySubId" resultMap="BaseResultMap">
+		SELECT
+			v.*
+		FROM
+			prop_val_ref r
+		LEFT JOIN exam_prop_val v ON v.id = r.prop_val1
+		WHERE
+			prop_val2 = #{proId}
+	</select>
+</mapper>

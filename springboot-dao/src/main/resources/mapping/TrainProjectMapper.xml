@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainProjectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainProject">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
+		<result column="PROJECT_TYPE_ID" jdbcType="INTEGER" property="projectTypeId" />
+		<result column="PROJECT_YEAR_ID" jdbcType="INTEGER" property="projectYearId" />
+		<result column="SPECIALTY_RANGE" jdbcType="VARCHAR" property="specialtyRange" />
+		<result column="PROJECT_INTRODUCTION" jdbcType="VARCHAR"
+			property="projectIntroduction" />
+		<result column="PROJECT_CODE" jdbcType="VARCHAR" property="projectCode" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROJECT_NAME, PROJECT_TYPE_ID, PROJECT_YEAR_ID, SPECIALTY_RANGE,
+		PROJECT_INTRODUCTION,
+		PROJECT_CODE, CREATE_DATE, CREATE_USER_ID, LAST_UPDATE_DATE, LAST_UPDATE_USER_ID,
+		STATUS, SEQ
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_project
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_project
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainProject">
+		insert into train_project (ID, PROJECT_NAME, PROJECT_TYPE_ID,
+		PROJECT_YEAR_ID, SPECIALTY_RANGE, PROJECT_INTRODUCTION,
+		PROJECT_CODE, CREATE_DATE, CREATE_USER_ID,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, STATUS,
+		SEQ)
+		values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR},
+		#{projectTypeId,jdbcType=INTEGER},
+		#{projectYearId,jdbcType=INTEGER}, #{specialtyRange,jdbcType=VARCHAR},
+		#{projectIntroduction,jdbcType=VARCHAR},
+		#{projectCode,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{lastUpdateUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{seq,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainProject">
+		insert into train_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="projectName != null">
+				PROJECT_NAME,
+			</if>
+			<if test="projectTypeId != null">
+				PROJECT_TYPE_ID,
+			</if>
+			<if test="projectYearId != null">
+				PROJECT_YEAR_ID,
+			</if>
+			<if test="specialtyRange != null">
+				SPECIALTY_RANGE,
+			</if>
+			<if test="projectIntroduction != null">
+				PROJECT_INTRODUCTION,
+			</if>
+			<if test="projectCode != null">
+				PROJECT_CODE,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="projectName != null">
+				#{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectTypeId != null">
+				#{projectTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="projectYearId != null">
+				#{projectYearId,jdbcType=INTEGER},
+			</if>
+			<if test="specialtyRange != null">
+				#{specialtyRange,jdbcType=VARCHAR},
+			</if>
+			<if test="projectIntroduction != null">
+				#{projectIntroduction,jdbcType=VARCHAR},
+			</if>
+			<if test="projectCode != null">
+				#{projectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainProject">
+		update train_project
+		<set>
+			<if test="projectName != null">
+				PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectTypeId != null">
+				PROJECT_TYPE_ID = #{projectTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="projectYearId != null">
+				PROJECT_YEAR_ID = #{projectYearId,jdbcType=INTEGER},
+			</if>
+			<if test="specialtyRange != null">
+				SPECIALTY_RANGE = #{specialtyRange,jdbcType=VARCHAR},
+			</if>
+			<if test="projectIntroduction != null">
+				PROJECT_INTRODUCTION = #{projectIntroduction,jdbcType=VARCHAR},
+			</if>
+			<if test="projectCode != null">
+				PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainProject">
+		update train_project
+		set PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+		PROJECT_TYPE_ID = #{projectTypeId,jdbcType=INTEGER},
+		PROJECT_YEAR_ID = #{projectYearId,jdbcType=INTEGER},
+		SPECIALTY_RANGE = #{specialtyRange,jdbcType=VARCHAR},
+		PROJECT_INTRODUCTION = #{projectIntroduction,jdbcType=VARCHAR},
+		PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

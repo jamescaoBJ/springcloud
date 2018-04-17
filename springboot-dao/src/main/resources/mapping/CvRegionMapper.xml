@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvRegionMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvRegionKey">
+		<id column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<id column="REGION_ID" jdbcType="INTEGER" property="regionId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.CvRegionKey">
+		delete from
+		cv_region
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and REGION_ID =
+		#{regionId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvRegionKey">
+		insert into cv_region
+		(CV_SET_ID, REGION_ID)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{regionId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvRegionKey">
+		insert into cv_region
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="regionId != null">
+				REGION_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="regionId != null">
+				#{regionId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

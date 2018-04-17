@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeQaStandardMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeQaStandard">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="YEAR_ID" jdbcType="INTEGER" property="yearId" />
+		<result column="CONDITION" jdbcType="INTEGER" property="condition" />
+		<result column="EXPRESSION" jdbcType="VARCHAR" property="expression" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+		<result column="SPECIFIC_PROVISIONS" jdbcType="VARCHAR"
+			property="specificProvisions" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="REPLACE_CONDITION_REMARK" jdbcType="VARCHAR"
+			property="replaceConditionRemark" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, YEAR_ID, CONDITION, EXPRESSION, SCORE,
+		SPECIFIC_PROVISIONS, REMARK,
+		CREATE_DATE,
+		STATUS, SEQ,
+		REPLACE_CONDITION_REMARK, LAST_UPDATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_qa_standard
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_qa_standard
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeQaStandard">
+		insert into icme_qa_standard
+		(ID, YEAR_ID, CONDITION,
+		EXPRESSION, SCORE, SPECIFIC_PROVISIONS,
+		REMARK, CREATE_DATE, STATUS,
+		SEQ, REPLACE_CONDITION_REMARK,
+		LAST_UPDATE_DATE
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{yearId,jdbcType=INTEGER},
+		#{condition,jdbcType=INTEGER},
+		#{expression,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE},
+		#{specificProvisions,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER},
+		#{seq,jdbcType=INTEGER}, #{replaceConditionRemark,jdbcType=VARCHAR},
+		#{lastUpdateDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeQaStandard">
+		insert into icme_qa_standard
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="yearId != null">
+				YEAR_ID,
+			</if>
+			<if test="condition != null">
+				CONDITION,
+			</if>
+			<if test="expression != null">
+				EXPRESSION,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+			<if test="specificProvisions != null">
+				SPECIFIC_PROVISIONS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="replaceConditionRemark != null">
+				REPLACE_CONDITION_REMARK,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="yearId != null">
+				#{yearId,jdbcType=INTEGER},
+			</if>
+			<if test="condition != null">
+				#{condition,jdbcType=INTEGER},
+			</if>
+			<if test="expression != null">
+				#{expression,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="specificProvisions != null">
+				#{specificProvisions,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="replaceConditionRemark != null">
+				#{replaceConditionRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeQaStandard">
+		update icme_qa_standard
+		<set>
+			<if test="yearId != null">
+				YEAR_ID = #{yearId,jdbcType=INTEGER},
+			</if>
+			<if test="condition != null">
+				CONDITION = #{condition,jdbcType=INTEGER},
+			</if>
+			<if test="expression != null">
+				EXPRESSION = #{expression,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				SCORE = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="specificProvisions != null">
+				SPECIFIC_PROVISIONS =
+				#{specificProvisions,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="replaceConditionRemark != null">
+				REPLACE_CONDITION_REMARK =
+				#{replaceConditionRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeQaStandard">
+		update
+		icme_qa_standard
+		set YEAR_ID = #{yearId,jdbcType=INTEGER},
+		CONDITION =
+		#{condition,jdbcType=INTEGER},
+		EXPRESSION =
+		#{expression,jdbcType=VARCHAR},
+		SCORE = #{score,jdbcType=DOUBLE},
+		SPECIFIC_PROVISIONS = #{specificProvisions,jdbcType=VARCHAR},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER},
+		REPLACE_CONDITION_REMARK =
+		#{replaceConditionRemark,jdbcType=VARCHAR},
+		LAST_UPDATE_DATE =
+		#{lastUpdateDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

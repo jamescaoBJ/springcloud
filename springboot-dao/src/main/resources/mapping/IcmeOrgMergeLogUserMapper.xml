@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeOrgMergeLogUserMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeOrgMergeLogUser">
+		<result column="MERGE_LOG_ID" jdbcType="INTEGER" property="mergeLogId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeOrgMergeLogUser">
+		insert into
+		icme_org_merge_log_user (MERGE_LOG_ID, USER_ID, ORG_ID
+		)
+		values
+		(#{mergeLogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{orgId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeOrgMergeLogUser">
+		insert into icme_org_merge_log_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mergeLogId != null">
+				MERGE_LOG_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="mergeLogId != null">
+				#{mergeLogId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

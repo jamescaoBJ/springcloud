@@ -1,0 +1,32 @@
+SELECT
+m.*,
+	t1.material_id,
+	t1.prop_id AS prop_val_id,
+	t2.type AS prop_type,
+	t2. NAME AS prop_val_name
+FROM
+material_info  m  LEFT JOIN  	material_prop_val t1 on m.id= t1.MATERIAL_ID
+LEFT JOIN 	SUB_SYS_PROP_VAL t3 on t1.PROP_ID=t3.id
+LEFT JOIN	exam_prop_val t2 on t2.id=t3.prop_val_id 
+
+WHERE
+t1.material_id=1103
+
+
+select *  from material_info where id>0 and type = 1 and state =4 order by id;
+
+
+
+SELECT
+	t1.material_id,
+	t1.source_id AS prop_val_id,
+	t2.type AS prop_type,
+	t2. NAME AS prop_val_name
+FROM
+	material_source_val t1,
+	exam_prop_val t2,
+	SUB_SYS_PROP_VAL t3
+WHERE
+	t1.source_id = t3.id
+AND t3.prop_val_id = t2.id
+AND t1.material_id =?

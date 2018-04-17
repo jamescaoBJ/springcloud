@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemLoginLimitMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemLoginLimit">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="time" jdbcType="INTEGER" property="time" />
+		<result column="login_num" jdbcType="INTEGER" property="loginNum" />
+		<result column="lock_time" jdbcType="INTEGER" property="lockTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, time, login_num, lock_time
+	</sql>
+	<!-- 获取登录次数规则 -->
+	<select id="getLoginLimter" resultMap="BaseResultMap">
+
+		select * from system_login_limit;
+	</select>
+
+	<update id="updateLoginErrors" parameterType="com.ncme.springboot.model.SystemUser">
+
+		update system_user set login_error_num =
+		#{loginErrorNum},login_error_first_time=#{loginErrorFirstTime},
+		login_error_last_time=#{loginErrorLastTime} where id = #{id}
+
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_login_limit
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_login_limit
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemLoginLimit">
+		insert into system_login_limit (id, time, login_num,
+		lock_time)
+		values (#{id,jdbcType=INTEGER}, #{time,jdbcType=INTEGER},
+		#{loginNum,jdbcType=INTEGER},
+		#{lockTime,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemLoginLimit">
+		insert into system_login_limit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="loginNum != null">
+				login_num,
+			</if>
+			<if test="lockTime != null">
+				lock_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=INTEGER},
+			</if>
+			<if test="loginNum != null">
+				#{loginNum,jdbcType=INTEGER},
+			</if>
+			<if test="lockTime != null">
+				#{lockTime,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemLoginLimit">
+		update system_login_limit
+		<set>
+			<if test="time != null">
+				time = #{time,jdbcType=INTEGER},
+			</if>
+			<if test="loginNum != null">
+				login_num = #{loginNum,jdbcType=INTEGER},
+			</if>
+			<if test="lockTime != null">
+				lock_time = #{lockTime,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemLoginLimit">
+		update system_login_limit
+		set time = #{time,jdbcType=INTEGER},
+		login_num = #{loginNum,jdbcType=INTEGER},
+		lock_time = #{lockTime,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeProjectUserTempMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeProjectUserTemp">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
+		<result column="CERTIFICATE_NO" jdbcType="VARCHAR" property="certificateNo" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="ORG_PROJECT_ID" jdbcType="INTEGER" property="orgProjectId" />
+		<result column="CARD_BEGIN_DATE" jdbcType="DATE" property="cardBeginDate" />
+		<result column="CARD_END_DATE" jdbcType="DATE" property="cardEndDate" />
+		<result column="SUBJECT_ID" jdbcType="INTEGER" property="subjectId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, REAL_NAME, CERTIFICATE_NO, ORG_ID, ORG_PROJECT_ID,
+		CARD_BEGIN_DATE,
+		CARD_END_DATE,
+		SUBJECT_ID, CREATE_DATE, STATUS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_project_user_temp
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_project_user_temp
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeProjectUserTemp">
+		insert into
+		icme_project_user_temp (ID, REAL_NAME, CERTIFICATE_NO,
+		ORG_ID,
+		ORG_PROJECT_ID, CARD_BEGIN_DATE,
+		CARD_END_DATE, SUBJECT_ID,
+		CREATE_DATE,
+		STATUS)
+		values (#{id,jdbcType=INTEGER},
+		#{realName,jdbcType=VARCHAR},
+		#{certificateNo,jdbcType=VARCHAR},
+		#{orgId,jdbcType=INTEGER}, #{orgProjectId,jdbcType=INTEGER},
+		#{cardBeginDate,jdbcType=DATE},
+		#{cardEndDate,jdbcType=DATE},
+		#{subjectId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeProjectUserTemp">
+		insert into icme_project_user_temp
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="realName != null">
+				REAL_NAME,
+			</if>
+			<if test="certificateNo != null">
+				CERTIFICATE_NO,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="orgProjectId != null">
+				ORG_PROJECT_ID,
+			</if>
+			<if test="cardBeginDate != null">
+				CARD_BEGIN_DATE,
+			</if>
+			<if test="cardEndDate != null">
+				CARD_END_DATE,
+			</if>
+			<if test="subjectId != null">
+				SUBJECT_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="certificateNo != null">
+				#{certificateNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="orgProjectId != null">
+				#{orgProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="cardBeginDate != null">
+				#{cardBeginDate,jdbcType=DATE},
+			</if>
+			<if test="cardEndDate != null">
+				#{cardEndDate,jdbcType=DATE},
+			</if>
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeProjectUserTemp">
+		update icme_project_user_temp
+		<set>
+			<if test="realName != null">
+				REAL_NAME = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="certificateNo != null">
+				CERTIFICATE_NO = #{certificateNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="orgProjectId != null">
+				ORG_PROJECT_ID = #{orgProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="cardBeginDate != null">
+				CARD_BEGIN_DATE = #{cardBeginDate,jdbcType=DATE},
+			</if>
+			<if test="cardEndDate != null">
+				CARD_END_DATE = #{cardEndDate,jdbcType=DATE},
+			</if>
+			<if test="subjectId != null">
+				SUBJECT_ID = #{subjectId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeProjectUserTemp">
+		update
+		icme_project_user_temp
+		set REAL_NAME = #{realName,jdbcType=VARCHAR},
+		CERTIFICATE_NO = #{certificateNo,jdbcType=VARCHAR},
+		ORG_ID =
+		#{orgId,jdbcType=INTEGER},
+		ORG_PROJECT_ID =
+		#{orgProjectId,jdbcType=INTEGER},
+		CARD_BEGIN_DATE =
+		#{cardBeginDate,jdbcType=DATE},
+		CARD_END_DATE =
+		#{cardEndDate,jdbcType=DATE},
+		SUBJECT_ID =
+		#{subjectId,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

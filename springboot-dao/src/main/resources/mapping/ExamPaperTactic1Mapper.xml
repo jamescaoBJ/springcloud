@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPaperTactic1Mapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamPaperTactic1">
+		<result column="TACTIC_ID" jdbcType="INTEGER" property="tacticId" />
+		<result column="QUESTION_LABEL_ID" jdbcType="INTEGER" property="questionLabelId" />
+		<result column="NUM" jdbcType="INTEGER" property="num" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPaperTactic1">
+		insert into exam_paper_tactic1
+		(TACTIC_ID, QUESTION_LABEL_ID, NUM,
+		SCORE)
+		values
+		(#{tacticId,jdbcType=INTEGER}, #{questionLabelId,jdbcType=INTEGER},
+		#{num,jdbcType=INTEGER},
+		#{score,jdbcType=DOUBLE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPaperTactic1">
+		insert into exam_paper_tactic1
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tacticId != null">
+				TACTIC_ID,
+			</if>
+			<if test="questionLabelId != null">
+				QUESTION_LABEL_ID,
+			</if>
+			<if test="num != null">
+				NUM,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tacticId != null">
+				#{tacticId,jdbcType=INTEGER},
+			</if>
+			<if test="questionLabelId != null">
+				#{questionLabelId,jdbcType=INTEGER},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtSqlWaitsMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooAtSqlWaits">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+		<result column="EXECUTION_ID" jdbcType="INTEGER" property="executionId" />
+		<result column="WAIT_ID" jdbcType="INTEGER" property="waitId" />
+		<result column="OBJ#" jdbcType="INTEGER" property="obj" />
+		<result column="WAIT_COUNT" jdbcType="INTEGER" property="waitCount" />
+		<result column="SUM_ELAPSED" jdbcType="INTEGER" property="sumElapsed" />
+		<result column="SUMSQUARES_ELAPSED" jdbcType="INTEGER"
+			property="sumsquaresElapsed" />
+		<result column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtSqlWaits">
+		insert into quest_soo_at_sql_waits (TRACE_FILE_ID, SQL_ID, PARSE_ID,
+		EXECUTION_ID, WAIT_ID, OBJ#,
+		WAIT_COUNT, SUM_ELAPSED, SUMSQUARES_ELAPSED,
+		EVENT_ID)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER},
+		#{executionId,jdbcType=INTEGER}, #{waitId,jdbcType=INTEGER}, #{obj,jdbcType=INTEGER},
+		#{waitCount,jdbcType=INTEGER}, #{sumElapsed,jdbcType=INTEGER},
+		#{sumsquaresElapsed,jdbcType=INTEGER},
+		#{eventId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtSqlWaits">
+		insert into quest_soo_at_sql_waits
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+			<if test="executionId != null">
+				EXECUTION_ID,
+			</if>
+			<if test="waitId != null">
+				WAIT_ID,
+			</if>
+			<if test="obj != null">
+				OBJ#,
+			</if>
+			<if test="waitCount != null">
+				WAIT_COUNT,
+			</if>
+			<if test="sumElapsed != null">
+				SUM_ELAPSED,
+			</if>
+			<if test="sumsquaresElapsed != null">
+				SUMSQUARES_ELAPSED,
+			</if>
+			<if test="eventId != null">
+				EVENT_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+			<if test="executionId != null">
+				#{executionId,jdbcType=INTEGER},
+			</if>
+			<if test="waitId != null">
+				#{waitId,jdbcType=INTEGER},
+			</if>
+			<if test="obj != null">
+				#{obj,jdbcType=INTEGER},
+			</if>
+			<if test="waitCount != null">
+				#{waitCount,jdbcType=INTEGER},
+			</if>
+			<if test="sumElapsed != null">
+				#{sumElapsed,jdbcType=INTEGER},
+			</if>
+			<if test="sumsquaresElapsed != null">
+				#{sumsquaresElapsed,jdbcType=INTEGER},
+			</if>
+			<if test="eventId != null">
+				#{eventId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

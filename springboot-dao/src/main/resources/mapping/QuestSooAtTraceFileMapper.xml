@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtTraceFileMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooAtTraceFile">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="INST_ID" jdbcType="INTEGER" property="instId" />
+		<result column="TRACE_FILE_NAME" jdbcType="VARCHAR" property="traceFileName" />
+		<result column="ORACLE_VERSION" jdbcType="VARCHAR" property="oracleVersion" />
+		<result column="ORACLE_HOME" jdbcType="VARCHAR" property="oracleHome" />
+		<result column="OS_NAME" jdbcType="VARCHAR" property="osName" />
+		<result column="NODE_NAME" jdbcType="VARCHAR" property="nodeName" />
+		<result column="OS_VERSION" jdbcType="VARCHAR" property="osVersion" />
+		<result column="INSTANCE_NAME" jdbcType="VARCHAR" property="instanceName" />
+		<result column="ORACLE_PID" jdbcType="INTEGER" property="oraclePid" />
+		<result column="OS_PID" jdbcType="INTEGER" property="osPid" />
+		<result column="IMAGE_NAME" jdbcType="VARCHAR" property="imageName" />
+		<result column="LAST_MODIFIED_DATE" jdbcType="DATE" property="lastModifiedDate" />
+		<result column="LAST_ANALYZED_DATE" jdbcType="DATE" property="lastAnalyzedDate" />
+		<result column="COMMENT_TEXT" jdbcType="VARCHAR" property="commentText" />
+		<result column="SQL_STATEMENT_COUNT" jdbcType="INTEGER"
+			property="sqlStatementCount" />
+		<result column="BASE_DATETIME_VALUE" jdbcType="DATE"
+			property="baseDatetimeValue" />
+		<result column="BASE_TIM_VALUE" jdbcType="INTEGER" property="baseTimValue" />
+		<result column="LOAD_STATUS" jdbcType="VARCHAR" property="loadStatus" />
+		<result column="LINES_LOADED" jdbcType="INTEGER" property="linesLoaded" />
+		<result column="PROCESS_WAITS" jdbcType="INTEGER" property="processWaits" />
+		<result column="PROCESS_BINDS" jdbcType="INTEGER" property="processBinds" />
+		<result column="LOAD_RECURSIVE" jdbcType="INTEGER" property="loadRecursive" />
+		<result column="LOAD_ELAPSED_MS" jdbcType="INTEGER" property="loadElapsedMs" />
+		<result column="LAST_DEBUG_MESSAGE" jdbcType="VARCHAR"
+			property="lastDebugMessage" />
+		<result column="ERROR_LINE_NO" jdbcType="INTEGER" property="errorLineNo" />
+		<result column="ERROR_TEXT" jdbcType="VARCHAR" property="errorText" />
+		<result column="PGA_LIMIT" jdbcType="INTEGER" property="pgaLimit" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtTraceFile">
+		insert into quest_soo_at_trace_file (TRACE_FILE_ID, INST_ID,
+		TRACE_FILE_NAME,
+		ORACLE_VERSION, ORACLE_HOME, OS_NAME,
+		NODE_NAME, OS_VERSION, INSTANCE_NAME,
+		ORACLE_PID, OS_PID, IMAGE_NAME,
+		LAST_MODIFIED_DATE, LAST_ANALYZED_DATE, COMMENT_TEXT,
+		SQL_STATEMENT_COUNT, BASE_DATETIME_VALUE, BASE_TIM_VALUE,
+		LOAD_STATUS, LINES_LOADED, PROCESS_WAITS,
+		PROCESS_BINDS, LOAD_RECURSIVE, LOAD_ELAPSED_MS,
+		LAST_DEBUG_MESSAGE, ERROR_LINE_NO, ERROR_TEXT,
+		PGA_LIMIT)
+		values (#{traceFileId,jdbcType=INTEGER}, #{instId,jdbcType=INTEGER},
+		#{traceFileName,jdbcType=VARCHAR},
+		#{oracleVersion,jdbcType=VARCHAR}, #{oracleHome,jdbcType=VARCHAR}, #{osName,jdbcType=VARCHAR},
+		#{nodeName,jdbcType=VARCHAR}, #{osVersion,jdbcType=VARCHAR},
+		#{instanceName,jdbcType=VARCHAR},
+		#{oraclePid,jdbcType=INTEGER}, #{osPid,jdbcType=INTEGER}, #{imageName,jdbcType=VARCHAR},
+		#{lastModifiedDate,jdbcType=DATE}, #{lastAnalyzedDate,jdbcType=DATE},
+		#{commentText,jdbcType=VARCHAR},
+		#{sqlStatementCount,jdbcType=INTEGER},
+		#{baseDatetimeValue,jdbcType=DATE}, #{baseTimValue,jdbcType=INTEGER},
+		#{loadStatus,jdbcType=VARCHAR}, #{linesLoaded,jdbcType=INTEGER},
+		#{processWaits,jdbcType=INTEGER},
+		#{processBinds,jdbcType=INTEGER}, #{loadRecursive,jdbcType=INTEGER}, #{loadElapsedMs,jdbcType=INTEGER},
+		#{lastDebugMessage,jdbcType=VARCHAR}, #{errorLineNo,jdbcType=INTEGER},
+		#{errorText,jdbcType=VARCHAR},
+		#{pgaLimit,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtTraceFile">
+		insert into quest_soo_at_trace_file
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="instId != null">
+				INST_ID,
+			</if>
+			<if test="traceFileName != null">
+				TRACE_FILE_NAME,
+			</if>
+			<if test="oracleVersion != null">
+				ORACLE_VERSION,
+			</if>
+			<if test="oracleHome != null">
+				ORACLE_HOME,
+			</if>
+			<if test="osName != null">
+				OS_NAME,
+			</if>
+			<if test="nodeName != null">
+				NODE_NAME,
+			</if>
+			<if test="osVersion != null">
+				OS_VERSION,
+			</if>
+			<if test="instanceName != null">
+				INSTANCE_NAME,
+			</if>
+			<if test="oraclePid != null">
+				ORACLE_PID,
+			</if>
+			<if test="osPid != null">
+				OS_PID,
+			</if>
+			<if test="imageName != null">
+				IMAGE_NAME,
+			</if>
+			<if test="lastModifiedDate != null">
+				LAST_MODIFIED_DATE,
+			</if>
+			<if test="lastAnalyzedDate != null">
+				LAST_ANALYZED_DATE,
+			</if>
+			<if test="commentText != null">
+				COMMENT_TEXT,
+			</if>
+			<if test="sqlStatementCount != null">
+				SQL_STATEMENT_COUNT,
+			</if>
+			<if test="baseDatetimeValue != null">
+				BASE_DATETIME_VALUE,
+			</if>
+			<if test="baseTimValue != null">
+				BASE_TIM_VALUE,
+			</if>
+			<if test="loadStatus != null">
+				LOAD_STATUS,
+			</if>
+			<if test="linesLoaded != null">
+				LINES_LOADED,
+			</if>
+			<if test="processWaits != null">
+				PROCESS_WAITS,
+			</if>
+			<if test="processBinds != null">
+				PROCESS_BINDS,
+			</if>
+			<if test="loadRecursive != null">
+				LOAD_RECURSIVE,
+			</if>
+			<if test="loadElapsedMs != null">
+				LOAD_ELAPSED_MS,
+			</if>
+			<if test="lastDebugMessage != null">
+				LAST_DEBUG_MESSAGE,
+			</if>
+			<if test="errorLineNo != null">
+				ERROR_LINE_NO,
+			</if>
+			<if test="errorText != null">
+				ERROR_TEXT,
+			</if>
+			<if test="pgaLimit != null">
+				PGA_LIMIT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="instId != null">
+				#{instId,jdbcType=INTEGER},
+			</if>
+			<if test="traceFileName != null">
+				#{traceFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="oracleVersion != null">
+				#{oracleVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="oracleHome != null">
+				#{oracleHome,jdbcType=VARCHAR},
+			</if>
+			<if test="osName != null">
+				#{osName,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeName != null">
+				#{nodeName,jdbcType=VARCHAR},
+			</if>
+			<if test="osVersion != null">
+				#{osVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="instanceName != null">
+				#{instanceName,jdbcType=VARCHAR},
+			</if>
+			<if test="oraclePid != null">
+				#{oraclePid,jdbcType=INTEGER},
+			</if>
+			<if test="osPid != null">
+				#{osPid,jdbcType=INTEGER},
+			</if>
+			<if test="imageName != null">
+				#{imageName,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifiedDate != null">
+				#{lastModifiedDate,jdbcType=DATE},
+			</if>
+			<if test="lastAnalyzedDate != null">
+				#{lastAnalyzedDate,jdbcType=DATE},
+			</if>
+			<if test="commentText != null">
+				#{commentText,jdbcType=VARCHAR},
+			</if>
+			<if test="sqlStatementCount != null">
+				#{sqlStatementCount,jdbcType=INTEGER},
+			</if>
+			<if test="baseDatetimeValue != null">
+				#{baseDatetimeValue,jdbcType=DATE},
+			</if>
+			<if test="baseTimValue != null">
+				#{baseTimValue,jdbcType=INTEGER},
+			</if>
+			<if test="loadStatus != null">
+				#{loadStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="linesLoaded != null">
+				#{linesLoaded,jdbcType=INTEGER},
+			</if>
+			<if test="processWaits != null">
+				#{processWaits,jdbcType=INTEGER},
+			</if>
+			<if test="processBinds != null">
+				#{processBinds,jdbcType=INTEGER},
+			</if>
+			<if test="loadRecursive != null">
+				#{loadRecursive,jdbcType=INTEGER},
+			</if>
+			<if test="loadElapsedMs != null">
+				#{loadElapsedMs,jdbcType=INTEGER},
+			</if>
+			<if test="lastDebugMessage != null">
+				#{lastDebugMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="errorLineNo != null">
+				#{errorLineNo,jdbcType=INTEGER},
+			</if>
+			<if test="errorText != null">
+				#{errorText,jdbcType=VARCHAR},
+			</if>
+			<if test="pgaLimit != null">
+				#{pgaLimit,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

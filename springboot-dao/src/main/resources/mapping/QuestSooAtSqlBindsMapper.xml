@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtSqlBindsMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooAtSqlBinds">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+		<result column="EXECUTION_ID" jdbcType="INTEGER" property="executionId" />
+		<result column="BIND_VAR_ID" jdbcType="INTEGER" property="bindVarId" />
+		<result column="VALUE" jdbcType="VARCHAR" property="value" />
+		<result column="DTY" jdbcType="INTEGER" property="dty" />
+		<result column="MXL" jdbcType="VARCHAR" property="mxl" />
+		<result column="MAL" jdbcType="VARCHAR" property="mal" />
+		<result column="SCL" jdbcType="VARCHAR" property="scl" />
+		<result column="PRE" jdbcType="VARCHAR" property="pre" />
+		<result column="OACFLG" jdbcType="INTEGER" property="oacflg" />
+		<result column="OACFL2" jdbcType="INTEGER" property="oacfl2" />
+		<result column="BINDSIZE" jdbcType="INTEGER" property="bindsize" />
+		<result column="OFFSET" jdbcType="INTEGER" property="offset" />
+		<result column="BFP" jdbcType="INTEGER" property="bfp" />
+		<result column="BLN" jdbcType="INTEGER" property="bln" />
+		<result column="AVL" jdbcType="INTEGER" property="avl" />
+		<result column="FLG" jdbcType="INTEGER" property="flg" />
+		<result column="EXEBND" jdbcType="INTEGER" property="exebnd" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtSqlBinds">
+		insert into quest_soo_at_sql_binds (TRACE_FILE_ID, SQL_ID, PARSE_ID,
+		EXECUTION_ID, BIND_VAR_ID, VALUE,
+		DTY, MXL, MAL, SCL,
+		PRE, OACFLG, OACFL2,
+		BINDSIZE, OFFSET, BFP,
+		BLN, AVL, FLG, EXEBND
+		)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER},
+		#{executionId,jdbcType=INTEGER}, #{bindVarId,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR},
+		#{dty,jdbcType=INTEGER}, #{mxl,jdbcType=VARCHAR},
+		#{mal,jdbcType=VARCHAR}, #{scl,jdbcType=VARCHAR},
+		#{pre,jdbcType=VARCHAR}, #{oacflg,jdbcType=INTEGER},
+		#{oacfl2,jdbcType=INTEGER},
+		#{bindsize,jdbcType=INTEGER}, #{offset,jdbcType=INTEGER}, #{bfp,jdbcType=INTEGER},
+		#{bln,jdbcType=INTEGER}, #{avl,jdbcType=INTEGER},
+		#{flg,jdbcType=INTEGER}, #{exebnd,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtSqlBinds">
+		insert into quest_soo_at_sql_binds
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+			<if test="executionId != null">
+				EXECUTION_ID,
+			</if>
+			<if test="bindVarId != null">
+				BIND_VAR_ID,
+			</if>
+			<if test="value != null">
+				VALUE,
+			</if>
+			<if test="dty != null">
+				DTY,
+			</if>
+			<if test="mxl != null">
+				MXL,
+			</if>
+			<if test="mal != null">
+				MAL,
+			</if>
+			<if test="scl != null">
+				SCL,
+			</if>
+			<if test="pre != null">
+				PRE,
+			</if>
+			<if test="oacflg != null">
+				OACFLG,
+			</if>
+			<if test="oacfl2 != null">
+				OACFL2,
+			</if>
+			<if test="bindsize != null">
+				BINDSIZE,
+			</if>
+			<if test="offset != null">
+				OFFSET,
+			</if>
+			<if test="bfp != null">
+				BFP,
+			</if>
+			<if test="bln != null">
+				BLN,
+			</if>
+			<if test="avl != null">
+				AVL,
+			</if>
+			<if test="flg != null">
+				FLG,
+			</if>
+			<if test="exebnd != null">
+				EXEBND,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+			<if test="executionId != null">
+				#{executionId,jdbcType=INTEGER},
+			</if>
+			<if test="bindVarId != null">
+				#{bindVarId,jdbcType=INTEGER},
+			</if>
+			<if test="value != null">
+				#{value,jdbcType=VARCHAR},
+			</if>
+			<if test="dty != null">
+				#{dty,jdbcType=INTEGER},
+			</if>
+			<if test="mxl != null">
+				#{mxl,jdbcType=VARCHAR},
+			</if>
+			<if test="mal != null">
+				#{mal,jdbcType=VARCHAR},
+			</if>
+			<if test="scl != null">
+				#{scl,jdbcType=VARCHAR},
+			</if>
+			<if test="pre != null">
+				#{pre,jdbcType=VARCHAR},
+			</if>
+			<if test="oacflg != null">
+				#{oacflg,jdbcType=INTEGER},
+			</if>
+			<if test="oacfl2 != null">
+				#{oacfl2,jdbcType=INTEGER},
+			</if>
+			<if test="bindsize != null">
+				#{bindsize,jdbcType=INTEGER},
+			</if>
+			<if test="offset != null">
+				#{offset,jdbcType=INTEGER},
+			</if>
+			<if test="bfp != null">
+				#{bfp,jdbcType=INTEGER},
+			</if>
+			<if test="bln != null">
+				#{bln,jdbcType=INTEGER},
+			</if>
+			<if test="avl != null">
+				#{avl,jdbcType=INTEGER},
+			</if>
+			<if test="flg != null">
+				#{flg,jdbcType=INTEGER},
+			</if>
+			<if test="exebnd != null">
+				#{exebnd,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

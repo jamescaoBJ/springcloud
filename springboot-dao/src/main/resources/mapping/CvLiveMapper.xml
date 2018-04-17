@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvLiveMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvLive">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="class_no" jdbcType="VARCHAR" property="classNo" />
+		<result column="class_name" jdbcType="VARCHAR" property="className" />
+		<result column="number" jdbcType="VARCHAR" property="number" />
+		<result column="teacher_token" jdbcType="VARCHAR" property="teacherToken" />
+		<result column="assistant_token" jdbcType="VARCHAR" property="assistantToken" />
+		<result column="student_token" jdbcType="VARCHAR" property="studentToken" />
+		<result column="studentClient_token" jdbcType="VARCHAR"
+			property="studentclientToken" />
+		<result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+		<result column="invalid_date" jdbcType="TIMESTAMP" property="invalidDate" />
+		<result column="teacher_join_url" jdbcType="VARCHAR" property="teacherJoinUrl" />
+		<result column="student_join_url" jdbcType="VARCHAR" property="studentJoinUrl" />
+		<result column="is_web_join" jdbcType="INTEGER" property="isWebJoin" />
+		<result column="is_client_join" jdbcType="INTEGER" property="isClientJoin" />
+		<result column="scene" jdbcType="INTEGER" property="scene" />
+		<result column="cv_id" jdbcType="INTEGER" property="cvId" />
+		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+		<result column="course_make_type" jdbcType="INTEGER" property="courseMakeType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, class_no, class_name, number, teacher_token,
+		assistant_token,
+		student_token,
+		studentClient_token, start_date,
+		invalid_date, teacher_join_url, student_join_url,
+		is_web_join,
+		is_client_join, scene, cv_id, create_date, modify_date,
+		course_make_type
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_live
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByCvId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_live
+		where cv_id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_live
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvLive">
+		insert into cv_live (id,
+		class_no, class_name,
+		number, teacher_token, assistant_token,
+		student_token, studentClient_token, start_date,
+		invalid_date,
+		teacher_join_url, student_join_url,
+		is_web_join, is_client_join, scene,
+		cv_id, create_date, modify_date,
+		course_make_type)
+		values
+		(#{id,jdbcType=INTEGER}, #{classNo,jdbcType=VARCHAR},
+		#{className,jdbcType=VARCHAR},
+		#{number,jdbcType=VARCHAR},
+		#{teacherToken,jdbcType=VARCHAR}, #{assistantToken,jdbcType=VARCHAR},
+		#{studentToken,jdbcType=VARCHAR},
+		#{studentclientToken,jdbcType=VARCHAR},
+		#{startDate,jdbcType=TIMESTAMP},
+		#{invalidDate,jdbcType=TIMESTAMP},
+		#{teacherJoinUrl,jdbcType=VARCHAR},
+		#{studentJoinUrl,jdbcType=VARCHAR},
+		#{isWebJoin,jdbcType=INTEGER},
+		#{isClientJoin,jdbcType=INTEGER}, #{scene,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{modifyDate,jdbcType=TIMESTAMP},
+		#{courseMakeType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvLive">
+		insert into cv_live
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="classNo != null">
+				class_no,
+			</if>
+			<if test="className != null">
+				class_name,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="teacherToken != null">
+				teacher_token,
+			</if>
+			<if test="assistantToken != null">
+				assistant_token,
+			</if>
+			<if test="studentToken != null">
+				student_token,
+			</if>
+			<if test="studentclientToken != null">
+				studentClient_token,
+			</if>
+			<if test="startDate != null">
+				start_date,
+			</if>
+			<if test="invalidDate != null">
+				invalid_date,
+			</if>
+			<if test="teacherJoinUrl != null">
+				teacher_join_url,
+			</if>
+			<if test="studentJoinUrl != null">
+				student_join_url,
+			</if>
+			<if test="isWebJoin != null">
+				is_web_join,
+			</if>
+			<if test="isClientJoin != null">
+				is_client_join,
+			</if>
+			<if test="scene != null">
+				scene,
+			</if>
+			<if test="cvId != null">
+				cv_id,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="modifyDate != null">
+				modify_date,
+			</if>
+			<if test="courseMakeType != null">
+				course_make_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="classNo != null">
+				#{classNo,jdbcType=VARCHAR},
+			</if>
+			<if test="className != null">
+				#{className,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherToken != null">
+				#{teacherToken,jdbcType=VARCHAR},
+			</if>
+			<if test="assistantToken != null">
+				#{assistantToken,jdbcType=VARCHAR},
+			</if>
+			<if test="studentToken != null">
+				#{studentToken,jdbcType=VARCHAR},
+			</if>
+			<if test="studentclientToken != null">
+				#{studentclientToken,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="invalidDate != null">
+				#{invalidDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="teacherJoinUrl != null">
+				#{teacherJoinUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="studentJoinUrl != null">
+				#{studentJoinUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="isWebJoin != null">
+				#{isWebJoin,jdbcType=INTEGER},
+			</if>
+			<if test="isClientJoin != null">
+				#{isClientJoin,jdbcType=INTEGER},
+			</if>
+			<if test="scene != null">
+				#{scene,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="courseMakeType != null">
+				#{courseMakeType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvLive">
+		update cv_live
+		<set>
+			<if test="classNo != null">
+				class_no = #{classNo,jdbcType=VARCHAR},
+			</if>
+			<if test="className != null">
+				class_name = #{className,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherToken != null">
+				teacher_token = #{teacherToken,jdbcType=VARCHAR},
+			</if>
+			<if test="assistantToken != null">
+				assistant_token = #{assistantToken,jdbcType=VARCHAR},
+			</if>
+			<if test="studentToken != null">
+				student_token = #{studentToken,jdbcType=VARCHAR},
+			</if>
+			<if test="studentclientToken != null">
+				studentClient_token =
+				#{studentclientToken,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				start_date = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="invalidDate != null">
+				invalid_date = #{invalidDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="teacherJoinUrl != null">
+				teacher_join_url = #{teacherJoinUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="studentJoinUrl != null">
+				student_join_url = #{studentJoinUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="isWebJoin != null">
+				is_web_join = #{isWebJoin,jdbcType=INTEGER},
+			</if>
+			<if test="isClientJoin != null">
+				is_client_join = #{isClientJoin,jdbcType=INTEGER},
+			</if>
+			<if test="scene != null">
+				scene = #{scene,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				cv_id = #{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="courseMakeType != null">
+				course_make_type = #{courseMakeType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvLive">
+		update cv_live
+		set
+		class_no = #{classNo,jdbcType=VARCHAR},
+		class_name =
+		#{className,jdbcType=VARCHAR},
+		number = #{number,jdbcType=VARCHAR},
+		teacher_token = #{teacherToken,jdbcType=VARCHAR},
+		assistant_token =
+		#{assistantToken,jdbcType=VARCHAR},
+		student_token =
+		#{studentToken,jdbcType=VARCHAR},
+		studentClient_token =
+		#{studentclientToken,jdbcType=VARCHAR},
+		start_date =
+		#{startDate,jdbcType=TIMESTAMP},
+		invalid_date =
+		#{invalidDate,jdbcType=TIMESTAMP},
+		teacher_join_url =
+		#{teacherJoinUrl,jdbcType=VARCHAR},
+		student_join_url =
+		#{studentJoinUrl,jdbcType=VARCHAR},
+		is_web_join =
+		#{isWebJoin,jdbcType=INTEGER},
+		is_client_join =
+		#{isClientJoin,jdbcType=INTEGER},
+		scene = #{scene,jdbcType=INTEGER},
+		cv_id = #{cvId,jdbcType=INTEGER},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		modify_date =
+		#{modifyDate,jdbcType=TIMESTAMP},
+		course_make_type =
+		#{courseMakeType,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 获取当前直播在线人数（暂不使用） -->
+	<select id="getOnlineNum" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select r.audience_num from cv_live_study_ref r where
+		r.class_no =
+		#{classNo,jdbcType=VARCHAR}
+	</select>
+	<!-- 获取直播回放人数（暂不使用） -->
+	<select id="getHuiFangNum" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select count(s.id) from cv_live_courseware_study s inner
+		join
+		cv_live_courseware c on c.courseware_no = s.coursewareId
+		inner join
+		cv_live l on l.cv_id = c.cv_id where l.cv_id =
+		#{cvId,jdbcType=INTEGER}
+	</select>
+	<!-- 获取直播列表信息 -->
+	<select id="getCvList" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select l.id as cvId,l.name as cvName,l.introduction as
+		introduction,l.type,l.file_path
+		filePath,l.startDate,l.endDate,l.token,l.studentJoinUrl,l.classNo,l.makeType from
+		(
+		SELECT C.* FROM (
+		SELECT
+		F.*,F.startDate AS sDate,
+		(
+		CASE
+		WHEN
+		F.start_time > 0 AND F.end_time = 0 THEN
+		1
+		WHEN F.start_time > 0 AND
+		F.end_time > 0 and F.start_time > F.end_time
+		THEN
+		1
+		WHEN F.start_time IS
+		NULL THEN
+		2
+		WHEN F.start_time &lt; F.end_time AND
+		FROM_UNIXTIME(F.end_time) &lt; NOW()
+		AND F.makeType = 2 THEN
+		3
+		WHEN
+		F.makeType = 1 THEN
+		4
+		WHEN F.start_time &lt; F.end_time AND
+		FROM_UNIXTIME(F.end_time) &lt; NOW()
+		AND F.makeType = 0 THEN
+		5
+		ELSE
+		3
+		END
+		)
+		AS type
+		FROM(
+		SELECT
+		A.ID1 AS ID,
+		A.NAME1 AS `NAME`,
+		A.BRAND1 AS BRAND,
+		A.INTRODUCTION1 AS INTRODUCTION,
+		A.FILE_PATH1 AS FILE_PATH,
+		A.CREATE_DATE1 AS CREATE_DATE,
+		A.CREATOR1 AS CREATOR,
+		A.cv_type1 AS
+		cv_type,
+		A.class_no1 AS classNo,
+		A.student_join_url1 AS studentJoinUrl,
+		A.student_token1 AS token,
+		A.start_date1 AS startDate,
+		A.invalid_date1
+		AS endDate,
+		A.course_make_type1 AS makeType,
+		A.oldtype1 AS oldtype,
+		lrf.start_time,
+		lrf.end_time
+		FROM(
+		SELECT
+		t2.ID AS ID1,
+		t2.`NAME` AS NAME1,
+		t2.BRAND AS BRAND1,
+		t2.INTRODUCTION AS INTRODUCTION1,
+		t2.FILE_PATH AS
+		FILE_PATH1,
+		t2.CREATE_DATE AS CREATE_DATE1,
+		t2.CREATOR AS CREATOR1,
+		t2.cv_type AS cv_type1,
+		live.class_no AS class_no1,
+		live.student_join_url AS student_join_url1,
+		live.student_token AS
+		student_token1,
+		live.start_date AS start_date1,
+		live.invalid_date AS
+		invalid_date1,
+		live.course_make_type AS course_make_type1,
+		(
+		CASE
+		WHEN
+		live.start_date &lt;= NOW()
+		AND live.invalid_date >= NOW() THEN
+		1
+		WHEN
+		live.start_date > NOW() THEN
+		2
+		WHEN live.invalid_date &lt; NOW()
+		AND
+		live.course_make_type != 1 THEN
+		3
+		WHEN live.course_make_type = 1 THEN
+		4
+		END
+		) AS oldtype1
+		FROM
+		cv t2,
+		cv_live live,
+		cv_schedule t3
+		WHERE
+		EXISTS (
+		SELECT
+		1
+		FROM
+		cv_set_schedule t4
+		JOIN cv_set t5 ON t4.cv_set_id = t5.id
+		JOIN cv_set_user_image t8 ON t5.id = t8.cv_set_id
+		<!-- PC端加入授权后,此处两行注释掉,使用下面三行替代 JOIN cv_set_system_site t6 ON t6.cv_set_id 
+			= t5.id JOIN system_site t7 ON t6.system_site_id = t7.id -->
+		JOIN cv_set_authorization csa ON csa.cv_set_id = t5.id
+		JOIN
+		cv_set_authorization_system_site csass ON csass.AUTHORIZATION_ID =
+		csa.ID
+		JOIN system_site t7 ON csass.SYSTEM_SITE_ID = t7.id
+		<if test="xueke != null">
+			join qm_user_image t9 on t8.userimage_id=t9.id
+			join
+			qm_user_image_prop t10 on t9.id=t10.userimage_id
+			join prop_val_ref t12
+			on (t10.prop_id = t12.prop_val2 or t10.prop_id =
+			t12.prop_val1)
+			join
+			exam_prop_val t11 on t12.prop_val1=t11.id and t11.id =
+			#{xueke,jdbcType=VARCHAR}
+		</if>
+		WHERE
+		t3.schedule_id = t4.cv_schedule_id
+		<if test="domainName != null">
+			and t7.domain_name = #{domainName}
+		</if>
+		AND t5. STATUS =5
+		AND t2.id = live.cv_id
+		<!-- PC端加入授权后,此处两行注释掉,否则查询不到数据 AND t5.START_DATE &lt;= NOW() AND t5.END_DATE 
+			>= NOW() -->
+		)
+		AND t2.id = t3.cv_id
+		AND t2.cv_type = 2
+		) A
+		LEFT JOIN cv_live_study_ref
+		lrf
+		ON lrf.class_no = A.class_no1
+		<if test="liveType == 1">
+			WHERE (lrf.start_time > 0 AND lrf.end_time = 0)
+			or
+			(lrf.start_time > 0 AND lrf.end_time > 0 and lrf.start_time >
+			lrf.end_time)
+		</if>
+		<if test="liveType == 2">
+			WHERE lrf.start_time IS NULL
+		</if>
+		<!-- 最早type=3时,返回3（已结束-后台手动设置为点播课程）、5（后台还未一键生成回放记录） 2018.3.12  xh
+		<if test="liveType == 3">
+			WHERE 
+			(lrf.start_time &lt; lrf.end_time AND FROM_UNIXTIME(lrf.end_time) &lt; NOW() AND A.course_make_type1 = 2)  返回type=3
+			OR 
+			(lrf.start_time &lt; lrf.end_time AND FROM_UNIXTIME(lrf.end_time) &lt; NOW() AND A.course_make_type1 = 0)  返回type=5
+		</if>
+		 -->
+		<!-- 现需求修改为type=4时,返回3（已结束-后台手动设置为点播课程）、4（后台一键生成回放记录） 2018.3.12  xh -->
+		<if test="liveType == 4">
+			WHERE
+			(A.course_make_type1 = 1) 
+			or 
+			(lrf.start_time &lt; lrf.end_time AND FROM_UNIXTIME(lrf.end_time) &lt; NOW() AND A.course_make_type1 = 2)
+		</if>
+		<!-- 现需求增加type=5时,返回5（后台还未一键生成回放记录） 2018.3.12  xh -->
+		<if test="liveType == 5">
+			WHERE
+			lrf.start_time &lt; lrf.end_time AND FROM_UNIXTIME(lrf.end_time) &lt; NOW() AND A.course_make_type1 = 0
+		</if>
+
+		) F
+		) C
+		LEFT JOIN cv_live_type_sort t9
+		ON t9.type = C.type
+		GROUP BY
+		C.id
+		ORDER
+		BY
+		t9.id ASC,
+		C.sDate DESC
+		) l
+	</select>
+
+	<!-- 根据课程ID获取项目List -->
+	<select id="cvForProvinceManager" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select id from cv_set where id in (select cv_set_id from
+		cv_set_schedule
+		where cv_schedule_id in (select SCHEDULE_id from
+		cv_schedule where
+		cv_id=#{cvId,jdbcType=INTEGER} ) )
+	</select>
+
+	<!-- -->
+	<select id="propCount" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select csar.*
+		from cv_set_authorization csa
+		LEFT JOIN
+		cv_set_authorization_region csar ON csar.AUTHORIZATION_ID =
+		csa.ID
+		where csa.CV_SET_ID = #{cvSetId} <!-- GROUP BY csar.AUTHORIZATION_ID --> HAVING
+		COUNT(csar.ID) = (SELECT COUNT(epv.ID) FROM exam_prop_val epv WHERE
+		epv.type = 20)
+	</select>
+
+	<!-- -->
+	<select id="userPropCount" parameterType="map" resultType="java.lang.Integer">
+		select count(*) from system_user_config s
+		JOIN
+		cv_set_authorization_region csar ON csar.PROP_VAL_ID =
+		s.USER_PROVINCE_ID
+		JOIN cv_set_authorization csa ON csa.ID =
+		csar.AUTHORIZATION_ID WHERE
+		s.USER_ID = #{userId} AND csa.CV_SET_ID =
+		#{cvSetId}
+	</select>
+
+
+
+	<!-- 根据课程ID获取教师 -->
+	<select id="selectTeacher" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t2.NAME AS name,t2.PHOTO photo,t2.SUMMARY summary
+		FROM cv_ref_teacher t
+		JOIN expert_info t2 ON t.expert_id = t2.id
+		LEFT
+		JOIN exam_prop_val t3 ON t2.job = t3.id
+		WHERE t.TYPE = 1 and t.CV_ID =
+		#{cvId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 获取当前直播在线学习人数 -->
+	<select id="getStudyNumForOnline" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		SELECT t.audience_num FROM cv_live_study_ref t
+		LEFT JOIN
+		cv_live t1 ON t1.class_no = t.class_no
+		WHERE t1.cv_id =
+		#{cvId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 获取直播结束时学习人数 -->
+	<select id="getStudyNumForEnd" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(1) from cv_live_study t
+		LEFT JOIN cv_live t1 ON
+		t1.class_no = t.class_no
+		WHERE t1.cv_id = #{cvId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 获取直播回放学习人数 -->
+	<select id="getStudyNumForViewBack" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		SELECT count(1) FROM cv_live_courseware_study t
+		LEFT JOIN
+		cv_live_courseware t1 ON t1.courseware_no = t.coursewareId
+		LEFT JOIN
+		cv_live t2 ON t2.class_no = t1.class_no
+		WHERE t2.cv_id =
+		#{cvId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 获取回放地址列表 -->
+	<select id="getCoursewareList" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t.`subject` coursewareName,t.courseware_url
+		coursewareUrl,t.courseware_token coursewareToken
+		FROM
+		cv_live_courseware t WHERE t.class_no = #{classNo,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据课程ID获取其项目 -->
+	<select id="getCvSet" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t6.CV_SET_COST_TYPE costType,t.id,t6.CV_SET_COST cost 
+		FROM cv_set t
+		LEFT
+		JOIN cv_set_schedule t1 ON t1.CV_SET_ID = t.ID
+		LEFT JOIN cv_schedule t2
+		ON t2.SCHEDULE_ID = t1.CV_SCHEDULE_ID
+		LEFT JOIN cv_set_authorization t6
+		ON t6.cv_set_id = t.id
+		WHERE t2.CV_ID = #{cvId,jdbcType=INTEGER} group
+		by id
+	</select>
+
+	<!-- 根据课程ID 获取课程学习次数 -->
+	<select id="getCourseLearnNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) FROM log_study_cv l inner join cv t on t.id
+		= l.cv_id where
+		t.id = #{cvId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 根据课程ID 获取直播详情 -->
+	<select id="getDetail" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select l.id as cvId,l.name as cvName,l.introduction as
+		introduction,l.type,l.file_path
+		filePath,l.startDate,l.endDate,l.token,l.studentJoinUrl,l.classNo,l.makeType from
+		(
+		SELECT C.* FROM (
+		SELECT
+		F.*,F.startDate AS sDate,
+		(
+		CASE
+		WHEN
+		F.start_time > 0 AND F.end_time = 0 THEN
+		1
+		WHEN F.start_time > 0 AND
+		F.end_time > 0 and F.start_time > F.end_time
+		THEN
+		1
+		WHEN F.start_time IS
+		NULL THEN
+		2
+		WHEN F.start_time &lt; F.end_time AND
+		FROM_UNIXTIME(F.end_time) &lt; NOW()
+		AND F.makeType = 2 THEN
+		3
+		WHEN
+		F.makeType = 1 THEN
+		4
+		WHEN F.start_time &lt; F.end_time AND
+		FROM_UNIXTIME(F.end_time) &lt; NOW()
+		AND F.makeType = 0 THEN
+		5
+		ELSE
+		3
+		END
+		)
+		AS type
+		FROM(
+		SELECT
+		A.ID1 AS ID,
+		A.NAME1 AS `NAME`,
+		A.BRAND1 AS BRAND,
+		A.INTRODUCTION1 AS INTRODUCTION,
+		A.FILE_PATH1 AS FILE_PATH,
+		A.CREATE_DATE1 AS CREATE_DATE,
+		A.CREATOR1 AS CREATOR,
+		A.cv_type1 AS
+		cv_type,
+		A.class_no1 AS classNo,
+		A.student_join_url1 AS studentJoinUrl,
+		A.student_token1 AS token,
+		A.start_date1 AS startDate,
+		A.invalid_date1
+		AS endDate,
+		A.course_make_type1 AS makeType,
+		A.oldtype1 AS oldtype,
+		lrf.start_time,
+		lrf.end_time
+		FROM(
+		SELECT
+		t2.ID AS ID1,
+		t2.`NAME` AS NAME1,
+		t2.BRAND AS BRAND1,
+		t2.INTRODUCTION AS INTRODUCTION1,
+		t2.FILE_PATH AS
+		FILE_PATH1,
+		t2.CREATE_DATE AS CREATE_DATE1,
+		t2.CREATOR AS CREATOR1,
+		t2.cv_type AS cv_type1,
+		live.class_no AS class_no1,
+		live.student_join_url AS student_join_url1,
+		live.student_token AS
+		student_token1,
+		live.start_date AS start_date1,
+		live.invalid_date AS
+		invalid_date1,
+		live.course_make_type AS course_make_type1,
+		(
+		CASE
+		WHEN
+		live.start_date &lt;= NOW()
+		AND live.invalid_date >= NOW() THEN
+		1
+		WHEN
+		live.start_date > NOW() THEN
+		2
+		WHEN live.invalid_date &lt; NOW()
+		AND
+		live.course_make_type != 1 THEN
+		3
+		WHEN live.course_make_type = 1 THEN
+		4
+		END
+		) AS oldtype1
+		FROM
+		cv t2,
+		cv_live live,
+		cv_schedule t3
+		WHERE
+		EXISTS (
+		SELECT
+		1
+		FROM
+		cv_set_schedule t4
+		JOIN cv_set t5 ON t4.cv_set_id = t5.id
+		JOIN cv_set_user_image t8 ON t5.id = t8.cv_set_id
+		<!-- PC端加入授权后,此处两行注释掉,使用下面三行替代 JOIN cv_set_system_site t6 ON t6.cv_set_id 
+			= t5.id JOIN system_site t7 ON t6.system_site_id = t7.id -->
+		JOIN cv_set_authorization csa ON csa.cv_set_id = t5.id
+		JOIN
+		cv_set_authorization_system_site csass ON csass.AUTHORIZATION_ID =
+		csa.ID
+		JOIN system_site t7 ON csass.SYSTEM_SITE_ID = t7.id
+		<if test="xueke != null">
+			join qm_user_image t9 on t8.userimage_id=t9.id
+			join
+			qm_user_image_prop t10 on t9.id=t10.userimage_id
+			join prop_val_ref t12
+			on (t10.prop_id = t12.prop_val2 or t10.prop_id =
+			t12.prop_val1)
+			join
+			exam_prop_val t11 on t12.prop_val1=t11.id and t11.id =
+			#{xueke,jdbcType=VARCHAR}
+		</if>
+		WHERE
+		t3.schedule_id = t4.cv_schedule_id
+		<if test="domainName != null">
+			and t7.domain_name = #{domainName}
+		</if>
+		AND t5. STATUS =5
+		AND t2.id = live.cv_id
+		<!-- PC端加入授权后,此处两行注释掉,否则查询不到数据 AND t5.START_DATE &lt;= NOW() AND t5.END_DATE 
+			>= NOW() -->
+
+		)
+		AND t2.id = t3.cv_id
+		AND t2.cv_type = 2
+		) A
+		LEFT JOIN cv_live_study_ref
+		lrf
+		ON lrf.class_no = A.class_no1
+		<if test="liveType == 1">
+			WHERE (lrf.start_time > 0 AND lrf.end_time = 0)
+			or
+			(lrf.start_time > 0 AND lrf.end_time > 0 and lrf.start_time >
+			lrf.end_time)
+		</if>
+		<if test="liveType == 2">
+			WHERE lrf.start_time IS NULL
+		</if>
+		<if test="liveType == 3">
+			WHERE (lrf.start_time &lt; lrf.end_time
+			AND
+			FROM_UNIXTIME(lrf.end_time) &lt; NOW()
+			AND A.course_make_type1 = 2)
+			OR
+			(lrf.start_time &lt; lrf.end_time
+			AND FROM_UNIXTIME(lrf.end_time) &lt;
+			NOW()
+			AND A.course_make_type1 = 0)
+		</if>
+		<if test="liveType == 4">
+			WHERE
+			A.course_make_type1 = 1
+		</if>
+
+		) F
+		) C
+		LEFT JOIN cv_live_type_sort t9
+		ON t9.type = C.type
+		ORDER BY
+		t9.id
+		ASC,
+		C.sDate DESC
+		) l where l.id = #{cvId,jdbcType=VARCHAR}
+	</select>
+	<!-- 我的学习列表之直播学习列表 -->
+	<select id="myStudyForCvLive" resultType="com.ncme.springboot.footstone.response.Record">
+	SELECT
+		l.id,l.name,l.FILE_PATH as filePath,l.startDate,l.endDate,t20.startdate as lastUpdateDate,'直播' as xtype,concat( '授课教师:',t40.name) as content1,
+		l.type AS liveState,ifnull(l.audience_num,0) as count1Number,t20.userid as userId,l.studentJoinUrl,l.classNo,l.token 
+	from cv_live_signup t20 join (
+		SELECT C.* FROM (
+			SELECT
+			F.*,F.startDate AS sDate,
+			(
+				CASE WHEN
+				F.start_time > 0 AND F.end_time = 0 THEN
+					1
+				WHEN F.start_time > 0 AND F.end_time > 0 and F.start_time > F.end_time	THEN
+					1
+				WHEN F.start_time IS NULL THEN
+					2
+				WHEN F.start_time &lt; F.end_time AND FROM_UNIXTIME(F.end_time) &lt; NOW()	AND F.makeType = 2 THEN
+					3
+				WHEN F.makeType = 1 THEN
+					4
+				WHEN F.start_time &lt; F.end_time AND FROM_UNIXTIME(F.end_time) &lt; NOW()
+				AND F.makeType = 0 THEN
+					5
+				ELSE
+					3
+				END	)AS type
+			FROM(
+				SELECT
+				A.ID1 AS ID,A.NAME1 AS `NAME`,A.BRAND1 AS BRAND,A.INTRODUCTION1 AS INTRODUCTION,A.FILE_PATH1 AS FILE_PATH,A.CREATE_DATE1 AS CREATE_DATE,A.CREATOR1 AS CREATOR,
+				A.cv_type1 AS	cv_type,A.class_no1 AS classNo,A.student_join_url1 AS studentJoinUrl,A.student_token1 AS token,A.start_date1 AS startDate,
+				A.invalid_date1 AS endDate,A.course_make_type1 AS makeType,A.oldtype1 AS oldtype,lrf.start_time,lrf.end_time,lrf.audience_num 
+					FROM(
+						SELECT
+						t2.ID AS ID1,t2.`NAME` AS NAME1,t2.BRAND AS BRAND1,t2.INTRODUCTION AS INTRODUCTION1,t2.FILE_PATH AS FILE_PATH1,
+						t2.CREATE_DATE AS CREATE_DATE1,t2.CREATOR AS CREATOR1,t2.cv_type AS cv_type1,live.class_no AS class_no1,live.student_join_url AS student_join_url1,
+						live.student_token AS student_token1,live.start_date AS start_date1,live.invalid_date AS invalid_date1,live.course_make_type AS course_make_type1,
+							(
+								CASE
+								  WHEN live.start_date &lt;= NOW() AND live.invalid_date >= NOW() THEN
+									1
+								  WHEN	live.start_date > NOW() THEN
+									2
+								  WHEN live.invalid_date &lt; NOW()	AND	live.course_make_type != 1 THEN
+									3
+								  WHEN live.course_make_type = 1 THEN
+									4
+								END
+							) AS oldtype1
+						FROM
+						cv t2,cv_live live,cv_schedule t3
+						WHERE
+							EXISTS (
+								SELECT	1 FROM
+								cv_set_schedule t4
+								JOIN cv_set t5 ON t4.cv_set_id = t5.id
+								JOIN cv_set_user_image t8 ON t5.id = t8.cv_set_id
+								JOIN cv_set_authorization csa ON csa.cv_set_id = t5.id
+								JOIN cv_set_authorization_system_site csass ON csass.AUTHORIZATION_ID =csa.ID
+								JOIN system_site t7 ON csass.SYSTEM_SITE_ID = t7.id 
+								WHERE
+								t3.schedule_id = t4.cv_schedule_id
+								AND t5. STATUS =5
+								AND t2.id = live.cv_id
+							)
+							AND t2.id = t3.cv_id
+							AND t2.cv_type = 2
+					) A
+				LEFT JOIN cv_live_study_ref lrf ON lrf.class_no = A.class_no1
+				) F
+		) C
+		LEFT JOIN cv_live_type_sort t9 ON t9.type = C.type
+		GROUP BY C.id ) l on t20.cvid = l.id 
+		join cv_ref_teacher t30 on t30.cv_id = l.id
+		join expert_info t40 on t40.id = t30.EXPERT_ID
+		where t20.userid = #{userId} 
+		order by l.id desc
+	</select>
+	<!-- 
+	<select id="myStudyForCvLive" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		t1.id,t1.name,t1.FILE_PATH as filePath,
+		t2.start_date as
+		startDate,t2.invalid_date as endDate,
+		t.startdate as lastUpdateDate,
+		'直播' as xtype,
+		concat( '授课教师:',t4.name) as content1,
+		(
+		CASE
+		WHEN
+		t2.start_date &lt;= NOW()
+		AND t2.invalid_date &gt;= NOW() THEN
+		1
+		WHEN
+		t2.start_date &gt; NOW() THEN
+		2
+		WHEN t2.invalid_date &lt; NOW()
+		AND
+		t2.course_make_type != 1 THEN
+		3
+		WHEN t2.course_make_type = 1 THEN
+		4
+		END
+		)
+		AS liveState,
+		ifnull(clsr.audience_num,0) as count1Number,
+		t.userid as
+		userId,
+		t2.student_join_url as studentJoinUrl,
+		t2.class_no as classNo,
+		t2.student_token as token
+		from cv_live_signup t
+		join cv t1 on t1.id =
+		t.cvid
+		join cv_live
+		t2 on t2.cv_id = t1.id
+		join cv_ref_teacher t3 on
+		t3.CV_ID = t1.ID
+		join
+		expert_info t4 on t4.id = t3.EXPERT_ID
+		left JOIN
+		cv_live_study_ref clsr
+		on clsr.class_no=t2.class_no
+		where t.userid =
+		#{userId}
+	</select>
+	-->
+	
+	<!-- 根据课程id得到直播报名人数 -->
+	<select id="getSignUpCountByCvId" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(t.id) from cv_live_signup t where t.cvid =
+		#{cvId}
+	</select><!-- 直播课程报名 -->
+	<insert id="signUpInfo">
+		insert into cv_live_signup (userid,cvid, startdate)
+		values (#{userId}, #{cvId}, #{date})
+	</insert>
+
+	<!-- 验证用户是否已报名过 -->
+	<select id="checkSignUp" resultType="java.lang.Integer">
+		select count(*) from
+		cv_live_signup where userid = #{userId} and
+		cvid=#{cvId}
+	</select>
+
+	<select id="selectCVUnitByCvId" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		t1.ID AS id, t1.NAME AS name
+		FROM
+		cv_unit t1,
+		cv_ref_unit t2
+		WHERE
+		t2.unit_id = t1.id
+		AND t2.cv_id =
+		#{cvId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 根据单元id判断是否存在记录(log_study_cv_unit) -->
+	<select id="queryLogStudyCVUnitByUnitId" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		*
+		FROM
+		log_study_cv_unit
+		WHERE
+		cv_unit_id =
+		#{cvUnitId,jdbcType=INTEGER}
+		AND system_user_id =
+		#{userId,jdbcType=INTEGER}
+	</select>
+
+	<update id="updLogStudyCVUnit" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		UPDATE
+		log_study_cv_unit
+		SET last_update_date = NOW()
+		WHERE
+		cv_unit_id =
+		#{cvUnitId,jdbcType=INTEGER}
+		AND system_user_id =
+		#{systemUserId,jdbcType=INTEGER}
+	</update>
+
+	<insert id="insertLogStudyCVUnit" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		insert into
+		log_study_cv_unit (ID, LOG_STUDY_CV_SET_ID, SYSTEM_USER_ID,
+		CV_ID,
+		CV_UNIT_ID)
+		values (#{id,jdbcType=INTEGER},
+		#{logStudyCvSetId,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER}, #{cvUnitId,jdbcType=INTEGER})
+	</insert>
+
+	<!-- 判断是否存在记录(log_study_cv_set) -->
+	<select id="queryLogStudyCVSet" parameterType="map"	resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		*
+		FROM
+		log_study_cv_set
+		WHERE
+		cv_set_id =	#{cvSetId,jdbcType=INTEGER}
+		AND system_user_id =
+		#{userId,jdbcType=INTEGER}
+	</select>
+	
+	<update id="updLogStudyCVSet" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		UPDATE
+		log_study_cv_set
+		SET last_update_date = NOW()
+		WHERE
+		cv_set_id =
+		#{logStudyCvSetId,jdbcType=INTEGER}
+		AND system_user_id =
+		#{systemUserId,jdbcType=INTEGER}
+	</update>
+	
+	<insert id="insertLogStudyCVSet" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		insert into
+		log_study_cv_set (ID, SYSTEM_USER_ID, SITE_ID,CV_SET_ID,STATE,IS_APPLY_CREDIT,LAST_UPDATE_DATE,APPLY_DATE)
+		values (#{id,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},1,
+		#{logStudyCvSetId,jdbcType=INTEGER},1,1,NOW(),null)
+	</insert>
+		
+	<!-- 判断是否存在记录(log_study_cv) -->
+	<select id="queryLogStudyCv" parameterType="map"	resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		*
+		FROM
+		log_study_cv
+		WHERE
+		cv_set_id =	#{cvSetId,jdbcType=INTEGER}
+		AND cv_id = #{cvId,jdbcType=INTEGER}
+		AND system_user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<update id="updLogStudyCv" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		UPDATE
+		log_study_cv
+		SET last_update_date = NOW()
+		WHERE
+		cv_set_id =	#{logStudyCvSetId,jdbcType=INTEGER}
+		AND cv_id = #{cvId,jdbcType=INTEGER}
+		AND system_user_id = #{systemUserId,jdbcType=INTEGER}
+	</update>
+	
+	<insert id="insertLogStudyCv" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		insert into
+		log_study_cv (ID, SYSTEM_USER_ID,CV_SET_ID,CV_ID,STATE,LAST_UPDATE_DATE)
+		values (#{id,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},
+		#{logStudyCvSetId,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER},
+		1,NOW())
+	</insert>
+	
+	
+	
+	
+</mapper>

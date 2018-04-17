@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetScoreMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetScore">
+		<id column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<result column="GRADE" jdbcType="DECIMAL" property="grade" />
+		<result column="STUDY_TIMES" jdbcType="INTEGER" property="studyTimes" />
+		<result column="CRITIQUESCORE1" jdbcType="DECIMAL" property="critiquescore1" />
+		<result column="CRITIQUESCORE2" jdbcType="DECIMAL" property="critiquescore2" />
+		<result column="CRITIQUESCORE3" jdbcType="DECIMAL" property="critiquescore3" />
+		<result column="CRITIQUESCORE4" jdbcType="DECIMAL" property="critiquescore4" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		CV_SET_ID, GRADE, STUDY_TIMES, CRITIQUESCORE1,
+		CRITIQUESCORE2, CRITIQUESCORE3,
+		CRITIQUESCORE4
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set_score
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_set_score
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetScore">
+		insert into cv_set_score
+		(CV_SET_ID, GRADE, STUDY_TIMES,
+		CRITIQUESCORE1, CRITIQUESCORE2,
+		CRITIQUESCORE3,
+		CRITIQUESCORE4)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{grade,jdbcType=DECIMAL},
+		#{studyTimes,jdbcType=INTEGER},
+		#{critiquescore1,jdbcType=DECIMAL},
+		#{critiquescore2,jdbcType=DECIMAL},
+		#{critiquescore3,jdbcType=DECIMAL},
+		#{critiquescore4,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetScore">
+		insert into cv_set_score
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="studyTimes != null">
+				STUDY_TIMES,
+			</if>
+			<if test="critiquescore1 != null">
+				CRITIQUESCORE1,
+			</if>
+			<if test="critiquescore2 != null">
+				CRITIQUESCORE2,
+			</if>
+			<if test="critiquescore3 != null">
+				CRITIQUESCORE3,
+			</if>
+			<if test="critiquescore4 != null">
+				CRITIQUESCORE4,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=DECIMAL},
+			</if>
+			<if test="studyTimes != null">
+				#{studyTimes,jdbcType=INTEGER},
+			</if>
+			<if test="critiquescore1 != null">
+				#{critiquescore1,jdbcType=DECIMAL},
+			</if>
+			<if test="critiquescore2 != null">
+				#{critiquescore2,jdbcType=DECIMAL},
+			</if>
+			<if test="critiquescore3 != null">
+				#{critiquescore3,jdbcType=DECIMAL},
+			</if>
+			<if test="critiquescore4 != null">
+				#{critiquescore4,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvSetScore">
+		update cv_set_score
+		<set>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=DECIMAL},
+			</if>
+			<if test="studyTimes != null">
+				STUDY_TIMES = #{studyTimes,jdbcType=INTEGER},
+			</if>
+			<if test="critiquescore1 != null">
+				CRITIQUESCORE1 = #{critiquescore1,jdbcType=DECIMAL},
+			</if>
+			<if test="critiquescore2 != null">
+				CRITIQUESCORE2 = #{critiquescore2,jdbcType=DECIMAL},
+			</if>
+			<if test="critiquescore3 != null">
+				CRITIQUESCORE3 = #{critiquescore3,jdbcType=DECIMAL},
+			</if>
+			<if test="critiquescore4 != null">
+				CRITIQUESCORE4 = #{critiquescore4,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetScore">
+		update
+		cv_set_score
+		set GRADE = #{grade,jdbcType=DECIMAL},
+		STUDY_TIMES =
+		#{studyTimes,jdbcType=INTEGER},
+		CRITIQUESCORE1 =
+		#{critiquescore1,jdbcType=DECIMAL},
+		CRITIQUESCORE2 =
+		#{critiquescore2,jdbcType=DECIMAL},
+		CRITIQUESCORE3 =
+		#{critiquescore3,jdbcType=DECIMAL},
+		CRITIQUESCORE4 =
+		#{critiquescore4,jdbcType=DECIMAL}
+		where CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER}
+	</update>
+</mapper>

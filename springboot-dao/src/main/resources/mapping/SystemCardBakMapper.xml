@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardBakMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCardBak">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CARD_NUMBER" jdbcType="VARCHAR" property="cardNumber" />
+		<result column="CARD_PASSWORD" jdbcType="VARCHAR" property="cardPassword" />
+		<result column="CARD_TYPE" jdbcType="INTEGER" property="cardType" />
+		<result column="IMPORT_DATE" jdbcType="TIMESTAMP" property="importDate" />
+		<result column="USEFUL_DATE" jdbcType="DATE" property="usefulDate" />
+		<result column="ISNOT_BIND" jdbcType="INTEGER" property="isnotBind" />
+		<result column="FACE_VALUE" jdbcType="INTEGER" property="faceValue" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="BALANCE" jdbcType="DOUBLE" property="balance" />
+		<result column="ORDER_ID" jdbcType="INTEGER" property="orderId" />
+		<result column="ISSELLED" jdbcType="INTEGER" property="isselled" />
+		<result column="SELL_STYLE" jdbcType="INTEGER" property="sellStyle" />
+		<result column="COST" jdbcType="INTEGER" property="cost" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardBak">
+		insert into system_card_bak (ID, CARD_NUMBER, CARD_PASSWORD,
+		CARD_TYPE, IMPORT_DATE, USEFUL_DATE,
+		ISNOT_BIND, FACE_VALUE, CREATE_USER_ID,
+		CREATE_DATE, STATUS, LAST_UPDATE_USER_ID,
+		LAST_UPDATE_DATE, BALANCE, ORDER_ID,
+		ISSELLED, SELL_STYLE, COST
+		)
+		values (#{id,jdbcType=INTEGER}, #{cardNumber,jdbcType=VARCHAR},
+		#{cardPassword,jdbcType=VARCHAR},
+		#{cardType,jdbcType=INTEGER}, #{importDate,jdbcType=TIMESTAMP}, #{usefulDate,jdbcType=DATE},
+		#{isnotBind,jdbcType=INTEGER}, #{faceValue,jdbcType=INTEGER},
+		#{createUserId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{lastUpdateUserId,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP}, #{balance,jdbcType=DOUBLE},
+		#{orderId,jdbcType=INTEGER},
+		#{isselled,jdbcType=INTEGER}, #{sellStyle,jdbcType=INTEGER}, #{cost,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardBak">
+		insert into system_card_bak
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cardNumber != null">
+				CARD_NUMBER,
+			</if>
+			<if test="cardPassword != null">
+				CARD_PASSWORD,
+			</if>
+			<if test="cardType != null">
+				CARD_TYPE,
+			</if>
+			<if test="importDate != null">
+				IMPORT_DATE,
+			</if>
+			<if test="usefulDate != null">
+				USEFUL_DATE,
+			</if>
+			<if test="isnotBind != null">
+				ISNOT_BIND,
+			</if>
+			<if test="faceValue != null">
+				FACE_VALUE,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="balance != null">
+				BALANCE,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="isselled != null">
+				ISSELLED,
+			</if>
+			<if test="sellStyle != null">
+				SELL_STYLE,
+			</if>
+			<if test="cost != null">
+				COST,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cardNumber != null">
+				#{cardNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="cardPassword != null">
+				#{cardPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="cardType != null">
+				#{cardType,jdbcType=INTEGER},
+			</if>
+			<if test="importDate != null">
+				#{importDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="usefulDate != null">
+				#{usefulDate,jdbcType=DATE},
+			</if>
+			<if test="isnotBind != null">
+				#{isnotBind,jdbcType=INTEGER},
+			</if>
+			<if test="faceValue != null">
+				#{faceValue,jdbcType=INTEGER},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DOUBLE},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="isselled != null">
+				#{isselled,jdbcType=INTEGER},
+			</if>
+			<if test="sellStyle != null">
+				#{sellStyle,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPaperTactic1PaperMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.ExamPaperTactic1PaperKey">
+		<id column="PAPER_ID" jdbcType="INTEGER" property="paperId" />
+		<id column="PAPER_ID_REF" jdbcType="INTEGER" property="paperIdRef" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.ExamPaperTactic1PaperKey">
+		delete from
+		exam_paper_tactic1_paper
+		where PAPER_ID = #{paperId,jdbcType=INTEGER}
+		and PAPER_ID_REF = #{paperIdRef,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPaperTactic1PaperKey">
+		insert into
+		exam_paper_tactic1_paper (PAPER_ID, PAPER_ID_REF)
+		values
+		(#{paperId,jdbcType=INTEGER}, #{paperIdRef,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPaperTactic1PaperKey">
+		insert into exam_paper_tactic1_paper
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="paperId != null">
+				PAPER_ID,
+			</if>
+			<if test="paperIdRef != null">
+				PAPER_ID_REF,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="paperId != null">
+				#{paperId,jdbcType=INTEGER},
+			</if>
+			<if test="paperIdRef != null">
+				#{paperIdRef,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

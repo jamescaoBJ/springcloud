@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeCreditTypeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeCreditType">
+		<result column="CREDIT_TYPE" jdbcType="VARCHAR" property="creditType" />
+		<result column="CREDIT_NAME" jdbcType="VARCHAR" property="creditName" />
+		<result column="WEIGHT" jdbcType="INTEGER" property="weight" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeCreditType">
+		insert into ncme_credit_type (CREDIT_TYPE, CREDIT_NAME, WEIGHT
+		)
+		values (#{creditType,jdbcType=VARCHAR}, #{creditName,jdbcType=VARCHAR},
+		#{weight,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeCreditType">
+		insert into ncme_credit_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="creditType != null">
+				CREDIT_TYPE,
+			</if>
+			<if test="creditName != null">
+				CREDIT_NAME,
+			</if>
+			<if test="weight != null">
+				WEIGHT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="creditType != null">
+				#{creditType,jdbcType=VARCHAR},
+			</if>
+			<if test="creditName != null">
+				#{creditName,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				#{weight,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

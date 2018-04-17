@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.WeiXinMapper">
+	 
+  	<!-- 专项列表 -->
+	<select id="selectSpeciaByPage" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id,t.`NAME` name,t.FILE_PATH file_path,t.FORMA forma,t.TEACHER teacher from cv_set_temp t 
+  	</select>
+  	
+	<!-- 专项详情 -->
+	<select id="getSpecialDetail" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+		select * from cv_set_temp t where t.id = #{id,jdbcType=INTEGER}
+	</select>
+	
+  	<!-- 验证本期是否已报名-专项列表专用 -->
+  	<select id="isSignUp1" parameterType="map" resultType="java.lang.Integer">
+  		select count(*) from sign_up_temp s where s.cv_set_id = #{cvSetId,jdbcType=INTEGER} and s.user_id = #{userId,jdbcType=INTEGER}
+  	</select>
+  	
+	<!-- 专项期数 -->
+	<select id="getSpecialFaceteach" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+	  	select t.id faceteachId,t.class_name faceteachName,t.train_starttime trainStarttime,t.train_endtime trainEndtime,
+	  	(
+			CASE 
+	    	WHEN t.train_starttime &lt;= curdate()
+			AND t.train_endtime >= curdate() THEN
+				0
+			WHEN t.train_starttime > curdate() THEN
+				0
+			WHEN t.train_endtime &lt; curdate() THEN
+				1
+			ELSE
+	      		1
+			END
+		) AS timeStatue 
+	  	from cv_set_schedule_faceteach_temp t where t.cv_set_id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 验证本期是否已报名 -->
+	<select id="isSignUp" parameterType="map" resultType="java.lang.Integer">
+	 	select count(*) from sign_up_temp s where s.cv_set_id = #{cvSetId,jdbcType=INTEGER} and s.faceteach_id = #{faceteachId,jdbcType=INTEGER} and s.user_id = #{userId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 专项下课程 -->
+    <select id="getSpecialCourseList" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+  		select t.id courseId,t.`name` courseName,t.teacher_name,t.teach_date courseTime from cv_temp t where t.cv_set_id = #{id,jdbcType=INTEGER}
+    </select>
+	  
+  	<!-- 专项报名 -->
+  	<insert id="saveSignUp" parameterType="map">
+	    insert into sign_up_temp (cv_set_id,faceteach_id,user_id, create_date)
+	    values (#{cvSetId,jdbcType=INTEGER}, #{faceteachId,jdbcType=INTEGER}, 
+	      #{userId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP})
+  	</insert>
+	
+	<!-- 查看报名表 -->
+  	<select id="getSignUp" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+	  	select u.id userId,u.REAL_NAME userName,u.CERTIFICATE_NO userCard,u.MOBIL_PHONE userPhone,u.hospital_address unitAddress,u.WORK_UNIT unitName,u.WORK_UNIT_ID workUnitId,
+		cvset.id,cvset.`NAME` name,s.faceteach_id faceteachName,t.train_starttime trainStarttime,t.train_endtime trainEndtime,t.train_place trainPlace
+		from system_user u 
+		inner join sign_up_temp s on s.user_id = u.id 
+		inner join cv_set_schedule_faceteach_temp t on t.cv_set_id = s.cv_set_id 
+		inner join cv_set_temp cvset on cvset.id = t.cv_set_id where s.user_id = #{userId,jdbcType=INTEGER} and s.cv_set_id = #{cvSetId,jdbcType=INTEGER} and s.faceteach_id = #{faceteachId,jdbcType=INTEGER} 
+		group by s.user_id,s.cv_set_id,s.faceteach_id
+  	</select>
+</mapper>

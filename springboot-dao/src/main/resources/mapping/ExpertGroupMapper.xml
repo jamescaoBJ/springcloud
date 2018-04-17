@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExpertGroupMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExpertGroup">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="CONTACT" jdbcType="VARCHAR" property="contact" />
+		<result column="PARENT" jdbcType="INTEGER" property="parent" />
+		<result column="PHONE1" jdbcType="VARCHAR" property="phone1" />
+		<result column="PHONE2" jdbcType="VARCHAR" property="phone2" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+		<result column="ORGANIZEDATE" jdbcType="DATE" property="organizedate" />
+		<result column="BREAKDATE" jdbcType="DATE" property="breakdate" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="MASTER" jdbcType="VARCHAR" property="master" />
+		<result column="LOCKSTATE" jdbcType="INTEGER" property="lockstate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, CONTACT, PARENT, PHONE1, PHONE2, EMAIL, ADDRESS,
+		SUMMARY, NOTE,
+		ORGANIZEDATE,
+		BREAKDATE, STATE, MASTER, LOCKSTATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from expert_group
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		expert_group
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExpertGroup">
+		insert into expert_group (ID,
+		NAME, CONTACT,
+		PARENT, PHONE1, PHONE2,
+		EMAIL, ADDRESS, SUMMARY,
+		NOTE,
+		ORGANIZEDATE, BREAKDATE,
+		STATE, MASTER, LOCKSTATE
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{contact,jdbcType=VARCHAR},
+		#{parent,jdbcType=INTEGER},
+		#{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{summary,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR},
+		#{organizedate,jdbcType=DATE}, #{breakdate,jdbcType=DATE},
+		#{state,jdbcType=INTEGER}, #{master,jdbcType=VARCHAR},
+		#{lockstate,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExpertGroup">
+		insert into expert_group
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="contact != null">
+				CONTACT,
+			</if>
+			<if test="parent != null">
+				PARENT,
+			</if>
+			<if test="phone1 != null">
+				PHONE1,
+			</if>
+			<if test="phone2 != null">
+				PHONE2,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="note != null">
+				NOTE,
+			</if>
+			<if test="organizedate != null">
+				ORGANIZEDATE,
+			</if>
+			<if test="breakdate != null">
+				BREAKDATE,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="master != null">
+				MASTER,
+			</if>
+			<if test="lockstate != null">
+				LOCKSTATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="parent != null">
+				#{parent,jdbcType=INTEGER},
+			</if>
+			<if test="phone1 != null">
+				#{phone1,jdbcType=VARCHAR},
+			</if>
+			<if test="phone2 != null">
+				#{phone2,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="organizedate != null">
+				#{organizedate,jdbcType=DATE},
+			</if>
+			<if test="breakdate != null">
+				#{breakdate,jdbcType=DATE},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="master != null">
+				#{master,jdbcType=VARCHAR},
+			</if>
+			<if test="lockstate != null">
+				#{lockstate,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExpertGroup">
+		update expert_group
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				CONTACT = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="parent != null">
+				PARENT = #{parent,jdbcType=INTEGER},
+			</if>
+			<if test="phone1 != null">
+				PHONE1 = #{phone1,jdbcType=VARCHAR},
+			</if>
+			<if test="phone2 != null">
+				PHONE2 = #{phone2,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				NOTE = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="organizedate != null">
+				ORGANIZEDATE = #{organizedate,jdbcType=DATE},
+			</if>
+			<if test="breakdate != null">
+				BREAKDATE = #{breakdate,jdbcType=DATE},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="master != null">
+				MASTER = #{master,jdbcType=VARCHAR},
+			</if>
+			<if test="lockstate != null">
+				LOCKSTATE = #{lockstate,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExpertGroup">
+		update
+		expert_group
+		set NAME = #{name,jdbcType=VARCHAR},
+		CONTACT =
+		#{contact,jdbcType=VARCHAR},
+		PARENT = #{parent,jdbcType=INTEGER},
+		PHONE1 = #{phone1,jdbcType=VARCHAR},
+		PHONE2 =
+		#{phone2,jdbcType=VARCHAR},
+		EMAIL = #{email,jdbcType=VARCHAR},
+		ADDRESS =
+		#{address,jdbcType=VARCHAR},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		NOTE = #{note,jdbcType=VARCHAR},
+		ORGANIZEDATE =
+		#{organizedate,jdbcType=DATE},
+		BREAKDATE = #{breakdate,jdbcType=DATE},
+		STATE = #{state,jdbcType=INTEGER},
+		MASTER = #{master,jdbcType=VARCHAR},
+		LOCKSTATE = #{lockstate,jdbcType=INTEGER}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

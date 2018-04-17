@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardUserMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCardUser">
+		<result column="CARD_ID" jdbcType="INTEGER" property="cardId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="BIND_DATE" jdbcType="TIMESTAMP" property="bindDate" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardUser">
+		insert into system_card_user (CARD_ID, USER_ID, SITE_ID,
+		BIND_DATE)
+		values (#{cardId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{bindDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardUser">
+		insert into system_card_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cardId != null">
+				CARD_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="bindDate != null">
+				BIND_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cardId != null">
+				#{cardId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="bindDate != null">
+				#{bindDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+</mapper>

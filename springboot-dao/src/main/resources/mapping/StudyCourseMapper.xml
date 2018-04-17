@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCourseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.StudyCourse">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="STUDY_COURSE_NAME" jdbcType="VARCHAR" property="studyCourseName" />
+		<result column="TEACHER" jdbcType="VARCHAR" property="teacher" />
+		<result column="KEY_WORD" jdbcType="VARCHAR" property="keyWord" />
+		<result column="STUDY_COURSE_TYPE" jdbcType="INTEGER" property="studyCourseType" />
+		<result column="TIMES" jdbcType="DOUBLE" property="times" />
+		<result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="REVIEW" jdbcType="VARCHAR" property="review" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="CLASS_HOURS" jdbcType="DOUBLE" property="classHours" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="COURSE_INT" jdbcType="VARCHAR" property="courseInt" />
+		<result column="PUB_DATE" jdbcType="DATE" property="pubDate" />
+		<result column="DIFFICULTY" jdbcType="INTEGER" property="difficulty" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CLICK_TIMES" jdbcType="INTEGER" property="clickTimes" />
+		<result column="TOTAL_CLICK_TIMES" jdbcType="INTEGER" property="totalClickTimes" />
+		<result column="TEACHER_UNIT" jdbcType="VARCHAR" property="teacherUnit" />
+		<result column="COURSE_IMG_PATH" jdbcType="VARCHAR" property="courseImgPath" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, STUDY_COURSE_NAME, TEACHER, KEY_WORD, STUDY_COURSE_TYPE, TIMES,
+		SUMMARY, DESCRIPTION,
+		REVIEW, STATUS, LAST_UPDATE_DATE, CLASS_HOURS, CREATE_DATE, COURSE_INT,
+		PUB_DATE,
+		DIFFICULTY, REMARK, CLICK_TIMES, TOTAL_CLICK_TIMES, TEACHER_UNIT, COURSE_IMG_PATH
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from study_course
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from study_course
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCourse">
+		insert into study_course (ID, STUDY_COURSE_NAME, TEACHER,
+		KEY_WORD, STUDY_COURSE_TYPE, TIMES,
+		SUMMARY, DESCRIPTION, REVIEW,
+		STATUS, LAST_UPDATE_DATE, CLASS_HOURS,
+		CREATE_DATE, COURSE_INT, PUB_DATE,
+		DIFFICULTY, REMARK, CLICK_TIMES,
+		TOTAL_CLICK_TIMES, TEACHER_UNIT, COURSE_IMG_PATH
+		)
+		values (#{id,jdbcType=INTEGER}, #{studyCourseName,jdbcType=VARCHAR},
+		#{teacher,jdbcType=VARCHAR},
+		#{keyWord,jdbcType=VARCHAR}, #{studyCourseType,jdbcType=INTEGER}, #{times,jdbcType=DOUBLE},
+		#{summary,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+		#{review,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP}, #{classHours,jdbcType=DOUBLE},
+		#{createDate,jdbcType=TIMESTAMP}, #{courseInt,jdbcType=VARCHAR},
+		#{pubDate,jdbcType=DATE},
+		#{difficulty,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{clickTimes,jdbcType=INTEGER},
+		#{totalClickTimes,jdbcType=INTEGER}, #{teacherUnit,jdbcType=VARCHAR},
+		#{courseImgPath,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCourse">
+		insert into study_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="studyCourseName != null">
+				STUDY_COURSE_NAME,
+			</if>
+			<if test="teacher != null">
+				TEACHER,
+			</if>
+			<if test="keyWord != null">
+				KEY_WORD,
+			</if>
+			<if test="studyCourseType != null">
+				STUDY_COURSE_TYPE,
+			</if>
+			<if test="times != null">
+				TIMES,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="review != null">
+				REVIEW,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="classHours != null">
+				CLASS_HOURS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="courseInt != null">
+				COURSE_INT,
+			</if>
+			<if test="pubDate != null">
+				PUB_DATE,
+			</if>
+			<if test="difficulty != null">
+				DIFFICULTY,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="clickTimes != null">
+				CLICK_TIMES,
+			</if>
+			<if test="totalClickTimes != null">
+				TOTAL_CLICK_TIMES,
+			</if>
+			<if test="teacherUnit != null">
+				TEACHER_UNIT,
+			</if>
+			<if test="courseImgPath != null">
+				COURSE_IMG_PATH,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseName != null">
+				#{studyCourseName,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher != null">
+				#{teacher,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWord != null">
+				#{keyWord,jdbcType=VARCHAR},
+			</if>
+			<if test="studyCourseType != null">
+				#{studyCourseType,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				#{times,jdbcType=DOUBLE},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="review != null">
+				#{review,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="classHours != null">
+				#{classHours,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="courseInt != null">
+				#{courseInt,jdbcType=VARCHAR},
+			</if>
+			<if test="pubDate != null">
+				#{pubDate,jdbcType=DATE},
+			</if>
+			<if test="difficulty != null">
+				#{difficulty,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="clickTimes != null">
+				#{clickTimes,jdbcType=INTEGER},
+			</if>
+			<if test="totalClickTimes != null">
+				#{totalClickTimes,jdbcType=INTEGER},
+			</if>
+			<if test="teacherUnit != null">
+				#{teacherUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="courseImgPath != null">
+				#{courseImgPath,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.StudyCourse">
+		update study_course
+		<set>
+			<if test="studyCourseName != null">
+				STUDY_COURSE_NAME = #{studyCourseName,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher != null">
+				TEACHER = #{teacher,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWord != null">
+				KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+			</if>
+			<if test="studyCourseType != null">
+				STUDY_COURSE_TYPE = #{studyCourseType,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				TIMES = #{times,jdbcType=DOUBLE},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="review != null">
+				REVIEW = #{review,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="classHours != null">
+				CLASS_HOURS = #{classHours,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="courseInt != null">
+				COURSE_INT = #{courseInt,jdbcType=VARCHAR},
+			</if>
+			<if test="pubDate != null">
+				PUB_DATE = #{pubDate,jdbcType=DATE},
+			</if>
+			<if test="difficulty != null">
+				DIFFICULTY = #{difficulty,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="clickTimes != null">
+				CLICK_TIMES = #{clickTimes,jdbcType=INTEGER},
+			</if>
+			<if test="totalClickTimes != null">
+				TOTAL_CLICK_TIMES = #{totalClickTimes,jdbcType=INTEGER},
+			</if>
+			<if test="teacherUnit != null">
+				TEACHER_UNIT = #{teacherUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="courseImgPath != null">
+				COURSE_IMG_PATH = #{courseImgPath,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.StudyCourse">
+		update study_course
+		set STUDY_COURSE_NAME = #{studyCourseName,jdbcType=VARCHAR},
+		TEACHER = #{teacher,jdbcType=VARCHAR},
+		KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+		STUDY_COURSE_TYPE = #{studyCourseType,jdbcType=INTEGER},
+		TIMES = #{times,jdbcType=DOUBLE},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		REVIEW = #{review,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		CLASS_HOURS = #{classHours,jdbcType=DOUBLE},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		COURSE_INT = #{courseInt,jdbcType=VARCHAR},
+		PUB_DATE = #{pubDate,jdbcType=DATE},
+		DIFFICULTY = #{difficulty,jdbcType=INTEGER},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CLICK_TIMES = #{clickTimes,jdbcType=INTEGER},
+		TOTAL_CLICK_TIMES = #{totalClickTimes,jdbcType=INTEGER},
+		TEACHER_UNIT = #{teacherUnit,jdbcType=VARCHAR},
+		COURSE_IMG_PATH = #{courseImgPath,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

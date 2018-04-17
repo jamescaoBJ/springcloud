@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ModelGuideMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ModelGuide">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="USER_IMAGE_ID" jdbcType="INTEGER" property="userImageId" />
+		<result column="QUALITY_ID" jdbcType="INTEGER" property="qualityId" />
+		<result column="LEVEL" jdbcType="INTEGER" property="level" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, USER_IMAGE_ID, QUALITY_ID, LEVEL
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from model_guide
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from model_guide
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ModelGuide">
+		insert into model_guide (ID, NAME, USER_IMAGE_ID,
+		QUALITY_ID, LEVEL)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{userImageId,jdbcType=INTEGER},
+		#{qualityId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ModelGuide">
+		insert into model_guide
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="userImageId != null">
+				USER_IMAGE_ID,
+			</if>
+			<if test="qualityId != null">
+				QUALITY_ID,
+			</if>
+			<if test="level != null">
+				LEVEL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="userImageId != null">
+				#{userImageId,jdbcType=INTEGER},
+			</if>
+			<if test="qualityId != null">
+				#{qualityId,jdbcType=INTEGER},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ModelGuide">
+		update model_guide
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="userImageId != null">
+				USER_IMAGE_ID = #{userImageId,jdbcType=INTEGER},
+			</if>
+			<if test="qualityId != null">
+				QUALITY_ID = #{qualityId,jdbcType=INTEGER},
+			</if>
+			<if test="level != null">
+				LEVEL = #{level,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ModelGuide">
+		update model_guide
+		set NAME = #{name,jdbcType=VARCHAR},
+		USER_IMAGE_ID = #{userImageId,jdbcType=INTEGER},
+		QUALITY_ID = #{qualityId,jdbcType=INTEGER},
+		LEVEL = #{level,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

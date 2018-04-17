@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemUserFaceEntryMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemUserFaceEntry">
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="fid" jdbcType="INTEGER" property="fid" />
+		<result column="entry_time" jdbcType="TIMESTAMP" property="entryTime" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemUserFaceEntry">
+		insert into system_user_face_entry (user_id, fid, entry_time)
+		values (#{userId,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER},
+		#{entryTime,jdbcType=TIMESTAMP})
+	</insert>
+	<select id="getFaceInfo" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		u.REAL_NAME AS realName,
+		u.CERTIFICATE_TYPE AS certificateType,
+		u.CERTIFICATE_NO AS certificateNo,
+		u.MOBIL_PHONE AS mobilPhone,
+		u.WORK_UNIT AS workUnit,
+		u.hospital_address AS hospitalAddress,
+		c.NAME AS projectName,
+		t.class_name AS className,
+		DATE_FORMAT(t.train_starttime,'%Y-%d-%m') AS startDate,
+		DATE_FORMAT(t.train_endtime,'%Y-%d-%m') AS endDate,
+		t.train_place AS trainPlace
+		FROM
+		system_user_face_entry f
+		LEFT JOIN system_user u ON u.ID = f.fid
+		LEFT JOIN
+		cv_set_schedule_faceteach t ON t.id = f.fid
+		LEFT JOIN cv_set c ON c.ID
+		= t.cv_set_id
+		WHERE
+		f.user_id = #{userId,jdbcType=INTEGER}
+		AND f.fid = #{fid,jdbcType=INTEGER}
+		AND c.ID = #{cvSetId,jdbcType=INTEGER}
+	</select>
+	<select id="isSignUp" parameterType="map"
+		resultType="com.ncme.springboot.model.SystemUserFaceEntry">
+		SELECT
+		user_id as userId,
+		fid as fid,
+		entry_time as entryTime
+		FROM
+		system_user_face_entry
+		WHERE
+		user_id = #{userId,jdbcType=INTEGER}
+		AND fid = #{fid,jdbcType=INTEGER}
+
+	</select>
+</mapper>

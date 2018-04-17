@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentSiteMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentSite">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="APPLICATION_ID" jdbcType="VARCHAR" property="applicationId" />
+		<result column="SITE_NAME" jdbcType="VARCHAR" property="siteName" />
+		<result column="SITE_LOGO" jdbcType="VARCHAR" property="siteLogo" />
+		<result column="SITE_VISIT" jdbcType="INTEGER" property="siteVisit" />
+		<result column="SITE_FOOT" jdbcType="VARCHAR" property="siteFoot" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, APPLICATION_ID, SITE_NAME, SITE_LOGO, SITE_VISIT, SITE_FOOT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_site
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_site
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentSite">
+		insert into train_content_site (ID, APPLICATION_ID, SITE_NAME,
+		SITE_LOGO, SITE_VISIT, SITE_FOOT
+		)
+		values (#{id,jdbcType=INTEGER}, #{applicationId,jdbcType=VARCHAR},
+		#{siteName,jdbcType=VARCHAR},
+		#{siteLogo,jdbcType=VARCHAR}, #{siteVisit,jdbcType=INTEGER}, #{siteFoot,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentSite">
+		insert into train_content_site
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID,
+			</if>
+			<if test="siteName != null">
+				SITE_NAME,
+			</if>
+			<if test="siteLogo != null">
+				SITE_LOGO,
+			</if>
+			<if test="siteVisit != null">
+				SITE_VISIT,
+			</if>
+			<if test="siteFoot != null">
+				SITE_FOOT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="applicationId != null">
+				#{applicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="siteName != null">
+				#{siteName,jdbcType=VARCHAR},
+			</if>
+			<if test="siteLogo != null">
+				#{siteLogo,jdbcType=VARCHAR},
+			</if>
+			<if test="siteVisit != null">
+				#{siteVisit,jdbcType=INTEGER},
+			</if>
+			<if test="siteFoot != null">
+				#{siteFoot,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentSite">
+		update train_content_site
+		<set>
+			<if test="applicationId != null">
+				APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="siteName != null">
+				SITE_NAME = #{siteName,jdbcType=VARCHAR},
+			</if>
+			<if test="siteLogo != null">
+				SITE_LOGO = #{siteLogo,jdbcType=VARCHAR},
+			</if>
+			<if test="siteVisit != null">
+				SITE_VISIT = #{siteVisit,jdbcType=INTEGER},
+			</if>
+			<if test="siteFoot != null">
+				SITE_FOOT = #{siteFoot,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentSite">
+		update train_content_site
+		set APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+		SITE_NAME = #{siteName,jdbcType=VARCHAR},
+		SITE_LOGO = #{siteLogo,jdbcType=VARCHAR},
+		SITE_VISIT = #{siteVisit,jdbcType=INTEGER},
+		SITE_FOOT = #{siteFoot,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

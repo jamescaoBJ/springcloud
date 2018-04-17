@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeManagePurviewMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeManagePurview">
+		<result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+		<result column="FUNC_ID" jdbcType="VARCHAR" property="funcId" />
+		<result column="FUNC_ADD" jdbcType="CHAR" property="funcAdd" />
+		<result column="FUNC_UPDATE" jdbcType="CHAR" property="funcUpdate" />
+		<result column="FUNC_DEL" jdbcType="CHAR" property="funcDel" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeManagePurview">
+		insert into ncme_manage_purview (LOGIN_NAME, FUNC_ID, FUNC_ADD,
+		FUNC_UPDATE, FUNC_DEL)
+		values (#{loginName,jdbcType=VARCHAR}, #{funcId,jdbcType=VARCHAR},
+		#{funcAdd,jdbcType=CHAR},
+		#{funcUpdate,jdbcType=CHAR}, #{funcDel,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeManagePurview">
+		insert into ncme_manage_purview
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="loginName != null">
+				LOGIN_NAME,
+			</if>
+			<if test="funcId != null">
+				FUNC_ID,
+			</if>
+			<if test="funcAdd != null">
+				FUNC_ADD,
+			</if>
+			<if test="funcUpdate != null">
+				FUNC_UPDATE,
+			</if>
+			<if test="funcDel != null">
+				FUNC_DEL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="funcId != null">
+				#{funcId,jdbcType=VARCHAR},
+			</if>
+			<if test="funcAdd != null">
+				#{funcAdd,jdbcType=CHAR},
+			</if>
+			<if test="funcUpdate != null">
+				#{funcUpdate,jdbcType=CHAR},
+			</if>
+			<if test="funcDel != null">
+				#{funcDel,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

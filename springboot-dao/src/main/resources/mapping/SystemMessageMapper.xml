@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemMessageMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemMessage">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="MESSAGE_CONTENT" jdbcType="VARCHAR" property="messageContent" />
+		<result column="MESSAGE_DATE" jdbcType="TIMESTAMP" property="messageDate" />
+		<result column="IS_READ" jdbcType="INTEGER" property="isRead" />
+		<result column="MESSAGE_TITLE" jdbcType="VARCHAR" property="messageTitle" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SYSTEM_USER_ID, MESSAGE_CONTENT, MESSAGE_DATE, IS_READ, MESSAGE_TITLE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_message
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_message
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemMessage">
+		insert into system_message (ID, SYSTEM_USER_ID, MESSAGE_CONTENT,
+		MESSAGE_DATE, IS_READ, MESSAGE_TITLE)
+		values (#{id,jdbcType=INTEGER}, #{systemUserId,jdbcType=INTEGER},
+		#{messageContent,jdbcType=VARCHAR},
+		#{messageDate,jdbcType=TIMESTAMP}, #{isRead,jdbcType=INTEGER}, #{messageTitle,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemMessage">
+		insert into system_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="messageContent != null">
+				MESSAGE_CONTENT,
+			</if>
+			<if test="messageDate != null">
+				MESSAGE_DATE,
+			</if>
+			<if test="isRead != null">
+				IS_READ,
+			</if>
+			<if test="messageTitle != null">
+				MESSAGE_TITLE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="messageContent != null">
+				#{messageContent,jdbcType=VARCHAR},
+			</if>
+			<if test="messageDate != null">
+				#{messageDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isRead != null">
+				#{isRead,jdbcType=INTEGER},
+			</if>
+			<if test="messageTitle != null">
+				#{messageTitle,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemMessage">
+		update system_message
+		<set>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="messageContent != null">
+				MESSAGE_CONTENT = #{messageContent,jdbcType=VARCHAR},
+			</if>
+			<if test="messageDate != null">
+				MESSAGE_DATE = #{messageDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isRead != null">
+				IS_READ = #{isRead,jdbcType=INTEGER},
+			</if>
+			<if test="messageTitle != null">
+				MESSAGE_TITLE = #{messageTitle,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemMessage">
+		update system_message
+		set SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+		MESSAGE_CONTENT = #{messageContent,jdbcType=VARCHAR},
+		MESSAGE_DATE = #{messageDate,jdbcType=TIMESTAMP},
+		IS_READ = #{isRead,jdbcType=INTEGER},
+		MESSAGE_TITLE = #{messageTitle,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getMessageList" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select id as msgId,message_content as msgContent,message_date as msgDate,is_read as msgIsRead,
+		message_title as msgTitle,ifnull(messageType,'0') as messageType
+		from system_message
+		where system_user_id = #{userId,jdbcType=INTEGER}
+		and messageType is null <!--此条件 v1.0 打开 ;  v1.1注释掉 -->
+		order by msgDate desc
+	</select>
+	<!-- 根据用户id查询该用户未读消息数量 -->
+	<select id="getNotReadCount" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(id)
+		from system_message
+		where system_user_id = #{userId,jdbcType=INTEGER}
+		and is_read = 1
+	</select>
+
+	<update id="markReadMessageByUserId">
+		update system_message
+		set IS_READ = #{isRead,jdbcType=INTEGER}
+		where system_user_id = #{userId,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamSysQuestTypeQuestMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.ExamSysQuestTypeQuest">
+		<result column="SUB_TYPE_ID" jdbcType="INTEGER" property="subTypeId" />
+		<result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
+		<result column="SUB_SYS_ID" jdbcType="INTEGER" property="subSysId" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamSysQuestTypeQuest">
+		insert into
+		exam_sys_quest_type_quest (SUB_TYPE_ID, QUESTION_ID, SUB_SYS_ID,
+		STATE)
+		values (#{subTypeId,jdbcType=INTEGER},
+		#{questionId,jdbcType=INTEGER},
+		#{subSysId,jdbcType=INTEGER},
+		#{state,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamSysQuestTypeQuest">
+		insert into exam_sys_quest_type_quest
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="subTypeId != null">
+				SUB_TYPE_ID,
+			</if>
+			<if test="questionId != null">
+				QUESTION_ID,
+			</if>
+			<if test="subSysId != null">
+				SUB_SYS_ID,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="subTypeId != null">
+				#{subTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="questionId != null">
+				#{questionId,jdbcType=INTEGER},
+			</if>
+			<if test="subSysId != null">
+				#{subSysId,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

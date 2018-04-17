@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CaseCourseDiseaseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CaseCourseDisease">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="DISEASEDATE" jdbcType="DATE" property="diseasedate" />
+		<result column="DISEASETYPE" jdbcType="INTEGER" property="diseasetype" />
+		<result column="COMPLAINT" jdbcType="VARCHAR" property="complaint" />
+		<result column="CURRENTDISEASE" jdbcType="VARCHAR" property="currentdisease" />
+		<result column="HISTORY1" jdbcType="VARCHAR" property="history1" />
+		<result column="HISTORY2" jdbcType="VARCHAR" property="history2" />
+		<result column="HISTORY3" jdbcType="VARCHAR" property="history3" />
+		<result column="HISTORY4" jdbcType="VARCHAR" property="history4" />
+		<result column="BODYSTATE1TYPE" jdbcType="INTEGER" property="bodystate1type" />
+		<result column="BODYSTATE1" jdbcType="VARCHAR" property="bodystate1" />
+		<result column="BODYSTATE2TYPE" jdbcType="INTEGER" property="bodystate2type" />
+		<result column="BODYSTATE2" jdbcType="VARCHAR" property="bodystate2" />
+		<result column="BODYSTATE3TYPE" jdbcType="INTEGER" property="bodystate3type" />
+		<result column="BODYSTATE3" jdbcType="VARCHAR" property="bodystate3" />
+		<result column="BODYSTATE4TYPE" jdbcType="INTEGER" property="bodystate4type" />
+		<result column="BODYSTATE4" jdbcType="VARCHAR" property="bodystate4" />
+		<result column="BODYSTATE5TYPE" jdbcType="INTEGER" property="bodystate5type" />
+		<result column="BODYSTATE5" jdbcType="VARCHAR" property="bodystate5" />
+		<result column="BODYSTATE6TYPE" jdbcType="INTEGER" property="bodystate6type" />
+		<result column="BODYSTATE6" jdbcType="VARCHAR" property="bodystate6" />
+		<result column="BODYSTATE7TYPE" jdbcType="INTEGER" property="bodystate7type" />
+		<result column="BODYSTATE7" jdbcType="VARCHAR" property="bodystate7" />
+		<result column="ASSAY" jdbcType="VARCHAR" property="assay" />
+		<result column="ASSAY_FILE" jdbcType="VARCHAR" property="assayFile" />
+		<result column="IMAGE" jdbcType="VARCHAR" property="image" />
+		<result column="IMAGE_FILE" jdbcType="VARCHAR" property="imageFile" />
+		<result column="REST" jdbcType="VARCHAR" property="rest" />
+		<result column="REST_FILE" jdbcType="VARCHAR" property="restFile" />
+		<result column="PLAN" jdbcType="VARCHAR" property="plan" />
+		<result column="PLAN_FILE" jdbcType="VARCHAR" property="planFile" />
+		<result column="FUTURESTATE" jdbcType="VARCHAR" property="futurestate" />
+		<result column="BODYSTATE8TYPE" jdbcType="INTEGER" property="bodystate8type" />
+		<result column="BODYSTATE8" jdbcType="VARCHAR" property="bodystate8" />
+		<result column="DISEASEYEAR" jdbcType="VARCHAR" property="diseaseyear" />
+		<result column="DISEASEMONTH" jdbcType="VARCHAR" property="diseasemonth" />
+		<result column="DISEASEDAY" jdbcType="VARCHAR" property="diseaseday" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DISEASEDATE, DISEASETYPE, COMPLAINT, CURRENTDISEASE,
+		HISTORY1,
+		HISTORY2, HISTORY3,
+		HISTORY4, BODYSTATE1TYPE, BODYSTATE1,
+		BODYSTATE2TYPE, BODYSTATE2,
+		BODYSTATE3TYPE,
+		BODYSTATE3, BODYSTATE4TYPE,
+		BODYSTATE4, BODYSTATE5TYPE, BODYSTATE5,
+		BODYSTATE6TYPE,
+		BODYSTATE6,
+		BODYSTATE7TYPE, BODYSTATE7, ASSAY, ASSAY_FILE, IMAGE, IMAGE_FILE,
+		REST,
+		REST_FILE, PLAN, PLAN_FILE, FUTURESTATE, BODYSTATE8TYPE,
+		BODYSTATE8,
+		DISEASEYEAR,
+		DISEASEMONTH, DISEASEDAY
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from case_course_disease
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		case_course_disease
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CaseCourseDisease">
+		insert into
+		case_course_disease (ID, DISEASEDATE, DISEASETYPE,
+		COMPLAINT,
+		CURRENTDISEASE, HISTORY1,
+		HISTORY2, HISTORY3, HISTORY4,
+		BODYSTATE1TYPE,
+		BODYSTATE1, BODYSTATE2TYPE,
+		BODYSTATE2, BODYSTATE3TYPE, BODYSTATE3,
+		BODYSTATE4TYPE, BODYSTATE4, BODYSTATE5TYPE,
+		BODYSTATE5, BODYSTATE6TYPE,
+		BODYSTATE6,
+		BODYSTATE7TYPE, BODYSTATE7, ASSAY,
+		ASSAY_FILE, IMAGE,
+		IMAGE_FILE,
+		REST, REST_FILE, PLAN,
+		PLAN_FILE, FUTURESTATE,
+		BODYSTATE8TYPE,
+		BODYSTATE8, DISEASEYEAR, DISEASEMONTH,
+		DISEASEDAY)
+		values (#{id,jdbcType=INTEGER}, #{diseasedate,jdbcType=DATE},
+		#{diseasetype,jdbcType=INTEGER},
+		#{complaint,jdbcType=VARCHAR},
+		#{currentdisease,jdbcType=VARCHAR}, #{history1,jdbcType=VARCHAR},
+		#{history2,jdbcType=VARCHAR}, #{history3,jdbcType=VARCHAR},
+		#{history4,jdbcType=VARCHAR},
+		#{bodystate1type,jdbcType=INTEGER},
+		#{bodystate1,jdbcType=VARCHAR}, #{bodystate2type,jdbcType=INTEGER},
+		#{bodystate2,jdbcType=VARCHAR}, #{bodystate3type,jdbcType=INTEGER},
+		#{bodystate3,jdbcType=VARCHAR},
+		#{bodystate4type,jdbcType=INTEGER},
+		#{bodystate4,jdbcType=VARCHAR}, #{bodystate5type,jdbcType=INTEGER},
+		#{bodystate5,jdbcType=VARCHAR}, #{bodystate6type,jdbcType=INTEGER},
+		#{bodystate6,jdbcType=VARCHAR},
+		#{bodystate7type,jdbcType=INTEGER},
+		#{bodystate7,jdbcType=VARCHAR}, #{assay,jdbcType=VARCHAR},
+		#{assayFile,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR},
+		#{imageFile,jdbcType=VARCHAR},
+		#{rest,jdbcType=VARCHAR},
+		#{restFile,jdbcType=VARCHAR}, #{plan,jdbcType=VARCHAR},
+		#{planFile,jdbcType=VARCHAR}, #{futurestate,jdbcType=VARCHAR},
+		#{bodystate8type,jdbcType=INTEGER},
+		#{bodystate8,jdbcType=VARCHAR},
+		#{diseaseyear,jdbcType=VARCHAR}, #{diseasemonth,jdbcType=VARCHAR},
+		#{diseaseday,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CaseCourseDisease">
+		insert into case_course_disease
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="diseasedate != null">
+				DISEASEDATE,
+			</if>
+			<if test="diseasetype != null">
+				DISEASETYPE,
+			</if>
+			<if test="complaint != null">
+				COMPLAINT,
+			</if>
+			<if test="currentdisease != null">
+				CURRENTDISEASE,
+			</if>
+			<if test="history1 != null">
+				HISTORY1,
+			</if>
+			<if test="history2 != null">
+				HISTORY2,
+			</if>
+			<if test="history3 != null">
+				HISTORY3,
+			</if>
+			<if test="history4 != null">
+				HISTORY4,
+			</if>
+			<if test="bodystate1type != null">
+				BODYSTATE1TYPE,
+			</if>
+			<if test="bodystate1 != null">
+				BODYSTATE1,
+			</if>
+			<if test="bodystate2type != null">
+				BODYSTATE2TYPE,
+			</if>
+			<if test="bodystate2 != null">
+				BODYSTATE2,
+			</if>
+			<if test="bodystate3type != null">
+				BODYSTATE3TYPE,
+			</if>
+			<if test="bodystate3 != null">
+				BODYSTATE3,
+			</if>
+			<if test="bodystate4type != null">
+				BODYSTATE4TYPE,
+			</if>
+			<if test="bodystate4 != null">
+				BODYSTATE4,
+			</if>
+			<if test="bodystate5type != null">
+				BODYSTATE5TYPE,
+			</if>
+			<if test="bodystate5 != null">
+				BODYSTATE5,
+			</if>
+			<if test="bodystate6type != null">
+				BODYSTATE6TYPE,
+			</if>
+			<if test="bodystate6 != null">
+				BODYSTATE6,
+			</if>
+			<if test="bodystate7type != null">
+				BODYSTATE7TYPE,
+			</if>
+			<if test="bodystate7 != null">
+				BODYSTATE7,
+			</if>
+			<if test="assay != null">
+				ASSAY,
+			</if>
+			<if test="assayFile != null">
+				ASSAY_FILE,
+			</if>
+			<if test="image != null">
+				IMAGE,
+			</if>
+			<if test="imageFile != null">
+				IMAGE_FILE,
+			</if>
+			<if test="rest != null">
+				REST,
+			</if>
+			<if test="restFile != null">
+				REST_FILE,
+			</if>
+			<if test="plan != null">
+				PLAN,
+			</if>
+			<if test="planFile != null">
+				PLAN_FILE,
+			</if>
+			<if test="futurestate != null">
+				FUTURESTATE,
+			</if>
+			<if test="bodystate8type != null">
+				BODYSTATE8TYPE,
+			</if>
+			<if test="bodystate8 != null">
+				BODYSTATE8,
+			</if>
+			<if test="diseaseyear != null">
+				DISEASEYEAR,
+			</if>
+			<if test="diseasemonth != null">
+				DISEASEMONTH,
+			</if>
+			<if test="diseaseday != null">
+				DISEASEDAY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="diseasedate != null">
+				#{diseasedate,jdbcType=DATE},
+			</if>
+			<if test="diseasetype != null">
+				#{diseasetype,jdbcType=INTEGER},
+			</if>
+			<if test="complaint != null">
+				#{complaint,jdbcType=VARCHAR},
+			</if>
+			<if test="currentdisease != null">
+				#{currentdisease,jdbcType=VARCHAR},
+			</if>
+			<if test="history1 != null">
+				#{history1,jdbcType=VARCHAR},
+			</if>
+			<if test="history2 != null">
+				#{history2,jdbcType=VARCHAR},
+			</if>
+			<if test="history3 != null">
+				#{history3,jdbcType=VARCHAR},
+			</if>
+			<if test="history4 != null">
+				#{history4,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate1type != null">
+				#{bodystate1type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate1 != null">
+				#{bodystate1,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate2type != null">
+				#{bodystate2type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate2 != null">
+				#{bodystate2,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate3type != null">
+				#{bodystate3type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate3 != null">
+				#{bodystate3,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate4type != null">
+				#{bodystate4type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate4 != null">
+				#{bodystate4,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate5type != null">
+				#{bodystate5type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate5 != null">
+				#{bodystate5,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate6type != null">
+				#{bodystate6type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate6 != null">
+				#{bodystate6,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate7type != null">
+				#{bodystate7type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate7 != null">
+				#{bodystate7,jdbcType=VARCHAR},
+			</if>
+			<if test="assay != null">
+				#{assay,jdbcType=VARCHAR},
+			</if>
+			<if test="assayFile != null">
+				#{assayFile,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				#{image,jdbcType=VARCHAR},
+			</if>
+			<if test="imageFile != null">
+				#{imageFile,jdbcType=VARCHAR},
+			</if>
+			<if test="rest != null">
+				#{rest,jdbcType=VARCHAR},
+			</if>
+			<if test="restFile != null">
+				#{restFile,jdbcType=VARCHAR},
+			</if>
+			<if test="plan != null">
+				#{plan,jdbcType=VARCHAR},
+			</if>
+			<if test="planFile != null">
+				#{planFile,jdbcType=VARCHAR},
+			</if>
+			<if test="futurestate != null">
+				#{futurestate,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate8type != null">
+				#{bodystate8type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate8 != null">
+				#{bodystate8,jdbcType=VARCHAR},
+			</if>
+			<if test="diseaseyear != null">
+				#{diseaseyear,jdbcType=VARCHAR},
+			</if>
+			<if test="diseasemonth != null">
+				#{diseasemonth,jdbcType=VARCHAR},
+			</if>
+			<if test="diseaseday != null">
+				#{diseaseday,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CaseCourseDisease">
+		update case_course_disease
+		<set>
+			<if test="diseasedate != null">
+				DISEASEDATE = #{diseasedate,jdbcType=DATE},
+			</if>
+			<if test="diseasetype != null">
+				DISEASETYPE = #{diseasetype,jdbcType=INTEGER},
+			</if>
+			<if test="complaint != null">
+				COMPLAINT = #{complaint,jdbcType=VARCHAR},
+			</if>
+			<if test="currentdisease != null">
+				CURRENTDISEASE = #{currentdisease,jdbcType=VARCHAR},
+			</if>
+			<if test="history1 != null">
+				HISTORY1 = #{history1,jdbcType=VARCHAR},
+			</if>
+			<if test="history2 != null">
+				HISTORY2 = #{history2,jdbcType=VARCHAR},
+			</if>
+			<if test="history3 != null">
+				HISTORY3 = #{history3,jdbcType=VARCHAR},
+			</if>
+			<if test="history4 != null">
+				HISTORY4 = #{history4,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate1type != null">
+				BODYSTATE1TYPE = #{bodystate1type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate1 != null">
+				BODYSTATE1 = #{bodystate1,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate2type != null">
+				BODYSTATE2TYPE = #{bodystate2type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate2 != null">
+				BODYSTATE2 = #{bodystate2,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate3type != null">
+				BODYSTATE3TYPE = #{bodystate3type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate3 != null">
+				BODYSTATE3 = #{bodystate3,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate4type != null">
+				BODYSTATE4TYPE = #{bodystate4type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate4 != null">
+				BODYSTATE4 = #{bodystate4,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate5type != null">
+				BODYSTATE5TYPE = #{bodystate5type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate5 != null">
+				BODYSTATE5 = #{bodystate5,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate6type != null">
+				BODYSTATE6TYPE = #{bodystate6type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate6 != null">
+				BODYSTATE6 = #{bodystate6,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate7type != null">
+				BODYSTATE7TYPE = #{bodystate7type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate7 != null">
+				BODYSTATE7 = #{bodystate7,jdbcType=VARCHAR},
+			</if>
+			<if test="assay != null">
+				ASSAY = #{assay,jdbcType=VARCHAR},
+			</if>
+			<if test="assayFile != null">
+				ASSAY_FILE = #{assayFile,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				IMAGE = #{image,jdbcType=VARCHAR},
+			</if>
+			<if test="imageFile != null">
+				IMAGE_FILE = #{imageFile,jdbcType=VARCHAR},
+			</if>
+			<if test="rest != null">
+				REST = #{rest,jdbcType=VARCHAR},
+			</if>
+			<if test="restFile != null">
+				REST_FILE = #{restFile,jdbcType=VARCHAR},
+			</if>
+			<if test="plan != null">
+				PLAN = #{plan,jdbcType=VARCHAR},
+			</if>
+			<if test="planFile != null">
+				PLAN_FILE = #{planFile,jdbcType=VARCHAR},
+			</if>
+			<if test="futurestate != null">
+				FUTURESTATE = #{futurestate,jdbcType=VARCHAR},
+			</if>
+			<if test="bodystate8type != null">
+				BODYSTATE8TYPE = #{bodystate8type,jdbcType=INTEGER},
+			</if>
+			<if test="bodystate8 != null">
+				BODYSTATE8 = #{bodystate8,jdbcType=VARCHAR},
+			</if>
+			<if test="diseaseyear != null">
+				DISEASEYEAR = #{diseaseyear,jdbcType=VARCHAR},
+			</if>
+			<if test="diseasemonth != null">
+				DISEASEMONTH = #{diseasemonth,jdbcType=VARCHAR},
+			</if>
+			<if test="diseaseday != null">
+				DISEASEDAY = #{diseaseday,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CaseCourseDisease">
+		update
+		case_course_disease
+		set DISEASEDATE = #{diseasedate,jdbcType=DATE},
+		DISEASETYPE = #{diseasetype,jdbcType=INTEGER},
+		COMPLAINT =
+		#{complaint,jdbcType=VARCHAR},
+		CURRENTDISEASE =
+		#{currentdisease,jdbcType=VARCHAR},
+		HISTORY1 =
+		#{history1,jdbcType=VARCHAR},
+		HISTORY2 = #{history2,jdbcType=VARCHAR},
+		HISTORY3 = #{history3,jdbcType=VARCHAR},
+		HISTORY4 =
+		#{history4,jdbcType=VARCHAR},
+		BODYSTATE1TYPE =
+		#{bodystate1type,jdbcType=INTEGER},
+		BODYSTATE1 =
+		#{bodystate1,jdbcType=VARCHAR},
+		BODYSTATE2TYPE =
+		#{bodystate2type,jdbcType=INTEGER},
+		BODYSTATE2 =
+		#{bodystate2,jdbcType=VARCHAR},
+		BODYSTATE3TYPE =
+		#{bodystate3type,jdbcType=INTEGER},
+		BODYSTATE3 =
+		#{bodystate3,jdbcType=VARCHAR},
+		BODYSTATE4TYPE =
+		#{bodystate4type,jdbcType=INTEGER},
+		BODYSTATE4 =
+		#{bodystate4,jdbcType=VARCHAR},
+		BODYSTATE5TYPE =
+		#{bodystate5type,jdbcType=INTEGER},
+		BODYSTATE5 =
+		#{bodystate5,jdbcType=VARCHAR},
+		BODYSTATE6TYPE =
+		#{bodystate6type,jdbcType=INTEGER},
+		BODYSTATE6 =
+		#{bodystate6,jdbcType=VARCHAR},
+		BODYSTATE7TYPE =
+		#{bodystate7type,jdbcType=INTEGER},
+		BODYSTATE7 =
+		#{bodystate7,jdbcType=VARCHAR},
+		ASSAY = #{assay,jdbcType=VARCHAR},
+		ASSAY_FILE = #{assayFile,jdbcType=VARCHAR},
+		IMAGE =
+		#{image,jdbcType=VARCHAR},
+		IMAGE_FILE = #{imageFile,jdbcType=VARCHAR},
+		REST = #{rest,jdbcType=VARCHAR},
+		REST_FILE =
+		#{restFile,jdbcType=VARCHAR},
+		PLAN = #{plan,jdbcType=VARCHAR},
+		PLAN_FILE = #{planFile,jdbcType=VARCHAR},
+		FUTURESTATE =
+		#{futurestate,jdbcType=VARCHAR},
+		BODYSTATE8TYPE =
+		#{bodystate8type,jdbcType=INTEGER},
+		BODYSTATE8 =
+		#{bodystate8,jdbcType=VARCHAR},
+		DISEASEYEAR =
+		#{diseaseyear,jdbcType=VARCHAR},
+		DISEASEMONTH =
+		#{diseasemonth,jdbcType=VARCHAR},
+		DISEASEDAY =
+		#{diseaseday,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

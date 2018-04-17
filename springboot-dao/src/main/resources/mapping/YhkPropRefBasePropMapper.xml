@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.YhkPropRefBasePropMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.YhkPropRefBaseProp">
+		<result column="YHK_PROP_ID" jdbcType="INTEGER" property="yhkPropId" />
+		<result column="BASE_PROP_ID" jdbcType="INTEGER" property="basePropId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.YhkPropRefBaseProp">
+		insert into yhk_prop_ref_base_prop (YHK_PROP_ID, BASE_PROP_ID)
+		values (#{yhkPropId,jdbcType=INTEGER}, #{basePropId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.YhkPropRefBaseProp">
+		insert into yhk_prop_ref_base_prop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="yhkPropId != null">
+				YHK_PROP_ID,
+			</if>
+			<if test="basePropId != null">
+				BASE_PROP_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="yhkPropId != null">
+				#{yhkPropId,jdbcType=INTEGER},
+			</if>
+			<if test="basePropId != null">
+				#{basePropId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

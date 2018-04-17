@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogExamMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.LogExam">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="START_DATE" jdbcType="DATE" property="startDate" />
+		<result column="END_DATE" jdbcType="DATE" property="endDate" />
+		<result column="LAST_DATE" jdbcType="DATE" property="lastDate" />
+		<result column="USE_TIME" jdbcType="INTEGER" property="useTime" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="RIGHT_RATE" jdbcType="DOUBLE" property="rightRate" />
+		<result column="RESULT" jdbcType="DOUBLE" property="result" />
+		<result column="ISNOT_PASS" jdbcType="INTEGER" property="isnotPass" />
+		<result column="IP" jdbcType="VARCHAR" property="ip" />
+		<result column="CHECK_USER_ID" jdbcType="INTEGER" property="checkUserId" />
+		<result column="EXAM_NAME" jdbcType="VARCHAR" property="examName" />
+		<result column="EXAM_TYPE_ID" jdbcType="INTEGER" property="examTypeId" />
+		<result column="EXAM_SUB_TYPE_ID" jdbcType="INTEGER" property="examSubTypeId" />
+		<result column="EXAMINATION_ID" jdbcType="INTEGER" property="examinationId" />
+		<result column="EXAM_TYPE" jdbcType="INTEGER" property="examType" />
+		<result column="TESTPAPER_ID" jdbcType="INTEGER" property="testpaperId" />
+		<result column="CORRECTING_MODE" jdbcType="INTEGER" property="correctingMode" />
+		<result column="ISNOT_DECIDE" jdbcType="INTEGER" property="isnotDecide" />
+		<result column="IS_LOCK" jdbcType="INTEGER" property="isLock" />
+		<result column="STUDY_COURSE_ID" jdbcType="INTEGER" property="studyCourseId" />
+		<result column="STUDY_COURSE_ELEMENT_ID" jdbcType="INTEGER"
+			property="studyCourseElementId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, SITE_ID, START_DATE, END_DATE, LAST_DATE, USE_TIME, STATE,
+		RIGHT_RATE,
+		RESULT, ISNOT_PASS, IP, CHECK_USER_ID, EXAM_NAME, EXAM_TYPE_ID,
+		EXAM_SUB_TYPE_ID,
+		EXAMINATION_ID, EXAM_TYPE, TESTPAPER_ID, CORRECTING_MODE, ISNOT_DECIDE, IS_LOCK,
+		STUDY_COURSE_ID, STUDY_COURSE_ELEMENT_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_exam
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from log_exam
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogExam">
+		insert into log_exam (ID, USER_ID, SITE_ID,
+		START_DATE, END_DATE, LAST_DATE,
+		USE_TIME, STATE, RIGHT_RATE,
+		RESULT, ISNOT_PASS, IP,
+		CHECK_USER_ID, EXAM_NAME, EXAM_TYPE_ID,
+		EXAM_SUB_TYPE_ID, EXAMINATION_ID, EXAM_TYPE,
+		TESTPAPER_ID, CORRECTING_MODE, ISNOT_DECIDE,
+		IS_LOCK, STUDY_COURSE_ID, STUDY_COURSE_ELEMENT_ID
+		)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{lastDate,jdbcType=DATE},
+		#{useTime,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
+		#{rightRate,jdbcType=DOUBLE},
+		#{result,jdbcType=DOUBLE}, #{isnotPass,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR},
+		#{checkUserId,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR},
+		#{examTypeId,jdbcType=INTEGER},
+		#{examSubTypeId,jdbcType=INTEGER}, #{examinationId,jdbcType=INTEGER}, #{examType,jdbcType=INTEGER},
+		#{testpaperId,jdbcType=INTEGER}, #{correctingMode,jdbcType=INTEGER},
+		#{isnotDecide,jdbcType=INTEGER},
+		#{isLock,jdbcType=INTEGER}, #{studyCourseId,jdbcType=INTEGER},
+		#{studyCourseElementId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogExam">
+		insert into log_exam
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="lastDate != null">
+				LAST_DATE,
+			</if>
+			<if test="useTime != null">
+				USE_TIME,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="rightRate != null">
+				RIGHT_RATE,
+			</if>
+			<if test="result != null">
+				RESULT,
+			</if>
+			<if test="isnotPass != null">
+				ISNOT_PASS,
+			</if>
+			<if test="ip != null">
+				IP,
+			</if>
+			<if test="checkUserId != null">
+				CHECK_USER_ID,
+			</if>
+			<if test="examName != null">
+				EXAM_NAME,
+			</if>
+			<if test="examTypeId != null">
+				EXAM_TYPE_ID,
+			</if>
+			<if test="examSubTypeId != null">
+				EXAM_SUB_TYPE_ID,
+			</if>
+			<if test="examinationId != null">
+				EXAMINATION_ID,
+			</if>
+			<if test="examType != null">
+				EXAM_TYPE,
+			</if>
+			<if test="testpaperId != null">
+				TESTPAPER_ID,
+			</if>
+			<if test="correctingMode != null">
+				CORRECTING_MODE,
+			</if>
+			<if test="isnotDecide != null">
+				ISNOT_DECIDE,
+			</if>
+			<if test="isLock != null">
+				IS_LOCK,
+			</if>
+			<if test="studyCourseId != null">
+				STUDY_COURSE_ID,
+			</if>
+			<if test="studyCourseElementId != null">
+				STUDY_COURSE_ELEMENT_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=DATE},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=DATE},
+			</if>
+			<if test="lastDate != null">
+				#{lastDate,jdbcType=DATE},
+			</if>
+			<if test="useTime != null">
+				#{useTime,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="rightRate != null">
+				#{rightRate,jdbcType=DOUBLE},
+			</if>
+			<if test="result != null">
+				#{result,jdbcType=DOUBLE},
+			</if>
+			<if test="isnotPass != null">
+				#{isnotPass,jdbcType=INTEGER},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="checkUserId != null">
+				#{checkUserId,jdbcType=INTEGER},
+			</if>
+			<if test="examName != null">
+				#{examName,jdbcType=VARCHAR},
+			</if>
+			<if test="examTypeId != null">
+				#{examTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="examSubTypeId != null">
+				#{examSubTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="examinationId != null">
+				#{examinationId,jdbcType=INTEGER},
+			</if>
+			<if test="examType != null">
+				#{examType,jdbcType=INTEGER},
+			</if>
+			<if test="testpaperId != null">
+				#{testpaperId,jdbcType=INTEGER},
+			</if>
+			<if test="correctingMode != null">
+				#{correctingMode,jdbcType=INTEGER},
+			</if>
+			<if test="isnotDecide != null">
+				#{isnotDecide,jdbcType=INTEGER},
+			</if>
+			<if test="isLock != null">
+				#{isLock,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseId != null">
+				#{studyCourseId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseElementId != null">
+				#{studyCourseElementId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogExam">
+		update log_exam
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				SITE_ID = #{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				START_DATE = #{startDate,jdbcType=DATE},
+			</if>
+			<if test="endDate != null">
+				END_DATE = #{endDate,jdbcType=DATE},
+			</if>
+			<if test="lastDate != null">
+				LAST_DATE = #{lastDate,jdbcType=DATE},
+			</if>
+			<if test="useTime != null">
+				USE_TIME = #{useTime,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="rightRate != null">
+				RIGHT_RATE = #{rightRate,jdbcType=DOUBLE},
+			</if>
+			<if test="result != null">
+				RESULT = #{result,jdbcType=DOUBLE},
+			</if>
+			<if test="isnotPass != null">
+				ISNOT_PASS = #{isnotPass,jdbcType=INTEGER},
+			</if>
+			<if test="ip != null">
+				IP = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="checkUserId != null">
+				CHECK_USER_ID = #{checkUserId,jdbcType=INTEGER},
+			</if>
+			<if test="examName != null">
+				EXAM_NAME = #{examName,jdbcType=VARCHAR},
+			</if>
+			<if test="examTypeId != null">
+				EXAM_TYPE_ID = #{examTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="examSubTypeId != null">
+				EXAM_SUB_TYPE_ID = #{examSubTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="examinationId != null">
+				EXAMINATION_ID = #{examinationId,jdbcType=INTEGER},
+			</if>
+			<if test="examType != null">
+				EXAM_TYPE = #{examType,jdbcType=INTEGER},
+			</if>
+			<if test="testpaperId != null">
+				TESTPAPER_ID = #{testpaperId,jdbcType=INTEGER},
+			</if>
+			<if test="correctingMode != null">
+				CORRECTING_MODE = #{correctingMode,jdbcType=INTEGER},
+			</if>
+			<if test="isnotDecide != null">
+				ISNOT_DECIDE = #{isnotDecide,jdbcType=INTEGER},
+			</if>
+			<if test="isLock != null">
+				IS_LOCK = #{isLock,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseId != null">
+				STUDY_COURSE_ID = #{studyCourseId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseElementId != null">
+				STUDY_COURSE_ELEMENT_ID = #{studyCourseElementId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogExam">
+		update log_exam
+		set USER_ID = #{userId,jdbcType=INTEGER},
+		SITE_ID = #{siteId,jdbcType=INTEGER},
+		START_DATE = #{startDate,jdbcType=DATE},
+		END_DATE = #{endDate,jdbcType=DATE},
+		LAST_DATE = #{lastDate,jdbcType=DATE},
+		USE_TIME = #{useTime,jdbcType=INTEGER},
+		STATE = #{state,jdbcType=INTEGER},
+		RIGHT_RATE = #{rightRate,jdbcType=DOUBLE},
+		RESULT = #{result,jdbcType=DOUBLE},
+		ISNOT_PASS = #{isnotPass,jdbcType=INTEGER},
+		IP = #{ip,jdbcType=VARCHAR},
+		CHECK_USER_ID = #{checkUserId,jdbcType=INTEGER},
+		EXAM_NAME = #{examName,jdbcType=VARCHAR},
+		EXAM_TYPE_ID = #{examTypeId,jdbcType=INTEGER},
+		EXAM_SUB_TYPE_ID = #{examSubTypeId,jdbcType=INTEGER},
+		EXAMINATION_ID = #{examinationId,jdbcType=INTEGER},
+		EXAM_TYPE = #{examType,jdbcType=INTEGER},
+		TESTPAPER_ID = #{testpaperId,jdbcType=INTEGER},
+		CORRECTING_MODE = #{correctingMode,jdbcType=INTEGER},
+		ISNOT_DECIDE = #{isnotDecide,jdbcType=INTEGER},
+		IS_LOCK = #{isLock,jdbcType=INTEGER},
+		STUDY_COURSE_ID = #{studyCourseId,jdbcType=INTEGER},
+		STUDY_COURSE_ELEMENT_ID = #{studyCourseElementId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据用户Id 考试Id查询是否参加过考试 -->
+	<select id="getLogExamByUIdAndExamId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_exam
+		where user_id = #{userId,jdbcType=INTEGER} and examination_id =
+		#{examId,jdbcType=INTEGER}
+	</select>
+
+	<insert id="saveLogExam" parameterType="com.ncme.springboot.model.LogExam"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into log_exam (ID, USER_ID, SITE_ID,
+		START_DATE, END_DATE, LAST_DATE,
+		USE_TIME, STATE, RIGHT_RATE,
+		RESULT, ISNOT_PASS, IP,
+		CHECK_USER_ID, EXAM_NAME, EXAM_TYPE_ID,
+		EXAM_SUB_TYPE_ID, EXAMINATION_ID, EXAM_TYPE,
+		TESTPAPER_ID, CORRECTING_MODE, ISNOT_DECIDE,
+		IS_LOCK, STUDY_COURSE_ID, STUDY_COURSE_ELEMENT_ID
+		)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 1,
+		sysdate(), sysdate(), sysdate(),0, 4, 0,
+		#{result,jdbcType=DOUBLE}, #{isnotPass,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR},
+		#{checkUserId,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR},
+		#{examTypeId,jdbcType=INTEGER},
+		0, #{examinationId,jdbcType=INTEGER}, #{examType,jdbcType=INTEGER},
+		#{testpaperId,jdbcType=INTEGER}, 1, 0,
+		0, #{studyCourseId,jdbcType=INTEGER},
+		#{studyCourseElementId,jdbcType=INTEGER}
+		)
+	</insert>
+</mapper>

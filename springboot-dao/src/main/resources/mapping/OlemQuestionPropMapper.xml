@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.OlemQuestionPropMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.OlemQuestionProp">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="OLEM_PROP_NAME" jdbcType="VARCHAR" property="olemPropName" />
+		<result column="OLEM_PROP_TYPE" jdbcType="INTEGER" property="olemPropType" />
+		<result column="RELATION" jdbcType="INTEGER" property="relation" />
+		<result column="SYS_PROP" jdbcType="INTEGER" property="sysProp" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PARENT_ID, OLEM_PROP_NAME, OLEM_PROP_TYPE, RELATION, SYS_PROP
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from olem_question_prop
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from olem_question_prop
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.OlemQuestionProp">
+		insert into olem_question_prop (ID, PARENT_ID, OLEM_PROP_NAME,
+		OLEM_PROP_TYPE, RELATION, SYS_PROP
+		)
+		values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER},
+		#{olemPropName,jdbcType=VARCHAR},
+		#{olemPropType,jdbcType=INTEGER}, #{relation,jdbcType=INTEGER}, #{sysProp,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.OlemQuestionProp">
+		insert into olem_question_prop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="olemPropName != null">
+				OLEM_PROP_NAME,
+			</if>
+			<if test="olemPropType != null">
+				OLEM_PROP_TYPE,
+			</if>
+			<if test="relation != null">
+				RELATION,
+			</if>
+			<if test="sysProp != null">
+				SYS_PROP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="olemPropName != null">
+				#{olemPropName,jdbcType=VARCHAR},
+			</if>
+			<if test="olemPropType != null">
+				#{olemPropType,jdbcType=INTEGER},
+			</if>
+			<if test="relation != null">
+				#{relation,jdbcType=INTEGER},
+			</if>
+			<if test="sysProp != null">
+				#{sysProp,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.OlemQuestionProp">
+		update olem_question_prop
+		<set>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="olemPropName != null">
+				OLEM_PROP_NAME = #{olemPropName,jdbcType=VARCHAR},
+			</if>
+			<if test="olemPropType != null">
+				OLEM_PROP_TYPE = #{olemPropType,jdbcType=INTEGER},
+			</if>
+			<if test="relation != null">
+				RELATION = #{relation,jdbcType=INTEGER},
+			</if>
+			<if test="sysProp != null">
+				SYS_PROP = #{sysProp,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.OlemQuestionProp">
+		update olem_question_prop
+		set PARENT_ID = #{parentId,jdbcType=INTEGER},
+		OLEM_PROP_NAME = #{olemPropName,jdbcType=VARCHAR},
+		OLEM_PROP_TYPE = #{olemPropType,jdbcType=INTEGER},
+		RELATION = #{relation,jdbcType=INTEGER},
+		SYS_PROP = #{sysProp,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemUserPostHistoryMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.SystemUserPostHistory">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="ADDRESS_ID" jdbcType="INTEGER" property="addressId" />
+		<result column="EXPRESS_NO" jdbcType="VARCHAR" property="expressNo" />
+		<result column="EXPRESS_ID" jdbcType="INTEGER" property="expressId" />
+		<result column="CERTIFICATE_NAME" jdbcType="VARCHAR" property="certificateName" />
+		<result column="INVOICE_STATUS" jdbcType="INTEGER" property="invoiceStatus" />
+		<result column="INVOICE_TITLE" jdbcType="VARCHAR" property="invoiceTitle" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="INVOICE_CONTENT" jdbcType="VARCHAR" property="invoiceContent" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, ADDRESS_ID, EXPRESS_NO, EXPRESS_ID, CERTIFICATE_NAME,
+		INVOICE_STATUS,
+		INVOICE_TITLE, CREATE_DATE, STATUS, DESCRIPTION, INVOICE_CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_user_post_history
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_user_post_history
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemUserPostHistory">
+		insert into system_user_post_history (ID, USER_ID, ADDRESS_ID,
+		EXPRESS_NO, EXPRESS_ID, CERTIFICATE_NAME,
+		INVOICE_STATUS, INVOICE_TITLE, CREATE_DATE,
+		STATUS, DESCRIPTION, INVOICE_CONTENT
+		)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{addressId,jdbcType=INTEGER},
+		#{expressNo,jdbcType=VARCHAR}, #{expressId,jdbcType=INTEGER}, #{certificateName,jdbcType=VARCHAR},
+		#{invoiceStatus,jdbcType=INTEGER}, #{invoiceTitle,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{invoiceContent,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemUserPostHistory">
+		insert into system_user_post_history
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="addressId != null">
+				ADDRESS_ID,
+			</if>
+			<if test="expressNo != null">
+				EXPRESS_NO,
+			</if>
+			<if test="expressId != null">
+				EXPRESS_ID,
+			</if>
+			<if test="certificateName != null">
+				CERTIFICATE_NAME,
+			</if>
+			<if test="invoiceStatus != null">
+				INVOICE_STATUS,
+			</if>
+			<if test="invoiceTitle != null">
+				INVOICE_TITLE,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="invoiceContent != null">
+				INVOICE_CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="addressId != null">
+				#{addressId,jdbcType=INTEGER},
+			</if>
+			<if test="expressNo != null">
+				#{expressNo,jdbcType=VARCHAR},
+			</if>
+			<if test="expressId != null">
+				#{expressId,jdbcType=INTEGER},
+			</if>
+			<if test="certificateName != null">
+				#{certificateName,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceStatus != null">
+				#{invoiceStatus,jdbcType=INTEGER},
+			</if>
+			<if test="invoiceTitle != null">
+				#{invoiceTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceContent != null">
+				#{invoiceContent,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemUserPostHistory">
+		update system_user_post_history
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="addressId != null">
+				ADDRESS_ID = #{addressId,jdbcType=INTEGER},
+			</if>
+			<if test="expressNo != null">
+				EXPRESS_NO = #{expressNo,jdbcType=VARCHAR},
+			</if>
+			<if test="expressId != null">
+				EXPRESS_ID = #{expressId,jdbcType=INTEGER},
+			</if>
+			<if test="certificateName != null">
+				CERTIFICATE_NAME = #{certificateName,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceStatus != null">
+				INVOICE_STATUS = #{invoiceStatus,jdbcType=INTEGER},
+			</if>
+			<if test="invoiceTitle != null">
+				INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceContent != null">
+				INVOICE_CONTENT = #{invoiceContent,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemUserPostHistory">
+		update system_user_post_history
+		set USER_ID = #{userId,jdbcType=INTEGER},
+		ADDRESS_ID = #{addressId,jdbcType=INTEGER},
+		EXPRESS_NO = #{expressNo,jdbcType=VARCHAR},
+		EXPRESS_ID = #{expressId,jdbcType=INTEGER},
+		CERTIFICATE_NAME = #{certificateName,jdbcType=VARCHAR},
+		INVOICE_STATUS = #{invoiceStatus,jdbcType=INTEGER},
+		INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER},
+		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		INVOICE_CONTENT = #{invoiceContent,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

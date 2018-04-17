@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentSurveyMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentSurvey">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="ADD_DATE" jdbcType="DATE" property="addDate" />
+		<result column="PUBLISH_DATE" jdbcType="DATE" property="publishDate" />
+		<result column="CLOSE_DATE" jdbcType="DATE" property="closeDate" />
+		<result column="DEL_DATE" jdbcType="DATE" property="delDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="APPLICATION_ID" jdbcType="INTEGER" property="applicationId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TITLE, ADD_DATE, PUBLISH_DATE, CLOSE_DATE, DEL_DATE, STATUS,
+		APPLICATION_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_survey
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_survey
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentSurvey">
+		insert into train_content_survey (ID, TITLE, ADD_DATE,
+		PUBLISH_DATE, CLOSE_DATE, DEL_DATE,
+		STATUS, APPLICATION_ID)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{addDate,jdbcType=DATE},
+		#{publishDate,jdbcType=DATE}, #{closeDate,jdbcType=DATE}, #{delDate,jdbcType=DATE},
+		#{status,jdbcType=INTEGER}, #{applicationId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentSurvey">
+		insert into train_content_survey
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="addDate != null">
+				ADD_DATE,
+			</if>
+			<if test="publishDate != null">
+				PUBLISH_DATE,
+			</if>
+			<if test="closeDate != null">
+				CLOSE_DATE,
+			</if>
+			<if test="delDate != null">
+				DEL_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				#{addDate,jdbcType=DATE},
+			</if>
+			<if test="publishDate != null">
+				#{publishDate,jdbcType=DATE},
+			</if>
+			<if test="closeDate != null">
+				#{closeDate,jdbcType=DATE},
+			</if>
+			<if test="delDate != null">
+				#{delDate,jdbcType=DATE},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="applicationId != null">
+				#{applicationId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentSurvey">
+		update train_content_survey
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				ADD_DATE = #{addDate,jdbcType=DATE},
+			</if>
+			<if test="publishDate != null">
+				PUBLISH_DATE = #{publishDate,jdbcType=DATE},
+			</if>
+			<if test="closeDate != null">
+				CLOSE_DATE = #{closeDate,jdbcType=DATE},
+			</if>
+			<if test="delDate != null">
+				DEL_DATE = #{delDate,jdbcType=DATE},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID = #{applicationId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentSurvey">
+		update train_content_survey
+		set TITLE = #{title,jdbcType=VARCHAR},
+		ADD_DATE = #{addDate,jdbcType=DATE},
+		PUBLISH_DATE = #{publishDate,jdbcType=DATE},
+		CLOSE_DATE = #{closeDate,jdbcType=DATE},
+		DEL_DATE = #{delDate,jdbcType=DATE},
+		STATUS = #{status,jdbcType=INTEGER},
+		APPLICATION_ID = #{applicationId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeSubjectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeSubject">
+		<result column="SUBJECT_ID" jdbcType="VARCHAR" property="subjectId" />
+		<result column="SUBJECT_NAME" jdbcType="VARCHAR" property="subjectName" />
+		<result column="SUBJECT2_ID" jdbcType="VARCHAR" property="subject2Id" />
+		<result column="SUBJECT2_NAME" jdbcType="VARCHAR" property="subject2Name" />
+		<result column="GUIDE" jdbcType="VARCHAR" property="guide" />
+		<result column="EXP_ID" jdbcType="VARCHAR" property="expId" />
+		<result column="KEY_GUIDE" jdbcType="VARCHAR" property="keyGuide" />
+		<result column="PRAC_GUIDE" jdbcType="VARCHAR" property="pracGuide" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeSubject">
+		insert into ncme_subject (SUBJECT_ID, SUBJECT_NAME, SUBJECT2_ID,
+		SUBJECT2_NAME, GUIDE, EXP_ID,
+		KEY_GUIDE, PRAC_GUIDE)
+		values (#{subjectId,jdbcType=VARCHAR}, #{subjectName,jdbcType=VARCHAR},
+		#{subject2Id,jdbcType=VARCHAR},
+		#{subject2Name,jdbcType=VARCHAR}, #{guide,jdbcType=VARCHAR}, #{expId,jdbcType=VARCHAR},
+		#{keyGuide,jdbcType=VARCHAR}, #{pracGuide,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeSubject">
+		insert into ncme_subject
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="subjectId != null">
+				SUBJECT_ID,
+			</if>
+			<if test="subjectName != null">
+				SUBJECT_NAME,
+			</if>
+			<if test="subject2Id != null">
+				SUBJECT2_ID,
+			</if>
+			<if test="subject2Name != null">
+				SUBJECT2_NAME,
+			</if>
+			<if test="guide != null">
+				GUIDE,
+			</if>
+			<if test="expId != null">
+				EXP_ID,
+			</if>
+			<if test="keyGuide != null">
+				KEY_GUIDE,
+			</if>
+			<if test="pracGuide != null">
+				PRAC_GUIDE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectName != null">
+				#{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="subject2Id != null">
+				#{subject2Id,jdbcType=VARCHAR},
+			</if>
+			<if test="subject2Name != null">
+				#{subject2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="guide != null">
+				#{guide,jdbcType=VARCHAR},
+			</if>
+			<if test="expId != null">
+				#{expId,jdbcType=VARCHAR},
+			</if>
+			<if test="keyGuide != null">
+				#{keyGuide,jdbcType=VARCHAR},
+			</if>
+			<if test="pracGuide != null">
+				#{pracGuide,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

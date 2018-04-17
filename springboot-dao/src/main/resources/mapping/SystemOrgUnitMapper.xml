@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemOrgUnitMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemOrgUnit">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="UNIT_NAME" jdbcType="VARCHAR" property="unitName" />
+		<result column="UNIT_ADDRESS" jdbcType="VARCHAR" property="unitAddress" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="UNITS_SCALE" jdbcType="INTEGER" property="unitsScale" />
+		<result column="UNITS_TYPE" jdbcType="INTEGER" property="unitsType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ORG_ID, SITE_ID, UNIT_NAME, UNIT_ADDRESS, SEQ, STATUS, CREATE_DATE,
+		CREATE_USER_ID,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, UNITS_SCALE, UNITS_TYPE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_org_unit
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_org_unit
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemOrgUnit">
+		insert into system_org_unit (ID, ORG_ID, SITE_ID,
+		UNIT_NAME, UNIT_ADDRESS, SEQ,
+		STATUS, CREATE_DATE, CREATE_USER_ID,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, UNITS_SCALE,
+		UNITS_TYPE)
+		values (#{id,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{unitName,jdbcType=VARCHAR}, #{unitAddress,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{lastUpdateUserId,jdbcType=INTEGER}, #{unitsScale,jdbcType=INTEGER},
+		#{unitsType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemOrgUnit">
+		insert into system_org_unit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="unitName != null">
+				UNIT_NAME,
+			</if>
+			<if test="unitAddress != null">
+				UNIT_ADDRESS,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="unitsScale != null">
+				UNITS_SCALE,
+			</if>
+			<if test="unitsType != null">
+				UNITS_TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="unitName != null">
+				#{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="unitAddress != null">
+				#{unitAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="unitsScale != null">
+				#{unitsScale,jdbcType=INTEGER},
+			</if>
+			<if test="unitsType != null">
+				#{unitsType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemOrgUnit">
+		update system_org_unit
+		<set>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				SITE_ID = #{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="unitName != null">
+				UNIT_NAME = #{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="unitAddress != null">
+				UNIT_ADDRESS = #{unitAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="unitsScale != null">
+				UNITS_SCALE = #{unitsScale,jdbcType=INTEGER},
+			</if>
+			<if test="unitsType != null">
+				UNITS_TYPE = #{unitsType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemOrgUnit">
+		update system_org_unit
+		set ORG_ID = #{orgId,jdbcType=INTEGER},
+		SITE_ID = #{siteId,jdbcType=INTEGER},
+		UNIT_NAME = #{unitName,jdbcType=VARCHAR},
+		UNIT_ADDRESS = #{unitAddress,jdbcType=VARCHAR},
+		SEQ = #{seq,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+		UNITS_SCALE = #{unitsScale,jdbcType=INTEGER},
+		UNITS_TYPE = #{unitsType,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.MaterialPropValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.MaterialPropValKey">
+		<id column="MATERIAL_ID" jdbcType="INTEGER" property="materialId" />
+		<id column="PROP_ID" jdbcType="INTEGER" property="propId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.MaterialPropValKey">
+		delete from material_prop_val
+		where MATERIAL_ID = #{materialId,jdbcType=INTEGER}
+		and PROP_ID = #{propId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.MaterialPropValKey">
+		insert into material_prop_val (MATERIAL_ID, PROP_ID)
+		values (#{materialId,jdbcType=INTEGER}, #{propId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.MaterialPropValKey">
+		insert into material_prop_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="materialId != null">
+				MATERIAL_ID,
+			</if>
+			<if test="propId != null">
+				PROP_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="materialId != null">
+				#{materialId,jdbcType=INTEGER},
+			</if>
+			<if test="propId != null">
+				#{propId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

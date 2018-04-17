@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtAppnameMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooAtAppname">
+		<result column="MOD" jdbcType="VARCHAR" property="mod" />
+		<result column="MH" jdbcType="INTEGER" property="mh" />
+		<result column="ACT" jdbcType="VARCHAR" property="act" />
+		<result column="AH" jdbcType="INTEGER" property="ah" />
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtAppname">
+		insert into quest_soo_at_appname (MOD, MH, ACT,
+		AH, TRACE_FILE_ID, SQL_ID,
+		PARSE_ID)
+		values (#{mod,jdbcType=VARCHAR}, #{mh,jdbcType=INTEGER},
+		#{act,jdbcType=VARCHAR},
+		#{ah,jdbcType=INTEGER}, #{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtAppname">
+		insert into quest_soo_at_appname
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mod != null">
+				MOD,
+			</if>
+			<if test="mh != null">
+				MH,
+			</if>
+			<if test="act != null">
+				ACT,
+			</if>
+			<if test="ah != null">
+				AH,
+			</if>
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="mod != null">
+				#{mod,jdbcType=VARCHAR},
+			</if>
+			<if test="mh != null">
+				#{mh,jdbcType=INTEGER},
+			</if>
+			<if test="act != null">
+				#{act,jdbcType=VARCHAR},
+			</if>
+			<if test="ah != null">
+				#{ah,jdbcType=INTEGER},
+			</if>
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

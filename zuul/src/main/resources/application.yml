@@ -1,0 +1,47 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://lyj:1989@localhost:8761/eureka/
+server:
+  port: 9090
+  contextPath: /
+  undertow:
+    accesslog:
+      dir: /data/V2/zuul_test/springboot/access
+      enabled: true
+      io-threads: 4
+      worker-threads: 32
+      buffer-size: 1024
+      buffers-per-region: 10
+spring:
+  application:
+    name: zuul
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 90000
+
+zuul:
+  add-host-header: true
+  routes:
+    springboot:
+      path: /**
+      serviceId: springboot
+      sensitiveHeaders:
+      retryable: true
+  ribbon:
+    eager-load:
+      enabled: true
+  useSeparateThreadPools: true
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtOperationsMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooAtOperations">
+		<result column="OPERATION_STRING" jdbcType="VARCHAR" property="operationString" />
+		<result column="OPERATION_ID" jdbcType="INTEGER" property="operationId" />
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtOperations">
+		insert into quest_soo_at_operations (OPERATION_STRING, OPERATION_ID,
+		TRACE_FILE_ID
+		)
+		values (#{operationString,jdbcType=VARCHAR},
+		#{operationId,jdbcType=INTEGER}, #{traceFileId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtOperations">
+		insert into quest_soo_at_operations
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="operationString != null">
+				OPERATION_STRING,
+			</if>
+			<if test="operationId != null">
+				OPERATION_ID,
+			</if>
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="operationString != null">
+				#{operationString,jdbcType=VARCHAR},
+			</if>
+			<if test="operationId != null">
+				#{operationId,jdbcType=INTEGER},
+			</if>
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

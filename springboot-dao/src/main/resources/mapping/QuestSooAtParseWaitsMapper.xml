@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtParseWaitsMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooAtParseWaits">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+		<result column="WAIT_ID" jdbcType="INTEGER" property="waitId" />
+		<result column="NAM" jdbcType="VARCHAR" property="nam" />
+		<result column="OBJ#" jdbcType="INTEGER" property="obj" />
+		<result column="WAIT_COUNT" jdbcType="INTEGER" property="waitCount" />
+		<result column="SUM_ELAPSED" jdbcType="INTEGER" property="sumElapsed" />
+		<result column="SUMSQUARES_ELAPSED" jdbcType="INTEGER"
+			property="sumsquaresElapsed" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtParseWaits">
+		insert into quest_soo_at_parse_waits (TRACE_FILE_ID, SQL_ID, PARSE_ID,
+		WAIT_ID, NAM, OBJ#, WAIT_COUNT,
+		SUM_ELAPSED, SUMSQUARES_ELAPSED)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER},
+		#{waitId,jdbcType=INTEGER}, #{nam,jdbcType=VARCHAR}, #{obj,jdbcType=INTEGER},
+		#{waitCount,jdbcType=INTEGER},
+		#{sumElapsed,jdbcType=INTEGER}, #{sumsquaresElapsed,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtParseWaits">
+		insert into quest_soo_at_parse_waits
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+			<if test="waitId != null">
+				WAIT_ID,
+			</if>
+			<if test="nam != null">
+				NAM,
+			</if>
+			<if test="obj != null">
+				OBJ#,
+			</if>
+			<if test="waitCount != null">
+				WAIT_COUNT,
+			</if>
+			<if test="sumElapsed != null">
+				SUM_ELAPSED,
+			</if>
+			<if test="sumsquaresElapsed != null">
+				SUMSQUARES_ELAPSED,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+			<if test="waitId != null">
+				#{waitId,jdbcType=INTEGER},
+			</if>
+			<if test="nam != null">
+				#{nam,jdbcType=VARCHAR},
+			</if>
+			<if test="obj != null">
+				#{obj,jdbcType=INTEGER},
+			</if>
+			<if test="waitCount != null">
+				#{waitCount,jdbcType=INTEGER},
+			</if>
+			<if test="sumElapsed != null">
+				#{sumElapsed,jdbcType=INTEGER},
+			</if>
+			<if test="sumsquaresElapsed != null">
+				#{sumsquaresElapsed,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

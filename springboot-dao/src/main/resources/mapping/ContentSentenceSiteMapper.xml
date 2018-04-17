@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ContentSentenceSiteMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ContentSentenceSite">
+		<result column="SENTENCE_ID" jdbcType="INTEGER" property="sentenceId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ContentSentenceSite">
+		insert into
+		content_sentence_site (SENTENCE_ID, SITE_ID)
+		values
+		(#{sentenceId,jdbcType=INTEGER}, #{siteId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ContentSentenceSite">
+		insert into content_sentence_site
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sentenceId != null">
+				SENTENCE_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sentenceId != null">
+				#{sentenceId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

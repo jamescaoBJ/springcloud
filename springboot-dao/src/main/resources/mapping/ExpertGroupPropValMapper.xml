@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExpertGroupPropValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExpertGroupPropVal">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+		<result column="PROPID" jdbcType="INTEGER" property="propid" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, GROUPID, PROPID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from expert_group_prop_val
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		expert_group_prop_val
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExpertGroupPropVal">
+		insert into
+		expert_group_prop_val (ID, GROUPID, PROPID
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{groupid,jdbcType=INTEGER},
+		#{propid,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExpertGroupPropVal">
+		insert into expert_group_prop_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="groupid != null">
+				GROUPID,
+			</if>
+			<if test="propid != null">
+				PROPID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="groupid != null">
+				#{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="propid != null">
+				#{propid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExpertGroupPropVal">
+		update expert_group_prop_val
+		<set>
+			<if test="groupid != null">
+				GROUPID = #{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="propid != null">
+				PROPID = #{propid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExpertGroupPropVal">
+		update
+		expert_group_prop_val
+		set GROUPID = #{groupid,jdbcType=INTEGER},
+		PROPID
+		= #{propid,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

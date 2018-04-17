@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooSbEventMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooSbEvent">
+		<result column="EVENT" jdbcType="VARCHAR" property="event" />
+		<result column="TOTAL_WAITS" jdbcType="INTEGER" property="totalWaits" />
+		<result column="TIME_WAITED" jdbcType="INTEGER" property="timeWaited" />
+		<result column="AVERAGE_WAIT" jdbcType="INTEGER" property="averageWait" />
+		<result column="PCT_TIME_WAITED" jdbcType="INTEGER" property="pctTimeWaited" />
+		<result column="PCT_TOTAL_WAITS" jdbcType="INTEGER" property="pctTotalWaits" />
+		<result column="SUM_WAITS" jdbcType="INTEGER" property="sumWaits" />
+		<result column="SUM_TIMES" jdbcType="INTEGER" property="sumTimes" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooSbEvent">
+		insert into quest_soo_sb_event (EVENT, TOTAL_WAITS, TIME_WAITED,
+		AVERAGE_WAIT, PCT_TIME_WAITED, PCT_TOTAL_WAITS,
+		SUM_WAITS, SUM_TIMES, NOTE
+		)
+		values (#{event,jdbcType=VARCHAR}, #{totalWaits,jdbcType=INTEGER},
+		#{timeWaited,jdbcType=INTEGER},
+		#{averageWait,jdbcType=INTEGER}, #{pctTimeWaited,jdbcType=INTEGER}, #{pctTotalWaits,jdbcType=INTEGER},
+		#{sumWaits,jdbcType=INTEGER}, #{sumTimes,jdbcType=INTEGER},
+		#{note,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooSbEvent">
+		insert into quest_soo_sb_event
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="event != null">
+				EVENT,
+			</if>
+			<if test="totalWaits != null">
+				TOTAL_WAITS,
+			</if>
+			<if test="timeWaited != null">
+				TIME_WAITED,
+			</if>
+			<if test="averageWait != null">
+				AVERAGE_WAIT,
+			</if>
+			<if test="pctTimeWaited != null">
+				PCT_TIME_WAITED,
+			</if>
+			<if test="pctTotalWaits != null">
+				PCT_TOTAL_WAITS,
+			</if>
+			<if test="sumWaits != null">
+				SUM_WAITS,
+			</if>
+			<if test="sumTimes != null">
+				SUM_TIMES,
+			</if>
+			<if test="note != null">
+				NOTE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="event != null">
+				#{event,jdbcType=VARCHAR},
+			</if>
+			<if test="totalWaits != null">
+				#{totalWaits,jdbcType=INTEGER},
+			</if>
+			<if test="timeWaited != null">
+				#{timeWaited,jdbcType=INTEGER},
+			</if>
+			<if test="averageWait != null">
+				#{averageWait,jdbcType=INTEGER},
+			</if>
+			<if test="pctTimeWaited != null">
+				#{pctTimeWaited,jdbcType=INTEGER},
+			</if>
+			<if test="pctTotalWaits != null">
+				#{pctTotalWaits,jdbcType=INTEGER},
+			</if>
+			<if test="sumWaits != null">
+				#{sumWaits,jdbcType=INTEGER},
+			</if>
+			<if test="sumTimes != null">
+				#{sumTimes,jdbcType=INTEGER},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetFavoritesMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetFavorites">
+		<id column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<id column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="FAVORITE_DATE" jdbcType="TIMESTAMP" property="favoriteDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		CV_SET_ID, SYSTEM_USER_ID, FAVORITE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetFavoritesKey"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set_favorites
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and
+		SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetFavoritesKey">
+		delete from
+		cv_set_favorites
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and
+		SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetFavorites">
+		insert into cv_set_favorites
+		(CV_SET_ID, SYSTEM_USER_ID, FAVORITE_DATE
+		)
+		values
+		(#{cvSetId,jdbcType=INTEGER}, #{systemUserId,jdbcType=INTEGER},
+		#{favoriteDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetFavorites">
+		insert into cv_set_favorites
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="favoriteDate != null">
+				FAVORITE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="favoriteDate != null">
+				#{favoriteDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvSetFavorites">
+		update cv_set_favorites
+		<set>
+			<if test="favoriteDate != null">
+				FAVORITE_DATE = #{favoriteDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and SYSTEM_USER_ID =
+		#{systemUserId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetFavorites">
+		update
+		cv_set_favorites
+		set FAVORITE_DATE = #{favoriteDate,jdbcType=TIMESTAMP}
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and SYSTEM_USER_ID =
+		#{systemUserId,jdbcType=INTEGER}
+	</update>
+</mapper>

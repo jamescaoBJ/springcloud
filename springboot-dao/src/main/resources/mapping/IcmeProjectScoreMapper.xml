@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeProjectScoreMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeProjectScore">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ICME_USER_ID" jdbcType="INTEGER" property="icmeUserId" />
+		<result column="ICME_PROJECT_ID" jdbcType="INTEGER" property="icmeProjectId" />
+		<result column="ORG_PROJECT_ID" jdbcType="INTEGER" property="orgProjectId" />
+		<result column="PROJECT_SCORE_TYPE" jdbcType="INTEGER"
+			property="projectScoreType" />
+		<result column="SCORE_REMARK" jdbcType="VARCHAR" property="scoreRemark" />
+		<result column="GIVE_ORG_ID" jdbcType="INTEGER" property="giveOrgId" />
+		<result column="FROM_ORG_ID" jdbcType="INTEGER" property="fromOrgId" />
+		<result column="TO_ORG_ID" jdbcType="INTEGER" property="toOrgId" />
+		<result column="SCORE_CHECK_FLAG" jdbcType="INTEGER" property="scoreCheckFlag" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="LAST_UPDATE_DATE" jdbcType="DATE" property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="REPEAT_FLAG" jdbcType="INTEGER" property="repeatFlag" />
+		<result column="SOURCE_FLAG" jdbcType="INTEGER" property="sourceFlag" />
+		<result column="SCORE_CHECK_DATE" jdbcType="DATE" property="scoreCheckDate" />
+		<result column="CARD_BEGIN_DATE" jdbcType="DATE" property="cardBeginDate" />
+		<result column="GRANT_SCORE_DATE" jdbcType="DATE" property="grantScoreDate" />
+		<result column="REMOTE_ADDRESS" jdbcType="VARCHAR" property="remoteAddress" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ICME_USER_ID, ICME_PROJECT_ID, ORG_PROJECT_ID,
+		PROJECT_SCORE_TYPE,
+		SCORE_REMARK,
+		GIVE_ORG_ID, FROM_ORG_ID, TO_ORG_ID,
+		SCORE_CHECK_FLAG, ORG_ID, CREATE_USER_ID,
+		CREATE_DATE,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, STATUS, REPEAT_FLAG,
+		SOURCE_FLAG,
+		SCORE_CHECK_DATE,
+		CARD_BEGIN_DATE, GRANT_SCORE_DATE,
+		REMOTE_ADDRESS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_project_score
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_project_score
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeProjectScore">
+		insert into icme_project_score
+		(ID, ICME_USER_ID, ICME_PROJECT_ID,
+		ORG_PROJECT_ID, PROJECT_SCORE_TYPE,
+		SCORE_REMARK,
+		GIVE_ORG_ID, FROM_ORG_ID, TO_ORG_ID,
+		SCORE_CHECK_FLAG,
+		ORG_ID, CREATE_USER_ID,
+		CREATE_DATE, LAST_UPDATE_DATE,
+		LAST_UPDATE_USER_ID,
+		STATUS, REPEAT_FLAG, SOURCE_FLAG,
+		SCORE_CHECK_DATE, CARD_BEGIN_DATE, GRANT_SCORE_DATE,
+		REMOTE_ADDRESS)
+		values (#{id,jdbcType=INTEGER}, #{icmeUserId,jdbcType=INTEGER},
+		#{icmeProjectId,jdbcType=INTEGER},
+		#{orgProjectId,jdbcType=INTEGER},
+		#{projectScoreType,jdbcType=INTEGER},
+		#{scoreRemark,jdbcType=VARCHAR},
+		#{giveOrgId,jdbcType=INTEGER}, #{fromOrgId,jdbcType=INTEGER},
+		#{toOrgId,jdbcType=INTEGER},
+		#{scoreCheckFlag,jdbcType=INTEGER},
+		#{orgId,jdbcType=INTEGER},
+		#{createUserId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=DATE},
+		#{lastUpdateUserId,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{repeatFlag,jdbcType=INTEGER}, #{sourceFlag,jdbcType=INTEGER},
+		#{scoreCheckDate,jdbcType=DATE}, #{cardBeginDate,jdbcType=DATE},
+		#{grantScoreDate,jdbcType=DATE},
+		#{remoteAddress,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeProjectScore">
+		insert into icme_project_score
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="icmeUserId != null">
+				ICME_USER_ID,
+			</if>
+			<if test="icmeProjectId != null">
+				ICME_PROJECT_ID,
+			</if>
+			<if test="orgProjectId != null">
+				ORG_PROJECT_ID,
+			</if>
+			<if test="projectScoreType != null">
+				PROJECT_SCORE_TYPE,
+			</if>
+			<if test="scoreRemark != null">
+				SCORE_REMARK,
+			</if>
+			<if test="giveOrgId != null">
+				GIVE_ORG_ID,
+			</if>
+			<if test="fromOrgId != null">
+				FROM_ORG_ID,
+			</if>
+			<if test="toOrgId != null">
+				TO_ORG_ID,
+			</if>
+			<if test="scoreCheckFlag != null">
+				SCORE_CHECK_FLAG,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="repeatFlag != null">
+				REPEAT_FLAG,
+			</if>
+			<if test="sourceFlag != null">
+				SOURCE_FLAG,
+			</if>
+			<if test="scoreCheckDate != null">
+				SCORE_CHECK_DATE,
+			</if>
+			<if test="cardBeginDate != null">
+				CARD_BEGIN_DATE,
+			</if>
+			<if test="grantScoreDate != null">
+				GRANT_SCORE_DATE,
+			</if>
+			<if test="remoteAddress != null">
+				REMOTE_ADDRESS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="icmeUserId != null">
+				#{icmeUserId,jdbcType=INTEGER},
+			</if>
+			<if test="icmeProjectId != null">
+				#{icmeProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="orgProjectId != null">
+				#{orgProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="projectScoreType != null">
+				#{projectScoreType,jdbcType=INTEGER},
+			</if>
+			<if test="scoreRemark != null">
+				#{scoreRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="giveOrgId != null">
+				#{giveOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="fromOrgId != null">
+				#{fromOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="toOrgId != null">
+				#{toOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="scoreCheckFlag != null">
+				#{scoreCheckFlag,jdbcType=INTEGER},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=DATE},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="repeatFlag != null">
+				#{repeatFlag,jdbcType=INTEGER},
+			</if>
+			<if test="sourceFlag != null">
+				#{sourceFlag,jdbcType=INTEGER},
+			</if>
+			<if test="scoreCheckDate != null">
+				#{scoreCheckDate,jdbcType=DATE},
+			</if>
+			<if test="cardBeginDate != null">
+				#{cardBeginDate,jdbcType=DATE},
+			</if>
+			<if test="grantScoreDate != null">
+				#{grantScoreDate,jdbcType=DATE},
+			</if>
+			<if test="remoteAddress != null">
+				#{remoteAddress,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeProjectScore">
+		update icme_project_score
+		<set>
+			<if test="icmeUserId != null">
+				ICME_USER_ID = #{icmeUserId,jdbcType=INTEGER},
+			</if>
+			<if test="icmeProjectId != null">
+				ICME_PROJECT_ID = #{icmeProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="orgProjectId != null">
+				ORG_PROJECT_ID = #{orgProjectId,jdbcType=INTEGER},
+			</if>
+			<if test="projectScoreType != null">
+				PROJECT_SCORE_TYPE =
+				#{projectScoreType,jdbcType=INTEGER},
+			</if>
+			<if test="scoreRemark != null">
+				SCORE_REMARK = #{scoreRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="giveOrgId != null">
+				GIVE_ORG_ID = #{giveOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="fromOrgId != null">
+				FROM_ORG_ID = #{fromOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="toOrgId != null">
+				TO_ORG_ID = #{toOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="scoreCheckFlag != null">
+				SCORE_CHECK_FLAG = #{scoreCheckFlag,jdbcType=INTEGER},
+			</if>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=DATE},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID =
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="repeatFlag != null">
+				REPEAT_FLAG = #{repeatFlag,jdbcType=INTEGER},
+			</if>
+			<if test="sourceFlag != null">
+				SOURCE_FLAG = #{sourceFlag,jdbcType=INTEGER},
+			</if>
+			<if test="scoreCheckDate != null">
+				SCORE_CHECK_DATE = #{scoreCheckDate,jdbcType=DATE},
+			</if>
+			<if test="cardBeginDate != null">
+				CARD_BEGIN_DATE = #{cardBeginDate,jdbcType=DATE},
+			</if>
+			<if test="grantScoreDate != null">
+				GRANT_SCORE_DATE = #{grantScoreDate,jdbcType=DATE},
+			</if>
+			<if test="remoteAddress != null">
+				REMOTE_ADDRESS = #{remoteAddress,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeProjectScore">
+		update
+		icme_project_score
+		set ICME_USER_ID = #{icmeUserId,jdbcType=INTEGER},
+		ICME_PROJECT_ID = #{icmeProjectId,jdbcType=INTEGER},
+		ORG_PROJECT_ID =
+		#{orgProjectId,jdbcType=INTEGER},
+		PROJECT_SCORE_TYPE =
+		#{projectScoreType,jdbcType=INTEGER},
+		SCORE_REMARK =
+		#{scoreRemark,jdbcType=VARCHAR},
+		GIVE_ORG_ID =
+		#{giveOrgId,jdbcType=INTEGER},
+		FROM_ORG_ID =
+		#{fromOrgId,jdbcType=INTEGER},
+		TO_ORG_ID = #{toOrgId,jdbcType=INTEGER},
+		SCORE_CHECK_FLAG = #{scoreCheckFlag,jdbcType=INTEGER},
+		ORG_ID =
+		#{orgId,jdbcType=INTEGER},
+		CREATE_USER_ID =
+		#{createUserId,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_DATE =
+		#{lastUpdateDate,jdbcType=DATE},
+		LAST_UPDATE_USER_ID =
+		#{lastUpdateUserId,jdbcType=INTEGER},
+		STATUS =
+		#{status,jdbcType=INTEGER},
+		REPEAT_FLAG =
+		#{repeatFlag,jdbcType=INTEGER},
+		SOURCE_FLAG =
+		#{sourceFlag,jdbcType=INTEGER},
+		SCORE_CHECK_DATE =
+		#{scoreCheckDate,jdbcType=DATE},
+		CARD_BEGIN_DATE =
+		#{cardBeginDate,jdbcType=DATE},
+		GRANT_SCORE_DATE =
+		#{grantScoreDate,jdbcType=DATE},
+		REMOTE_ADDRESS =
+		#{remoteAddress,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

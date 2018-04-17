@@ -1,0 +1,74 @@
+server:
+  port: 9096
+  contextPath: /
+  undertow:
+    accesslog:
+      dir: /data/V2/zuul_test/springboot/access
+      enabled: true
+      io-threads: 4
+      worker-threads: 32
+      buffer-size: 1024
+      buffers-per-region: 10
+datasource:
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql://10.1.27.97:3306/cpd_test?useUnicode=true&amp;characterEncoding=utf-8
+  username: cpd_test
+  password: hVVii#O%1!N2@eS6
+  maxActive: 100
+  initialSize: 10
+  minIdle: 5
+  testWhileIdle: true
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 30000
+  validationQuery: SELECT 1
+  testOnBorrow: false
+  testOnReturn: false
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://lyj:1989@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: springboot
+    boot:
+    admin:
+      url:http://lyj:1989@localhost:8761/eureka/
+  jackson:
+    serialization:
+      indent_output:true  
+  thymeleaf:
+    cache: false
+  output:
+    ansi:
+      enable: ALWAYS
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  redis:
+    host: 127.0.0.1
+    password: 
+    port: 6379
+    pool:
+      max-idle: 100
+      min-idle: 1
+      max-active: 1000
+      max-wait: -1
+endpoints:
+  health:
+    sensitive:false             
+#swagger2
+swagger2:
+#\u751F\u4EA7\u73AF\u5883\u6539\u4E3A\uFF1Afalse \uFF0C\u7981\u6B62\u5F00\u653Eswagger2
+  enable: true
+jwt:
+  header: Authorization
+  tokenPrefix: token
+  authPrefix: auth
+  secret: a679913jfsfdsaf@2017
+  expiration: 86400000
+  path: /**

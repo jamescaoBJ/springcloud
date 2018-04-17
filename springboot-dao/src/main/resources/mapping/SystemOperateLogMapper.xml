@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemOperateLogMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemOperateLog">
+		<id column="operate_id" jdbcType="INTEGER" property="operateId" />
+		<result column="visit_ip" jdbcType="VARCHAR" property="visitIp" />
+		<result column="request_url" jdbcType="VARCHAR" property="requestUrl" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="operate_login_name" jdbcType="VARCHAR"
+			property="operateLoginName" />
+		<result column="operate_type" jdbcType="VARCHAR" property="operateType" />
+		<result column="operate_context" jdbcType="VARCHAR" property="operateContext" />
+		<result column="operate_platform" jdbcType="VARCHAR" property="operatePlatform" />
+		<result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+		<result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		operate_id, visit_ip, request_url, user_id, operate_login_name, operate_type,
+		operate_context,
+		operate_platform, module_name, operate_time, create_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_operate_log
+		where operate_id = #{operateId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_operate_log
+		where operate_id = #{operateId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemOperateLog">
+		insert into system_operate_log (operate_id, visit_ip, request_url,
+		user_id, operate_login_name, operate_type,
+		operate_context, operate_platform, module_name,
+		operate_time, create_time)
+		values (#{operateId,jdbcType=INTEGER}, #{visitIp,jdbcType=VARCHAR},
+		#{requestUrl,jdbcType=VARCHAR},
+		#{userId,jdbcType=INTEGER}, #{operateLoginName,jdbcType=VARCHAR},
+		#{operateType,jdbcType=VARCHAR},
+		#{operateContext,jdbcType=VARCHAR}, #{operatePlatform,jdbcType=VARCHAR}, #{moduleName,jdbcType=VARCHAR},
+		#{operateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemOperateLog">
+		insert into system_operate_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="operateId != null">
+				operate_id,
+			</if>
+			<if test="visitIp != null">
+				visit_ip,
+			</if>
+			<if test="requestUrl != null">
+				request_url,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="operateLoginName != null">
+				operate_login_name,
+			</if>
+			<if test="operateType != null">
+				operate_type,
+			</if>
+			<if test="operateContext != null">
+				operate_context,
+			</if>
+			<if test="operatePlatform != null">
+				operate_platform,
+			</if>
+			<if test="moduleName != null">
+				module_name,
+			</if>
+			<if test="operateTime != null">
+				operate_time,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="operateId != null">
+				#{operateId,jdbcType=INTEGER},
+			</if>
+			<if test="visitIp != null">
+				#{visitIp,jdbcType=VARCHAR},
+			</if>
+			<if test="requestUrl != null">
+				#{requestUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="operateLoginName != null">
+				#{operateLoginName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateType != null">
+				#{operateType,jdbcType=VARCHAR},
+			</if>
+			<if test="operateContext != null">
+				#{operateContext,jdbcType=VARCHAR},
+			</if>
+			<if test="operatePlatform != null">
+				#{operatePlatform,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleName != null">
+				#{moduleName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateTime != null">
+				#{operateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemOperateLog">
+		update system_operate_log
+		<set>
+			<if test="visitIp != null">
+				visit_ip = #{visitIp,jdbcType=VARCHAR},
+			</if>
+			<if test="requestUrl != null">
+				request_url = #{requestUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="operateLoginName != null">
+				operate_login_name = #{operateLoginName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateType != null">
+				operate_type = #{operateType,jdbcType=VARCHAR},
+			</if>
+			<if test="operateContext != null">
+				operate_context = #{operateContext,jdbcType=VARCHAR},
+			</if>
+			<if test="operatePlatform != null">
+				operate_platform = #{operatePlatform,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleName != null">
+				module_name = #{moduleName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateTime != null">
+				operate_time = #{operateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where operate_id = #{operateId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemOperateLog">
+		update system_operate_log
+		set visit_ip = #{visitIp,jdbcType=VARCHAR},
+		request_url = #{requestUrl,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=INTEGER},
+		operate_login_name = #{operateLoginName,jdbcType=VARCHAR},
+		operate_type = #{operateType,jdbcType=VARCHAR},
+		operate_context = #{operateContext,jdbcType=VARCHAR},
+		operate_platform = #{operatePlatform,jdbcType=VARCHAR},
+		module_name = #{moduleName,jdbcType=VARCHAR},
+		operate_time = #{operateTime,jdbcType=TIMESTAMP},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where operate_id = #{operateId,jdbcType=INTEGER}
+	</update>
+</mapper>

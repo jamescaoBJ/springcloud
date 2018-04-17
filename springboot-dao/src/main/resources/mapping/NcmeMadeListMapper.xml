@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeMadeListMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeMadeList">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="START_NUM" jdbcType="VARCHAR" property="startNum" />
+		<result column="END_NUM" jdbcType="VARCHAR" property="endNum" />
+		<result column="MADE_DATE" jdbcType="DATE" property="madeDate" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="TIMES" jdbcType="INTEGER" property="times" />
+		<result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, START_NUM, END_NUM, MADE_DATE, TYPE, TIMES, OPERATOR, REMARK
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ncme_made_list
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ncme_made_list
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeMadeList">
+		insert into ncme_made_list (ID, START_NUM, END_NUM,
+		MADE_DATE, TYPE, TIMES,
+		OPERATOR, REMARK)
+		values (#{id,jdbcType=INTEGER}, #{startNum,jdbcType=VARCHAR},
+		#{endNum,jdbcType=VARCHAR},
+		#{madeDate,jdbcType=DATE}, #{type,jdbcType=INTEGER}, #{times,jdbcType=INTEGER},
+		#{operator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeMadeList">
+		insert into ncme_made_list
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="startNum != null">
+				START_NUM,
+			</if>
+			<if test="endNum != null">
+				END_NUM,
+			</if>
+			<if test="madeDate != null">
+				MADE_DATE,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="times != null">
+				TIMES,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="startNum != null">
+				#{startNum,jdbcType=VARCHAR},
+			</if>
+			<if test="endNum != null">
+				#{endNum,jdbcType=VARCHAR},
+			</if>
+			<if test="madeDate != null">
+				#{madeDate,jdbcType=DATE},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				#{times,jdbcType=INTEGER},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.NcmeMadeList">
+		update ncme_made_list
+		<set>
+			<if test="startNum != null">
+				START_NUM = #{startNum,jdbcType=VARCHAR},
+			</if>
+			<if test="endNum != null">
+				END_NUM = #{endNum,jdbcType=VARCHAR},
+			</if>
+			<if test="madeDate != null">
+				MADE_DATE = #{madeDate,jdbcType=DATE},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				TIMES = #{times,jdbcType=INTEGER},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.NcmeMadeList">
+		update ncme_made_list
+		set START_NUM = #{startNum,jdbcType=VARCHAR},
+		END_NUM = #{endNum,jdbcType=VARCHAR},
+		MADE_DATE = #{madeDate,jdbcType=DATE},
+		TYPE = #{type,jdbcType=INTEGER},
+		TIMES = #{times,jdbcType=INTEGER},
+		OPERATOR = #{operator,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

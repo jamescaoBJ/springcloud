@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCourseCreditMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCourseCredit">
+		<result column="CREDIT_YEAR" jdbcType="VARCHAR" property="creditYear" />
+		<result column="COURSE_ID" jdbcType="INTEGER" property="courseId" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="CREDIT_TYPE" jdbcType="VARCHAR" property="creditType" />
+		<result column="INDUSTRY_ID" jdbcType="INTEGER" property="industryId" />
+		<result column="COURSE_TYPE" jdbcType="INTEGER" property="courseType" />
+		<result column="CREDIT_NUM" jdbcType="REAL" property="creditNum" />
+		<result column="COURSE_SERIAL" jdbcType="VARCHAR" property="courseSerial" />
+		<result column="REQUEST" jdbcType="VARCHAR" property="request" />
+		<result column="RE_STUDY_FLAG" jdbcType="INTEGER" property="reStudyFlag" />
+		<result column="CREDIT_DATE" jdbcType="TIMESTAMP" property="creditDate" />
+		<result column="CREDIT_HOURS" jdbcType="REAL" property="creditHours" />
+		<result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+		<result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCourseCredit">
+		insert into system_course_credit (CREDIT_YEAR, COURSE_ID, ORG_ID,
+		CREDIT_TYPE, INDUSTRY_ID, COURSE_TYPE,
+		CREDIT_NUM, COURSE_SERIAL, REQUEST,
+		RE_STUDY_FLAG, CREDIT_DATE, CREDIT_HOURS,
+		START_DATE, END_DATE, SITE_ID
+		)
+		values (#{creditYear,jdbcType=VARCHAR}, #{courseId,jdbcType=INTEGER},
+		#{orgId,jdbcType=INTEGER},
+		#{creditType,jdbcType=VARCHAR}, #{industryId,jdbcType=INTEGER}, #{courseType,jdbcType=INTEGER},
+		#{creditNum,jdbcType=REAL}, #{courseSerial,jdbcType=VARCHAR},
+		#{request,jdbcType=VARCHAR},
+		#{reStudyFlag,jdbcType=INTEGER}, #{creditDate,jdbcType=TIMESTAMP}, #{creditHours,jdbcType=REAL},
+		#{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
+		#{siteId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCourseCredit">
+		insert into system_course_credit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="creditYear != null">
+				CREDIT_YEAR,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="creditType != null">
+				CREDIT_TYPE,
+			</if>
+			<if test="industryId != null">
+				INDUSTRY_ID,
+			</if>
+			<if test="courseType != null">
+				COURSE_TYPE,
+			</if>
+			<if test="creditNum != null">
+				CREDIT_NUM,
+			</if>
+			<if test="courseSerial != null">
+				COURSE_SERIAL,
+			</if>
+			<if test="request != null">
+				REQUEST,
+			</if>
+			<if test="reStudyFlag != null">
+				RE_STUDY_FLAG,
+			</if>
+			<if test="creditDate != null">
+				CREDIT_DATE,
+			</if>
+			<if test="creditHours != null">
+				CREDIT_HOURS,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="creditYear != null">
+				#{creditYear,jdbcType=VARCHAR},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="creditType != null">
+				#{creditType,jdbcType=VARCHAR},
+			</if>
+			<if test="industryId != null">
+				#{industryId,jdbcType=INTEGER},
+			</if>
+			<if test="courseType != null">
+				#{courseType,jdbcType=INTEGER},
+			</if>
+			<if test="creditNum != null">
+				#{creditNum,jdbcType=REAL},
+			</if>
+			<if test="courseSerial != null">
+				#{courseSerial,jdbcType=VARCHAR},
+			</if>
+			<if test="request != null">
+				#{request,jdbcType=VARCHAR},
+			</if>
+			<if test="reStudyFlag != null">
+				#{reStudyFlag,jdbcType=INTEGER},
+			</if>
+			<if test="creditDate != null">
+				#{creditDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creditHours != null">
+				#{creditHours,jdbcType=REAL},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

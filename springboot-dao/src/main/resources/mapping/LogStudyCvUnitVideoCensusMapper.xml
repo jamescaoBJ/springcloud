@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogStudyCvUnitVideoCensusMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.LogStudyCvUnitVideoCensus">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<result column="CV_ID" jdbcType="INTEGER" property="cvId" />
+		<result column="CV_UNIT_ID" jdbcType="INTEGER" property="cvUnitId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="videoEchoLength" jdbcType="INTEGER" property="videoecholength" />
+		<result column="videoStartLength" jdbcType="INTEGER" property="videostartlength" />
+		<result column="videoEndLength" jdbcType="INTEGER" property="videoendlength" />
+		<result column="videoLength" jdbcType="INTEGER" property="videolength" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SYSTEM_USER_ID, CV_SET_ID, CV_ID, CV_UNIT_ID, CREATE_DATE,
+		videoEchoLength, videoStartLength,
+		videoEndLength, videoLength
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_unit_video_census
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from log_study_cv_unit_video_census
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideoCensus">
+		insert into log_study_cv_unit_video_census (ID, SYSTEM_USER_ID, CV_SET_ID,
+		CV_ID, CV_UNIT_ID, CREATE_DATE,
+		videoEchoLength, videoStartLength, videoEndLength,
+		videoLength)
+		values (#{id,jdbcType=INTEGER}, #{systemUserId,jdbcType=INTEGER},
+		#{cvSetId,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER}, #{cvUnitId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{videoecholength,jdbcType=INTEGER},
+		#{videostartlength,jdbcType=INTEGER},
+		#{videoendlength,jdbcType=INTEGER},
+		#{videolength,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideoCensus">
+		insert into log_study_cv_unit_video_census
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="cvId != null">
+				CV_ID,
+			</if>
+			<if test="cvUnitId != null">
+				CV_UNIT_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="videoecholength != null">
+				videoEchoLength,
+			</if>
+			<if test="videostartlength != null">
+				videoStartLength,
+			</if>
+			<if test="videoendlength != null">
+				videoEndLength,
+			</if>
+			<if test="videolength != null">
+				videoLength,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="cvUnitId != null">
+				#{cvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="videoecholength != null">
+				#{videoecholength,jdbcType=INTEGER},
+			</if>
+			<if test="videostartlength != null">
+				#{videostartlength,jdbcType=INTEGER},
+			</if>
+			<if test="videoendlength != null">
+				#{videoendlength,jdbcType=INTEGER},
+			</if>
+			<if test="videolength != null">
+				#{videolength,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideoCensus">
+		update log_study_cv_unit_video_census
+		<set>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				CV_ID = #{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="cvUnitId != null">
+				CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="videoecholength != null">
+				videoEchoLength = #{videoecholength,jdbcType=INTEGER},
+			</if>
+			<if test="videostartlength != null">
+				videoStartLength = #{videostartlength,jdbcType=INTEGER},
+			</if>
+			<if test="videoendlength != null">
+				videoEndLength = #{videoendlength,jdbcType=INTEGER},
+			</if>
+			<if test="videolength != null">
+				videoLength = #{videolength,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideoCensus">
+		update log_study_cv_unit_video_census
+		set SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+		CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+		CV_ID = #{cvId,jdbcType=INTEGER},
+		CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		videoEchoLength = #{videoecholength,jdbcType=INTEGER},
+		videoStartLength = #{videostartlength,jdbcType=INTEGER},
+		videoEndLength = #{videoendlength,jdbcType=INTEGER},
+		videoLength = #{videolength,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据用户id查询该用户的学习长度 -->
+	<select id="getStudyLengthByUserId"	resultType="java.lang.Integer">
+		SELECT sum(videoEndLength-videoStartLength+videoEchoLength)
+		from log_study_cv_unit_video_census where SYSTEM_USER_ID =
+		#{userId,jdbcType=INTEGER}
+		<if test="year != null">
+			and year(create_date) = #{year,jdbcType=INTEGER}
+		</if>
+		<if test="cvSetId != null">
+			and cv_set_id = #{cvSetId,jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<!-- 学习报告折线图 -->
+	<select id="studyTime" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+			DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') learnDate,
+			TIMESTAMPDIFF(DAY,CREATE_DATE,(DATE_add(CREATE_DATE, INTERVAL 1 MONTH))
+			) AS totalDay,
+			sum(round((videoEndLength - videoStartLength + videoEchoLength) / 60)
+			) learntime
+		FROM
+			log_study_cv_unit_video_census
+		WHERE
+			SYSTEM_USER_ID = #{userId}
+		AND CV_SET_ID = #{cvSetId}
+		AND DATE_FORMAT(CREATE_DATE, '%Y') = #{year}
+		AND DATE_FORMAT(CREATE_DATE, '%m') = #{month}
+		GROUP BY
+			YEAR (CREATE_DATE),
+			MONTH (CREATE_DATE),
+			DAY (CREATE_DATE)
+		ORDER BY
+			CREATE_DATE ASC
+	</select>
+</mapper>

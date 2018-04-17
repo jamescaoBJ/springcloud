@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvRefUnitMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvRefUnitKey">
+		<id column="CV_ID" jdbcType="INTEGER" property="cvId" />
+		<id column="UNIT_ID" jdbcType="INTEGER" property="unitId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.CvRefUnitKey">
+		delete from
+		cv_ref_unit
+		where CV_ID = #{cvId,jdbcType=INTEGER}
+		and UNIT_ID =
+		#{unitId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvRefUnitKey">
+		insert into cv_ref_unit
+		(CV_ID, UNIT_ID)
+		values (#{cvId,jdbcType=INTEGER},
+		#{unitId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvRefUnitKey">
+		insert into cv_ref_unit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvId != null">
+				CV_ID,
+			</if>
+			<if test="unitId != null">
+				UNIT_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="unitId != null">
+				#{unitId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

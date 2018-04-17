@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemOrgMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemOrg">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ORG_TYPE_ID" jdbcType="INTEGER" property="orgTypeId" />
+		<result column="PARENT_ORG_ID" jdbcType="INTEGER" property="parentOrgId" />
+		<result column="ADMIN_PARENT_ORG_ID" jdbcType="INTEGER"
+			property="adminParentOrgId" />
+		<result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+		<result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="ORG_TYPE_FLAG" jdbcType="INTEGER" property="orgTypeFlag" />
+		<result column="ALIAS_NAME" jdbcType="VARCHAR" property="aliasName" />
+		<result column="ORG_SEQ" jdbcType="INTEGER" property="orgSeq" />
+		<result column="ORG_SEQ2" jdbcType="INTEGER" property="orgSeq2" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="ORG_ABBR" jdbcType="VARCHAR" property="orgAbbr" />
+		<result column="LAYER" jdbcType="INTEGER" property="layer" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ORG_TYPE_ID, PARENT_ORG_ID, ADMIN_PARENT_ORG_ID, ORG_CODE, ORG_NAME,
+		STATUS,
+		ORG_TYPE_FLAG, ALIAS_NAME, ORG_SEQ, ORG_SEQ2, LAST_UPDATE_DATE, ORG_ABBR, LAYER
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_org
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_org
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemOrg">
+		insert into system_org (ID, ORG_TYPE_ID, PARENT_ORG_ID,
+		ADMIN_PARENT_ORG_ID, ORG_CODE, ORG_NAME,
+		STATUS, ORG_TYPE_FLAG, ALIAS_NAME,
+		ORG_SEQ, ORG_SEQ2, LAST_UPDATE_DATE,
+		ORG_ABBR, LAYER)
+		values (#{id,jdbcType=INTEGER}, #{orgTypeId,jdbcType=INTEGER},
+		#{parentOrgId,jdbcType=INTEGER},
+		#{adminParentOrgId,jdbcType=INTEGER}, #{orgCode,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{orgTypeFlag,jdbcType=INTEGER},
+		#{aliasName,jdbcType=VARCHAR},
+		#{orgSeq,jdbcType=INTEGER}, #{orgSeq2,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{orgAbbr,jdbcType=VARCHAR}, #{layer,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemOrg">
+		insert into system_org
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orgTypeId != null">
+				ORG_TYPE_ID,
+			</if>
+			<if test="parentOrgId != null">
+				PARENT_ORG_ID,
+			</if>
+			<if test="adminParentOrgId != null">
+				ADMIN_PARENT_ORG_ID,
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE,
+			</if>
+			<if test="orgName != null">
+				ORG_NAME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="orgTypeFlag != null">
+				ORG_TYPE_FLAG,
+			</if>
+			<if test="aliasName != null">
+				ALIAS_NAME,
+			</if>
+			<if test="orgSeq != null">
+				ORG_SEQ,
+			</if>
+			<if test="orgSeq2 != null">
+				ORG_SEQ2,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="orgAbbr != null">
+				ORG_ABBR,
+			</if>
+			<if test="layer != null">
+				LAYER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orgTypeId != null">
+				#{orgTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="parentOrgId != null">
+				#{parentOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="adminParentOrgId != null">
+				#{adminParentOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="orgCode != null">
+				#{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="orgTypeFlag != null">
+				#{orgTypeFlag,jdbcType=INTEGER},
+			</if>
+			<if test="aliasName != null">
+				#{aliasName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgSeq != null">
+				#{orgSeq,jdbcType=INTEGER},
+			</if>
+			<if test="orgSeq2 != null">
+				#{orgSeq2,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orgAbbr != null">
+				#{orgAbbr,jdbcType=VARCHAR},
+			</if>
+			<if test="layer != null">
+				#{layer,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemOrg">
+		update system_org
+		<set>
+			<if test="orgTypeId != null">
+				ORG_TYPE_ID = #{orgTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="parentOrgId != null">
+				PARENT_ORG_ID = #{parentOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="adminParentOrgId != null">
+				ADMIN_PARENT_ORG_ID = #{adminParentOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="orgTypeFlag != null">
+				ORG_TYPE_FLAG = #{orgTypeFlag,jdbcType=INTEGER},
+			</if>
+			<if test="aliasName != null">
+				ALIAS_NAME = #{aliasName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgSeq != null">
+				ORG_SEQ = #{orgSeq,jdbcType=INTEGER},
+			</if>
+			<if test="orgSeq2 != null">
+				ORG_SEQ2 = #{orgSeq2,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orgAbbr != null">
+				ORG_ABBR = #{orgAbbr,jdbcType=VARCHAR},
+			</if>
+			<if test="layer != null">
+				LAYER = #{layer,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemOrg">
+		update system_org
+		set ORG_TYPE_ID = #{orgTypeId,jdbcType=INTEGER},
+		PARENT_ORG_ID = #{parentOrgId,jdbcType=INTEGER},
+		ADMIN_PARENT_ORG_ID = #{adminParentOrgId,jdbcType=INTEGER},
+		ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+		ORG_NAME = #{orgName,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		ORG_TYPE_FLAG = #{orgTypeFlag,jdbcType=INTEGER},
+		ALIAS_NAME = #{aliasName,jdbcType=VARCHAR},
+		ORG_SEQ = #{orgSeq,jdbcType=INTEGER},
+		ORG_SEQ2 = #{orgSeq2,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		ORG_ABBR = #{orgAbbr,jdbcType=VARCHAR},
+		LAYER = #{layer,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

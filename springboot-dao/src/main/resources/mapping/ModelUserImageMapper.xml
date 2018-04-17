@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ModelUserImageMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ModelUserImage">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TYPE_ID" jdbcType="INTEGER" property="typeId" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE_ID, NAME
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from model_user_image
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from model_user_image
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ModelUserImage">
+		insert into model_user_image (ID, TYPE_ID, NAME
+		)
+		values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ModelUserImage">
+		insert into model_user_image
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="typeId != null">
+				TYPE_ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="typeId != null">
+				#{typeId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ModelUserImage">
+		update model_user_image
+		<set>
+			<if test="typeId != null">
+				TYPE_ID = #{typeId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ModelUserImage">
+		update model_user_image
+		set TYPE_ID = #{typeId,jdbcType=INTEGER},
+		NAME = #{name,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

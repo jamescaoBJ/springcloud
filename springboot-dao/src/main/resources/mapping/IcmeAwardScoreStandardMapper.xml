@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeAwardScoreStandardMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.IcmeAwardScoreStandard">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SCORE_TYPE_ID" jdbcType="INTEGER" property="scoreTypeId" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SCORE_TYPE_ID, NAME, REMARK, CREATE_DATE, STATUS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_award_score_standard
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_award_score_standard
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeAwardScoreStandard">
+		insert into
+		icme_award_score_standard (ID, SCORE_TYPE_ID, NAME,
+		REMARK,
+		CREATE_DATE, STATUS
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{scoreTypeId,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeAwardScoreStandard">
+		insert into icme_award_score_standard
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="scoreTypeId != null">
+				SCORE_TYPE_ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="scoreTypeId != null">
+				#{scoreTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeAwardScoreStandard">
+		update icme_award_score_standard
+		<set>
+			<if test="scoreTypeId != null">
+				SCORE_TYPE_ID = #{scoreTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeAwardScoreStandard">
+		update
+		icme_award_score_standard
+		set SCORE_TYPE_ID =
+		#{scoreTypeId,jdbcType=INTEGER},
+		NAME = #{name,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

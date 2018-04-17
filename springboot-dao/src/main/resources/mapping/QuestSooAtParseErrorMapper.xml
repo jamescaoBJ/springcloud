@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtParseErrorMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooAtParseError">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+		<result column="ERROR_ID" jdbcType="INTEGER" property="errorId" />
+		<result column="ERR" jdbcType="INTEGER" property="err" />
+		<result column="TIM" jdbcType="INTEGER" property="tim" />
+		<result column="SQLERRM" jdbcType="VARCHAR" property="sqlerrm" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtParseError">
+		insert into quest_soo_at_parse_error (TRACE_FILE_ID, SQL_ID, PARSE_ID,
+		ERROR_ID, ERR, TIM,
+		SQLERRM)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER},
+		#{errorId,jdbcType=INTEGER}, #{err,jdbcType=INTEGER}, #{tim,jdbcType=INTEGER},
+		#{sqlerrm,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtParseError">
+		insert into quest_soo_at_parse_error
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+			<if test="errorId != null">
+				ERROR_ID,
+			</if>
+			<if test="err != null">
+				ERR,
+			</if>
+			<if test="tim != null">
+				TIM,
+			</if>
+			<if test="sqlerrm != null">
+				SQLERRM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+			<if test="errorId != null">
+				#{errorId,jdbcType=INTEGER},
+			</if>
+			<if test="err != null">
+				#{err,jdbcType=INTEGER},
+			</if>
+			<if test="tim != null">
+				#{tim,jdbcType=INTEGER},
+			</if>
+			<if test="sqlerrm != null">
+				#{sqlerrm,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

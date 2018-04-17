@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogStudyCvUnitMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.LogStudyCvUnit">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="LOG_STUDY_CV_SET_ID" jdbcType="INTEGER"
+			property="logStudyCvSetId" />
+		<result column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="CV_ID" jdbcType="INTEGER" property="cvId" />
+		<result column="CV_UNIT_ID" jdbcType="INTEGER" property="cvUnitId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, LOG_STUDY_CV_SET_ID, SYSTEM_USER_ID, CV_ID, CV_UNIT_ID, STATUS,
+		LAST_UPDATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_unit
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from log_study_cv_unit
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		insert into log_study_cv_unit (ID, LOG_STUDY_CV_SET_ID, SYSTEM_USER_ID,
+		CV_ID, CV_UNIT_ID, STATUS,
+		LAST_UPDATE_DATE)
+		values (#{id,jdbcType=INTEGER}, #{logStudyCvSetId,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER}, #{cvUnitId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		insert into log_study_cv_unit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="logStudyCvSetId != null">
+				LOG_STUDY_CV_SET_ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="cvId != null">
+				CV_ID,
+			</if>
+			<if test="cvUnitId != null">
+				CV_UNIT_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="logStudyCvSetId != null">
+				#{logStudyCvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="cvUnitId != null">
+				#{cvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		update log_study_cv_unit
+		<set>
+			<if test="logStudyCvSetId != null">
+				LOG_STUDY_CV_SET_ID = #{logStudyCvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				CV_ID = #{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="cvUnitId != null">
+				CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		update log_study_cv_unit
+		set LOG_STUDY_CV_SET_ID = #{logStudyCvSetId,jdbcType=INTEGER},
+		SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+		CV_ID = #{cvId,jdbcType=INTEGER},
+		CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据项目id和用户id查询该课程的学习记录(以最新更新时间倒序排序) -->
+	<select id="queryLogStudyCVUnitByCvSetId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_unit
+		where log_study_cv_set_id = #{cvSetId,jdbcType=INTEGER}
+		and system_user_id = #{userId,jdbcType=INTEGER}
+		order by last_update_date desc
+	</select>
+	<!-- 根据用户id和单元id更新学习状态 -->
+	<update id="updateStatusByUserIdAndUnitId" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+		update log_study_cv_unit
+		set
+		STATUS = #{status,jdbcType=INTEGER}
+		where SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER} and CV_UNIT_ID =
+		#{cvUnitId,jdbcType=INTEGER}
+	</update>
+	<!-- 根据单元id和用户id查询单元学习记录（单表数据） -->
+	<select id="getLogStudyByUnitIdAndUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_unit
+		where SYSTEM_USER_ID = #{userId,jdbcType=INTEGER} and CV_UNIT_ID =
+		#{unitId,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -1,0 +1,147 @@
+﻿前端须知：
+
+1.设置http请求头信息：
+
+Authorization: Bearer token
+*其中Token格式如下例子：
+
+eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjpbeyJhdXRob3JpdHkiOiIvdGVhY2hlciJ9XSwic3ViIjoiYWRtaW4iLCJqdGkiOiIxIn0.eDeKBrsOhNAbipg8br6UZSi-mjA_Lg4M79eTdRjghUmpDwPHE4vcSFSxP0Wau-j4nr6EA31ogptbqXMMFR7B5Q
+
+*token中有三个.号，请截取中间的Token部分，用js base64 解码，就会获得当前用户信息和权限信息集合。
+
+{"auth":[{"authority":"/teacher"},{"authority":"/teacher/page"}],"sub":"admin","jti":"1"}
+
+*再从中获取auth->authority-> **所有权限，就可判断出前台控件根据权限要求是否显隐关系，从而达到显示或者隐藏某些控件。
+
+
+
+-- 直播列表
+
+
+SELECT
+	l.id AS cvId,
+	l. NAME AS name,
+	l.introduction AS introduction,
+	l.type,
+	l.file_path filePath,
+	l.startDate,
+	l.endDate,
+	l.token,
+	l.studentJoinUrl,
+	l.classNo,cs.user_id as userId,cs.joinTime ,cs.leaveTime ,cs.useful_length as usefulLength , csf.start_time as logStartTime,csf.end_time as logEndTime,csf.total_live_length as logTotalLiveLength
+FROM
+	(
+		SELECT
+			C.*
+		FROM
+			(
+				SELECT
+					F.*, F.startDate AS sDate,
+					(
+						CASE
+						WHEN F.start_time > 0
+						AND F.end_time = 0 THEN
+							1
+						WHEN F.start_time > 0
+						AND F.end_time > 0
+						AND F.start_time > F.end_time THEN
+							1
+						WHEN F.start_time IS NULL THEN
+							2
+						WHEN F.start_time < F.end_time
+						AND FROM_UNIXTIME(F.end_time) < NOW()
+						AND F.makeType = 2 THEN
+							3
+						WHEN F.makeType = 1 THEN
+							4
+						WHEN F.start_time < F.end_time
+						AND FROM_UNIXTIME(F.end_time) < NOW()
+						AND F.makeType = 0 THEN
+							5
+						ELSE
+							3
+						END
+					) AS type
+				FROM
+					(
+						SELECT
+							A.ID1 AS ID,
+							A.NAME1 AS `NAME`,
+							A.BRAND1 AS BRAND,
+							A.INTRODUCTION1 AS INTRODUCTION,
+							A.FILE_PATH1 AS FILE_PATH,
+							A.CREATE_DATE1 AS CREATE_DATE,
+							A.CREATOR1 AS CREATOR,
+							A.cv_type1 AS cv_type,
+							A.class_no1 AS classNo,
+							A.student_join_url1 AS studentJoinUrl,
+							A.student_token1 AS token,
+							A.start_date1 AS startDate,
+							A.invalid_date1 AS endDate,
+							A.course_make_type1 AS makeType,
+							A.oldtype1 AS oldtype,
+							lrf.start_time,
+							lrf.end_time
+						FROM
+							(
+								SELECT
+									t2.ID AS ID1,
+									t2.`NAME` AS NAME1,
+									t2.BRAND AS BRAND1,
+									t2.INTRODUCTION AS INTRODUCTION1,
+									t2.FILE_PATH AS FILE_PATH1,
+									t2.CREATE_DATE AS CREATE_DATE1,
+									t2.CREATOR AS CREATOR1,
+									t2.cv_type AS cv_type1,
+									live.class_no AS class_no1,
+									live.student_join_url AS student_join_url1,
+									live.student_token AS student_token1,
+									live.start_date AS start_date1,
+									live.invalid_date AS invalid_date1,
+									live.course_make_type AS course_make_type1,
+									(
+										CASE
+										WHEN live.start_date <= NOW()
+										AND live.invalid_date >= NOW() THEN
+											1
+										WHEN live.start_date > NOW() THEN
+											2
+										WHEN live.invalid_date < NOW()
+										AND live.course_make_type != 1 THEN
+											3
+										WHEN live.course_make_type = 1 THEN
+											4
+										END
+									) AS oldtype1
+								FROM
+									cv t2,
+									cv_live live,
+									cv_schedule t3
+								WHERE
+									EXISTS (
+										SELECT
+											1
+										FROM
+											cv_set_schedule t4
+										JOIN cv_set t5 ON t4.cv_set_id = t5.id
+										JOIN cv_set_user_image t8 ON t5.id = t8.cv_set_id
+										JOIN cv_set_system_site t6 ON t6.cv_set_id = t5.id
+										JOIN system_site t7 ON t6.system_site_id = t7.id
+										WHERE
+											t3.schedule_id = t4.cv_schedule_id
+										AND t5. STATUS = 5
+										AND t2.id = live.cv_id
+										AND t5.START_DATE <= NOW()
+										AND t5.END_DATE >= NOW()
+									)
+								AND t2.id = t3.cv_id
+								AND t2.cv_type = 2
+							) A
+						LEFT JOIN cv_live_study_ref lrf ON lrf.class_no = A.class_no1
+					) F
+			) C
+		LEFT JOIN cv_live_type_sort t9 ON t9.type = C.type
+		ORDER BY
+			t9.id ASC,
+			C.sDate DESC
+	) l , cv_live_study cs  , cv_live_study_ref csf where cs.class_no = l.classNo  and cs.class_no = csf.class_no and cs.user_id = 

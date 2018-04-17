@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPaperBaseTacticMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamPaperBaseTactic">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PAPER_ID" jdbcType="INTEGER" property="paperId" />
+		<result column="QUESTION_LABEL_ID" jdbcType="INTEGER" property="questionLabelId" />
+		<result column="GRADE" jdbcType="INTEGER" property="grade" />
+		<result column="AMOUNT" jdbcType="INTEGER" property="amount" />
+		<result column="QUESTION_SCORE" jdbcType="DOUBLE" property="questionScore" />
+		<result column="QUESTION_TYPE_ID" jdbcType="VARCHAR" property="questionTypeId" />
+		<result column="QUESTION_TYPE_NAME" jdbcType="VARCHAR"
+			property="questionTypeName" />
+		<result column="CASCADE_ID" jdbcType="VARCHAR" property="cascadeId" />
+		<result column="CASCADE_NAME" jdbcType="VARCHAR" property="cascadeName" />
+		<result column="PROP_POINT2_ID" jdbcType="VARCHAR" property="propPoint2Id" />
+		<result column="PROP_POINT2_NAME" jdbcType="VARCHAR" property="propPoint2Name" />
+		<result column="PROP_COGNIZE_ID" jdbcType="VARCHAR" property="propCognizeId" />
+		<result column="PROP_COGNIZE_NAME" jdbcType="VARCHAR" property="propCognizeName" />
+		<result column="PROP_TITLE_ID" jdbcType="VARCHAR" property="propTitleId" />
+		<result column="PROP_TITLE_NAME" jdbcType="VARCHAR" property="propTitleName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PAPER_ID, QUESTION_LABEL_ID, GRADE, AMOUNT,
+		QUESTION_SCORE,
+		QUESTION_TYPE_ID,
+		QUESTION_TYPE_NAME, CASCADE_ID,
+		CASCADE_NAME, PROP_POINT2_ID, PROP_POINT2_NAME,
+		PROP_COGNIZE_ID,
+		PROP_COGNIZE_NAME, PROP_TITLE_ID, PROP_TITLE_NAME
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_paper_base_tactic
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_paper_base_tactic
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPaperBaseTactic">
+		insert into
+		exam_paper_base_tactic (ID, PAPER_ID, QUESTION_LABEL_ID,
+		GRADE, AMOUNT,
+		QUESTION_SCORE,
+		QUESTION_TYPE_ID, QUESTION_TYPE_NAME, CASCADE_ID,
+		CASCADE_NAME, PROP_POINT2_ID, PROP_POINT2_NAME,
+		PROP_COGNIZE_ID,
+		PROP_COGNIZE_NAME, PROP_TITLE_ID,
+		PROP_TITLE_NAME)
+		values
+		(#{id,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER},
+		#{questionLabelId,jdbcType=INTEGER},
+		#{grade,jdbcType=INTEGER},
+		#{amount,jdbcType=INTEGER}, #{questionScore,jdbcType=DOUBLE},
+		#{questionTypeId,jdbcType=VARCHAR},
+		#{questionTypeName,jdbcType=VARCHAR}, #{cascadeId,jdbcType=VARCHAR},
+		#{cascadeName,jdbcType=VARCHAR}, #{propPoint2Id,jdbcType=VARCHAR},
+		#{propPoint2Name,jdbcType=VARCHAR},
+		#{propCognizeId,jdbcType=VARCHAR},
+		#{propCognizeName,jdbcType=VARCHAR}, #{propTitleId,jdbcType=VARCHAR},
+		#{propTitleName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPaperBaseTactic">
+		insert into exam_paper_base_tactic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="paperId != null">
+				PAPER_ID,
+			</if>
+			<if test="questionLabelId != null">
+				QUESTION_LABEL_ID,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="questionScore != null">
+				QUESTION_SCORE,
+			</if>
+			<if test="questionTypeId != null">
+				QUESTION_TYPE_ID,
+			</if>
+			<if test="questionTypeName != null">
+				QUESTION_TYPE_NAME,
+			</if>
+			<if test="cascadeId != null">
+				CASCADE_ID,
+			</if>
+			<if test="cascadeName != null">
+				CASCADE_NAME,
+			</if>
+			<if test="propPoint2Id != null">
+				PROP_POINT2_ID,
+			</if>
+			<if test="propPoint2Name != null">
+				PROP_POINT2_NAME,
+			</if>
+			<if test="propCognizeId != null">
+				PROP_COGNIZE_ID,
+			</if>
+			<if test="propCognizeName != null">
+				PROP_COGNIZE_NAME,
+			</if>
+			<if test="propTitleId != null">
+				PROP_TITLE_ID,
+			</if>
+			<if test="propTitleName != null">
+				PROP_TITLE_NAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="paperId != null">
+				#{paperId,jdbcType=INTEGER},
+			</if>
+			<if test="questionLabelId != null">
+				#{questionLabelId,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=INTEGER},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=INTEGER},
+			</if>
+			<if test="questionScore != null">
+				#{questionScore,jdbcType=DOUBLE},
+			</if>
+			<if test="questionTypeId != null">
+				#{questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="questionTypeName != null">
+				#{questionTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="cascadeId != null">
+				#{cascadeId,jdbcType=VARCHAR},
+			</if>
+			<if test="cascadeName != null">
+				#{cascadeName,jdbcType=VARCHAR},
+			</if>
+			<if test="propPoint2Id != null">
+				#{propPoint2Id,jdbcType=VARCHAR},
+			</if>
+			<if test="propPoint2Name != null">
+				#{propPoint2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="propCognizeId != null">
+				#{propCognizeId,jdbcType=VARCHAR},
+			</if>
+			<if test="propCognizeName != null">
+				#{propCognizeName,jdbcType=VARCHAR},
+			</if>
+			<if test="propTitleId != null">
+				#{propTitleId,jdbcType=VARCHAR},
+			</if>
+			<if test="propTitleName != null">
+				#{propTitleName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamPaperBaseTactic">
+		update exam_paper_base_tactic
+		<set>
+			<if test="paperId != null">
+				PAPER_ID = #{paperId,jdbcType=INTEGER},
+			</if>
+			<if test="questionLabelId != null">
+				QUESTION_LABEL_ID = #{questionLabelId,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=INTEGER},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=INTEGER},
+			</if>
+			<if test="questionScore != null">
+				QUESTION_SCORE = #{questionScore,jdbcType=DOUBLE},
+			</if>
+			<if test="questionTypeId != null">
+				QUESTION_TYPE_ID = #{questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="questionTypeName != null">
+				QUESTION_TYPE_NAME =
+				#{questionTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="cascadeId != null">
+				CASCADE_ID = #{cascadeId,jdbcType=VARCHAR},
+			</if>
+			<if test="cascadeName != null">
+				CASCADE_NAME = #{cascadeName,jdbcType=VARCHAR},
+			</if>
+			<if test="propPoint2Id != null">
+				PROP_POINT2_ID = #{propPoint2Id,jdbcType=VARCHAR},
+			</if>
+			<if test="propPoint2Name != null">
+				PROP_POINT2_NAME = #{propPoint2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="propCognizeId != null">
+				PROP_COGNIZE_ID = #{propCognizeId,jdbcType=VARCHAR},
+			</if>
+			<if test="propCognizeName != null">
+				PROP_COGNIZE_NAME = #{propCognizeName,jdbcType=VARCHAR},
+			</if>
+			<if test="propTitleId != null">
+				PROP_TITLE_ID = #{propTitleId,jdbcType=VARCHAR},
+			</if>
+			<if test="propTitleName != null">
+				PROP_TITLE_NAME = #{propTitleName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamPaperBaseTactic">
+		update
+		exam_paper_base_tactic
+		set PAPER_ID = #{paperId,jdbcType=INTEGER},
+		QUESTION_LABEL_ID = #{questionLabelId,jdbcType=INTEGER},
+		GRADE =
+		#{grade,jdbcType=INTEGER},
+		AMOUNT = #{amount,jdbcType=INTEGER},
+		QUESTION_SCORE = #{questionScore,jdbcType=DOUBLE},
+		QUESTION_TYPE_ID =
+		#{questionTypeId,jdbcType=VARCHAR},
+		QUESTION_TYPE_NAME =
+		#{questionTypeName,jdbcType=VARCHAR},
+		CASCADE_ID =
+		#{cascadeId,jdbcType=VARCHAR},
+		CASCADE_NAME =
+		#{cascadeName,jdbcType=VARCHAR},
+		PROP_POINT2_ID =
+		#{propPoint2Id,jdbcType=VARCHAR},
+		PROP_POINT2_NAME =
+		#{propPoint2Name,jdbcType=VARCHAR},
+		PROP_COGNIZE_ID =
+		#{propCognizeId,jdbcType=VARCHAR},
+		PROP_COGNIZE_NAME =
+		#{propCognizeName,jdbcType=VARCHAR},
+		PROP_TITLE_ID =
+		#{propTitleId,jdbcType=VARCHAR},
+		PROP_TITLE_NAME =
+		#{propTitleName,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemBugLogMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemBugLog">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="BUG_LEVEL" jdbcType="INTEGER" property="bugLevel" />
+		<result column="BUG_STATUS" jdbcType="INTEGER" property="bugStatus" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+		<result column="FINISHER" jdbcType="VARCHAR" property="finisher" />
+		<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />
+		<result column="UPDATE_DATE" jdbcType="DATE" property="updateDate" />
+		<result column="REPLY" jdbcType="VARCHAR" property="reply" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+		<result column="FILE_PATH_TWO" jdbcType="VARCHAR" property="filePathTwo" />
+		<result column="FILE_PATH_THREE" jdbcType="VARCHAR" property="filePathThree" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TITLE, CONTENT, BUG_LEVEL, BUG_STATUS, STATUS, CREATOR, FINISHER,
+		CREATE_DATE,
+		UPDATE_DATE, REPLY, TYPE, FILE_PATH, FILE_PATH_TWO, FILE_PATH_THREE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_bug_log
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_bug_log
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemBugLog">
+		insert into system_bug_log (ID, TITLE, CONTENT,
+		BUG_LEVEL, BUG_STATUS, STATUS,
+		CREATOR, FINISHER, CREATE_DATE,
+		UPDATE_DATE, REPLY, TYPE,
+		FILE_PATH, FILE_PATH_TWO, FILE_PATH_THREE
+		)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{bugLevel,jdbcType=INTEGER}, #{bugStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{creator,jdbcType=VARCHAR}, #{finisher,jdbcType=VARCHAR},
+		#{createDate,jdbcType=DATE},
+		#{updateDate,jdbcType=DATE}, #{reply,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+		#{filePath,jdbcType=VARCHAR}, #{filePathTwo,jdbcType=VARCHAR},
+		#{filePathThree,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemBugLog">
+		insert into system_bug_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="bugLevel != null">
+				BUG_LEVEL,
+			</if>
+			<if test="bugStatus != null">
+				BUG_STATUS,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="creator != null">
+				CREATOR,
+			</if>
+			<if test="finisher != null">
+				FINISHER,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE,
+			</if>
+			<if test="reply != null">
+				REPLY,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="filePath != null">
+				FILE_PATH,
+			</if>
+			<if test="filePathTwo != null">
+				FILE_PATH_TWO,
+			</if>
+			<if test="filePathThree != null">
+				FILE_PATH_THREE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="bugLevel != null">
+				#{bugLevel,jdbcType=INTEGER},
+			</if>
+			<if test="bugStatus != null">
+				#{bugStatus,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="finisher != null">
+				#{finisher,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=DATE},
+			</if>
+			<if test="reply != null">
+				#{reply,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="filePath != null">
+				#{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="filePathTwo != null">
+				#{filePathTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="filePathThree != null">
+				#{filePathThree,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemBugLog">
+		update system_bug_log
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="bugLevel != null">
+				BUG_LEVEL = #{bugLevel,jdbcType=INTEGER},
+			</if>
+			<if test="bugStatus != null">
+				BUG_STATUS = #{bugStatus,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="creator != null">
+				CREATOR = #{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="finisher != null">
+				FINISHER = #{finisher,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=DATE},
+			</if>
+			<if test="reply != null">
+				REPLY = #{reply,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="filePath != null">
+				FILE_PATH = #{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="filePathTwo != null">
+				FILE_PATH_TWO = #{filePathTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="filePathThree != null">
+				FILE_PATH_THREE = #{filePathThree,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemBugLog">
+		update system_bug_log
+		set TITLE = #{title,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=VARCHAR},
+		BUG_LEVEL = #{bugLevel,jdbcType=INTEGER},
+		BUG_STATUS = #{bugStatus,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATOR = #{creator,jdbcType=VARCHAR},
+		FINISHER = #{finisher,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=DATE},
+		UPDATE_DATE = #{updateDate,jdbcType=DATE},
+		REPLY = #{reply,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		FILE_PATH = #{filePath,jdbcType=VARCHAR},
+		FILE_PATH_TWO = #{filePathTwo,jdbcType=VARCHAR},
+		FILE_PATH_THREE = #{filePathThree,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

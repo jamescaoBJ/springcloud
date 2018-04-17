@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogStudyCvUnitVideoMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.LogStudyCvUnitVideo">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="LOG_STUDY_CV_UNIT_ID" jdbcType="INTEGER"
+			property="logStudyCvUnitId" />
+		<result column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="CV_ID" jdbcType="INTEGER" property="cvId" />
+		<result column="CV_UNIT_ID" jdbcType="INTEGER" property="cvUnitId" />
+		<result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+		<result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="videoLength" jdbcType="INTEGER" property="videolength" />
+		<result column="videoPlayLength" jdbcType="INTEGER" property="videoplaylength" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, LOG_STUDY_CV_UNIT_ID, SYSTEM_USER_ID, CV_ID, CV_UNIT_ID, START_DATE,
+		END_DATE,
+		videoLength, videoPlayLength
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_unit_video
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from log_study_cv_unit_video
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideo">
+		insert into log_study_cv_unit_video (ID, LOG_STUDY_CV_UNIT_ID,
+		SYSTEM_USER_ID,
+		CV_ID, CV_UNIT_ID, START_DATE,
+		END_DATE, videoLength, videoPlayLength
+		)
+		values (#{id,jdbcType=INTEGER}, #{logStudyCvUnitId,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER}, #{cvUnitId,jdbcType=INTEGER}, #{startDate,jdbcType=TIMESTAMP},
+		#{endDate,jdbcType=TIMESTAMP}, #{videolength,jdbcType=INTEGER},
+		#{videoplaylength,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideo">
+		insert into log_study_cv_unit_video
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="logStudyCvUnitId != null">
+				LOG_STUDY_CV_UNIT_ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="cvId != null">
+				CV_ID,
+			</if>
+			<if test="cvUnitId != null">
+				CV_UNIT_ID,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="videolength != null">
+				videoLength,
+			</if>
+			<if test="videoplaylength != null">
+				videoPlayLength,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="logStudyCvUnitId != null">
+				#{logStudyCvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="cvUnitId != null">
+				#{cvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="videolength != null">
+				#{videolength,jdbcType=INTEGER},
+			</if>
+			<if test="videoplaylength != null">
+				#{videoplaylength,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideo">
+		update log_study_cv_unit_video
+		<set>
+			<if test="logStudyCvUnitId != null">
+				LOG_STUDY_CV_UNIT_ID = #{logStudyCvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				CV_ID = #{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="cvUnitId != null">
+				CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				START_DATE = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="videolength != null">
+				videoLength = #{videolength,jdbcType=INTEGER},
+			</if>
+			<if test="videoplaylength != null">
+				videoPlayLength = #{videoplaylength,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogStudyCvUnitVideo">
+		update log_study_cv_unit_video
+		set LOG_STUDY_CV_UNIT_ID = #{logStudyCvUnitId,jdbcType=INTEGER},
+		SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+		CV_ID = #{cvId,jdbcType=INTEGER},
+		CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER},
+		START_DATE = #{startDate,jdbcType=TIMESTAMP},
+		END_DATE = #{endDate,jdbcType=TIMESTAMP},
+		videoLength = #{videolength,jdbcType=INTEGER},
+		videoPlayLength = #{videoplaylength,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据用户id和单元id查询单元视频学习记录 -->
+	<select id="getVideoLogByUserIdAndUnitId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_unit_video
+		where SYSTEM_USER_ID = #{userId,jdbcType=INTEGER} and CV_UNIT_ID =
+		#{unitId,jdbcType=INTEGER}
+	</select>
+</mapper>

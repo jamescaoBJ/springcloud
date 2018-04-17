@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamExamPaperMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamExamPaper">
+		<result column="EXAM_ID" jdbcType="INTEGER" property="examId" />
+		<result column="PAPER_ID" jdbcType="INTEGER" property="paperId" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamExamPaper">
+		insert into exam_exam_paper
+		(EXAM_ID, PAPER_ID, SEQ
+		)
+		values (#{examId,jdbcType=INTEGER},
+		#{paperId,jdbcType=INTEGER},
+		#{seq,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamExamPaper">
+		insert into exam_exam_paper
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="examId != null">
+				EXAM_ID,
+			</if>
+			<if test="paperId != null">
+				PAPER_ID,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="examId != null">
+				#{examId,jdbcType=INTEGER},
+			</if>
+			<if test="paperId != null">
+				#{paperId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

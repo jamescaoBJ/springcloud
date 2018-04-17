@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeExpertMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeExpert">
+		<id column="EXP_ID" jdbcType="INTEGER" property="expId" />
+		<result column="EXP_NAME" jdbcType="VARCHAR" property="expName" />
+		<result column="SEX" jdbcType="CHAR" property="sex" />
+		<result column="TYPE" jdbcType="CHAR" property="type" />
+		<result column="WORKUNIT" jdbcType="VARCHAR" property="workunit" />
+		<result column="BIRTH" jdbcType="VARCHAR" property="birth" />
+		<result column="SPECIAL" jdbcType="VARCHAR" property="special" />
+		<result column="POST" jdbcType="VARCHAR" property="post" />
+		<result column="PHOTOURL" jdbcType="VARCHAR" property="photourl" />
+		<result column="PHOTOURL2" jdbcType="VARCHAR" property="photourl2" />
+		<result column="GRADSCL_DATE" jdbcType="VARCHAR" property="gradsclDate" />
+		<result column="WORKSTORY" jdbcType="VARCHAR" property="workstory" />
+		<result column="DEPT_INFO" jdbcType="VARCHAR" property="deptInfo" />
+		<result column="BALLOT" jdbcType="INTEGER" property="ballot" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		EXP_ID, EXP_NAME, SEX, TYPE, WORKUNIT, BIRTH, SPECIAL, POST, PHOTOURL,
+		PHOTOURL2,
+		GRADSCL_DATE, WORKSTORY, DEPT_INFO, BALLOT, REMARK, CREATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ncme_expert
+		where EXP_ID = #{expId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ncme_expert
+		where EXP_ID = #{expId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeExpert">
+		insert into ncme_expert (EXP_ID, EXP_NAME, SEX,
+		TYPE, WORKUNIT, BIRTH,
+		SPECIAL, POST, PHOTOURL,
+		PHOTOURL2, GRADSCL_DATE, WORKSTORY,
+		DEPT_INFO, BALLOT, REMARK,
+		CREATE_DATE)
+		values (#{expId,jdbcType=INTEGER}, #{expName,jdbcType=VARCHAR},
+		#{sex,jdbcType=CHAR},
+		#{type,jdbcType=CHAR}, #{workunit,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR},
+		#{special,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR},
+		#{photourl,jdbcType=VARCHAR},
+		#{photourl2,jdbcType=VARCHAR}, #{gradsclDate,jdbcType=VARCHAR}, #{workstory,jdbcType=VARCHAR},
+		#{deptInfo,jdbcType=VARCHAR}, #{ballot,jdbcType=INTEGER},
+		#{remark,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeExpert">
+		insert into ncme_expert
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="expId != null">
+				EXP_ID,
+			</if>
+			<if test="expName != null">
+				EXP_NAME,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="workunit != null">
+				WORKUNIT,
+			</if>
+			<if test="birth != null">
+				BIRTH,
+			</if>
+			<if test="special != null">
+				SPECIAL,
+			</if>
+			<if test="post != null">
+				POST,
+			</if>
+			<if test="photourl != null">
+				PHOTOURL,
+			</if>
+			<if test="photourl2 != null">
+				PHOTOURL2,
+			</if>
+			<if test="gradsclDate != null">
+				GRADSCL_DATE,
+			</if>
+			<if test="workstory != null">
+				WORKSTORY,
+			</if>
+			<if test="deptInfo != null">
+				DEPT_INFO,
+			</if>
+			<if test="ballot != null">
+				BALLOT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="expId != null">
+				#{expId,jdbcType=INTEGER},
+			</if>
+			<if test="expName != null">
+				#{expName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=CHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=CHAR},
+			</if>
+			<if test="workunit != null">
+				#{workunit,jdbcType=VARCHAR},
+			</if>
+			<if test="birth != null">
+				#{birth,jdbcType=VARCHAR},
+			</if>
+			<if test="special != null">
+				#{special,jdbcType=VARCHAR},
+			</if>
+			<if test="post != null">
+				#{post,jdbcType=VARCHAR},
+			</if>
+			<if test="photourl != null">
+				#{photourl,jdbcType=VARCHAR},
+			</if>
+			<if test="photourl2 != null">
+				#{photourl2,jdbcType=VARCHAR},
+			</if>
+			<if test="gradsclDate != null">
+				#{gradsclDate,jdbcType=VARCHAR},
+			</if>
+			<if test="workstory != null">
+				#{workstory,jdbcType=VARCHAR},
+			</if>
+			<if test="deptInfo != null">
+				#{deptInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="ballot != null">
+				#{ballot,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.NcmeExpert">
+		update ncme_expert
+		<set>
+			<if test="expName != null">
+				EXP_NAME = #{expName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=CHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=CHAR},
+			</if>
+			<if test="workunit != null">
+				WORKUNIT = #{workunit,jdbcType=VARCHAR},
+			</if>
+			<if test="birth != null">
+				BIRTH = #{birth,jdbcType=VARCHAR},
+			</if>
+			<if test="special != null">
+				SPECIAL = #{special,jdbcType=VARCHAR},
+			</if>
+			<if test="post != null">
+				POST = #{post,jdbcType=VARCHAR},
+			</if>
+			<if test="photourl != null">
+				PHOTOURL = #{photourl,jdbcType=VARCHAR},
+			</if>
+			<if test="photourl2 != null">
+				PHOTOURL2 = #{photourl2,jdbcType=VARCHAR},
+			</if>
+			<if test="gradsclDate != null">
+				GRADSCL_DATE = #{gradsclDate,jdbcType=VARCHAR},
+			</if>
+			<if test="workstory != null">
+				WORKSTORY = #{workstory,jdbcType=VARCHAR},
+			</if>
+			<if test="deptInfo != null">
+				DEPT_INFO = #{deptInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="ballot != null">
+				BALLOT = #{ballot,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where EXP_ID = #{expId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.NcmeExpert">
+		update ncme_expert
+		set EXP_NAME = #{expName,jdbcType=VARCHAR},
+		SEX = #{sex,jdbcType=CHAR},
+		TYPE = #{type,jdbcType=CHAR},
+		WORKUNIT = #{workunit,jdbcType=VARCHAR},
+		BIRTH = #{birth,jdbcType=VARCHAR},
+		SPECIAL = #{special,jdbcType=VARCHAR},
+		POST = #{post,jdbcType=VARCHAR},
+		PHOTOURL = #{photourl,jdbcType=VARCHAR},
+		PHOTOURL2 = #{photourl2,jdbcType=VARCHAR},
+		GRADSCL_DATE = #{gradsclDate,jdbcType=VARCHAR},
+		WORKSTORY = #{workstory,jdbcType=VARCHAR},
+		DEPT_INFO = #{deptInfo,jdbcType=VARCHAR},
+		BALLOT = #{ballot,jdbcType=INTEGER},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+		where EXP_ID = #{expId,jdbcType=INTEGER}
+	</update>
+</mapper>

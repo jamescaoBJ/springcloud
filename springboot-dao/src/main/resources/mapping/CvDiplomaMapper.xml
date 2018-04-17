@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvDiplomaMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvDiploma">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="ID_NUMBER" jdbcType="VARCHAR" property="idNumber" />
+		<result column="SYSTEM_USER_NAME" jdbcType="VARCHAR" property="systemUserName" />
+		<result column="ITEM_NUMBER" jdbcType="VARCHAR" property="itemNumber" />
+		<result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName" />
+		<result column="APPLY_TIME" jdbcType="VARCHAR" property="applyTime" />
+		<result column="DIPLOMA_NUMBER" jdbcType="VARCHAR" property="diplomaNumber" />
+		<result column="PATH_URL" jdbcType="VARCHAR" property="pathUrl" />
+		<result column="IS_DELETE" jdbcType="INTEGER" property="isDelete" />
+		<result column="ITEM_GRADE" jdbcType="VARCHAR" property="itemGrade" />
+		<result column="ITEM_TYPE" jdbcType="VARCHAR" property="itemType" />
+		<result column="BEGIN_TIME" jdbcType="VARCHAR" property="beginTime" />
+		<result column="END_TIME" jdbcType="VARCHAR" property="endTime" />
+		<result column="ITEM_SCORE" jdbcType="VARCHAR" property="itemScore" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SYSTEM_USER_ID, ID_NUMBER, SYSTEM_USER_NAME,
+		ITEM_NUMBER, ITEM_NAME,
+		APPLY_TIME,
+		DIPLOMA_NUMBER, PATH_URL, IS_DELETE,
+		ITEM_GRADE, ITEM_TYPE, BEGIN_TIME, END_TIME,
+		ITEM_SCORE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_diploma
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_diploma
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvDiploma">
+		insert into cv_diploma (ID,
+		SYSTEM_USER_ID, ID_NUMBER,
+		SYSTEM_USER_NAME, ITEM_NUMBER, ITEM_NAME,
+		APPLY_TIME, DIPLOMA_NUMBER, PATH_URL,
+		IS_DELETE, ITEM_GRADE, ITEM_TYPE,
+		BEGIN_TIME, END_TIME, ITEM_SCORE
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},
+		#{idNumber,jdbcType=VARCHAR},
+		#{systemUserName,jdbcType=VARCHAR}, #{itemNumber,jdbcType=VARCHAR},
+		#{itemName,jdbcType=VARCHAR},
+		#{applyTime,jdbcType=VARCHAR},
+		#{diplomaNumber,jdbcType=VARCHAR},
+		#{pathUrl,jdbcType=VARCHAR},
+		#{isDelete,jdbcType=INTEGER}, #{itemGrade,jdbcType=VARCHAR},
+		#{itemType,jdbcType=VARCHAR},
+		#{beginTime,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{itemScore,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvDiploma">
+		insert into cv_diploma
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="idNumber != null">
+				ID_NUMBER,
+			</if>
+			<if test="systemUserName != null">
+				SYSTEM_USER_NAME,
+			</if>
+			<if test="itemNumber != null">
+				ITEM_NUMBER,
+			</if>
+			<if test="itemName != null">
+				ITEM_NAME,
+			</if>
+			<if test="applyTime != null">
+				APPLY_TIME,
+			</if>
+			<if test="diplomaNumber != null">
+				DIPLOMA_NUMBER,
+			</if>
+			<if test="pathUrl != null">
+				PATH_URL,
+			</if>
+			<if test="isDelete != null">
+				IS_DELETE,
+			</if>
+			<if test="itemGrade != null">
+				ITEM_GRADE,
+			</if>
+			<if test="itemType != null">
+				ITEM_TYPE,
+			</if>
+			<if test="beginTime != null">
+				BEGIN_TIME,
+			</if>
+			<if test="endTime != null">
+				END_TIME,
+			</if>
+			<if test="itemScore != null">
+				ITEM_SCORE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="idNumber != null">
+				#{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="systemUserName != null">
+				#{systemUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="itemNumber != null">
+				#{itemNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="itemName != null">
+				#{itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="applyTime != null">
+				#{applyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="diplomaNumber != null">
+				#{diplomaNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="pathUrl != null">
+				#{pathUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="itemGrade != null">
+				#{itemGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="itemType != null">
+				#{itemType,jdbcType=VARCHAR},
+			</if>
+			<if test="beginTime != null">
+				#{beginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="itemScore != null">
+				#{itemScore,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvDiploma">
+		update cv_diploma
+		<set>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="idNumber != null">
+				ID_NUMBER = #{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="systemUserName != null">
+				SYSTEM_USER_NAME = #{systemUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="itemNumber != null">
+				ITEM_NUMBER = #{itemNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="itemName != null">
+				ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="applyTime != null">
+				APPLY_TIME = #{applyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="diplomaNumber != null">
+				DIPLOMA_NUMBER = #{diplomaNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="pathUrl != null">
+				PATH_URL = #{pathUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				IS_DELETE = #{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="itemGrade != null">
+				ITEM_GRADE = #{itemGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="itemType != null">
+				ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
+			</if>
+			<if test="beginTime != null">
+				BEGIN_TIME = #{beginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				END_TIME = #{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="itemScore != null">
+				ITEM_SCORE = #{itemScore,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvDiploma">
+		update cv_diploma
+		set SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+		ID_NUMBER =
+		#{idNumber,jdbcType=VARCHAR},
+		SYSTEM_USER_NAME =
+		#{systemUserName,jdbcType=VARCHAR},
+		ITEM_NUMBER =
+		#{itemNumber,jdbcType=VARCHAR},
+		ITEM_NAME =
+		#{itemName,jdbcType=VARCHAR},
+		APPLY_TIME =
+		#{applyTime,jdbcType=VARCHAR},
+		DIPLOMA_NUMBER =
+		#{diplomaNumber,jdbcType=VARCHAR},
+		PATH_URL =
+		#{pathUrl,jdbcType=VARCHAR},
+		IS_DELETE = #{isDelete,jdbcType=INTEGER},
+		ITEM_GRADE = #{itemGrade,jdbcType=VARCHAR},
+		ITEM_TYPE =
+		#{itemType,jdbcType=VARCHAR},
+		BEGIN_TIME =
+		#{beginTime,jdbcType=VARCHAR},
+		END_TIME = #{endTime,jdbcType=VARCHAR},
+		ITEM_SCORE = #{itemScore,jdbcType=VARCHAR}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据用户id和项目编号查询证书信息 -->
+	<select id="getCvDiplomaByUserIdAndCode" resultType="com.ncme.springboot.footstone.response.Record">
+		select	t.SYSTEM_USER_NAME as realName,t.BEGIN_TIME as beginTime,t.END_TIME as endTime,t.ITEM_NAME as itemName,
+				t.ITEM_SCORE as itemScore,t.ITEM_GRADE as itemGrade,t.APPLY_TIME as	applyTime,t.DIPLOMA_NUMBER as diplomaNumber,
+				case s.CERTIFICATE_TYPE when 1 then 
+				year(CURDATE())-if(length(s.CERTIFICATE_NO)=18,substring(s.CERTIFICATE_NO,7,4),if(length(s.CERTIFICATE_NO)=15,concat('19',substring(s.CERTIFICATE_NO,7,2)),null))
+				else '' end as age,
+				case s.SEX when 1 then '男' when 2 then '女' else '未知' end as sex,t.ITEM_SCORE*3 as studyHour
+		from cv_diploma t
+		left join system_user s on s.id = t.SYSTEM_USER_ID
+		where t.system_user_id = #{userId,jdbcType=INTEGER} and t.item_number = #{itemNumber,jdbcType=VARCHAR}
+	</select>
+	<!-- 根据用户id查询该用户所有的学分之和 -->
+	<select id="getScoreByUserId" resultType="java.lang.Double">
+		SELECT sum(item_score)
+		from cv_diploma where system_user_id =	#{userId,jdbcType=INTEGER}
+		<if test="year != null">
+			and year(apply_time) = #{year,jdbcType=INTEGER}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetMapper">
+
+<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSet">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="FORMA" jdbcType="INTEGER" property="forma" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+		<result column="INTRODUCTION" jdbcType="VARCHAR" property="introduction" />
+		<result column="ANNOUNCEMENT" jdbcType="VARCHAR" property="announcement" />
+		<result column="KNOWLEDGE_NEEDED" jdbcType="VARCHAR" property="knowledgeNeeded" />
+		<result column="KNOWLEDGE_BASE" jdbcType="VARCHAR" property="knowledgeBase" />
+		<result column="REFERENCE" jdbcType="VARCHAR" property="reference" />
+		<result column="REFERENCE_LATELY" jdbcType="VARCHAR" property="referenceLately" />
+		<result column="OPINION" jdbcType="VARCHAR" property="opinion" />
+		<result column="REPORT" jdbcType="VARCHAR" property="report" />
+		<result column="OPINION_TYPE" jdbcType="VARCHAR" property="opinionType" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SERIAL_NUMBER" jdbcType="VARCHAR" property="serialNumber" />
+		<result column="LEVEL" jdbcType="INTEGER" property="level" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+		<result column="COST" jdbcType="DOUBLE" property="cost" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+		<result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="BREAK_DAYS" jdbcType="INTEGER" property="breakDays" />
+		<result column="MAKER" jdbcType="VARCHAR" property="maker" />
+		<result column="DELI_MAN" jdbcType="VARCHAR" property="deliMan" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="DELI_DATE" jdbcType="TIMESTAMP" property="deliDate" />
+		<result column="SIGN" jdbcType="VARCHAR" property="sign" />
+		<result column="PROVINCEID" jdbcType="INTEGER" property="provinceid" />
+		<result column="CITYID" jdbcType="INTEGER" property="cityid" />
+		<result column="RELATION_QUIZ" jdbcType="VARCHAR" property="relationQuiz" />
+		<result column="cv_set_type" jdbcType="INTEGER" property="cvSetType" />
+		<result column="cost_type" jdbcType="INTEGER" property="costType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, FORMA, CODE, FILE_PATH, INTRODUCTION,
+		ANNOUNCEMENT,
+		KNOWLEDGE_NEEDED, KNOWLEDGE_BASE,
+		REFERENCE,
+		REFERENCE_LATELY, OPINION, REPORT, OPINION_TYPE, STATUS,
+		SERIAL_NUMBER,
+		LEVEL, SCORE, COST, TYPE, START_DATE, END_DATE,
+		BREAK_DAYS, MAKER, DELI_MAN,
+		CREATE_DATE,
+		DELI_DATE, SIGN, PROVINCEID,
+		CITYID, RELATION_QUIZ, cv_set_type, cost_type
+	</sql>
+	<select id="myCredit" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+			t1.id as learnId,t1.code as code, t1.FILE_PATH as learnUrl,t1.name as learnTitle,(SUM(tt.videoLength) )as learnTime,
+			(CASE t1.FORMA
+			WHEN 1 THEN
+			'远程'
+			WHEN 3 THEN
+			'面授'
+			END
+			) AS xtype,
+			concat(
+			case t2.cv_set_level
+			when 1 then '国家I类'
+			when 2 then
+			'省级I类'
+			when 3 then '市级I类'
+			when 4 then '省级II类'
+			when 5 then '市级II类'
+			when 6
+			then ' ' end ,'',left(t2.cv_set_score,3),'学分')
+			as content1
+		FROM
+			log_study_cv_set t
+		JOIN cv_set t1 ON t.cv_set_id = t1.id
+		join cv_set_authorization t2 on t2.cv_set_id = t1.ID
+		JOIN cv_set_authorization_system_site t4 ON t4.AUTHORIZATION_ID = t2.id
+		JOIN cv_set_authorization_region t5 ON t5.AUTHORIZATION_ID = t2.ID
+		JOIN system_site t6 ON t6.id = t4.SYSTEM_SITE_ID
+		JOIN log_study_cv_unit t7 ON t7.log_study_cv_set_id = t1.id
+		JOIN log_study_cv_unit_video tt ON t7.id = tt.log_study_cv_unit_id
+		WHERE
+		 t.system_user_id = #{userId}
+		AND t6.domain_name = #{domainName}
+		AND t.state = 2
+		AND t.is_apply_credit = #{applyCreditState}
+		AND t5.PROP_VAL_ID = #{provinceId}
+		and t2.cv_set_score > 0
+		and t1.status = 5
+		and tt.system_user_id = #{userId}
+		GROUP BY
+			t1.id
+		ORDER BY
+			t.last_update_date DESC
+	</select>
+	
+		
+	<sql id="live">
+		SELECT
+		l.id AS id,
+		l. NAME AS name,
+		l.introduction AS introduction,
+
+
+
+		l.file_path filePath,
+		l.startDate,
+		l.endDate,
+
+		l.studentJoinUrl,
+		l.classNo,cs.user_id as userId,
+		l.token,
+		'' AS unitId,
+		'' AS unitName,
+		''
+		AS unitType,
+		cs.leaveTime as lastUpdateDate,
+		'直播' as xtype,
+		(case l.type
+		when 1 then '正在直播' when 2 then '未开始' when 3 then '点播' when 4
+		then '回放'
+		when 5 then '结束' end) as status,
+
+		(select CONCAT('授课教师：',
+		GROUP_CONCAT(ei. NAME)) from cv_ref_teacher
+		temp,expert_info ei where
+		l.id = temp.cv_id and ei.id =
+		temp.expert_id) as content1,
+
+		concat(l.audience_num,'/200') as content2
+		FROM
+		(
+		SELECT
+		C.*
+		FROM
+		(
+		SELECT
+		F.*, F.startDate AS sDate,
+		(
+		CASE
+		WHEN F.start_time > 0
+		AND F.end_time = 0
+		THEN
+		1
+		WHEN F.start_time > 0
+		AND F.end_time > 0
+		AND F.start_time >
+		F.end_time THEN
+		<!-- 正在直播 -->
+		1
+		WHEN F.start_time IS NULL THEN
+		<!-- 未开始 -->
+		2
+		WHEN F.start_time &lt; F.end_time
+		AND FROM_UNIXTIME(F.end_time) &lt;
+		NOW()
+		AND F.makeType = 2 THEN
+		<!-- 点播 -->
+		3
+		WHEN F.makeType = 1 THEN
+		<!-- 回放 -->
+		4
+		WHEN F.start_time &lt; F.end_time
+		AND FROM_UNIXTIME(F.end_time) &lt;
+		NOW()
+		AND F.makeType = 0 THEN
+		<!-- 结束 -->
+		5
+		ELSE
+		3
+		END
+		) AS type
+		FROM
+		(
+		SELECT
+		A.ID1 AS ID,
+		A.NAME1 AS `NAME`,
+		A.BRAND1 AS
+		BRAND,
+		A.INTRODUCTION1 AS INTRODUCTION,
+		A.FILE_PATH1 AS FILE_PATH,
+		A.CREATE_DATE1 AS CREATE_DATE,
+		A.CREATOR1 AS CREATOR,
+		A.cv_type1 AS
+		cv_type,
+		A.class_no1 AS classNo,
+		A.student_join_url1 AS studentJoinUrl,
+		A.student_token1 AS token,
+		A.start_date1 AS startDate,
+		A.invalid_date1
+		AS endDate,
+		A.course_make_type1 AS makeType,
+		A.oldtype1 AS oldtype,
+		lrf.start_time,
+		lrf.end_time,
+		lrf.audience_num
+		FROM
+		(
+		SELECT
+		t2.ID AS ID1,
+		t2.`NAME` AS NAME1,
+		t2.BRAND AS BRAND1,
+		t2.INTRODUCTION AS
+		INTRODUCTION1,
+		t2.FILE_PATH AS FILE_PATH1,
+		t2.CREATE_DATE AS
+		CREATE_DATE1,
+		t2.CREATOR AS CREATOR1,
+		t2.cv_type AS cv_type1,
+		live.class_no AS class_no1,
+		live.student_join_url AS student_join_url1,
+		live.student_token AS student_token1,
+		live.start_date AS start_date1,
+		live.invalid_date AS invalid_date1,
+		live.course_make_type AS
+		course_make_type1,
+		(
+		CASE
+		WHEN live.start_date &lt;= NOW()
+		AND
+		live.invalid_date >= NOW() THEN
+		1
+		WHEN live.start_date > NOW() THEN
+		2
+		WHEN live.invalid_date &lt; NOW()
+		AND live.course_make_type != 1 THEN
+		3
+		WHEN live.course_make_type = 1 THEN
+		4
+		END
+		) AS oldtype1
+		FROM
+		cv t2,
+		cv_live
+		live,
+		cv_schedule t3
+		WHERE
+		EXISTS (
+		SELECT
+		1
+		FROM
+		cv_set_schedule t4
+		JOIN
+		cv_set t5 ON t4.cv_set_id = t5.id
+		JOIN cv_set_user_image t8 ON t5.id =
+		t8.cv_set_id
+		JOIN cv_set_system_site t6 ON t6.cv_set_id = t5.id
+		JOIN
+		system_site t7 ON t6.system_site_id = t7.id
+		WHERE
+		t3.schedule_id =
+		t4.cv_schedule_id
+		AND t5. STATUS = 5
+		AND t2.id = live.cv_id
+		AND
+		t5.START_DATE &lt;= NOW()
+		AND t5.END_DATE >= NOW()
+		)
+		AND t2.id = t3.cv_id
+		AND t2.cv_type = 2
+		) A
+		LEFT JOIN cv_live_study_ref lrf ON lrf.class_no =
+		A.class_no1
+		) F
+		) C
+		LEFT JOIN cv_live_type_sort t9 ON t9.type = C.type
+		ORDER BY
+		t9.id ASC,
+		C.sDate DESC
+		) l , cv_live_study cs ,
+		cv_live_study_ref csf where cs.class_no =
+		l.classNo and cs.class_no =
+		csf.class_no and cs.user_id = #{userId}
+
+
+	</sql>
+
+	<!-- 我的学习-项目和直播列表展示 -->
+	<select id="myStudy" resultType="com.ncme.springboot.footstone.response.Record">
+
+
+		SELECT
+		t1.id as id,
+		t1.name as name,
+		t1.introduction as introduction,
+
+		t1.FILE_PATH as filePath,
+		t1.START_DATE as startDate,
+		t1.END_DATE as
+		endDate,
+		'' as studentJoinUrl,
+		'' as classNo,
+		t.system_user_id as userId,
+		'' as token,
+		cunit.id AS unitId,
+		cunit.name AS unitName,
+		cunit.type AS
+		unitType,
+		t.last_update_date as lastUpdateDate,
+		(case t1.FORMA when 1
+		then '远程' when 3 then '面授' END) as xtype,
+
+		(case t1.forma when 3 then
+		(select (case when temp.train_endtime &lt; now() then "未开始" when
+		temp.train_endtime > now() and temp.train_starttime &lt; now() then
+		"面授中" else "已结束" end) as status from cv_set_schedule_faceteach temp
+		where t1.id = temp.cv_set_id)
+		when 1 then
+		( select (concat(
+		ROUND((SELECT COUNT(DISTINCT l.CV_UNIT_ID)
+		FROM log_study_cv_unit l
+		LEFT JOIN cv_unit u ON l.CV_UNIT_ID = u.ID
+		WHERE u.`point` = 1 AND
+		l.STATUS = 2 AND l.SYSTEM_USER_ID = 20
+		AND l.LOG_STUDY_CV_SET_ID =
+		t1.id)/(
+		SELECT COUNT(DISTINCT u.id)
+		FROM cv_unit u
+		LEFT JOIN cv_ref_unit
+		r ON u.ID = r.UNIT_ID
+		WHERE u.`point` = 1 AND r.CV_ID IN (
+		SELECT cv.id
+		FROM cv
+		LEFT JOIN cv_schedule sch ON cv.id = sch.CV_ID
+		LEFT JOIN
+		cv_set_schedule ssch ON ssch.CV_SCHEDULE_ID = sch.SCHEDULE_ID
+		WHERE
+		ssch.CV_SET_ID = t1.id
+		)
+		)*100,1),'%')) as status
+		) end )
+		as status,
+		(
+		case
+		t1.forma
+		when 1
+		then (
+		case t1.level when 1 then CONCAT('国家I类 ',
+		t1.score)
+		when 2 then CONCAT('省级I类 ', t1.score)
+		when 3 then CONCAT('市级I类
+		', t1.score)
+		when 4 then CONCAT('省级II类 ',t1.score)
+		when 5 then
+		CONCAT('市级II类 ', t1.score)
+		when 6 then CONCAT('无学分')
+		end
+		)
+		when 3
+		then
+		(select CONCAT( DATE_FORMAT(temp1.train_starttime,'%Y-%m-%d'), '至'
+		,DATE_FORMAT(temp1.train_endtime,'%Y-%m-%d') ) from
+		cv_set_schedule_faceteach temp1 where t1.id = temp1.cv_set_id)
+		end
+		)as
+		content1,
+
+		(case t1.forma when 1
+
+		then (
+		CONCAT('还剩',TIMESTAMPDIFF(DAY,DATE_FORMAT(t1.START_DATE,'%Y-%m-%d'),
+		DATE_FORMAT(t1.END_DATE,'%Y-%m-%d')),'天到期'))
+
+		when 3
+
+		then
+		(select
+		my_cssf.train_place from cv_set_schedule_faceteach my_cssf where
+		t1.id
+		= my_cssf.cv_set_id)
+		end
+		) as content2
+		FROM
+		log_study_cv_set t
+		JOIN cv_set
+		t1 ON t.cv_set_id = t1.id
+		JOIN cv_set_system_site t2 ON
+		t1.id =
+		t2.cv_set_id
+		JOIN system_site t3 ON t2.system_site_id = t3.id
+		JOIN
+		(SELECT unit.id,unit.name,unit.type,log_unit.log_study_cv_set_id
+		from
+		cv_unit unit
+		join log_study_cv_unit log_unit on log_unit.cv_unit_id =
+		unit.id
+		where log_unit.system_user_id = #{userId} GROUP BY
+		log_unit.LOG_STUDY_CV_SET_ID order by log_unit.last_update_date DESC )
+		cunit
+		on cunit.log_study_cv_set_id = t1.id
+		WHERE
+		t.system_user_id =
+		#{userId}
+		AND t3.domain_name = #{domainName}
+		AND t.is_apply_credit =
+		#{noApplyCredit}
+
+		UNION ALL
+
+		<include refid="live" />
+
+		order by lastUpdateDate desc
+
+	</select>
+
+	<select id="list" parameterType="com.ncme.springboot.model.CvSet"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 项目所有讨论 -->
+	<select id="projectDiscuss" resultType="com.ncme.springboot.footstone.response.Record">
+
+
+		select
+		csud.*,su.REAL_NAME,su.sex from cv_set_unit_discuss csud,system_user
+		su where su.ID= csud.SYSTEM_USER_ID and csud.CV_SET_ID =
+		#{projectId,jdbcType=INTEGER} order by csud.DISCUSS_DATE desc
+
+	</select>
+
+	<!-- 单元讨论 -->
+	<select id="unitDiscuss" resultType="com.ncme.springboot.footstone.response.Record">
+
+		select
+		t.*,su.REAL_NAME,su.sex from cv_set_unit_discuss t,system_user su
+		where su.ID= t.SYSTEM_USER_ID and t.CV_SET_ID =
+		#{projectId,jdbcType=INTEGER} and
+		t.CV_UNIT_ID=#{unitId,jdbcType=INTEGER} order by t.DISCUSS_DATE desc
+
+	</select>
+	<!-- 项目所有的笔记 -->
+	<select id="projectNote" resultType="com.ncme.springboot.footstone.response.Record">
+
+
+		select t.*
+		,su.REAL_NAME,su.sex from cv_set_unit_note t ,system_user su
+		where
+		t.SYSTEM_USER_ID = su.ID and t.CV_SET_ID = #{projectId} and
+		t.SYSTEM_USER_ID = #{userId}
+		order by t.note_date desc
+	</select>
+	<!-- 获取单元笔记 -->
+	<select id="unitNote" resultType="com.ncme.springboot.footstone.response.Record">
+
+
+		select t.*,su.REAL_NAME,su.sex
+		from cv_set_unit_note t ,system_user su where
+		t.SYSTEM_USER_ID = su.ID
+		and t.CV_SET_ID = #{projectId} and
+		t.SYSTEM_USER_ID = #{userId} and
+		t.CV_UNIT_ID = #{unitId} ORDER BY
+		t.note_date desc
+	</select>
+
+
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from cv_set
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSet">
+		insert into cv_set (ID, NAME,
+		FORMA,
+		CODE, FILE_PATH, INTRODUCTION,
+		ANNOUNCEMENT, KNOWLEDGE_NEEDED,
+		KNOWLEDGE_BASE,
+		REFERENCE, REFERENCE_LATELY, OPINION,
+		REPORT,
+		OPINION_TYPE, STATUS,
+		SERIAL_NUMBER, LEVEL, SCORE,
+		COST, TYPE,
+		START_DATE,
+		END_DATE, BREAK_DAYS, MAKER,
+		DELI_MAN, CREATE_DATE,
+		DELI_DATE,
+		SIGN, PROVINCEID, CITYID,
+		RELATION_QUIZ, cv_set_type,
+		cost_type
+		)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{forma,jdbcType=INTEGER},
+		#{code,jdbcType=VARCHAR},
+		#{filePath,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
+		#{announcement,jdbcType=VARCHAR}, #{knowledgeNeeded,jdbcType=VARCHAR},
+		#{knowledgeBase,jdbcType=VARCHAR},
+		#{reference,jdbcType=VARCHAR},
+		#{referenceLately,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR},
+		#{report,jdbcType=VARCHAR}, #{opinionType,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{serialNumber,jdbcType=VARCHAR},
+		#{level,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE},
+		#{cost,jdbcType=DOUBLE}, #{type,jdbcType=INTEGER},
+		#{startDate,jdbcType=TIMESTAMP},
+		#{endDate,jdbcType=TIMESTAMP},
+		#{breakDays,jdbcType=INTEGER}, #{maker,jdbcType=VARCHAR},
+		#{deliMan,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{deliDate,jdbcType=TIMESTAMP},
+		#{sign,jdbcType=VARCHAR},
+		#{provinceid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER},
+		#{relationQuiz,jdbcType=VARCHAR}, #{cvSetType,jdbcType=INTEGER},
+		#{costType,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSet">
+		insert into cv_set
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="forma != null">
+				FORMA,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="filePath != null">
+				FILE_PATH,
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION,
+			</if>
+			<if test="announcement != null">
+				ANNOUNCEMENT,
+			</if>
+			<if test="knowledgeNeeded != null">
+				KNOWLEDGE_NEEDED,
+			</if>
+			<if test="knowledgeBase != null">
+				KNOWLEDGE_BASE,
+			</if>
+			<if test="reference != null">
+				REFERENCE,
+			</if>
+			<if test="referenceLately != null">
+				REFERENCE_LATELY,
+			</if>
+			<if test="opinion != null">
+				OPINION,
+			</if>
+			<if test="report != null">
+				REPORT,
+			</if>
+			<if test="opinionType != null">
+				OPINION_TYPE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="serialNumber != null">
+				SERIAL_NUMBER,
+			</if>
+			<if test="level != null">
+				LEVEL,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+			<if test="cost != null">
+				COST,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="breakDays != null">
+				BREAK_DAYS,
+			</if>
+			<if test="maker != null">
+				MAKER,
+			</if>
+			<if test="deliMan != null">
+				DELI_MAN,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="deliDate != null">
+				DELI_DATE,
+			</if>
+			<if test="sign != null">
+				SIGN,
+			</if>
+			<if test="provinceid != null">
+				PROVINCEID,
+			</if>
+			<if test="cityid != null">
+				CITYID,
+			</if>
+			<if test="relationQuiz != null">
+				RELATION_QUIZ,
+			</if>
+			<if test="cvSetType != null">
+				cv_set_type,
+			</if>
+			<if test="costType != null">
+				cost_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="forma != null">
+				#{forma,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="filePath != null">
+				#{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="announcement != null">
+				#{announcement,jdbcType=VARCHAR},
+			</if>
+			<if test="knowledgeNeeded != null">
+				#{knowledgeNeeded,jdbcType=VARCHAR},
+			</if>
+			<if test="knowledgeBase != null">
+				#{knowledgeBase,jdbcType=VARCHAR},
+			</if>
+			<if test="reference != null">
+				#{reference,jdbcType=VARCHAR},
+			</if>
+			<if test="referenceLately != null">
+				#{referenceLately,jdbcType=VARCHAR},
+			</if>
+			<if test="opinion != null">
+				#{opinion,jdbcType=VARCHAR},
+			</if>
+			<if test="report != null">
+				#{report,jdbcType=VARCHAR},
+			</if>
+			<if test="opinionType != null">
+				#{opinionType,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="serialNumber != null">
+				#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=DOUBLE},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="breakDays != null">
+				#{breakDays,jdbcType=INTEGER},
+			</if>
+			<if test="maker != null">
+				#{maker,jdbcType=VARCHAR},
+			</if>
+			<if test="deliMan != null">
+				#{deliMan,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deliDate != null">
+				#{deliDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sign != null">
+				#{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceid != null">
+				#{provinceid,jdbcType=INTEGER},
+			</if>
+			<if test="cityid != null">
+				#{cityid,jdbcType=INTEGER},
+			</if>
+			<if test="relationQuiz != null">
+				#{relationQuiz,jdbcType=VARCHAR},
+			</if>
+			<if test="cvSetType != null">
+				#{cvSetType,jdbcType=INTEGER},
+			</if>
+			<if test="costType != null">
+				#{costType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvSet">
+		update cv_set
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="forma != null">
+				FORMA = #{forma,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="filePath != null">
+				FILE_PATH = #{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="announcement != null">
+				ANNOUNCEMENT = #{announcement,jdbcType=VARCHAR},
+			</if>
+			<if test="knowledgeNeeded != null">
+				KNOWLEDGE_NEEDED = #{knowledgeNeeded,jdbcType=VARCHAR},
+			</if>
+			<if test="knowledgeBase != null">
+				KNOWLEDGE_BASE = #{knowledgeBase,jdbcType=VARCHAR},
+			</if>
+			<if test="reference != null">
+				REFERENCE = #{reference,jdbcType=VARCHAR},
+			</if>
+			<if test="referenceLately != null">
+				REFERENCE_LATELY = #{referenceLately,jdbcType=VARCHAR},
+			</if>
+			<if test="opinion != null">
+				OPINION = #{opinion,jdbcType=VARCHAR},
+			</if>
+			<if test="report != null">
+				REPORT = #{report,jdbcType=VARCHAR},
+			</if>
+			<if test="opinionType != null">
+				OPINION_TYPE = #{opinionType,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="serialNumber != null">
+				SERIAL_NUMBER = #{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				LEVEL = #{level,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				SCORE = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="cost != null">
+				COST = #{cost,jdbcType=DOUBLE},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				START_DATE = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="breakDays != null">
+				BREAK_DAYS = #{breakDays,jdbcType=INTEGER},
+			</if>
+			<if test="maker != null">
+				MAKER = #{maker,jdbcType=VARCHAR},
+			</if>
+			<if test="deliMan != null">
+				DELI_MAN = #{deliMan,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deliDate != null">
+				DELI_DATE = #{deliDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sign != null">
+				SIGN = #{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceid != null">
+				PROVINCEID = #{provinceid,jdbcType=INTEGER},
+			</if>
+			<if test="cityid != null">
+				CITYID = #{cityid,jdbcType=INTEGER},
+			</if>
+			<if test="relationQuiz != null">
+				RELATION_QUIZ = #{relationQuiz,jdbcType=VARCHAR},
+			</if>
+			<if test="cvSetType != null">
+				cv_set_type = #{cvSetType,jdbcType=INTEGER},
+			</if>
+			<if test="costType != null">
+				cost_type = #{costType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvSet">
+		update cv_set
+		set
+		NAME = #{name,jdbcType=VARCHAR},
+		FORMA = #{forma,jdbcType=INTEGER},
+		CODE = #{code,jdbcType=VARCHAR},
+		FILE_PATH =
+		#{filePath,jdbcType=VARCHAR},
+		INTRODUCTION =
+		#{introduction,jdbcType=VARCHAR},
+		ANNOUNCEMENT =
+		#{announcement,jdbcType=VARCHAR},
+		KNOWLEDGE_NEEDED =
+		#{knowledgeNeeded,jdbcType=VARCHAR},
+		KNOWLEDGE_BASE =
+		#{knowledgeBase,jdbcType=VARCHAR},
+		REFERENCE =
+		#{reference,jdbcType=VARCHAR},
+		REFERENCE_LATELY =
+		#{referenceLately,jdbcType=VARCHAR},
+		OPINION =
+		#{opinion,jdbcType=VARCHAR},
+		REPORT = #{report,jdbcType=VARCHAR},
+		OPINION_TYPE = #{opinionType,jdbcType=VARCHAR},
+		STATUS =
+		#{status,jdbcType=INTEGER},
+		SERIAL_NUMBER =
+		#{serialNumber,jdbcType=VARCHAR},
+		LEVEL = #{level,jdbcType=INTEGER},
+		SCORE = #{score,jdbcType=DOUBLE},
+		COST = #{cost,jdbcType=DOUBLE},
+		TYPE =
+		#{type,jdbcType=INTEGER},
+		START_DATE = #{startDate,jdbcType=TIMESTAMP},
+		END_DATE = #{endDate,jdbcType=TIMESTAMP},
+		BREAK_DAYS =
+		#{breakDays,jdbcType=INTEGER},
+		MAKER = #{maker,jdbcType=VARCHAR},
+		DELI_MAN = #{deliMan,jdbcType=VARCHAR},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		DELI_DATE =
+		#{deliDate,jdbcType=TIMESTAMP},
+		SIGN = #{sign,jdbcType=VARCHAR},
+		PROVINCEID = #{provinceid,jdbcType=INTEGER},
+		CITYID =
+		#{cityid,jdbcType=INTEGER},
+		RELATION_QUIZ =
+		#{relationQuiz,jdbcType=VARCHAR},
+		cv_set_type =
+		#{cvSetType,jdbcType=INTEGER},
+		cost_type = #{costType,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 根据名称和省份查询项目 -->
+	<select id="getCVSetPageListByNameAndProvice" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id as cvSetId,t.name,t.forma,t.file_path,csa.cv_set_level as level,
+		csa.cv_set_score as score,csa.cv_set_cost_type as cost_type,csa.cv_set_cost as cost
+		from cv_set t
+		left join cv_set_authorization csa	on csa.cv_set_id = t.id
+		left join cv_set_authorization_region csar on csar.AUTHORIZATION_ID = csa.id
+		where 1=1 and csa.cv_set_start_date &lt;= curdate() and csa.cv_set_end_date	&gt;= curdate()
+		<if test="cvSet.name != null">
+			and t.name LIKE CONCAT('%', CONCAT(#{cvSet.name}, '%'))
+		</if>
+		<!-- 项目授课形式 -->
+		<if test="cvSet.forma != null">
+			and t.forma = #{cvSet.forma}
+		</if>
+		<if test="cvSet.status != null">
+			and t.status = #{cvSet.status}
+		</if>
+		<if test="cvSet.level != null">
+			and csa.CV_SET_LEVEL = #{cvSet.level}
+		</if>
+		<!-- 项目类型 -->
+		<if test="cvSet.cvSetType != null">
+			and t.cv_set_type = #{cvSet.cvSetType}
+		</if>
+		<if test="cvSet.sign != null">
+			and csa.CV_SET_SIGN LIKE CONCAT('%', CONCAT(#{cvSet.sign},'%'))
+		</if>
+		<if test="provinceId != null">
+			and t.id in (SELECT DISTINCT(ccc.CV_SET_ID) FROM 
+			cv_set_authorization_region csar LEFT JOIN cv_set_authorization ccc
+			ON ccc.id = csar.AUTHORIZATION_ID
+			WHERE csar.PROP_VAL_ID = #{provinceId})
+		</if>
+		<if test="provinceId == null">
+			and t.id in (SELECT ccc.CV_SET_ID FROM	cv_set_authorization_region csar
+			LEFT JOIN cv_set_authorization ccc ON ccc.id = csar.AUTHORIZATION_ID
+			GROUP BY ccc.cv_set_id,ccc.id HAVING count(1) = (SELECT count(1) FROM
+			exam_prop_val epv WHERE epv.type =	20))
+		</if>
+		<if test="cvSet.propName != null">
+			and t.id in (select distinct(cvim.cv_set_id) from	CV_SET_USER_IMAGE cvim
+			where USERIMAGE_ID in	(select ip.userimage_id	from qm_user_image_prop ip where prop_id in 
+			(select	id from	exam_prop_val where name = #{cvSet.propName})))
+		</if>
+		<if test="cvSet.xuekeName != null">
+			and t.id in (select distinct(cvim.cv_set_id) from CV_SET_USER_IMAGE
+			cvim where USERIMAGE_ID in	(select ip.userimage_id from
+			qm_user_image_prop ip where prop_id in (select	id from exam_prop_val
+			where
+			<foreach collection="cvSet.xuekeName" item="name" open=""
+				close="" separator="OR">
+				name = #{name}
+			</foreach>
+			)))
+		</if>
+		<if test="domainName != null">
+			AND t.id IN (SELECT DISTINCT(CV_SET_ID) FROM cv_set_authorization csa
+			LEFT JOIN cv_set_authorization_system_site csass ON csass.AUTHORIZATION_ID = csa.ID
+			LEFT JOIN system_site ss ON	csass.SYSTEM_SITE_ID = ss.id
+			WHERE ss.DOMAIN_NAME =#{domainName})
+		</if>
+		group by t.id
+		order by t.modify_date desc
+	</select>
+	<!-- 根据项目id查询项目详情 -->
+	<select id="getProjectDetailById" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t.id,t.name,t.forma as subjectType,csa.cv_set_serial_number as code,t.file_path as	filePath,t.introduction,csa.cv_set_level as level,
+				left(csa.cv_set_score,3) as	score,DATE_FORMAT(csa.cv_set_start_date,'%Y-%m-%d') as startDate,
+				DATE_FORMAT(csa.cv_set_end_date,'%Y-%m-%d') as endDate,csa.cv_set_sign as sign,
+				csa.cv_set_cost_type as costType,csa.cv_set_cost as cost,t.code as cvSetCode
+		from cv_set t
+		LEFT JOIN cv_set_authorization csa	on csa.cv_set_id = t.id
+		LEFT JOIN cv_set_authorization_system_site csass ON csass.AUTHORIZATION_ID	= csa.id
+		LEFT JOIN system_site t6 ON	t6.id = csass.SYSTEM_SITE_ID
+		where t.status = 5
+			<!--  and t6.domain_name = #{domainName} -->
+			<!-- AND csa.cv_set_start_date &lt;= CURDATE()
+			AND	csa.cv_set_end_date &gt;= CURDATE() -->
+			AND t.id = #{id,jdbcType=INTEGER}
+			<if test="provinceId != null">
+				and t.id in (SELECT DISTINCT(ccc.CV_SET_ID) FROM
+								cv_set_authorization_region csar LEFT JOIN cv_set_authorization ccc	ON ccc.id = csar.AUTHORIZATION_ID
+				WHERE csar.PROP_VAL_ID = #{provinceId})
+			</if>
+
+		GROUP BY t.id
+	</select>
+
+	<!-- 获取首页推荐项目 -->
+	<!-- 之前的SQL 
+		select t.id as cvSetId,t.name,t.file_path,t.level,t.score,t6.CV_SET_COST_TYPE cost_type
+		from cv_set t inner join cv_set_authorization t6 on t6.CV_SET_ID = t.id
+		where 1=1 and t.`STATUS` = 5 group by t.id order by t6.modify_date desc limit 0,4
+	 -->
+	<select id="getReCommendProjectList" resultType="com.ncme.springboot.footstone.response.Record">
+		(SELECT t1.FILE_PATH,t1.ID as cvSetId,t1. NAME,t2.CV_SET_LEVEL AS LEVEL,LEFT (t2.CV_SET_SCORE, 3) AS SCORE,t2.CV_SET_COST_TYPE AS cost_type,'1' as type
+		FROM cv_set t1
+		LEFT JOIN cv_set_authorization t2 ON t2.CV_SET_ID = t1.ID
+		LEFT JOIN cv_set_authorization_system_site t3 ON t3.AUTHORIZATION_ID = t2.ID
+		LEFT JOIN system_site t5 ON t5.ID = t3.SYSTEM_SITE_ID
+		LEFT JOIN content_edition_ref t6 ON t6.REF_ID = t1.ID
+		WHERE t6.EDITION_ID = #{edtionId} AND t1.`STATUS` = #{status} AND t6.CHECK_STATE = 1 AND t2.CV_SET_START_DATE &lt;= CURDATE() AND t2.CV_SET_END_DATE >= CURDATE()
+		<if test="domainName != null">
+		and t5.DOMAIN_NAME = #{domainName}
+		</if>
+		AND t1.ID IN (
+			SELECT DISTINCT csa.CV_SET_ID
+			FROM cv_set_authorization_region csar
+			LEFT JOIN cv_set_authorization csa ON csa.ID = csar.AUTHORIZATION_ID
+			GROUP BY csar.AUTHORIZATION_ID
+			HAVING count(csar.PROP_VAL_ID) = (SELECT count(1) FROM exam_prop_val epv WHERE epv.type = 20)
+		)
+		GROUP BY t1.ID ORDER BY t6.sort ASC limit 0,4)
+		union
+		(SELECT e.photo filePath,e.id cvSetId,e.`NAME`,e.workunit_office level,e.workunit score,'' AS cost_type,'2' as type 
+		FROM content_edition_ref c
+		LEFT JOIN expert_info e ON e.ID = c.expert_info_id
+		WHERE e.lockstate = 1 AND c.CHECK_STATE = 1 and e.personage = 1
+		ORDER BY CONVERT (e. NAME USING gbk) ASC limit 0,2)
+		union
+		(select i.photo filePath,e.id cvSetId,e.`NAME`,i.`NAME` level,i.workunit score,'' AS cost_type,'3' as type
+		from content_edition_ref  c 
+		left JOIN expert_group e ON  c.EXPERT_ID = e.ID 
+		left join expert_info i on i.groupid = e.id
+		where e.parent = 0 and e.lockstate=1 and e.state = 1  
+		group by e.id order by e.organizedate desc limit 0,2)
+	</select>
+	<!-- 根据项目id查询书籍推荐 -->
+	<select id="getRefereeBookByCvSetId" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		<!-- select cv_set_id as cvSetid,book_name as name,book_url as
+		url from
+		cv_set_refereebook where cv_set_id =
+		#{cvSetId,jdbcType=INTEGER} -->
+		select t.name,ifnull(t.author,'') as author,t.source,t.old as `year` from exam_source_val t 
+		left join exam_source_type s ON t.type = s.id
+		join cv_set_refereebook csr on csr.source_id = t.ID
+		where csr.cv_set_id = #{cvSetId}
+	</select>
+
+	<!-- 根据项目id查询指南共识 -->
+	<select id="getKnowledgebaseByCvSetId" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		<!-- select cv_set_id as cvSetid,knowledgebase_name as
+		name,knowledgebase_url as
+		url from cv_set_knowledgebase where cv_set_id
+		= #{cvSetId,jdbcType=INTEGER} -->
+		select t.name,ifnull(t.author,'') as author,t.source,t.old as `year` from exam_source_val t 
+		left join exam_source_type s ON t.type = s.id
+		join cv_set_knowledgebase csk on csk.source_id = t.ID
+		where csk.cv_set_id = #{cvSetId}
+	</select>
+
+	<!-- 根据项目id查询最新文献 -->
+	<select id="getReferencelatelyByCvSetId" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		<!-- select cv_set_id as cvSetid,reference_name as
+		name,reference_url as url from
+		cv_set_referencelately where cv_set_id =
+		#{cvSetId,jdbcType=INTEGER} -->
+		select t.name,ifnull(t.author,'') as author,t.source,t.old as `year` from exam_source_val t 
+		left join exam_source_type s ON t.type = s.id
+		join cv_set_referencelately csr on csr.source_id = t.ID
+		where csr.cv_set_id = #{cvSetId}
+	</select>
+	<!-- 我的学习中项目列表 -->
+	<select id="myStudyCvSet" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT	t1.id,t1.name,t1.file_path as filePath,t1.forma,t2.cv_set_start_date as startDate,
+				t2.cv_set_end_date as endDate,t.LAST_UPDATE_DATE as	lastUpdateDate,t.state,
+				(
+				CASE t1.FORMA
+				WHEN 1 THEN
+				'远程'
+				WHEN 3 THEN
+				'面授'
+				END
+				) AS xtype,
+				concat(
+				case t2.cv_set_level
+				when 1 then '国家I类'
+				when 2 then	'省级I类'
+				when 3 then '市级I类'
+				when 4 then '省级II类'
+				when 5 then '市级II类'
+				when 6
+				then '无' end ,'',if(t2.cv_set_score>0,left(t2.cv_set_score,3),''),'学分')
+				as content1,
+				(case when
+					TIMESTAMPDIFF(DAY,date_sub(CURDATE(), interval 1 day),DATE_FORMAT(t2.cv_set_end_date,'%Y-%m-%d'))>0 
+				THEN
+					CONCAT('还剩',TIMESTAMPDIFF(DAY,date_sub(CURDATE(), interval 1 day),DATE_FORMAT(t2.cv_set_end_date,'%Y-%m-%d')),
+						'天到期'
+						)
+				else '已过期'
+				end
+				)
+				AS content2,
+				t.system_user_id as userId,
+				'' as studentJoinUrl,
+				'' as classNo,
+				'' as token
+		from log_study_cv_set t
+		join cv_set t1 on t1.id = t.CV_SET_ID
+		join cv_set_authorization t2 on t2.cv_set_id = t1.ID
+		join cv_set_authorization_region t3 on t3.AUTHORIZATION_ID = t2.ID
+		where t.system_user_id = #{userId} and t.IS_APPLY_CREDIT = #{isApplyCredit}
+			<!-- and t3.PROP_VAL_ID = #{provinceId}  --> <!-- 应客户要求将省份条件去掉 -->
+			and t1.status = 5
+		group by t1.ID
+		order by t.LAST_UPDATE_DATE desc
+	</select>
+
+	<select id="getCvSetById" resultMap="BaseResultMap">
+		select t.ID, t.NAME, t.FORMA, t.CODE, t.FILE_PATH, t.INTRODUCTION,t.ANNOUNCEMENT, t.KNOWLEDGE_NEEDED, t.KNOWLEDGE_BASE,
+			t.REFERENCE,t.REFERENCE_LATELY, t.OPINION, t.REPORT, t.OPINION_TYPE,t.STATUS,t2.cv_set_serial_number as SERIAL_NUMBER,
+			t2.cv_set_level as level,t2.cv_set_score as score, t2.cv_set_cost as cost, t.TYPE,t2.cv_set_start_date as start_date,
+			t2.cv_set_end_date as end_date,t.BREAK_DAYS, t.MAKER, t.DELI_MAN, t.CREATE_DATE,t.DELI_DATE,
+			t2.cv_set_sign as sign, t.PROVINCEID, t.CITYID,t.RELATION_QUIZ,t.cv_set_type,t2.cv_set_cost_type as cost_type
+		from cv_set t
+		left join cv_set_authorization t2 on t2.cv_set_id = t.ID
+		LEFT JOIN cv_set_authorization_system_site t4 ON t4.AUTHORIZATION_ID = t2.id
+		LEFT JOIN system_site t6 ON t6.id = t4.SYSTEM_SITE_ID
+		where t.status = 5
+			and t6.domain_name = #{domainName}
+			<!-- AND t2.cv_set_start_date &lt;= CURDATE()
+			AND t2.cv_set_end_date &gt;= CURDATE() -->
+			AND t.id = #{cvSetId,jdbcType=INTEGER}
+		<if test="provinceId != null">
+			and t.id in (SELECT DISTINCT(ccc.CV_SET_ID) FROM
+			cv_set_authorization_region csar LEFT JOIN cv_set_authorization ccc
+			ON ccc.id = csar.AUTHORIZATION_ID
+			WHERE csar.PROP_VAL_ID =
+			#{provinceId})
+		</if>
+
+		GROUP BY t.id
+	</select>
+	
+	<!-- 年度项目学习报告 -->
+	<select id="annualProjectReport" resultType="com.ncme.springboot.footstone.response.Record">
+		select t1.id as projectId,t1.name as projectTitle,t1.file_path as filePath
+		from log_study_cv_set t
+		join cv_set t1 on t1.id = t.CV_SET_ID
+		join cv_set_authorization t2 on t2.cv_set_id = t1.ID
+		join cv_set_authorization_region t3 on t3.AUTHORIZATION_ID = t2.ID
+		where t.SYSTEM_USER_ID = #{userId} and year(t.LAST_UPDATE_DATE) = #{year}
+		and t1.status = 5 
+		group by t1.ID 
+		order by t.LAST_UPDATE_DATE desc
+	</select>
+	
+	<!-- 来源 -->
+	<select id="listPeixunOrg" parameterType="java.lang.Integer" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.name from peixun_org t, cv_set_org t2 
+		where t.id=t2.org_id and t2.cv_id = #{cvSetId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeProjectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeProject">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
+		<result column="PROJECT_CODE" jdbcType="VARCHAR" property="projectCode" />
+		<result column="ORG_ID" jdbcType="INTEGER" property="orgId" />
+		<result column="PROJECT_TYPE_ID" jdbcType="INTEGER" property="projectTypeId" />
+		<result column="SCORE_TYPE_ID" jdbcType="INTEGER" property="scoreTypeId" />
+		<result column="PROJECT_ACTIVITY_ID" jdbcType="INTEGER"
+			property="projectActivityId" />
+		<result column="YEAR_ID" jdbcType="INTEGER" property="yearId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="PROJECT_HOLD_ORG" jdbcType="VARCHAR" property="projectHoldOrg" />
+		<result column="PROJECT_HOLD_DATE" jdbcType="DATE" property="projectHoldDate" />
+		<result column="PROJECT_HOLD_END_DATE" jdbcType="DATE"
+			property="projectHoldEndDate" />
+		<result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+		<result column="PROJECT_CLASS_HOUR" jdbcType="DOUBLE" property="projectClassHour" />
+		<result column="PROJECT_CLASS_SCORE" jdbcType="DOUBLE"
+			property="projectClassScore" />
+		<result column="APPROVAL_ORG_ID" jdbcType="INTEGER" property="approvalOrgId" />
+		<result column="VERIFY_CODE" jdbcType="VARCHAR" property="verifyCode" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="LAST_UPDATE_DATE" jdbcType="DATE" property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="PROJECT_TYPE" jdbcType="INTEGER" property="projectType" />
+		<result column="NPR_PROJECT_ID" jdbcType="INTEGER" property="nprProjectId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROJECT_NAME, PROJECT_CODE, ORG_ID, PROJECT_TYPE_ID,
+		SCORE_TYPE_ID,
+		PROJECT_ACTIVITY_ID,
+		YEAR_ID, SITE_ID, PROJECT_HOLD_ORG,
+		PROJECT_HOLD_DATE, PROJECT_HOLD_END_DATE,
+		CHARGE_PERSON,
+		PROJECT_CLASS_HOUR, PROJECT_CLASS_SCORE, APPROVAL_ORG_ID, VERIFY_CODE,
+		STATUS,
+		CREATE_DATE,
+		CREATE_USER_ID, LAST_UPDATE_DATE,
+		LAST_UPDATE_USER_ID, PROJECT_TYPE, NPR_PROJECT_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_project
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_project
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeProject">
+		insert into icme_project (ID,
+		PROJECT_NAME, PROJECT_CODE,
+		ORG_ID, PROJECT_TYPE_ID, SCORE_TYPE_ID,
+		PROJECT_ACTIVITY_ID, YEAR_ID, SITE_ID,
+		PROJECT_HOLD_ORG,
+		PROJECT_HOLD_DATE, PROJECT_HOLD_END_DATE,
+		CHARGE_PERSON,
+		PROJECT_CLASS_HOUR, PROJECT_CLASS_SCORE,
+		APPROVAL_ORG_ID, VERIFY_CODE,
+		STATUS,
+		CREATE_DATE, CREATE_USER_ID, LAST_UPDATE_DATE,
+		LAST_UPDATE_USER_ID, PROJECT_TYPE, NPR_PROJECT_ID
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR},
+		#{projectCode,jdbcType=VARCHAR},
+		#{orgId,jdbcType=INTEGER},
+		#{projectTypeId,jdbcType=INTEGER}, #{scoreTypeId,jdbcType=INTEGER},
+		#{projectActivityId,jdbcType=INTEGER}, #{yearId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{projectHoldOrg,jdbcType=VARCHAR},
+		#{projectHoldDate,jdbcType=DATE},
+		#{projectHoldEndDate,jdbcType=DATE},
+		#{chargePerson,jdbcType=VARCHAR}, #{projectClassHour,jdbcType=DOUBLE},
+		#{projectClassScore,jdbcType=DOUBLE},
+		#{approvalOrgId,jdbcType=INTEGER}, #{verifyCode,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=DATE},
+		#{lastUpdateUserId,jdbcType=INTEGER}, #{projectType,jdbcType=INTEGER},
+		#{nprProjectId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeProject">
+		insert into icme_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="projectName != null">
+				PROJECT_NAME,
+			</if>
+			<if test="projectCode != null">
+				PROJECT_CODE,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="projectTypeId != null">
+				PROJECT_TYPE_ID,
+			</if>
+			<if test="scoreTypeId != null">
+				SCORE_TYPE_ID,
+			</if>
+			<if test="projectActivityId != null">
+				PROJECT_ACTIVITY_ID,
+			</if>
+			<if test="yearId != null">
+				YEAR_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="projectHoldOrg != null">
+				PROJECT_HOLD_ORG,
+			</if>
+			<if test="projectHoldDate != null">
+				PROJECT_HOLD_DATE,
+			</if>
+			<if test="projectHoldEndDate != null">
+				PROJECT_HOLD_END_DATE,
+			</if>
+			<if test="chargePerson != null">
+				CHARGE_PERSON,
+			</if>
+			<if test="projectClassHour != null">
+				PROJECT_CLASS_HOUR,
+			</if>
+			<if test="projectClassScore != null">
+				PROJECT_CLASS_SCORE,
+			</if>
+			<if test="approvalOrgId != null">
+				APPROVAL_ORG_ID,
+			</if>
+			<if test="verifyCode != null">
+				VERIFY_CODE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="projectType != null">
+				PROJECT_TYPE,
+			</if>
+			<if test="nprProjectId != null">
+				NPR_PROJECT_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="projectName != null">
+				#{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectCode != null">
+				#{projectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="projectTypeId != null">
+				#{projectTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="scoreTypeId != null">
+				#{scoreTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="projectActivityId != null">
+				#{projectActivityId,jdbcType=INTEGER},
+			</if>
+			<if test="yearId != null">
+				#{yearId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="projectHoldOrg != null">
+				#{projectHoldOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="projectHoldDate != null">
+				#{projectHoldDate,jdbcType=DATE},
+			</if>
+			<if test="projectHoldEndDate != null">
+				#{projectHoldEndDate,jdbcType=DATE},
+			</if>
+			<if test="chargePerson != null">
+				#{chargePerson,jdbcType=VARCHAR},
+			</if>
+			<if test="projectClassHour != null">
+				#{projectClassHour,jdbcType=DOUBLE},
+			</if>
+			<if test="projectClassScore != null">
+				#{projectClassScore,jdbcType=DOUBLE},
+			</if>
+			<if test="approvalOrgId != null">
+				#{approvalOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="verifyCode != null">
+				#{verifyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=DATE},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="projectType != null">
+				#{projectType,jdbcType=INTEGER},
+			</if>
+			<if test="nprProjectId != null">
+				#{nprProjectId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeProject">
+		update icme_project
+		<set>
+			<if test="projectName != null">
+				PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectCode != null">
+				PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=INTEGER},
+			</if>
+			<if test="projectTypeId != null">
+				PROJECT_TYPE_ID = #{projectTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="scoreTypeId != null">
+				SCORE_TYPE_ID = #{scoreTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="projectActivityId != null">
+				PROJECT_ACTIVITY_ID =
+				#{projectActivityId,jdbcType=INTEGER},
+			</if>
+			<if test="yearId != null">
+				YEAR_ID = #{yearId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				SITE_ID = #{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="projectHoldOrg != null">
+				PROJECT_HOLD_ORG = #{projectHoldOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="projectHoldDate != null">
+				PROJECT_HOLD_DATE = #{projectHoldDate,jdbcType=DATE},
+			</if>
+			<if test="projectHoldEndDate != null">
+				PROJECT_HOLD_END_DATE =
+				#{projectHoldEndDate,jdbcType=DATE},
+			</if>
+			<if test="chargePerson != null">
+				CHARGE_PERSON = #{chargePerson,jdbcType=VARCHAR},
+			</if>
+			<if test="projectClassHour != null">
+				PROJECT_CLASS_HOUR = #{projectClassHour,jdbcType=DOUBLE},
+			</if>
+			<if test="projectClassScore != null">
+				PROJECT_CLASS_SCORE =
+				#{projectClassScore,jdbcType=DOUBLE},
+			</if>
+			<if test="approvalOrgId != null">
+				APPROVAL_ORG_ID = #{approvalOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="verifyCode != null">
+				VERIFY_CODE = #{verifyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=DATE},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID =
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="projectType != null">
+				PROJECT_TYPE = #{projectType,jdbcType=INTEGER},
+			</if>
+			<if test="nprProjectId != null">
+				NPR_PROJECT_ID = #{nprProjectId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeProject">
+		update
+		icme_project
+		set PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+		PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+		ORG_ID =
+		#{orgId,jdbcType=INTEGER},
+		PROJECT_TYPE_ID =
+		#{projectTypeId,jdbcType=INTEGER},
+		SCORE_TYPE_ID =
+		#{scoreTypeId,jdbcType=INTEGER},
+		PROJECT_ACTIVITY_ID =
+		#{projectActivityId,jdbcType=INTEGER},
+		YEAR_ID =
+		#{yearId,jdbcType=INTEGER},
+		SITE_ID = #{siteId,jdbcType=INTEGER},
+		PROJECT_HOLD_ORG = #{projectHoldOrg,jdbcType=VARCHAR},
+		PROJECT_HOLD_DATE = #{projectHoldDate,jdbcType=DATE},
+		PROJECT_HOLD_END_DATE = #{projectHoldEndDate,jdbcType=DATE},
+		CHARGE_PERSON = #{chargePerson,jdbcType=VARCHAR},
+		PROJECT_CLASS_HOUR =
+		#{projectClassHour,jdbcType=DOUBLE},
+		PROJECT_CLASS_SCORE =
+		#{projectClassScore,jdbcType=DOUBLE},
+		APPROVAL_ORG_ID =
+		#{approvalOrgId,jdbcType=INTEGER},
+		VERIFY_CODE =
+		#{verifyCode,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		CREATE_USER_ID =
+		#{createUserId,jdbcType=INTEGER},
+		LAST_UPDATE_DATE =
+		#{lastUpdateDate,jdbcType=DATE},
+		LAST_UPDATE_USER_ID =
+		#{lastUpdateUserId,jdbcType=INTEGER},
+		PROJECT_TYPE =
+		#{projectType,jdbcType=INTEGER},
+		NPR_PROJECT_ID =
+		#{nprProjectId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeStudyCardMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeStudyCard">
+		<result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
+		<result column="CARD_PASSWD" jdbcType="VARCHAR" property="cardPasswd" />
+		<result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+		<result column="OPERATOR_DATE" jdbcType="DATE" property="operatorDate" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="LINK_DATE" jdbcType="DATE" property="linkDate" />
+		<result column="BALANCE" jdbcType="INTEGER" property="balance" />
+		<result column="TIMES" jdbcType="INTEGER" property="times" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="ORDER_NO" jdbcType="CHAR" property="orderNo" />
+		<result column="SALE_TYPE" jdbcType="INTEGER" property="saleType" />
+		<result column="PARENT_CARD" jdbcType="VARCHAR" property="parentCard" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeStudyCard">
+		insert into ncme_study_card (CARD_NO, CARD_PASSWD, CARD_TYPE,
+		OPERATOR_DATE, USER_NAME, LINK_DATE,
+		BALANCE, TIMES, STATUS,
+		ORDER_NO, SALE_TYPE, PARENT_CARD,
+		REMARK)
+		values (#{cardNo,jdbcType=VARCHAR}, #{cardPasswd,jdbcType=VARCHAR},
+		#{cardType,jdbcType=VARCHAR},
+		#{operatorDate,jdbcType=DATE}, #{userName,jdbcType=VARCHAR}, #{linkDate,jdbcType=DATE},
+		#{balance,jdbcType=INTEGER}, #{times,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{orderNo,jdbcType=CHAR}, #{saleType,jdbcType=INTEGER}, #{parentCard,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeStudyCard">
+		insert into ncme_study_card
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cardNo != null">
+				CARD_NO,
+			</if>
+			<if test="cardPasswd != null">
+				CARD_PASSWD,
+			</if>
+			<if test="cardType != null">
+				CARD_TYPE,
+			</if>
+			<if test="operatorDate != null">
+				OPERATOR_DATE,
+			</if>
+			<if test="userName != null">
+				USER_NAME,
+			</if>
+			<if test="linkDate != null">
+				LINK_DATE,
+			</if>
+			<if test="balance != null">
+				BALANCE,
+			</if>
+			<if test="times != null">
+				TIMES,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="orderNo != null">
+				ORDER_NO,
+			</if>
+			<if test="saleType != null">
+				SALE_TYPE,
+			</if>
+			<if test="parentCard != null">
+				PARENT_CARD,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cardNo != null">
+				#{cardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cardPasswd != null">
+				#{cardPasswd,jdbcType=VARCHAR},
+			</if>
+			<if test="cardType != null">
+				#{cardType,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorDate != null">
+				#{operatorDate,jdbcType=DATE},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="linkDate != null">
+				#{linkDate,jdbcType=DATE},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				#{times,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderNo != null">
+				#{orderNo,jdbcType=CHAR},
+			</if>
+			<if test="saleType != null">
+				#{saleType,jdbcType=INTEGER},
+			</if>
+			<if test="parentCard != null">
+				#{parentCard,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

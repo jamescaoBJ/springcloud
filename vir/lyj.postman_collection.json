@@ -1,0 +1,152 @@
+{
+	"id": "af6aafcb-bc36-b4f0-cd58-3f8329a286db",
+	"name": "lyj",
+	"description": "",
+	"order": [
+		"e0b6eaa8-397d-d9b9-ec8d-1464fe1ba419",
+		"45bfe27b-92ac-ceca-c9a9-224b5193b1bb",
+		"102059c1-bee8-ad63-e812-f334eb6a8a8b",
+		"ab51cd29-faaf-1b86-c850-39e786a0a1da"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "2760136",
+	"public": false,
+	"requests": [
+		{
+			"id": "102059c1-bee8-ad63-e812-f334eb6a8a8b",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:9092/feign/getRtnBody?accountName=中国",
+			"queryParams": [
+				{
+					"key": "accountName",
+					"value": "中国",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508479471232,
+			"name": "feign 测试远程调用 参数：对象",
+			"description": "feign 测试远程调用",
+			"collectionId": "af6aafcb-bc36-b4f0-cd58-3f8329a286db",
+			"responses": []
+		},
+		{
+			"folder": null,
+			"id": "45bfe27b-92ac-ceca-c9a9-224b5193b1bb",
+			"name": "返回RtnBody复杂数据",
+			"dataMode": "params",
+			"data": null,
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "",
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://localhost:9092/getRtnBody?accountName=laya",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"queryParams": [
+				{
+					"key": "accountName",
+					"value": "laya",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "af6aafcb-bc36-b4f0-cd58-3f8329a286db"
+		},
+		{
+			"id": "ab51cd29-faaf-1b86-c850-39e786a0a1da",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:9092/feign/page-simple?pageCurrent=1&pageSize=2",
+			"queryParams": [
+				{
+					"key": "pageCurrent",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageSize",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "af6aafcb-bc36-b4f0-cd58-3f8329a286db",
+			"data": null,
+			"dataMode": "params",
+			"name": "feign调用-page",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1508479573297,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"folder": null,
+			"id": "e0b6eaa8-397d-d9b9-ec8d-1464fe1ba419",
+			"name": "ribbon：入参：map，user对象，返回string ok",
+			"dataMode": "params",
+			"data": [],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "ribbon：入参：map，user对象，返回string ok",
+			"headers": "Content-Type: application/json\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "http://localhost:9092/map?accountName=woshi你妹1111",
+			"preRequestScript": "",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"queryParams": [
+				{
+					"key": "accountName",
+					"value": "woshi你妹1111",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariableData": [],
+			"collectionId": "af6aafcb-bc36-b4f0-cd58-3f8329a286db"
+		}
+	]
+}

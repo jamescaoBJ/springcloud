@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamHospitalMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamHospital">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="EXAMINER" jdbcType="VARCHAR" property="examiner" />
+		<result column="REGIONID" jdbcType="INTEGER" property="regionid" />
+		<result column="PROPID" jdbcType="INTEGER" property="propid" />
+		<result column="HOSPITAL_ADDRESS" jdbcType="VARCHAR" property="hospitalAddress" />
+		<result column="A" jdbcType="INTEGER" property="a" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, EXAMINER, REGIONID, PROPID, HOSPITAL_ADDRESS, A
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_hospital
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 关键字查询 -->
+	<select id="getHospitalByArea" resultType="com.ncme.springboot.footstone.response.Record">
+		select e.id hospitalid,e.`name` hospitalName from exam_hospital e
+		where 1=1
+		<if test="regionId != null">
+			and e.REGIONID = #{regionId}
+		</if>
+		<if test="keyWord != null">
+			and e.`NAME` like CONCAT('%',#{keyWord},'%')
+		</if>
+		order by id desc
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_hospital
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamHospital">
+		insert into exam_hospital (ID,
+		NAME, EXAMINER,
+		REGIONID, PROPID, HOSPITAL_ADDRESS,
+		A)
+		values
+		(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{examiner,jdbcType=VARCHAR},
+		#{regionid,jdbcType=INTEGER},
+		#{propid,jdbcType=INTEGER}, #{hospitalAddress,jdbcType=VARCHAR},
+		#{a,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamHospital">
+		insert into exam_hospital
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="examiner != null">
+				EXAMINER,
+			</if>
+			<if test="regionid != null">
+				REGIONID,
+			</if>
+			<if test="propid != null">
+				PROPID,
+			</if>
+			<if test="hospitalAddress != null">
+				HOSPITAL_ADDRESS,
+			</if>
+			<if test="a != null">
+				A,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="examiner != null">
+				#{examiner,jdbcType=VARCHAR},
+			</if>
+			<if test="regionid != null">
+				#{regionid,jdbcType=INTEGER},
+			</if>
+			<if test="propid != null">
+				#{propid,jdbcType=INTEGER},
+			</if>
+			<if test="hospitalAddress != null">
+				#{hospitalAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="a != null">
+				#{a,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamHospital">
+		update exam_hospital
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="examiner != null">
+				EXAMINER = #{examiner,jdbcType=VARCHAR},
+			</if>
+			<if test="regionid != null">
+				REGIONID = #{regionid,jdbcType=INTEGER},
+			</if>
+			<if test="propid != null">
+				PROPID = #{propid,jdbcType=INTEGER},
+			</if>
+			<if test="hospitalAddress != null">
+				HOSPITAL_ADDRESS = #{hospitalAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="a != null">
+				A = #{a,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamHospital">
+		update
+		exam_hospital
+		set NAME = #{name,jdbcType=VARCHAR},
+		EXAMINER =
+		#{examiner,jdbcType=VARCHAR},
+		REGIONID = #{regionid,jdbcType=INTEGER},
+		PROPID = #{propid,jdbcType=INTEGER},
+		HOSPITAL_ADDRESS =
+		#{hospitalAddress,jdbcType=VARCHAR},
+		A = #{a,jdbcType=INTEGER}
+		where ID
+		= #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

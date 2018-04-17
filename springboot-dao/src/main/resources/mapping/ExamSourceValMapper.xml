@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamSourceValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamSourceVal">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="SOURCE" jdbcType="VARCHAR" property="source" />
+		<result column="OLD" jdbcType="VARCHAR" property="old" />
+		<result column="SUBJECT" jdbcType="INTEGER" property="subject" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE, NAME, CODE, SOURCE, OLD, SUBJECT, STATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_source_val
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_source_val
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamSourceVal">
+		insert into exam_source_val
+		(ID, TYPE, NAME,
+		CODE, SOURCE, OLD,
+		SUBJECT, STATE)
+		values
+		(#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR}, #{old,jdbcType=VARCHAR},
+		#{subject,jdbcType=INTEGER}, #{state,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamSourceVal">
+		insert into exam_source_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="source != null">
+				SOURCE,
+			</if>
+			<if test="old != null">
+				OLD,
+			</if>
+			<if test="subject != null">
+				SUBJECT,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=VARCHAR},
+			</if>
+			<if test="old != null">
+				#{old,jdbcType=VARCHAR},
+			</if>
+			<if test="subject != null">
+				#{subject,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamSourceVal">
+		update exam_source_val
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				SOURCE = #{source,jdbcType=VARCHAR},
+			</if>
+			<if test="old != null">
+				OLD = #{old,jdbcType=VARCHAR},
+			</if>
+			<if test="subject != null">
+				SUBJECT = #{subject,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamSourceVal">
+		update
+		exam_source_val
+		set TYPE = #{type,jdbcType=INTEGER},
+		NAME =
+		#{name,jdbcType=VARCHAR},
+		CODE = #{code,jdbcType=VARCHAR},
+		SOURCE =
+		#{source,jdbcType=VARCHAR},
+		OLD = #{old,jdbcType=VARCHAR},
+		SUBJECT =
+		#{subject,jdbcType=INTEGER},
+		STATE = #{state,jdbcType=INTEGER}
+		where ID
+		= #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

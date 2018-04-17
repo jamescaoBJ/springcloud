@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.HysUserDataMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.HysUserData">
+		<result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
+		<result column="SEX" jdbcType="INTEGER" property="sex" />
+		<result column="WORK_UNIT" jdbcType="VARCHAR" property="workUnit" />
+		<result column="PHONE_NUMBER" jdbcType="VARCHAR" property="phoneNumber" />
+		<result column="USERID" jdbcType="INTEGER" property="userid" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.HysUserData">
+		insert into hys_user_data
+		(DEPT_NAME, SEX, WORK_UNIT,
+		PHONE_NUMBER, USERID)
+		values
+		(#{deptName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
+		#{workUnit,jdbcType=VARCHAR},
+		#{phoneNumber,jdbcType=VARCHAR},
+		#{userid,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.HysUserData">
+		insert into hys_user_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="deptName != null">
+				DEPT_NAME,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+			<if test="workUnit != null">
+				WORK_UNIT,
+			</if>
+			<if test="phoneNumber != null">
+				PHONE_NUMBER,
+			</if>
+			<if test="userid != null">
+				USERID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="deptName != null">
+				#{deptName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="workUnit != null">
+				#{workUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNumber != null">
+				#{phoneNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemExpertsMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemExperts">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="SPELLING_NAME" jdbcType="VARCHAR" property="spellingName" />
+		<result column="PHOTO_PATH" jdbcType="VARCHAR" property="photoPath" />
+		<result column="INTRODUCTION" jdbcType="VARCHAR" property="introduction" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, SPELLING_NAME, PHOTO_PATH, INTRODUCTION, SEQ, DESCRIPTION,
+		CREATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_experts
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_experts
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemExperts">
+		insert into system_experts (ID, NAME, SPELLING_NAME,
+		PHOTO_PATH, INTRODUCTION, SEQ,
+		DESCRIPTION, CREATE_DATE)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{spellingName,jdbcType=VARCHAR},
+		#{photoPath,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER},
+		#{description,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemExperts">
+		insert into system_experts
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="spellingName != null">
+				SPELLING_NAME,
+			</if>
+			<if test="photoPath != null">
+				PHOTO_PATH,
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="spellingName != null">
+				#{spellingName,jdbcType=VARCHAR},
+			</if>
+			<if test="photoPath != null">
+				#{photoPath,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemExperts">
+		update system_experts
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="spellingName != null">
+				SPELLING_NAME = #{spellingName,jdbcType=VARCHAR},
+			</if>
+			<if test="photoPath != null">
+				PHOTO_PATH = #{photoPath,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemExperts">
+		update system_experts
+		set NAME = #{name,jdbcType=VARCHAR},
+		SPELLING_NAME = #{spellingName,jdbcType=VARCHAR},
+		PHOTO_PATH = #{photoPath,jdbcType=VARCHAR},
+		INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+		SEQ = #{seq,jdbcType=INTEGER},
+		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=DATE}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

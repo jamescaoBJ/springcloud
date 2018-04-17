@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvRefPropCourseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvRefPropCourseKey">
+		<id column="CV_ID" jdbcType="INTEGER" property="cvId" />
+		<id column="PROP_ID" jdbcType="INTEGER" property="propId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.CvRefPropCourseKey">
+		delete from
+		cv_ref_prop_course
+		where CV_ID = #{cvId,jdbcType=INTEGER}
+		and PROP_ID =
+		#{propId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvRefPropCourseKey">
+		insert into cv_ref_prop_course
+		(CV_ID, PROP_ID)
+		values (#{cvId,jdbcType=INTEGER},
+		#{propId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvRefPropCourseKey">
+		insert into cv_ref_prop_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvId != null">
+				CV_ID,
+			</if>
+			<if test="propId != null">
+				PROP_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="propId != null">
+				#{propId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

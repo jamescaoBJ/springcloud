@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardOrderMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCardOrder">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CARD_TYPE_ID" jdbcType="INTEGER" property="cardTypeId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="ORDER_DATE" jdbcType="TIMESTAMP" property="orderDate" />
+		<result column="QUANTITY" jdbcType="DOUBLE" property="quantity" />
+		<result column="PRICE" jdbcType="DOUBLE" property="price" />
+		<result column="AMOUNT" jdbcType="DOUBLE" property="amount" />
+		<result column="PAY_DATE" jdbcType="DATE" property="payDate" />
+		<result column="ORDER_RESOURCE" jdbcType="VARCHAR" property="orderResource" />
+		<result column="PAYMODE_CODE" jdbcType="CHAR" property="paymodeCode" />
+		<result column="INVOICE_STATUS" jdbcType="INTEGER" property="invoiceStatus" />
+		<result column="INVOICE_TITLE" jdbcType="VARCHAR" property="invoiceTitle" />
+		<result column="RECIPIENT" jdbcType="VARCHAR" property="recipient" />
+		<result column="TEL" jdbcType="VARCHAR" property="tel" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="ORDER_OPER" jdbcType="VARCHAR" property="orderOper" />
+		<result column="OPER_DATE" jdbcType="DATE" property="operDate" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="POST_CODE" jdbcType="VARCHAR" property="postCode" />
+		<result column="ORDER_NUMBER" jdbcType="VARCHAR" property="orderNumber" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="ORDER_TYPE" jdbcType="INTEGER" property="orderType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CARD_TYPE_ID, USER_ID, ORDER_DATE, QUANTITY, PRICE, AMOUNT, PAY_DATE,
+		ORDER_RESOURCE,
+		PAYMODE_CODE, INVOICE_STATUS, INVOICE_TITLE, RECIPIENT, TEL, ADDRESS, ORDER_OPER,
+		OPER_DATE, REMARK, POST_CODE, ORDER_NUMBER, STATUS, ORDER_TYPE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_card_order
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_card_order
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardOrder">
+		insert into system_card_order (ID, CARD_TYPE_ID, USER_ID,
+		ORDER_DATE, QUANTITY, PRICE,
+		AMOUNT, PAY_DATE, ORDER_RESOURCE,
+		PAYMODE_CODE, INVOICE_STATUS, INVOICE_TITLE,
+		RECIPIENT, TEL, ADDRESS,
+		ORDER_OPER, OPER_DATE, REMARK,
+		POST_CODE, ORDER_NUMBER, STATUS,
+		ORDER_TYPE)
+		values (#{id,jdbcType=INTEGER}, #{cardTypeId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{orderDate,jdbcType=TIMESTAMP}, #{quantity,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE},
+		#{amount,jdbcType=DOUBLE}, #{payDate,jdbcType=DATE},
+		#{orderResource,jdbcType=VARCHAR},
+		#{paymodeCode,jdbcType=CHAR}, #{invoiceStatus,jdbcType=INTEGER}, #{invoiceTitle,jdbcType=VARCHAR},
+		#{recipient,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{orderOper,jdbcType=VARCHAR}, #{operDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR},
+		#{postCode,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{orderType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardOrder">
+		insert into system_card_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cardTypeId != null">
+				CARD_TYPE_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="orderDate != null">
+				ORDER_DATE,
+			</if>
+			<if test="quantity != null">
+				QUANTITY,
+			</if>
+			<if test="price != null">
+				PRICE,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="payDate != null">
+				PAY_DATE,
+			</if>
+			<if test="orderResource != null">
+				ORDER_RESOURCE,
+			</if>
+			<if test="paymodeCode != null">
+				PAYMODE_CODE,
+			</if>
+			<if test="invoiceStatus != null">
+				INVOICE_STATUS,
+			</if>
+			<if test="invoiceTitle != null">
+				INVOICE_TITLE,
+			</if>
+			<if test="recipient != null">
+				RECIPIENT,
+			</if>
+			<if test="tel != null">
+				TEL,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="orderOper != null">
+				ORDER_OPER,
+			</if>
+			<if test="operDate != null">
+				OPER_DATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="postCode != null">
+				POST_CODE,
+			</if>
+			<if test="orderNumber != null">
+				ORDER_NUMBER,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cardTypeId != null">
+				#{cardTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="orderDate != null">
+				#{orderDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="quantity != null">
+				#{quantity,jdbcType=DOUBLE},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DOUBLE},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="payDate != null">
+				#{payDate,jdbcType=DATE},
+			</if>
+			<if test="orderResource != null">
+				#{orderResource,jdbcType=VARCHAR},
+			</if>
+			<if test="paymodeCode != null">
+				#{paymodeCode,jdbcType=CHAR},
+			</if>
+			<if test="invoiceStatus != null">
+				#{invoiceStatus,jdbcType=INTEGER},
+			</if>
+			<if test="invoiceTitle != null">
+				#{invoiceTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="recipient != null">
+				#{recipient,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="orderOper != null">
+				#{orderOper,jdbcType=VARCHAR},
+			</if>
+			<if test="operDate != null">
+				#{operDate,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="postCode != null">
+				#{postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNumber != null">
+				#{orderNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemCardOrder">
+		update system_card_order
+		<set>
+			<if test="cardTypeId != null">
+				CARD_TYPE_ID = #{cardTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="orderDate != null">
+				ORDER_DATE = #{orderDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="quantity != null">
+				QUANTITY = #{quantity,jdbcType=DOUBLE},
+			</if>
+			<if test="price != null">
+				PRICE = #{price,jdbcType=DOUBLE},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="payDate != null">
+				PAY_DATE = #{payDate,jdbcType=DATE},
+			</if>
+			<if test="orderResource != null">
+				ORDER_RESOURCE = #{orderResource,jdbcType=VARCHAR},
+			</if>
+			<if test="paymodeCode != null">
+				PAYMODE_CODE = #{paymodeCode,jdbcType=CHAR},
+			</if>
+			<if test="invoiceStatus != null">
+				INVOICE_STATUS = #{invoiceStatus,jdbcType=INTEGER},
+			</if>
+			<if test="invoiceTitle != null">
+				INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="recipient != null">
+				RECIPIENT = #{recipient,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				TEL = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="orderOper != null">
+				ORDER_OPER = #{orderOper,jdbcType=VARCHAR},
+			</if>
+			<if test="operDate != null">
+				OPER_DATE = #{operDate,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="postCode != null">
+				POST_CODE = #{postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNumber != null">
+				ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemCardOrder">
+		update system_card_order
+		set CARD_TYPE_ID = #{cardTypeId,jdbcType=INTEGER},
+		USER_ID = #{userId,jdbcType=INTEGER},
+		ORDER_DATE = #{orderDate,jdbcType=TIMESTAMP},
+		QUANTITY = #{quantity,jdbcType=DOUBLE},
+		PRICE = #{price,jdbcType=DOUBLE},
+		AMOUNT = #{amount,jdbcType=DOUBLE},
+		PAY_DATE = #{payDate,jdbcType=DATE},
+		ORDER_RESOURCE = #{orderResource,jdbcType=VARCHAR},
+		PAYMODE_CODE = #{paymodeCode,jdbcType=CHAR},
+		INVOICE_STATUS = #{invoiceStatus,jdbcType=INTEGER},
+		INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+		RECIPIENT = #{recipient,jdbcType=VARCHAR},
+		TEL = #{tel,jdbcType=VARCHAR},
+		ADDRESS = #{address,jdbcType=VARCHAR},
+		ORDER_OPER = #{orderOper,jdbcType=VARCHAR},
+		OPER_DATE = #{operDate,jdbcType=DATE},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		POST_CODE = #{postCode,jdbcType=VARCHAR},
+		ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		ORDER_TYPE = #{orderType,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

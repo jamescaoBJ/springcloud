@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemResourceOldMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemResourceOld">
+		<result column="RESOURCE_ID" jdbcType="INTEGER" property="resourceId" />
+		<result column="RESOURCE_PARENT_ID" jdbcType="INTEGER"
+			property="resourceParentId" />
+		<result column="RESOURCE_NAME" jdbcType="VARCHAR" property="resourceName" />
+		<result column="RESOURCE_URL" jdbcType="VARCHAR" property="resourceUrl" />
+		<result column="RESOURCE_SEQ" jdbcType="INTEGER" property="resourceSeq" />
+		<result column="RESOURCE_FLAG" jdbcType="INTEGER" property="resourceFlag" />
+		<result column="RESOURCE_REMARK" jdbcType="VARCHAR" property="resourceRemark" />
+		<result column="RESOURCE_IMAGE" jdbcType="VARCHAR" property="resourceImage" />
+		<result column="RESOURCE_LEVEL" jdbcType="INTEGER" property="resourceLevel" />
+		<result column="RESOURCE_PROP" jdbcType="INTEGER" property="resourceProp" />
+		<result column="IS_LEAF" jdbcType="INTEGER" property="isLeaf" />
+		<result column="IS_BLANK" jdbcType="INTEGER" property="isBlank" />
+		<result column="DEFAULT_JUMP" jdbcType="INTEGER" property="defaultJump" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemResourceOld">
+		insert into system_resource_old (RESOURCE_ID, RESOURCE_PARENT_ID,
+		RESOURCE_NAME,
+		RESOURCE_URL, RESOURCE_SEQ, RESOURCE_FLAG,
+		RESOURCE_REMARK, RESOURCE_IMAGE, RESOURCE_LEVEL,
+		RESOURCE_PROP, IS_LEAF, IS_BLANK,
+		DEFAULT_JUMP)
+		values (#{resourceId,jdbcType=INTEGER},
+		#{resourceParentId,jdbcType=INTEGER},
+		#{resourceName,jdbcType=VARCHAR},
+		#{resourceUrl,jdbcType=VARCHAR}, #{resourceSeq,jdbcType=INTEGER}, #{resourceFlag,jdbcType=INTEGER},
+		#{resourceRemark,jdbcType=VARCHAR}, #{resourceImage,jdbcType=VARCHAR},
+		#{resourceLevel,jdbcType=INTEGER},
+		#{resourceProp,jdbcType=INTEGER}, #{isLeaf,jdbcType=INTEGER}, #{isBlank,jdbcType=INTEGER},
+		#{defaultJump,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemResourceOld">
+		insert into system_resource_old
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="resourceId != null">
+				RESOURCE_ID,
+			</if>
+			<if test="resourceParentId != null">
+				RESOURCE_PARENT_ID,
+			</if>
+			<if test="resourceName != null">
+				RESOURCE_NAME,
+			</if>
+			<if test="resourceUrl != null">
+				RESOURCE_URL,
+			</if>
+			<if test="resourceSeq != null">
+				RESOURCE_SEQ,
+			</if>
+			<if test="resourceFlag != null">
+				RESOURCE_FLAG,
+			</if>
+			<if test="resourceRemark != null">
+				RESOURCE_REMARK,
+			</if>
+			<if test="resourceImage != null">
+				RESOURCE_IMAGE,
+			</if>
+			<if test="resourceLevel != null">
+				RESOURCE_LEVEL,
+			</if>
+			<if test="resourceProp != null">
+				RESOURCE_PROP,
+			</if>
+			<if test="isLeaf != null">
+				IS_LEAF,
+			</if>
+			<if test="isBlank != null">
+				IS_BLANK,
+			</if>
+			<if test="defaultJump != null">
+				DEFAULT_JUMP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="resourceId != null">
+				#{resourceId,jdbcType=INTEGER},
+			</if>
+			<if test="resourceParentId != null">
+				#{resourceParentId,jdbcType=INTEGER},
+			</if>
+			<if test="resourceName != null">
+				#{resourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceUrl != null">
+				#{resourceUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceSeq != null">
+				#{resourceSeq,jdbcType=INTEGER},
+			</if>
+			<if test="resourceFlag != null">
+				#{resourceFlag,jdbcType=INTEGER},
+			</if>
+			<if test="resourceRemark != null">
+				#{resourceRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceImage != null">
+				#{resourceImage,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceLevel != null">
+				#{resourceLevel,jdbcType=INTEGER},
+			</if>
+			<if test="resourceProp != null">
+				#{resourceProp,jdbcType=INTEGER},
+			</if>
+			<if test="isLeaf != null">
+				#{isLeaf,jdbcType=INTEGER},
+			</if>
+			<if test="isBlank != null">
+				#{isBlank,jdbcType=INTEGER},
+			</if>
+			<if test="defaultJump != null">
+				#{defaultJump,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

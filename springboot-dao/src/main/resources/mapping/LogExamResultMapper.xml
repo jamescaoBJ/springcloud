@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogExamResultMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.LogExamResult">
+		<id column="LOG_EXAM_ID" jdbcType="INTEGER" property="logExamId" />
+		<id column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
+		<result column="QUESTION_RESULT" jdbcType="VARCHAR" property="questionResult" />
+		<result column="ISNOT_RIGHT" jdbcType="INTEGER" property="isnotRight" />
+		<result column="QUESTIONLABEL_ID" jdbcType="INTEGER" property="questionlabelId" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="RIGHT_COUNT" jdbcType="VARCHAR" property="rightCount" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+		<result column="REALITYSCORE" jdbcType="DOUBLE" property="realityscore" />
+		<result column="SELECT_RESULT" jdbcType="VARCHAR" property="selectResult" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		LOG_EXAM_ID, QUESTION_ID, QUESTION_RESULT, ISNOT_RIGHT, QUESTIONLABEL_ID, SEQ,
+		PARENT_ID,
+		RIGHT_COUNT, SCORE, REALITYSCORE, SELECT_RESULT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="com.ncme.springboot.model.LogExamResultKey"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_exam_result
+		where LOG_EXAM_ID = #{logExamId,jdbcType=INTEGER}
+		and QUESTION_ID = #{questionId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.LogExamResultKey">
+		delete from log_exam_result
+		where LOG_EXAM_ID = #{logExamId,jdbcType=INTEGER}
+		and QUESTION_ID = #{questionId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogExamResult">
+		insert into log_exam_result (LOG_EXAM_ID, QUESTION_ID, QUESTION_RESULT,
+		ISNOT_RIGHT, QUESTIONLABEL_ID, SEQ,
+		PARENT_ID, RIGHT_COUNT, SCORE,
+		REALITYSCORE, SELECT_RESULT)
+		values (#{logExamId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER},
+		#{questionResult,jdbcType=VARCHAR},
+		#{isnotRight,jdbcType=INTEGER}, #{questionlabelId,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER},
+		#{parentId,jdbcType=INTEGER}, #{rightCount,jdbcType=VARCHAR},
+		#{score,jdbcType=DOUBLE},
+		#{realityscore,jdbcType=DOUBLE}, #{selectResult,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogExamResult">
+		insert into log_exam_result
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logExamId != null">
+				LOG_EXAM_ID,
+			</if>
+			<if test="questionId != null">
+				QUESTION_ID,
+			</if>
+			<if test="questionResult != null">
+				QUESTION_RESULT,
+			</if>
+			<if test="isnotRight != null">
+				ISNOT_RIGHT,
+			</if>
+			<if test="questionlabelId != null">
+				QUESTIONLABEL_ID,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="rightCount != null">
+				RIGHT_COUNT,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+			<if test="realityscore != null">
+				REALITYSCORE,
+			</if>
+			<if test="selectResult != null">
+				SELECT_RESULT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="logExamId != null">
+				#{logExamId,jdbcType=INTEGER},
+			</if>
+			<if test="questionId != null">
+				#{questionId,jdbcType=INTEGER},
+			</if>
+			<if test="questionResult != null">
+				#{questionResult,jdbcType=VARCHAR},
+			</if>
+			<if test="isnotRight != null">
+				#{isnotRight,jdbcType=INTEGER},
+			</if>
+			<if test="questionlabelId != null">
+				#{questionlabelId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="rightCount != null">
+				#{rightCount,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="realityscore != null">
+				#{realityscore,jdbcType=DOUBLE},
+			</if>
+			<if test="selectResult != null">
+				#{selectResult,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogExamResult">
+		update log_exam_result
+		<set>
+			<if test="questionResult != null">
+				QUESTION_RESULT = #{questionResult,jdbcType=VARCHAR},
+			</if>
+			<if test="isnotRight != null">
+				ISNOT_RIGHT = #{isnotRight,jdbcType=INTEGER},
+			</if>
+			<if test="questionlabelId != null">
+				QUESTIONLABEL_ID = #{questionlabelId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="rightCount != null">
+				RIGHT_COUNT = #{rightCount,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				SCORE = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="realityscore != null">
+				REALITYSCORE = #{realityscore,jdbcType=DOUBLE},
+			</if>
+			<if test="selectResult != null">
+				SELECT_RESULT = #{selectResult,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where LOG_EXAM_ID = #{logExamId,jdbcType=INTEGER}
+		and QUESTION_ID = #{questionId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogExamResult">
+		update log_exam_result
+		set QUESTION_RESULT = #{questionResult,jdbcType=VARCHAR},
+		ISNOT_RIGHT = #{isnotRight,jdbcType=INTEGER},
+		QUESTIONLABEL_ID = #{questionlabelId,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER},
+		PARENT_ID = #{parentId,jdbcType=INTEGER},
+		RIGHT_COUNT = #{rightCount,jdbcType=VARCHAR},
+		SCORE = #{score,jdbcType=DOUBLE},
+		REALITYSCORE = #{realityscore,jdbcType=DOUBLE},
+		SELECT_RESULT = #{selectResult,jdbcType=VARCHAR}
+		where LOG_EXAM_ID = #{logExamId,jdbcType=INTEGER}
+		and QUESTION_ID = #{questionId,jdbcType=INTEGER}
+	</update>
+</mapper>

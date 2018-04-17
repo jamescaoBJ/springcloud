@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QmUserImagePropMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QmUserImageProp">
+		<result column="USERIMAGE_ID" jdbcType="INTEGER" property="userimageId" />
+		<result column="PROP_ID" jdbcType="INTEGER" property="propId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QmUserImageProp">
+		insert into qm_user_image_prop (USERIMAGE_ID, PROP_ID)
+		values (#{userimageId,jdbcType=INTEGER}, #{propId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QmUserImageProp">
+		insert into qm_user_image_prop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userimageId != null">
+				USERIMAGE_ID,
+			</if>
+			<if test="propId != null">
+				PROP_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userimageId != null">
+				#{userimageId,jdbcType=INTEGER},
+			</if>
+			<if test="propId != null">
+				#{propId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

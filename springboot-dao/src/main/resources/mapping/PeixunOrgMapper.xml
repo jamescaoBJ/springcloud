@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.PeixunOrgMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.PeixunOrg">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="LEVEL" jdbcType="INTEGER" property="level" />
+		<result column="HOSPITAL_ID" jdbcType="INTEGER" property="hospitalId" />
+		<result column="REGION1_ID" jdbcType="INTEGER" property="region1Id" />
+		<result column="REGION2_ID" jdbcType="INTEGER" property="region2Id" />
+		<result column="REGION3_ID" jdbcType="INTEGER" property="region3Id" />
+		<result column="CONTACT" jdbcType="VARCHAR" property="contact" />
+		<result column="PHONE_NUMBER" jdbcType="VARCHAR" property="phoneNumber" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="FILEPATH" jdbcType="VARCHAR" property="filepath" />
+		<result column="PHOTOPATH" jdbcType="VARCHAR" property="photopath" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, TYPE, LEVEL, HOSPITAL_ID, REGION1_ID, REGION2_ID, REGION3_ID,
+		CONTACT,
+		PHONE_NUMBER, STATE, DESCRIPTION, USER_ID, FILEPATH, PHOTOPATH
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from peixun_org
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from peixun_org
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.PeixunOrg">
+		insert into peixun_org (ID, NAME, TYPE,
+		LEVEL, HOSPITAL_ID, REGION1_ID,
+		REGION2_ID, REGION3_ID, CONTACT,
+		PHONE_NUMBER, STATE, DESCRIPTION,
+		USER_ID, FILEPATH, PHOTOPATH
+		)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{level,jdbcType=INTEGER}, #{hospitalId,jdbcType=INTEGER}, #{region1Id,jdbcType=INTEGER},
+		#{region2Id,jdbcType=INTEGER}, #{region3Id,jdbcType=INTEGER},
+		#{contact,jdbcType=VARCHAR},
+		#{phoneNumber,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR},
+		#{userId,jdbcType=INTEGER}, #{filepath,jdbcType=VARCHAR},
+		#{photopath,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.PeixunOrg">
+		insert into peixun_org
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="level != null">
+				LEVEL,
+			</if>
+			<if test="hospitalId != null">
+				HOSPITAL_ID,
+			</if>
+			<if test="region1Id != null">
+				REGION1_ID,
+			</if>
+			<if test="region2Id != null">
+				REGION2_ID,
+			</if>
+			<if test="region3Id != null">
+				REGION3_ID,
+			</if>
+			<if test="contact != null">
+				CONTACT,
+			</if>
+			<if test="phoneNumber != null">
+				PHONE_NUMBER,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="filepath != null">
+				FILEPATH,
+			</if>
+			<if test="photopath != null">
+				PHOTOPATH,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=INTEGER},
+			</if>
+			<if test="hospitalId != null">
+				#{hospitalId,jdbcType=INTEGER},
+			</if>
+			<if test="region1Id != null">
+				#{region1Id,jdbcType=INTEGER},
+			</if>
+			<if test="region2Id != null">
+				#{region2Id,jdbcType=INTEGER},
+			</if>
+			<if test="region3Id != null">
+				#{region3Id,jdbcType=INTEGER},
+			</if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNumber != null">
+				#{phoneNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="filepath != null">
+				#{filepath,jdbcType=VARCHAR},
+			</if>
+			<if test="photopath != null">
+				#{photopath,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.PeixunOrg">
+		update peixun_org
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="level != null">
+				LEVEL = #{level,jdbcType=INTEGER},
+			</if>
+			<if test="hospitalId != null">
+				HOSPITAL_ID = #{hospitalId,jdbcType=INTEGER},
+			</if>
+			<if test="region1Id != null">
+				REGION1_ID = #{region1Id,jdbcType=INTEGER},
+			</if>
+			<if test="region2Id != null">
+				REGION2_ID = #{region2Id,jdbcType=INTEGER},
+			</if>
+			<if test="region3Id != null">
+				REGION3_ID = #{region3Id,jdbcType=INTEGER},
+			</if>
+			<if test="contact != null">
+				CONTACT = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNumber != null">
+				PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="filepath != null">
+				FILEPATH = #{filepath,jdbcType=VARCHAR},
+			</if>
+			<if test="photopath != null">
+				PHOTOPATH = #{photopath,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.PeixunOrg">
+		update peixun_org
+		set NAME = #{name,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		LEVEL = #{level,jdbcType=INTEGER},
+		HOSPITAL_ID = #{hospitalId,jdbcType=INTEGER},
+		REGION1_ID = #{region1Id,jdbcType=INTEGER},
+		REGION2_ID = #{region2Id,jdbcType=INTEGER},
+		REGION3_ID = #{region3Id,jdbcType=INTEGER},
+		CONTACT = #{contact,jdbcType=VARCHAR},
+		PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+		STATE = #{state,jdbcType=INTEGER},
+		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		USER_ID = #{userId,jdbcType=INTEGER},
+		FILEPATH = #{filepath,jdbcType=VARCHAR},
+		PHOTOPATH = #{photopath,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getOrg" resultMap="BaseResultMap">
+		SELECT
+		t.*
+		FROM
+		peixun_org t,
+		cv_set_org t2
+		WHERE
+		t.id = t2.org_id
+		AND t2.cv_id =#{cvSetId,jdbcType=INTEGER}
+	</select>
+</mapper>

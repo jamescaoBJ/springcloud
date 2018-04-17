@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPaperTactic2Mapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamPaperTactic2">
+		<result column="TACTIC_ID" jdbcType="INTEGER" property="tacticId" />
+		<result column="STUDY1_ID" jdbcType="INTEGER" property="study1Id" />
+		<result column="STUDY1_NAME" jdbcType="VARCHAR" property="study1Name" />
+		<result column="STUDY2_ID" jdbcType="INTEGER" property="study2Id" />
+		<result column="STUDY2_NAME" jdbcType="VARCHAR" property="study2Name" />
+		<result column="STUDY3_ID" jdbcType="INTEGER" property="study3Id" />
+		<result column="STUDY3_NAME" jdbcType="VARCHAR" property="study3Name" />
+		<result column="UNIT_ID" jdbcType="INTEGER" property="unitId" />
+		<result column="UNIT_NAME" jdbcType="VARCHAR" property="unitName" />
+		<result column="POINT_ID" jdbcType="INTEGER" property="pointId" />
+		<result column="POINT_NAME" jdbcType="VARCHAR" property="pointName" />
+		<result column="percent" jdbcType="VARCHAR" property="percent" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPaperTactic2">
+		insert into exam_paper_tactic2
+		(TACTIC_ID, STUDY1_ID, STUDY1_NAME,
+		STUDY2_ID, STUDY2_NAME, STUDY3_ID,
+		STUDY3_NAME, UNIT_ID, UNIT_NAME,
+		POINT_ID, POINT_NAME, percent
+		)
+		values
+		(#{tacticId,jdbcType=INTEGER}, #{study1Id,jdbcType=INTEGER},
+		#{study1Name,jdbcType=VARCHAR},
+		#{study2Id,jdbcType=INTEGER},
+		#{study2Name,jdbcType=VARCHAR}, #{study3Id,jdbcType=INTEGER},
+		#{study3Name,jdbcType=VARCHAR}, #{unitId,jdbcType=INTEGER},
+		#{unitName,jdbcType=VARCHAR},
+		#{pointId,jdbcType=INTEGER},
+		#{pointName,jdbcType=VARCHAR}, #{percent,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPaperTactic2">
+		insert into exam_paper_tactic2
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tacticId != null">
+				TACTIC_ID,
+			</if>
+			<if test="study1Id != null">
+				STUDY1_ID,
+			</if>
+			<if test="study1Name != null">
+				STUDY1_NAME,
+			</if>
+			<if test="study2Id != null">
+				STUDY2_ID,
+			</if>
+			<if test="study2Name != null">
+				STUDY2_NAME,
+			</if>
+			<if test="study3Id != null">
+				STUDY3_ID,
+			</if>
+			<if test="study3Name != null">
+				STUDY3_NAME,
+			</if>
+			<if test="unitId != null">
+				UNIT_ID,
+			</if>
+			<if test="unitName != null">
+				UNIT_NAME,
+			</if>
+			<if test="pointId != null">
+				POINT_ID,
+			</if>
+			<if test="pointName != null">
+				POINT_NAME,
+			</if>
+			<if test="percent != null">
+				percent,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tacticId != null">
+				#{tacticId,jdbcType=INTEGER},
+			</if>
+			<if test="study1Id != null">
+				#{study1Id,jdbcType=INTEGER},
+			</if>
+			<if test="study1Name != null">
+				#{study1Name,jdbcType=VARCHAR},
+			</if>
+			<if test="study2Id != null">
+				#{study2Id,jdbcType=INTEGER},
+			</if>
+			<if test="study2Name != null">
+				#{study2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="study3Id != null">
+				#{study3Id,jdbcType=INTEGER},
+			</if>
+			<if test="study3Name != null">
+				#{study3Name,jdbcType=VARCHAR},
+			</if>
+			<if test="unitId != null">
+				#{unitId,jdbcType=INTEGER},
+			</if>
+			<if test="unitName != null">
+				#{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="pointId != null">
+				#{pointId,jdbcType=INTEGER},
+			</if>
+			<if test="pointName != null">
+				#{pointName,jdbcType=VARCHAR},
+			</if>
+			<if test="percent != null">
+				#{percent,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeSubjectUserMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeSubjectUser">
+		<result column="SUBJECT_ID" jdbcType="INTEGER" property="subjectId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="ADD_DATE" jdbcType="DATE" property="addDate" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeSubjectUser">
+		insert into icme_subject_user
+		(SUBJECT_ID, USER_ID, ADD_DATE
+		)
+		values (#{subjectId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{addDate,jdbcType=DATE}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeSubjectUser">
+		insert into icme_subject_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="subjectId != null">
+				SUBJECT_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="addDate != null">
+				ADD_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="addDate != null">
+				#{addDate,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+</mapper>

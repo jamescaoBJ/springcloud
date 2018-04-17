@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.AdvertMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.Advert">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="URL" jdbcType="VARCHAR" property="url" />
+		<result column="TARGET_URL" jdbcType="VARCHAR" property="targetUrl" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, URL, TARGET_URL as targetUrl, REMARK,TYPE
+	</sql>
+	<select id="getBannerList" resultType="com.ncme.springboot.model.Advert">
+		select
+		<include refid="Base_Column_List" />
+		from advert
+		where 1 = 1 and type = 2 and STATE = 2 order by CREATEDATE
+		desc limit 0,5
+	</select>
+
+
+</mapper>

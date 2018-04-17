@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeYearMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeYear">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="YEAR" jdbcType="VARCHAR" property="year" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+		<result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="ANNUAL_SCORE" jdbcType="INTEGER" property="annualScore" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, YEAR, STATUS, CREATE_DATE, START_DATE, END_DATE, ANNUAL_SCORE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_year
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from icme_year
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeYear">
+		insert into icme_year (ID, YEAR, STATUS,
+		CREATE_DATE, START_DATE, END_DATE,
+		ANNUAL_SCORE)
+		values (#{id,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
+		#{annualScore,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeYear">
+		insert into icme_year
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="year != null">
+				YEAR,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="annualScore != null">
+				ANNUAL_SCORE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="annualScore != null">
+				#{annualScore,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeYear">
+		update icme_year
+		<set>
+			<if test="year != null">
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startDate != null">
+				START_DATE = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="annualScore != null">
+				ANNUAL_SCORE = #{annualScore,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeYear">
+		update icme_year
+		set YEAR = #{year,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		START_DATE = #{startDate,jdbcType=TIMESTAMP},
+		END_DATE = #{endDate,jdbcType=TIMESTAMP},
+		ANNUAL_SCORE = #{annualScore,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

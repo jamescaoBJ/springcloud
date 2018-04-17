@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.HysRolesMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.HysRoles">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="NAME_DESC" jdbcType="VARCHAR" property="nameDesc" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, NAME_DESC, STATUS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hys_roles
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		hys_roles
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.HysRoles">
+		insert into hys_roles (ID,
+		NAME, NAME_DESC,
+		STATUS)
+		values (#{id,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{nameDesc,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.HysRoles">
+		insert into hys_roles
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="nameDesc != null">
+				NAME_DESC,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="nameDesc != null">
+				#{nameDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.HysRoles">
+		update hys_roles
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="nameDesc != null">
+				NAME_DESC = #{nameDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.HysRoles">
+		update hys_roles
+		set NAME = #{name,jdbcType=VARCHAR},
+		NAME_DESC =
+		#{nameDesc,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER}
+		where
+		ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

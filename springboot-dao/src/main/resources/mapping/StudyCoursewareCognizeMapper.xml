@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCoursewareCognizeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.StudyCoursewareCognize">
+		<result column="COURSEWARE_ID" jdbcType="INTEGER" property="coursewareId" />
+		<result column="PROP_VAL_ID" jdbcType="INTEGER" property="propValId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCoursewareCognize">
+		insert into study_courseware_cognize (COURSEWARE_ID, PROP_VAL_ID)
+		values (#{coursewareId,jdbcType=INTEGER}, #{propValId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCoursewareCognize">
+		insert into study_courseware_cognize
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="coursewareId != null">
+				COURSEWARE_ID,
+			</if>
+			<if test="propValId != null">
+				PROP_VAL_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="coursewareId != null">
+				#{coursewareId,jdbcType=INTEGER},
+			</if>
+			<if test="propValId != null">
+				#{propValId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

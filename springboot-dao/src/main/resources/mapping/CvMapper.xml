@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.Cv">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="SERIAL_NUMBER" jdbcType="VARCHAR" property="serialNumber" />
+		<result column="BRAND" jdbcType="VARCHAR" property="brand" />
+		<result column="INTRODUCTION" jdbcType="VARCHAR" property="introduction" />
+		<result column="ANNOUNCEMENT" jdbcType="VARCHAR" property="announcement" />
+		<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+		<result column="cv_type" jdbcType="INTEGER" property="cvType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, SERIAL_NUMBER, BRAND, INTRODUCTION, ANNOUNCEMENT,
+		FILE_PATH,
+		CREATE_DATE,
+		CREATOR, cv_type
+	</sql>
+
+
+	<resultMap id="MyResultMap" type="com.ncme.springboot.model.Cv">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="SERIAL_NUMBER" jdbcType="VARCHAR" property="serialNumber" />
+		<result column="BRAND" jdbcType="VARCHAR" property="brand" />
+		<result column="INTRODUCTION" jdbcType="VARCHAR" property="introduction" />
+		<result column="ANNOUNCEMENT" jdbcType="VARCHAR" property="announcement" />
+		<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+		<result column="cv_type" jdbcType="INTEGER" property="cvType" />
+		<collection property="cvUnitList" column="{id=id,userId=userId}"
+			select="mySelectCvUnitByCvsetId" ofType="com.ncme.springboot.model.CvUnit"
+			javaType="ArrayList" />
+	</resultMap>
+	<!-- 项目目录 -->
+	<select id="mySelectCvByCvsetId" resultMap="MyResultMap">
+		SELECT	c.*,${userId} as userId
+		FROM CV c
+		INNER JOIN CV_SCHEDULE cs ON c.id = cs.CV_ID
+		INNER JOIN CV_SET_SCHEDULE css ON cs.SCHEDULE_ID = css.CV_SCHEDULE_ID
+		INNER JOIN cv_set t on css.CV_SET_ID = t.id
+		WHERE
+		css.CV_SET_ID =	#{projectId,jdbcType=INTEGER}
+		ORDER BY cs.sequenceNum ASC
+	</select>
+
+
+	<select id="mySelectCvUnitByCvsetId" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t.* 
+			<if test="userId != null and userId != 0">
+			,ifnull(lscu.`STATUS`,0) studyState
+			,ifnull(lscuv.videoPlayLength,0) videoPlayLength
+			</if>
+			,gci.media_type mediaType,gci.media_id videoUrl
+		FROM CV_UNIT t left join  CV_REF_UNIT tt on t.id = tt.unit_id 
+		<if test="userId != null and userId != 0">
+		left join log_study_cv_unit lscu on lscu.CV_UNIT_ID = t.id and lscu.SYSTEM_USER_ID = #{userId}
+		left join log_study_cv_unit_video lscuv on lscuv.cv_unit_id = t.id AND lscuv.SYSTEM_USER_ID = #{userId}
+		</if>
+		left join group_class_info gci on t.id = gci.class_id
+		WHERE tt.cv_id = #{id}
+		group by t.id
+		order by sequenceNum asc
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from cv
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.Cv">
+		insert into cv (ID, NAME,
+		SERIAL_NUMBER,
+		BRAND, INTRODUCTION, ANNOUNCEMENT,
+		FILE_PATH,
+		CREATE_DATE, CREATOR,
+		cv_type)
+		values (#{id,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{serialNumber,jdbcType=VARCHAR},
+		#{brand,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
+		#{announcement,jdbcType=VARCHAR},
+		#{filePath,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{creator,jdbcType=VARCHAR},
+		#{cvType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.Cv">
+		insert into cv
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="serialNumber != null">
+				SERIAL_NUMBER,
+			</if>
+			<if test="brand != null">
+				BRAND,
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION,
+			</if>
+			<if test="announcement != null">
+				ANNOUNCEMENT,
+			</if>
+			<if test="filePath != null">
+				FILE_PATH,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="creator != null">
+				CREATOR,
+			</if>
+			<if test="cvType != null">
+				cv_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber != null">
+				#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null">
+				#{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="announcement != null">
+				#{announcement,jdbcType=VARCHAR},
+			</if>
+			<if test="filePath != null">
+				#{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="cvType != null">
+				#{cvType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.Cv">
+		update cv
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber != null">
+				SERIAL_NUMBER = #{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null">
+				BRAND = #{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="announcement != null">
+				ANNOUNCEMENT = #{announcement,jdbcType=VARCHAR},
+			</if>
+			<if test="filePath != null">
+				FILE_PATH = #{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				CREATOR = #{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="cvType != null">
+				cv_type = #{cvType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.Cv">
+		update cv
+		set NAME
+		= #{name,jdbcType=VARCHAR},
+		SERIAL_NUMBER =
+		#{serialNumber,jdbcType=VARCHAR},
+		BRAND = #{brand,jdbcType=VARCHAR},
+		INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+		ANNOUNCEMENT =
+		#{announcement,jdbcType=VARCHAR},
+		FILE_PATH =
+		#{filePath,jdbcType=VARCHAR},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		CREATOR =
+		#{creator,jdbcType=VARCHAR},
+		cv_type = #{cvType,jdbcType=INTEGER}
+		where
+		ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 获取典型病例列表-同时根据type可获取VR/三维动画/名师课程 -->
+	<select id="getCaseCvList" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id typicalId,t.`NAME` typicalTitle,t.FILE_PATH
+		filePath,count(l.id) AS learnPeople,cs.modify_date
+		from cv t
+		left join
+		cv_schedule cve on t.ID= cve.cv_id
+		left join cv_set_schedule cvs on
+		cve.SCHEDULE_ID =cvs.CV_SCHEDULE_ID
+		left join cv_set cs on
+		cvs.CV_SET_ID=cs.id
+		left JOIN log_study_cv l ON l.CV_ID = t.id
+		LEFT JOIN
+		cv_set_authorization t6 ON t6.cv_set_id = cs.id
+		LEFT JOIN
+		cv_set_authorization_system_site t7 ON t7.AUTHORIZATION_ID =
+		t6.ID
+		<if test="xueke != null">
+			left JOIN cv_set_user_image t8 ON t8.cv_set_id = cs.id
+			left JOIN qm_user_image t9 ON t9.id = t8.userimage_id
+			left JOIN
+			qm_user_image_prop t10 ON t10.userimage_id = t9.id
+			left JOIN
+			exam_prop_val t11 ON t11.id = t10.prop_id
+		</if>
+		where t.id>0 
+		<if test="types == 1 or types == 4">
+			and find_in_set(#{types}, t.brand)
+		</if>
+		<if test="types == 3">
+			and (find_in_set('3', t.brand) or find_in_set('5', t.brand))
+		</if>
+		<!-- 2018.3.1   注释掉  xh 
+		and t.brand in
+		<foreach collection="type" index="index" item="id" open="("
+			close=")" separator=",">
+			#{id}
+		</foreach>
+		 -->
+		and cs.`STATUS` =5
+		<if test="xueke != null">
+			<!-- 妇产科学510004、 儿科学510005、医学教育与卫生管理610010809 、儿科护理学580005 是二级学科 -->
+			<if test="xueke != 510004 and xueke != 510005 and xueke != 610010809 and xueke != 580005">
+				and t11.id in (#{xueke,jdbcType=VARCHAR})
+			</if>
+			<if test="xueke == 510004 or xueke == 510005 or xueke == 610010809 or xueke == 580005">
+				and t11.id in 
+				<foreach collection="xk" index="index" item="id" open="("
+					close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+		</if>
+		group by t.id
+		<choose>
+			<when test="hot != null">
+				<if test="hot == 1">
+					order by learnPeople desc
+				</if>
+				<if test="hot == 0">
+					order by learnPeople asc
+				</if>
+			</when>
+			<otherwise>
+				order by cs.modify_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- <select id="getCaseCvList" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record"> 
+		select t.id typicalId,t.`NAME` typicalTitle,t.FILE_PATH filePath,count(l.id) 
+		AS learnPeople,cve.start_date from cv t left join cv_schedule cve on t.ID= 
+		cve.cv_id left join cv_set_schedule cvs on cve.SCHEDULE_ID =cvs.CV_SCHEDULE_ID 
+		left join cv_set cs on cvs.CV_SET_ID=cs.id left JOIN log_study_cv l ON l.CV_ID 
+		= t.id left join CV_REF_PROP_COURSE t1 on t1.cv_id=t.id LEFT JOIN cv_set_authorization 
+		t6 ON t6.cv_set_id = cs.id LEFT JOIN cv_set_authorization_system_site t7 
+		ON t7.AUTHORIZATION_ID = t6.ID where t.id>0 and t.brand in <foreach collection="type" 
+		index="index" item="id" open="(" close=")" separator=","> #{id} </foreach> 
+		and t1.cv_id=t.id and cs.`STATUS` =5 <if test="xueke != null"> and t1.prop_id 
+		in (#{xueke,jdbcType=VARCHAR}) </if> group by t.id <choose> <when test="hot 
+		!= null"> <if test="hot == 1"> order by learnPeople desc </if> <if test="hot 
+		== 0"> order by learnPeople asc </if> </when> <otherwise> order by cve.start_date 
+		desc </otherwise> </choose> </select> -->
+
+	<!-- 统计此课程学习人数 -->
+	<select id="studyCvCount" resultType="java.lang.Integer">
+		select count(*) from log_study_cv l
+		where l.CV_ID =
+		#{cvId,jdbcType=INTEGER}
+		<if test="userId != null and userId !=0">
+			and system_user_id = #{userId,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<!-- 获取典型病例详情-同时根据type可获取VR/三维动画/名师课程 -->
+	<select id="getCvDetailById" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id typicalId,t.`NAME` typicalTitle,t.INTRODUCTION
+		classIntroduce,t.cv_type,t.FILE_PATH filePath
+		from cv t
+		where t.id>0
+		<!-- and t.brand in <foreach collection="type" index="index" item="id" 
+			open="(" close=")" separator=","> #{id} </foreach> -->
+		and t.id = #{typicalId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 获取典型病例目录-同时根据type可获取VR/三维动画/名师课程 -->
+	<select id="getCvCatalogById" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t2. NAME unitTitle,t2.id classId,ifnull(lscu.
+		STATUS, '')
+		STATUS,ifnull(lscu.last_update_date, '')
+		last_update_date,ifnull(i.media_id, '') vedioUrl,t2.type
+		FROM cv t
+		left
+		join cv_ref_unit t1 ON t.id = t1.cv_id
+		left join cv_unit t2 ON t2.id =
+		t1.unit_id
+		left join log_study_cv_unit lscu ON lscu.cv_unit_id = t2.id
+		AND lscu.system_user_id = #{userId,jdbcType=INTEGER }
+		left join
+		group_class_info i ON i.class_id = t2.id
+		WHERE t.id = #{typicalId,jdbcType=INTEGER} 
+		and t2.type != 7 <!-- cv_unit表中 type=7 为直播课程单元,直播课程后台手动设置为点播后,此直播课程变为点播课程,不需要返回直播单元-->
+		ORDER BY t2.id
+	</select>
+
+	<!-- 根据单元ID获取到 该单元 所在的课程ID -->
+	<select id="getCvIdByUnitId" resultType="java.lang.String">
+		select ref.cv_id from
+		cv_unit u inner join cv_ref_unit ref on ref.unit_id =
+		u.id left join cv
+		c on c.id = ref.cv_id
+		where u.id = #{unitId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 再根据 课程ID 获取 其课程 所在的 项目ID -->
+	<select id="getCvSetIdByCvId" resultType="java.lang.String">
+		select c.id from cv_set
+		c inner join cv_set_schedule s on c.id = s.cv_set_id
+		inner join
+		cv_schedule cvs on cvs.schedule_id = s.cv_schedule_id inner
+		join cv on
+		cv.id = cvs.cv_id
+		where cv.id = #{cvId,jdbcType=VARCHAR}
+	</select>
+	<!-- 根据项目id查询该项目的所有课程数量 -->
+	<select id="getCvCountByCvSetId" resultType="java.lang.Integer">
+		SELECT count(1) FROM
+		cv_schedule
+		WHERE SCHEDULE_ID IN (
+		SELECT CV_SCHEDULE_ID FROM
+		cv_set_schedule WHERE CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER}
+		)
+	</select>
+	<!-- 项目下已完成的课程数量 -->
+	<select id="getCompleteCvCountByUIdAndCvSetId" resultType="java.lang.Integer">
+		SELECT count(1) FROM log_study_cv t
+		WHERE t.STATE = 2 AND t.CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER} AND
+		t.SYSTEM_USER_ID =
+		#{userId,jdbcType=INTEGER }
+	</select>
+
+	<!-- 判断该课程学习状态 0:未学习 1:学习中 2:已完成 -->
+	<select id="getCvStudyStatue" resultType="java.lang.String">
+		select l.state from
+		log_study_cv l where l.cv_id =
+		#{typicalId,jdbcType=VARCHAR} and
+		l.system_user_id =
+		#{userId,jdbcType=VARCHAR}
+	</select>
+		
+	<!-- 返回该课程当前学习的单元ID(cvUnitId) -->
+	<select id="getCvStudyingCvUnitId" resultType="com.ncme.springboot.footstone.response.Record">
+		select u.CV_UNIT_ID,c.type from log_study_cv_unit u left join cv_unit c on c.id = u.cv_unit_id
+		where u.SYSTEM_USER_ID = #{userId,jdbcType=VARCHAR} and u.CV_ID = #{typicalId,jdbcType=VARCHAR} 
+		order by u.LAST_UPDATE_DATE desc limit 0,1
+	</select>
+	
+	<!-- 根据儿科学二级学科ID 获取其三级学科ID -->
+	<select id="getXueKeList" resultType="com.ncme.springboot.footstone.response.Record">
+		select v.PROP_VAL2 id from prop_val_ref v where v.PROP_VAL1 = #{xueke}
+	</select>
+	
+	<!-- 判断该(0 项目 1课程 2直播课程)是否被收藏过 -->
+	<select id="getMyFavIsFavById" parameterType="map" resultType="java.lang.Integer">
+		select count(*) num from cv_set_favorites f 
+		where f.cv_set_id = #{CvSetId} and f.system_user_id = #{userId} and f.type=#{type}
+	</select>
+	
+</mapper>

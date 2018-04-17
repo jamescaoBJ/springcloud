@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeStudyCreditMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeStudyCredit">
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="COURSE_ID" jdbcType="VARCHAR" property="courseId" />
+		<result column="ORGAN_ID" jdbcType="VARCHAR" property="organId" />
+		<result column="APPLY_YEAR" jdbcType="INTEGER" property="applyYear" />
+		<result column="CREDIT_TYPE" jdbcType="VARCHAR" property="creditType" />
+		<result column="COURSE_SERIAL" jdbcType="VARCHAR" property="courseSerial" />
+		<result column="APPLYDATE" jdbcType="DATE" property="applydate" />
+		<result column="STARTDATE" jdbcType="DATE" property="startdate" />
+		<result column="PASSDATE" jdbcType="DATE" property="passdate" />
+		<result column="ANSWERTIMES" jdbcType="INTEGER" property="answertimes" />
+		<result column="APPLY_TYPE" jdbcType="VARCHAR" property="applyType" />
+		<result column="APPLY_SUBTYPE" jdbcType="VARCHAR" property="applySubtype" />
+		<result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
+		<result column="APPLY_CREDIT" jdbcType="REAL" property="applyCredit" />
+		<result column="ICME_MARK" jdbcType="DATE" property="icmeMark" />
+		<result column="SENDDATE" jdbcType="DATE" property="senddate" />
+		<result column="SERIAL_INT" jdbcType="VARCHAR" property="serialInt" />
+		<result column="ORDER_INT" jdbcType="VARCHAR" property="orderInt" />
+		<result column="USER_X_ID" jdbcType="VARCHAR" property="userXId" />
+		<result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeStudyCredit">
+		insert into ncme_study_credit (USER_NAME, COURSE_ID, ORGAN_ID,
+		APPLY_YEAR, CREDIT_TYPE, COURSE_SERIAL,
+		APPLYDATE, STARTDATE, PASSDATE,
+		ANSWERTIMES, APPLY_TYPE, APPLY_SUBTYPE,
+		CARD_NO, APPLY_CREDIT, ICME_MARK,
+		SENDDATE, SERIAL_INT, ORDER_INT,
+		USER_X_ID, OPERATOR)
+		values (#{userName,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR},
+		#{organId,jdbcType=VARCHAR},
+		#{applyYear,jdbcType=INTEGER}, #{creditType,jdbcType=VARCHAR}, #{courseSerial,jdbcType=VARCHAR},
+		#{applydate,jdbcType=DATE}, #{startdate,jdbcType=DATE},
+		#{passdate,jdbcType=DATE},
+		#{answertimes,jdbcType=INTEGER}, #{applyType,jdbcType=VARCHAR}, #{applySubtype,jdbcType=VARCHAR},
+		#{cardNo,jdbcType=VARCHAR}, #{applyCredit,jdbcType=REAL},
+		#{icmeMark,jdbcType=DATE},
+		#{senddate,jdbcType=DATE}, #{serialInt,jdbcType=VARCHAR}, #{orderInt,jdbcType=VARCHAR},
+		#{userXId,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeStudyCredit">
+		insert into ncme_study_credit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userName != null">
+				USER_NAME,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="organId != null">
+				ORGAN_ID,
+			</if>
+			<if test="applyYear != null">
+				APPLY_YEAR,
+			</if>
+			<if test="creditType != null">
+				CREDIT_TYPE,
+			</if>
+			<if test="courseSerial != null">
+				COURSE_SERIAL,
+			</if>
+			<if test="applydate != null">
+				APPLYDATE,
+			</if>
+			<if test="startdate != null">
+				STARTDATE,
+			</if>
+			<if test="passdate != null">
+				PASSDATE,
+			</if>
+			<if test="answertimes != null">
+				ANSWERTIMES,
+			</if>
+			<if test="applyType != null">
+				APPLY_TYPE,
+			</if>
+			<if test="applySubtype != null">
+				APPLY_SUBTYPE,
+			</if>
+			<if test="cardNo != null">
+				CARD_NO,
+			</if>
+			<if test="applyCredit != null">
+				APPLY_CREDIT,
+			</if>
+			<if test="icmeMark != null">
+				ICME_MARK,
+			</if>
+			<if test="senddate != null">
+				SENDDATE,
+			</if>
+			<if test="serialInt != null">
+				SERIAL_INT,
+			</if>
+			<if test="orderInt != null">
+				ORDER_INT,
+			</if>
+			<if test="userXId != null">
+				USER_X_ID,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=VARCHAR},
+			</if>
+			<if test="organId != null">
+				#{organId,jdbcType=VARCHAR},
+			</if>
+			<if test="applyYear != null">
+				#{applyYear,jdbcType=INTEGER},
+			</if>
+			<if test="creditType != null">
+				#{creditType,jdbcType=VARCHAR},
+			</if>
+			<if test="courseSerial != null">
+				#{courseSerial,jdbcType=VARCHAR},
+			</if>
+			<if test="applydate != null">
+				#{applydate,jdbcType=DATE},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=DATE},
+			</if>
+			<if test="passdate != null">
+				#{passdate,jdbcType=DATE},
+			</if>
+			<if test="answertimes != null">
+				#{answertimes,jdbcType=INTEGER},
+			</if>
+			<if test="applyType != null">
+				#{applyType,jdbcType=VARCHAR},
+			</if>
+			<if test="applySubtype != null">
+				#{applySubtype,jdbcType=VARCHAR},
+			</if>
+			<if test="cardNo != null">
+				#{cardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="applyCredit != null">
+				#{applyCredit,jdbcType=REAL},
+			</if>
+			<if test="icmeMark != null">
+				#{icmeMark,jdbcType=DATE},
+			</if>
+			<if test="senddate != null">
+				#{senddate,jdbcType=DATE},
+			</if>
+			<if test="serialInt != null">
+				#{serialInt,jdbcType=VARCHAR},
+			</if>
+			<if test="orderInt != null">
+				#{orderInt,jdbcType=VARCHAR},
+			</if>
+			<if test="userXId != null">
+				#{userXId,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

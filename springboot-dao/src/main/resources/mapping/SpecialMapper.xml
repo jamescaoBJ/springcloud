@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SpecialMapper">
+	<!-- 专项能力列表 -->
+	<select id="getSpecialTrainList" resultType="com.ncme.springboot.footstone.response.Record">
+		select z.id,z.`name`,z.coverUrl,z.modeString,z.intro from zx_cv_set z 
+		where z.type = 0
+		<if test="state != null">
+			and z.state = #{state}
+		</if>
+		<if test="keyword != null">
+			and z.`name` like CONCAT('%',#{keyword},'%')
+		</if>
+		order by z.publishtime desc
+	</select>
+
+	<!-- 根据专项ID,获取专项详情 -->
+	<select id="getSpecialDetail" resultType="com.ncme.springboot.footstone.response.Record">
+		select * from zx_cv_set z where z.id = #{zxSetId}
+	</select>
+	
+	<!-- 根据学科ID查询学科名称 -->
+	<select id="getSubjectNameById" resultType="java.lang.String">
+		select v.`NAME` from exam_prop_val v where v.id = #{subjectId}
+	</select>
+	
+	<!-- 根据专家ID查询专家信息 -->
+	<select id="getExpertInfoById" resultType="com.ncme.springboot.footstone.response.Record">
+		select i.id expertId,i.`NAME` expertName,IFNULL(v.`NAME`,'') jobName,i.photo 
+		from expert_info i left join exam_prop_val v on i.JOB = v.ID
+		where i.id = #{expertId}
+	</select>
+	
+	<!-- 根据专项项目阶段(1或2或3)包含的NCME项目ID查询项目信息 -->
+	<select id="getPhase1NcmeProjectById" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.id as projectId,t.name,t.file_path,csa.cv_set_level as	level,
+		LEFT (csa.cv_set_score, 3) as score,csa.cv_set_cost_type as cost_type 
+		from cv_set t left join cv_set_authorization csa on csa.cv_set_id = t.id
+		left join cv_set_authorization_region csar on csar.AUTHORIZATION_ID = csa.id
+		where 1=1 and t.id=#{phaseNcmeProjectId}
+		group by t.id
+	</select>
+	
+	<!-- 根据面授项目ID 或 临床实践项目ID,统计报名次数 -->
+	<select id="getLearnNumByProjectId" resultType="java.lang.Integer">
+		select count(0) num from system_user_face_entry e left join cv_set_schedule_faceteach f on e.fid = f.id 
+		where f.cv_set_id = #{projectId}
+	</select>
+</mapper>

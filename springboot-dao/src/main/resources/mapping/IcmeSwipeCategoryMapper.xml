@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeSwipeCategoryMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeSwipeCategory">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SWIPE_NAME" jdbcType="VARCHAR" property="swipeName" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SWIPE_NAME, SEQ, STATUS, CREATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_swipe_category
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_swipe_category
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeSwipeCategory">
+		insert into
+		icme_swipe_category (ID, SWIPE_NAME, SEQ,
+		STATUS, CREATE_DATE)
+		values
+		(#{id,jdbcType=INTEGER}, #{swipeName,jdbcType=VARCHAR},
+		#{seq,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeSwipeCategory">
+		insert into icme_swipe_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="swipeName != null">
+				SWIPE_NAME,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="swipeName != null">
+				#{swipeName,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeSwipeCategory">
+		update icme_swipe_category
+		<set>
+			<if test="swipeName != null">
+				SWIPE_NAME = #{swipeName,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeSwipeCategory">
+		update
+		icme_swipe_category
+		set SWIPE_NAME = #{swipeName,jdbcType=VARCHAR},
+		SEQ
+		= #{seq,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

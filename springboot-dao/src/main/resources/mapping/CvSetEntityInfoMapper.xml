@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetEntityInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetEntityInfo">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="FAVORITE" jdbcType="INTEGER" property="favorite" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+		<result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+		<result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="REVIEW_DATE" jdbcType="TIMESTAMP" property="reviewDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, CV_SET_ID, CONTENT, FAVORITE, STATUS, SCORE,
+		START_DATE,
+		END_DATE, REVIEW_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set_entity_info
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_set_entity_info
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetEntityInfo">
+		insert into cv_set_entity_info
+		(ID, USER_ID, CV_SET_ID,
+		CONTENT, FAVORITE, STATUS,
+		SCORE, START_DATE,
+		END_DATE,
+		REVIEW_DATE)
+		values (#{id,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{cvSetId,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR}, #{favorite,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{score,jdbcType=DOUBLE},
+		#{startDate,jdbcType=TIMESTAMP},
+		#{endDate,jdbcType=TIMESTAMP},
+		#{reviewDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetEntityInfo">
+		insert into cv_set_entity_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="favorite != null">
+				FAVORITE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="reviewDate != null">
+				REVIEW_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="favorite != null">
+				#{favorite,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reviewDate != null">
+				#{reviewDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvSetEntityInfo">
+		update cv_set_entity_info
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="favorite != null">
+				FAVORITE = #{favorite,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				SCORE = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="startDate != null">
+				START_DATE = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reviewDate != null">
+				REVIEW_DATE = #{reviewDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetEntityInfo">
+		update
+		cv_set_entity_info
+		set USER_ID = #{userId,jdbcType=INTEGER},
+		CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER},
+		CONTENT = #{content,jdbcType=VARCHAR},
+		FAVORITE = #{favorite,jdbcType=INTEGER},
+		STATUS =
+		#{status,jdbcType=INTEGER},
+		SCORE = #{score,jdbcType=DOUBLE},
+		START_DATE = #{startDate,jdbcType=TIMESTAMP},
+		END_DATE =
+		#{endDate,jdbcType=TIMESTAMP},
+		REVIEW_DATE =
+		#{reviewDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

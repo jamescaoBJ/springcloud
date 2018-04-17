@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetScheduleFaceteachMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.CvSetScheduleFaceteach">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="cv_set_id" jdbcType="INTEGER" property="cvSetId" />
+		<result column="class_name" jdbcType="VARCHAR" property="className" />
+		<result column="people_number" jdbcType="INTEGER" property="peopleNumber" />
+		<result column="train_place" jdbcType="VARCHAR" property="trainPlace" />
+		<result column="train_starttime" jdbcType="TIMESTAMP" property="trainStarttime" />
+		<result column="train_endtime" jdbcType="TIMESTAMP" property="trainEndtime" />
+		<result column="lession_starttime" jdbcType="VARCHAR" property="lessionStarttime" />
+		<result column="lession_endtime" jdbcType="VARCHAR" property="lessionEndtime" />
+		<result column="contact_way" jdbcType="VARCHAR" property="contactWay" />
+		<result column="sequenceNum" jdbcType="INTEGER" property="sequencenum" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetScheduleFaceteach">
+		train_place, train_starttime,
+		train_endtime,lession_starttime,lession_endtime,
+		contact_way,
+		sequenceNum)
+		#{trainPlace,jdbcType=VARCHAR},
+		#{trainStarttime,jdbcType=TIMESTAMP},
+		#{trainEndtime,jdbcType=TIMESTAMP},
+		#{lessionStarttime,jdbcType=VARCHAR},
+		#{lessionEndtime,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR},
+		#{sequencenum,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetScheduleFaceteach">
+		insert into cv_set_schedule_faceteach
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cvSetId != null">
+				cv_set_id,
+			</if>
+			<if test="className != null">
+				class_name,
+			</if>
+			<if test="peopleNumber != null">
+				people_number,
+			</if>
+			<if test="trainPlace != null">
+				train_place,
+			</if>
+			<if test="trainStarttime != null">
+				train_starttime,
+			</if>
+			<if test="trainEndtime != null">
+				train_endtime,
+			</if>
+			<if test="lessionStarttime != null">
+				lesssion_starttime,
+			</if>
+			<if test="lessionEndtime != null">
+				lession_endtime,
+			</if>
+			<if test="contactWay != null">
+				contact_way,
+			</if>
+			<if test="sequencenum != null">
+				sequenceNum,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="className != null">
+				#{className,jdbcType=VARCHAR},
+			</if>
+			<if test="peopleNumber != null">
+				#{peopleNumber,jdbcType=INTEGER},
+			</if>
+			<if test="trainPlace != null">
+				#{trainPlace,jdbcType=VARCHAR},
+			</if>
+			<if test="trainStarttime != null">
+				#{trainStarttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="trainEndtime != null">
+				#{trainEndtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lessionStarttime != null">
+				#{lessionStarttime,jdbcType=VARCHAR},
+			</if>
+			<if test="lessionEndtime != null">
+				#{lessionEndtime,jdbcType=VARCHAR},
+			</if>
+			<if test="contactWay != null">
+				#{contactWay,jdbcType=VARCHAR},
+			</if>
+			<if test="sequencenum != null">
+				#{sequencenum,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<!-- 根据用户id和项目id查询面授项目期数 -->
+	<select id="getFaceteachByUserIdAndCvSetId" resultMap="BaseResultMap">
+		SELECT
+		t1.id, t1.cv_set_id, t1.class_name, t1.people_number,
+		t1.train_place,
+		t1.train_starttime, t1.train_endtime,
+		t1.contact_way, t1.sequenceNum
+		from system_user_face_entry t
+		left join cv_set_schedule_faceteach t1 on
+		t1.id = t.fid
+		where t.user_id = #{userId} and t1.cv_set_id =
+		#{cvSetId};
+	</select>
+	<!-- 根据面授ID获取面授信息 -->
+	<select id="getFaceTeachById" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		DATE_FORMAT(t.train_starttime,'%Y-%m-%d') AS
+		trainStartDate,
+		DATE_FORMAT(t.train_endtime,'%Y-%m-%d') AS
+		trainEndDate,
+		t.train_place AS trainPlace,
+		t.lession_starttime AS
+		lessionStarttime,
+		t.lession_endtime AS lessionEndtime,
+		CASE WHEN (
+		SELECT count(*) FROM system_user_face_entry WHERE fid = t.id )
+		> 0 THEN
+		1 ELSE 0 END AS isSignUp
+		FROM
+		cv_set_schedule_faceteach t
+		WHERE
+		t.id =
+		#{fid,jdbcType=INTEGER}
+		AND t.cv_set_id =
+		#{cvSetId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 根据项目ID获取面授期数 -->
+	<select id="faceTeachList" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		class_name AS
+		className
+		FROM
+		cv_set_schedule_faceteach
+		WHERE
+		CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER}
+	</select>
+</mapper>

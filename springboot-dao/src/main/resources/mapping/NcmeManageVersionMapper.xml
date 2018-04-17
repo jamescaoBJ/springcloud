@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeManageVersionMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeManageVersion">
+		<result column="VERNO" jdbcType="CHAR" property="verno" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeManageVersion">
+		insert into ncme_manage_version (VERNO, DESCRIPTION)
+		values (#{verno,jdbcType=CHAR}, #{description,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeManageVersion">
+		insert into ncme_manage_version
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="verno != null">
+				VERNO,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="verno != null">
+				#{verno,jdbcType=CHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

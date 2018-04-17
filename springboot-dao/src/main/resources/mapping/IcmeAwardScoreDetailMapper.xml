@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeAwardScoreDetailMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.IcmeAwardScoreDetail">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="AWARD_SCORE_STANDARD_ID" jdbcType="INTEGER"
+			property="awardScoreStandardId" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="VALUE" jdbcType="INTEGER" property="value" />
+		<result column="UNIT" jdbcType="VARCHAR" property="unit" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="MAX_SCORE_LIMIT" jdbcType="DOUBLE" property="maxScoreLimit" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, AWARD_SCORE_STANDARD_ID, NAME, VALUE, UNIT, SCORE,
+		REMARK,
+		MAX_SCORE_LIMIT, CREATE_DATE,
+		STATUS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_award_score_detail
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_award_score_detail
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeAwardScoreDetail">
+		insert into
+		icme_award_score_detail (ID, AWARD_SCORE_STANDARD_ID, NAME,
+		VALUE,
+		UNIT, SCORE,
+		REMARK, MAX_SCORE_LIMIT, CREATE_DATE,
+		STATUS)
+		values
+		(#{id,jdbcType=INTEGER}, #{awardScoreStandardId,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{value,jdbcType=INTEGER},
+		#{unit,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE},
+		#{remark,jdbcType=VARCHAR}, #{maxScoreLimit,jdbcType=DOUBLE},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeAwardScoreDetail">
+		insert into icme_award_score_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="awardScoreStandardId != null">
+				AWARD_SCORE_STANDARD_ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="value != null">
+				VALUE,
+			</if>
+			<if test="unit != null">
+				UNIT,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="maxScoreLimit != null">
+				MAX_SCORE_LIMIT,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="awardScoreStandardId != null">
+				#{awardScoreStandardId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="value != null">
+				#{value,jdbcType=INTEGER},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="maxScoreLimit != null">
+				#{maxScoreLimit,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeAwardScoreDetail">
+		update icme_award_score_detail
+		<set>
+			<if test="awardScoreStandardId != null">
+				AWARD_SCORE_STANDARD_ID =
+				#{awardScoreStandardId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="value != null">
+				VALUE = #{value,jdbcType=INTEGER},
+			</if>
+			<if test="unit != null">
+				UNIT = #{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				SCORE = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="maxScoreLimit != null">
+				MAX_SCORE_LIMIT = #{maxScoreLimit,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeAwardScoreDetail">
+		update
+		icme_award_score_detail
+		set AWARD_SCORE_STANDARD_ID =
+		#{awardScoreStandardId,jdbcType=INTEGER},
+		NAME =
+		#{name,jdbcType=VARCHAR},
+		VALUE = #{value,jdbcType=INTEGER},
+		UNIT =
+		#{unit,jdbcType=VARCHAR},
+		SCORE = #{score,jdbcType=DOUBLE},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		MAX_SCORE_LIMIT =
+		#{maxScoreLimit,jdbcType=DOUBLE},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TopicDiscussionMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TopicDiscussion">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="talk_content" jdbcType="VARCHAR" property="talkContent" />
+		<result column="create_date" jdbcType="DATE" property="createDate" />
+		<result column="create_user" jdbcType="VARCHAR" property="createUser" />
+		<result column="talk_ansy" jdbcType="VARCHAR" property="talkAnsy" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, talk_content, create_date, create_user, talk_ansy
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from topic_discussion
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="getLastTopicDiscuss" resultType="com.ncme.springboot.footstone.response.Record">
+
+
+		select csud.discuss_content as discussContent,csud.discuss_date as
+		discussDate ,u.real_name as realName,u.sex as sex from cv_set_unit_discuss
+		csud,system_user u where u.id = csud.system_user_id
+		and
+		csud.id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="submitTopicDiscuss" parameterType="com.ncme.springboot.model.CvSetUnitDiscuss"
+		useGeneratedKeys="true" keyProperty="id">
+
+		INSERT INTO cv_set_unit_discuss (
+		cv_set_id,
+		cv_unit_id,
+		discuss_id,
+		system_user_id,
+		discuss_date,
+		discuss_content,
+		discuss_type
+		)
+		VALUES
+		(#{cvSetId,jdbcType=INTEGER},#{cvUnitId,jdbcType=INTEGER},#{discussId,jdbcType=INTEGER},#{systemUserId,jdbcType=INTEGER},
+		sysdate() ,#{discussContent,jdbcType=VARCHAR},2);
+
+	</insert>
+
+	<select id="getCvUnit" resultType="com.ncme.springboot.model.CvUnit">
+
+		select * from cv_unit WHERE cv_unit.id = #{unitId,jdbcType=INTEGER}
+
+
+	</select>
+
+	<update id="updateLogCvSetUnit" parameterType="com.ncme.springboot.model.LogStudyCvUnit">
+
+		update log_study_cv_unit set STATUS = 2 , LAST_UPDATE_DATE = now() WHERE
+		CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER} and SYSTEM_USER_ID =
+		#{systemUserId,jdbcType=INTEGER} ;
+
+
+	</update>
+	<select id="CountTalk" parameterType="com.ncme.springboot.model.CvSetUnitDiscuss"
+		resultType="int">
+
+		select count(*) from cv_set_unit_discuss WHERE SYSTEM_USER_ID =
+		#{systemUserId,jdbcType=INTEGER}
+		and CV_UNIT_ID = #{cvUnitId,jdbcType=INTEGER} and DISCUSS_TYPE =
+		#{discussType,jdbcType=INTEGER}
+
+	</select>
+	<resultMap id="MyTopicResultMap" type="com.ncme.springboot.footstone.response.Record">
+
+		<collection property="talk" column="{unitId=unitId,talkId=talkId}"
+			select="getTalk" javaType="ArrayList" />
+	</resultMap>
+
+
+
+	<select id="getTalk" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+
+		SELECT
+		discuss.discuss_content as discussContent,discuss.discuss_date as discussDate,u.real_name as
+		realName,u.sex as sex
+		FROM
+		cv_set_unit_discuss discuss
+		LEFT JOIN system_user u ON discuss.system_user_id = u.id
+		WHERE
+		discuss.discuss_id =#{talkId,jdbcType=INTEGER}
+		AND discuss.CV_UNIT_ID
+		=#{unitId,jdbcType=INTEGER}
+		AND discuss.discuss_type = 2
+		ORDER BY
+		discuss.discuss_date DESC
+
+
+	</select>
+
+	<select id="getTopicDiscuss" resultMap="MyTopicResultMap">
+
+
+		SELECT
+		cu.id AS unitId,
+		CAST(cu.quota AS signed) AS unitQuota,
+		top.id AS talkId,
+		top.talk_content AS talkName
+		FROM
+		cv_unit cu,
+		group_class_info gci,
+		topic_discussion top
+		WHERE
+		cu.id = gci.class_id
+		AND gci.media_id = top.id
+		AND cu.id =
+		#{unitId,jdbcType=INTEGER};
+
+
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from topic_discussion
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TopicDiscussion">
+		insert into topic_discussion (ID, talk_content, create_date,
+		create_user, talk_ansy)
+		values (#{id,jdbcType=INTEGER}, #{talkContent,jdbcType=VARCHAR},
+		#{createDate,jdbcType=DATE},
+		#{createUser,jdbcType=VARCHAR}, #{talkAnsy,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TopicDiscussion">
+		insert into topic_discussion
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="talkContent != null">
+				talk_content,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="createUser != null">
+				create_user,
+			</if>
+			<if test="talkAnsy != null">
+				talk_ansy,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="talkContent != null">
+				#{talkContent,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="talkAnsy != null">
+				#{talkAnsy,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TopicDiscussion">
+		update topic_discussion
+		<set>
+			<if test="talkContent != null">
+				talk_content = #{talkContent,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="talkAnsy != null">
+				talk_ansy = #{talkAnsy,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TopicDiscussion">
+		update topic_discussion
+		set talk_content = #{talkContent,jdbcType=VARCHAR},
+		create_date = #{createDate,jdbcType=DATE},
+		create_user = #{createUser,jdbcType=VARCHAR},
+		talk_ansy = #{talkAnsy,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getTopicIdByUnitId" resultType="java.lang.Integer">
+		SELECT
+		top.id
+		FROM
+		cv_unit cu,
+		group_class_info gci,
+		topic_discussion top
+		WHERE
+		cu.id = gci.class_id
+		AND gci.media_id = top.id
+		AND cu.id = #{unitId}
+	</select>
+</mapper>

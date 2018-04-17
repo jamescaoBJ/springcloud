@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemAbilityCourseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemAbilityCourse">
+		<result column="ABILITY_ID" jdbcType="INTEGER" property="abilityId" />
+		<result column="COURSE_ID" jdbcType="INTEGER" property="courseId" />
+		<result column="CREDIT_TYPE" jdbcType="VARCHAR" property="creditType" />
+		<result column="CREDIT_NUM" jdbcType="DOUBLE" property="creditNum" />
+		<result column="IS_OBLIGATORY" jdbcType="INTEGER" property="isObligatory" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemAbilityCourse">
+		insert into system_ability_course (ABILITY_ID, COURSE_ID, CREDIT_TYPE,
+		CREDIT_NUM, IS_OBLIGATORY)
+		values (#{abilityId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER},
+		#{creditType,jdbcType=VARCHAR},
+		#{creditNum,jdbcType=DOUBLE}, #{isObligatory,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemAbilityCourse">
+		insert into system_ability_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="abilityId != null">
+				ABILITY_ID,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="creditType != null">
+				CREDIT_TYPE,
+			</if>
+			<if test="creditNum != null">
+				CREDIT_NUM,
+			</if>
+			<if test="isObligatory != null">
+				IS_OBLIGATORY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="abilityId != null">
+				#{abilityId,jdbcType=INTEGER},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="creditType != null">
+				#{creditType,jdbcType=VARCHAR},
+			</if>
+			<if test="creditNum != null">
+				#{creditNum,jdbcType=DOUBLE},
+			</if>
+			<if test="isObligatory != null">
+				#{isObligatory,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

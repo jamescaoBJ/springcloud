@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvLiveCoursewareStudyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.CvLiveCoursewareStudy">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="coursewareId" jdbcType="VARCHAR" property="coursewareid" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="joinTime" jdbcType="BIGINT" property="jointime" />
+		<result column="leaveTime" jdbcType="BIGINT" property="leavetime" />
+		<result column="duration" jdbcType="VARCHAR" property="duration" />
+		<result column="ip" jdbcType="VARCHAR" property="ip" />
+		<result column="device" jdbcType="INTEGER" property="device" />
+		<result column="recordDate" jdbcType="TIMESTAMP" property="recorddate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, coursewareId, username, joinTime, leaveTime,
+		duration, ip,
+		device, recordDate
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_live_courseware_study
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_live_courseware_study
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvLiveCoursewareStudy">
+		insert into
+		cv_live_courseware_study (id, user_id, coursewareId,
+		username,
+		joinTime, leaveTime,
+		duration, ip, device,
+		recordDate)
+		values
+		(#{id,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},
+		#{coursewareid,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{jointime,jdbcType=BIGINT}, #{leavetime,jdbcType=BIGINT},
+		#{duration,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+		#{device,jdbcType=INTEGER},
+		#{recorddate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvLiveCoursewareStudy">
+		insert into cv_live_courseware_study
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="coursewareid != null">
+				coursewareId,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="jointime != null">
+				joinTime,
+			</if>
+			<if test="leavetime != null">
+				leaveTime,
+			</if>
+			<if test="duration != null">
+				duration,
+			</if>
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="device != null">
+				device,
+			</if>
+			<if test="recorddate != null">
+				recordDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="coursewareid != null">
+				#{coursewareid,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="jointime != null">
+				#{jointime,jdbcType=BIGINT},
+			</if>
+			<if test="leavetime != null">
+				#{leavetime,jdbcType=BIGINT},
+			</if>
+			<if test="duration != null">
+				#{duration,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				#{device,jdbcType=INTEGER},
+			</if>
+			<if test="recorddate != null">
+				#{recorddate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvLiveCoursewareStudy">
+		update cv_live_courseware_study
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="coursewareid != null">
+				coursewareId = #{coursewareid,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="jointime != null">
+				joinTime = #{jointime,jdbcType=BIGINT},
+			</if>
+			<if test="leavetime != null">
+				leaveTime = #{leavetime,jdbcType=BIGINT},
+			</if>
+			<if test="duration != null">
+				duration = #{duration,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				ip = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				device = #{device,jdbcType=INTEGER},
+			</if>
+			<if test="recorddate != null">
+				recordDate = #{recorddate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvLiveCoursewareStudy">
+		update
+		cv_live_courseware_study
+		set user_id = #{userId,jdbcType=BIGINT},
+		coursewareId = #{coursewareid,jdbcType=VARCHAR},
+		username =
+		#{username,jdbcType=VARCHAR},
+		joinTime = #{jointime,jdbcType=BIGINT},
+		leaveTime = #{leavetime,jdbcType=BIGINT},
+		duration =
+		#{duration,jdbcType=VARCHAR},
+		ip = #{ip,jdbcType=VARCHAR},
+		device =
+		#{device,jdbcType=INTEGER},
+		recordDate =
+		#{recorddate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetScoreLogMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetScoreLog">
+		<id column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<id column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="SCORE1" jdbcType="DECIMAL" property="score1" />
+		<result column="SCORE2" jdbcType="DECIMAL" property="score2" />
+		<result column="SCORE3" jdbcType="DECIMAL" property="score3" />
+		<result column="SCORE4" jdbcType="DECIMAL" property="score4" />
+		<result column="SCORE_DATE" jdbcType="TIMESTAMP" property="scoreDate" />
+		<result column="SCORE_CONTENT" jdbcType="VARCHAR" property="scoreContent" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		CV_SET_ID, SYSTEM_USER_ID, SCORE1, SCORE2, SCORE3, SCORE4,
+		SCORE_DATE,
+		SCORE_CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetScoreLogKey"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set_score_log
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and
+		SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetScoreLogKey">
+		delete from
+		cv_set_score_log
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and
+		SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetScoreLog">
+		insert into cv_set_score_log
+		(CV_SET_ID, SYSTEM_USER_ID, SCORE1,
+		SCORE2, SCORE3, SCORE4,
+		SCORE_DATE,
+		SCORE_CONTENT)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{systemUserId,jdbcType=INTEGER},
+		#{score1,jdbcType=DECIMAL},
+		#{score2,jdbcType=DECIMAL}, #{score3,jdbcType=DECIMAL},
+		#{score4,jdbcType=DECIMAL},
+		#{scoreDate,jdbcType=TIMESTAMP},
+		#{scoreContent,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetScoreLog">
+		insert into cv_set_score_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="score1 != null">
+				SCORE1,
+			</if>
+			<if test="score2 != null">
+				SCORE2,
+			</if>
+			<if test="score3 != null">
+				SCORE3,
+			</if>
+			<if test="score4 != null">
+				SCORE4,
+			</if>
+			<if test="scoreDate != null">
+				SCORE_DATE,
+			</if>
+			<if test="scoreContent != null">
+				SCORE_CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="score1 != null">
+				#{score1,jdbcType=DECIMAL},
+			</if>
+			<if test="score2 != null">
+				#{score2,jdbcType=DECIMAL},
+			</if>
+			<if test="score3 != null">
+				#{score3,jdbcType=DECIMAL},
+			</if>
+			<if test="score4 != null">
+				#{score4,jdbcType=DECIMAL},
+			</if>
+			<if test="scoreDate != null">
+				#{scoreDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="scoreContent != null">
+				#{scoreContent,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvSetScoreLog">
+		update cv_set_score_log
+		<set>
+			<if test="score1 != null">
+				SCORE1 = #{score1,jdbcType=DECIMAL},
+			</if>
+			<if test="score2 != null">
+				SCORE2 = #{score2,jdbcType=DECIMAL},
+			</if>
+			<if test="score3 != null">
+				SCORE3 = #{score3,jdbcType=DECIMAL},
+			</if>
+			<if test="score4 != null">
+				SCORE4 = #{score4,jdbcType=DECIMAL},
+			</if>
+			<if test="scoreDate != null">
+				SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="scoreContent != null">
+				SCORE_CONTENT = #{scoreContent,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and SYSTEM_USER_ID =
+		#{systemUserId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetScoreLog">
+		update
+		cv_set_score_log
+		set SCORE1 = #{score1,jdbcType=DECIMAL},
+		SCORE2 =
+		#{score2,jdbcType=DECIMAL},
+		SCORE3 = #{score3,jdbcType=DECIMAL},
+		SCORE4
+		= #{score4,jdbcType=DECIMAL},
+		SCORE_DATE =
+		#{scoreDate,jdbcType=TIMESTAMP},
+		SCORE_CONTENT =
+		#{scoreContent,jdbcType=VARCHAR}
+		where CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER}
+		and SYSTEM_USER_ID =
+		#{systemUserId,jdbcType=INTEGER}
+	</update>
+
+	<select id="listScoreLogByCvSetId" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t.CV_SET_ID
+		as cvSetId,u.REAL_NAME as studentName,u.sex as sex, t.score_date as
+		evaluateTime,t.SCORE_CONTENT as evaluateContent
+		from cv_set_score_log t
+		LEFT JOIN system_user u on t.system_user_id = u.id
+		where t.cv_set_id =
+		#{cvSetId,jdbcType=INTEGER}
+	</select>
+	<!-- 根据用户id和项目id查询该项目评价信息 -->
+	<select id="getScoreLogByUserIdAndCvSetId" resultType="com.ncme.springboot.model.CvSetScoreLog">
+		select
+		<include refid="Base_Column_List" />
+		from cv_set_score_log
+		where system_user_id = #{userId,jdbcType=INTEGER}
+		and cv_set_id =
+		#{cvSetId,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemOrderPaymodeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemOrderPaymode">
+		<result column="PAYMODE_CODE" jdbcType="CHAR" property="paymodeCode" />
+		<result column="PAYMODE_NAME" jdbcType="VARCHAR" property="paymodeName" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemOrderPaymode">
+		insert into system_order_paymode (PAYMODE_CODE, PAYMODE_NAME)
+		values (#{paymodeCode,jdbcType=CHAR}, #{paymodeName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemOrderPaymode">
+		insert into system_order_paymode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="paymodeCode != null">
+				PAYMODE_CODE,
+			</if>
+			<if test="paymodeName != null">
+				PAYMODE_NAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="paymodeCode != null">
+				#{paymodeCode,jdbcType=CHAR},
+			</if>
+			<if test="paymodeName != null">
+				#{paymodeName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

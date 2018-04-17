@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardOrderLogMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCardOrderLog">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ORDER_ID" jdbcType="INTEGER" property="orderId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="IS_SUCCESS" jdbcType="INTEGER" property="isSuccess" />
+		<result column="ORDER_DATE" jdbcType="DATE" property="orderDate" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="ALIPAY_NO" jdbcType="VARCHAR" property="alipayNo" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ORDER_ID, USER_ID, IS_SUCCESS, ORDER_DATE, REMARK, ALIPAY_NO
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_card_order_log
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_card_order_log
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardOrderLog">
+		insert into system_card_order_log (ID, ORDER_ID, USER_ID,
+		IS_SUCCESS, ORDER_DATE, REMARK,
+		ALIPAY_NO)
+		values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{isSuccess,jdbcType=INTEGER}, #{orderDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR},
+		#{alipayNo,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardOrderLog">
+		insert into system_card_order_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="isSuccess != null">
+				IS_SUCCESS,
+			</if>
+			<if test="orderDate != null">
+				ORDER_DATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="alipayNo != null">
+				ALIPAY_NO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="isSuccess != null">
+				#{isSuccess,jdbcType=INTEGER},
+			</if>
+			<if test="orderDate != null">
+				#{orderDate,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayNo != null">
+				#{alipayNo,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemCardOrderLog">
+		update system_card_order_log
+		<set>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="isSuccess != null">
+				IS_SUCCESS = #{isSuccess,jdbcType=INTEGER},
+			</if>
+			<if test="orderDate != null">
+				ORDER_DATE = #{orderDate,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayNo != null">
+				ALIPAY_NO = #{alipayNo,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemCardOrderLog">
+		update system_card_order_log
+		set ORDER_ID = #{orderId,jdbcType=INTEGER},
+		USER_ID = #{userId,jdbcType=INTEGER},
+		IS_SUCCESS = #{isSuccess,jdbcType=INTEGER},
+		ORDER_DATE = #{orderDate,jdbcType=DATE},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		ALIPAY_NO = #{alipayNo,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

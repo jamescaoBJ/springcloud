@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardCreateRecordBakMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.SystemCardCreateRecordBak">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CARD_START_INT" jdbcType="VARCHAR" property="cardStartInt" />
+		<result column="CARD_END_INT" jdbcType="VARCHAR" property="cardEndInt" />
+		<result column="CARD_SUM" jdbcType="INTEGER" property="cardSum" />
+		<result column="CARD_USERD_SUM" jdbcType="INTEGER" property="cardUserdSum" />
+		<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardCreateRecordBak">
+		insert into system_card_create_record_bak (ID, CARD_START_INT, CARD_END_INT,
+		CARD_SUM, CARD_USERD_SUM, CREATE_DATE,
+		DESCRIPTION)
+		values (#{id,jdbcType=INTEGER}, #{cardStartInt,jdbcType=VARCHAR},
+		#{cardEndInt,jdbcType=VARCHAR},
+		#{cardSum,jdbcType=INTEGER}, #{cardUserdSum,jdbcType=INTEGER}, #{createDate,jdbcType=DATE},
+		#{description,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardCreateRecordBak">
+		insert into system_card_create_record_bak
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cardStartInt != null">
+				CARD_START_INT,
+			</if>
+			<if test="cardEndInt != null">
+				CARD_END_INT,
+			</if>
+			<if test="cardSum != null">
+				CARD_SUM,
+			</if>
+			<if test="cardUserdSum != null">
+				CARD_USERD_SUM,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cardStartInt != null">
+				#{cardStartInt,jdbcType=VARCHAR},
+			</if>
+			<if test="cardEndInt != null">
+				#{cardEndInt,jdbcType=VARCHAR},
+			</if>
+			<if test="cardSum != null">
+				#{cardSum,jdbcType=INTEGER},
+			</if>
+			<if test="cardUserdSum != null">
+				#{cardUserdSum,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

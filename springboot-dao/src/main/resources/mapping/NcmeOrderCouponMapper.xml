@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeOrderCouponMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeOrderCoupon">
+		<result column="COUPON_CODE" jdbcType="VARCHAR" property="couponCode" />
+		<result column="BALANCE" jdbcType="DOUBLE" property="balance" />
+		<result column="COUPON_TIMES" jdbcType="INTEGER" property="couponTimes" />
+		<result column="USE_TIMES" jdbcType="INTEGER" property="useTimes" />
+		<result column="START_DATE" jdbcType="DATE" property="startDate" />
+		<result column="END_DATE" jdbcType="DATE" property="endDate" />
+		<result column="SALESMAN" jdbcType="VARCHAR" property="salesman" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeOrderCoupon">
+		insert into ncme_order_coupon (COUPON_CODE, BALANCE, COUPON_TIMES,
+		USE_TIMES, START_DATE, END_DATE,
+		SALESMAN, CREATE_TIME, REMARK
+		)
+		values (#{couponCode,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE},
+		#{couponTimes,jdbcType=INTEGER},
+		#{useTimes,jdbcType=INTEGER}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE},
+		#{salesman,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeOrderCoupon">
+		insert into ncme_order_coupon
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="couponCode != null">
+				COUPON_CODE,
+			</if>
+			<if test="balance != null">
+				BALANCE,
+			</if>
+			<if test="couponTimes != null">
+				COUPON_TIMES,
+			</if>
+			<if test="useTimes != null">
+				USE_TIMES,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="salesman != null">
+				SALESMAN,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="couponCode != null">
+				#{couponCode,jdbcType=VARCHAR},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DOUBLE},
+			</if>
+			<if test="couponTimes != null">
+				#{couponTimes,jdbcType=INTEGER},
+			</if>
+			<if test="useTimes != null">
+				#{useTimes,jdbcType=INTEGER},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=DATE},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=DATE},
+			</if>
+			<if test="salesman != null">
+				#{salesman,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SearchMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSet">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<!-- 首页全局搜索 -->
+	<select id="getSearchResultList" resultType="com.ncme.springboot.footstone.response.Record">
+		select ll.* from ( 
+		<!-- 项目搜索 -->
+		select t.id as itemId,t.name as itemName,t.file_path as itemUrl,
+		concat( case csa.CV_SET_LEVEL when 1 then '国家I类' when 2 then '省级I类' when 3 then
+		'市级I类' when 4 then '省级II类' when 5 then '市级II类' when 6 then ' ' end
+		,'',left(csa.CV_SET_SCORE,3),'学分') as itemTitleTeacher,
+		'0' as itemPeopleNum,'0' as itemHintTitle,'0' as itemType,CASE cost_type
+		when 0 then '免费' when 2 then '收费' else '学习卡' end as itemStatus,'' as
+		startDate,'' as endDate,'' as makeType
+		from cv_set t
+		LEFT JOIN cv_set_authorization csa ON csa.CV_SET_ID = t.id
+		LEFT JOIN cv_set_authorization_region csar ON csar.AUTHORIZATION_ID = csa.id
+		left join cv_ref_teacher r on r.cv_id = t.id left join expert_info e on
+		e.ID = r.expert_id
+		where 1=1 and t.`STATUS` = 5 and t.`NAME` like CONCAT('%',#{keyWord},'%')
+		AND csa.CV_SET_START_DATE &lt;= CURDATE() AND csa.CV_SET_END_DATE >= CURDATE()
+		<if test="provinceId != null">
+			and t.id in (SELECT DISTINCT(ccc.CV_SET_ID) FROM
+			cv_set_authorization_region csar LEFT JOIN cv_set_authorization ccc
+			ON ccc.id = csar.AUTHORIZATION_ID
+			WHERE csar.PROP_VAL_ID =
+			#{provinceId})
+		</if>
+		<if test="provinceId == null">
+			and t.id in (SELECT ccc.CV_SET_ID FROM
+			cv_set_authorization_region csar
+			LEFT JOIN cv_set_authorization ccc ON
+			ccc.id = csar.AUTHORIZATION_ID
+			GROUP BY ccc.cv_set_id,ccc.id HAVING
+			count(1) = (SELECT count(1) FROM
+			exam_prop_val epv WHERE epv.type =
+			20))
+		</if>
+		<if test="domainName != null">
+			AND t.id IN (SELECT DISTINCT(CV_SET_ID) FROM
+			cv_set_authorization csa
+			LEFT JOIN cv_set_authorization_system_site
+			csass ON
+			csass.AUTHORIZATION_ID = csa.ID
+			LEFT JOIN system_site ss ON
+			csass.SYSTEM_SITE_ID = ss.id
+			WHERE ss.DOMAIN_NAME =#{domainName})
+		</if>
+		or t.id in (select m.cv_set_id from cv_set_expert m inner join
+		expert_info n on n.id = m.expert_id where m.type = 2 and n.`NAME` like
+		CONCAT('%',#{keyWord},'%')) 
+		and t.`STATUS` = 5
+		AND csa.CV_SET_START_DATE &lt;= CURDATE() AND csa.CV_SET_END_DATE >= CURDATE() 
+		<if test="provinceId != null">
+			and t.id in (SELECT DISTINCT(ccc.CV_SET_ID) FROM
+			cv_set_authorization_region csar LEFT JOIN cv_set_authorization ccc
+			ON ccc.id = csar.AUTHORIZATION_ID
+			WHERE csar.PROP_VAL_ID =
+			#{provinceId})
+		</if>
+		<if test="provinceId == null">
+			and t.id in (SELECT ccc.CV_SET_ID FROM
+			cv_set_authorization_region csar
+			LEFT JOIN cv_set_authorization ccc ON
+			ccc.id = csar.AUTHORIZATION_ID
+			GROUP BY ccc.cv_set_id,ccc.id HAVING
+			count(1) = (SELECT count(1) FROM
+			exam_prop_val epv WHERE epv.type =
+			20))
+		</if>
+		<if test="domainName != null">
+			AND t.id IN (SELECT DISTINCT(CV_SET_ID) FROM
+			cv_set_authorization csa
+			LEFT JOIN cv_set_authorization_system_site
+			csass ON
+			csass.AUTHORIZATION_ID = csa.ID
+			LEFT JOIN system_site ss ON
+			csass.SYSTEM_SITE_ID = ss.id
+			WHERE ss.DOMAIN_NAME =#{domainName})
+		</if>
+		<!-- 课程搜索 -->
+		union
+		select * from (
+		select t.id as itemId,t.name as itemName,t.file_path as itemUrl,
+		e.`NAME` as itemTitleTeacher,
+		'0' as itemPeopleNum,'0' as itemHintTitle,'1' as itemType,t.cv_type as
+		itemStatus,'' as startDate,'' as endDate,'' as makeType 
+		from cv t
+		left join cv_ref_teacher r on r.cv_id = t.id
+		left join expert_info e on e.ID = r.expert_id
+			LEFT JOIN cv_schedule cve ON t.ID = cve.cv_id
+			LEFT JOIN cv_set_schedule cvs ON cve.SCHEDULE_ID = cvs.CV_SCHEDULE_ID
+			LEFT JOIN cv_set cs ON cvs.CV_SET_ID = cs.id
+			LEFT JOIN cv_set_authorization t6 ON t6.cv_set_id = cs.id
+			LEFT JOIN cv_set_authorization_system_site t7 ON t7.AUTHORIZATION_ID = t6.ID
+		where 1=1 and t.cv_type !=2 and t.`NAME` like CONCAT('%',#{keyWord},'%') AND cs.`STATUS` = 5
+		and t.id in (
+			select t.id
+				from cv t
+				left join
+				cv_schedule cve on t.ID= cve.cv_id
+				left join cv_set_schedule cvs on
+				cve.SCHEDULE_ID =cvs.CV_SCHEDULE_ID
+				left join cv_set cs on cvs.CV_SET_ID=cs.id
+				LEFT JOIN cv_set_authorization t6 ON t6.cv_set_id = cs.id
+				LEFT JOIN cv_set_authorization_system_site t7 ON t7.AUTHORIZATION_ID = t6.ID
+				where t.id>0 
+				and (find_in_set('1', t.brand) or find_in_set('3', t.brand) or find_in_set('4', t.brand)or find_in_set('5', t.brand))
+				and cs.`STATUS` =5
+				group by t.id
+			)
+		or t.id in (select m.cv_id from cv_ref_teacher m inner join expert_info
+		n on n.id = m.expert_id where m.type = 1 and n.`NAME` like
+		CONCAT('%',#{keyWord},'%')) AND t.cv_type != 2 AND cs.`STATUS` = 5 
+		and t.id in (
+			select t.id
+				from cv t
+				left join
+				cv_schedule cve on t.ID= cve.cv_id
+				left join cv_set_schedule cvs on
+				cve.SCHEDULE_ID =cvs.CV_SCHEDULE_ID
+				left join cv_set cs on cvs.CV_SET_ID=cs.id
+				LEFT JOIN cv_set_authorization t6 ON t6.cv_set_id = cs.id
+				LEFT JOIN cv_set_authorization_system_site t7 ON t7.AUTHORIZATION_ID = t6.ID
+				where t.id>0 
+				and (find_in_set('1', t.brand) or find_in_set('3', t.brand) or find_in_set('4', t.brand)or find_in_set('5', t.brand))
+				and cs.`STATUS` =5
+				group by t.id
+			)
+		group by t.id
+		) m
+		union
+		select l.id as itemId,l.name as itemName,l.file_path itemUrl,
+		'' as itemTitleTeacher,
+		'0' as itemPeopleNum,'0' as itemHintTitle,'1' as itemType,l.type as
+		itemStatus,l.startDate,l.endDate,l.makeType 
+		from (
+		SELECT C.* FROM (
+		SELECT
+		F.*,F.startDate AS sDate,
+		(
+		CASE
+		WHEN
+		F.start_time > 0 AND F.end_time = 0 THEN
+		1
+		WHEN F.start_time > 0 AND
+		F.end_time > 0 and F.start_time > F.end_time
+		THEN
+		1
+		WHEN F.start_time IS
+		NULL THEN
+		2
+		WHEN F.start_time &lt; F.end_time AND
+		FROM_UNIXTIME(F.end_time) &lt; NOW()
+		AND F.makeType = 2 THEN
+		3
+		WHEN
+		F.makeType = 1 THEN
+		4
+		WHEN F.start_time &lt; F.end_time AND
+		FROM_UNIXTIME(F.end_time) &lt; NOW()
+		AND F.makeType = 0 THEN
+		5
+		ELSE
+		3
+		END
+		)
+		AS type
+		FROM(
+		SELECT
+		A.ID1 AS ID,
+		A.NAME1 AS `NAME`,
+		A.BRAND1 AS BRAND,
+		A.INTRODUCTION1 AS INTRODUCTION,
+		A.FILE_PATH1 AS FILE_PATH,
+		A.CREATE_DATE1 AS CREATE_DATE,
+		A.CREATOR1 AS CREATOR,
+		A.cv_type1 AS
+		cv_type,
+		A.class_no1 AS classNo,
+		A.student_join_url1 AS studentJoinUrl,
+		A.student_token1 AS token,
+		A.start_date1 AS startDate,
+		A.invalid_date1
+		AS endDate,
+		A.course_make_type1 AS makeType,
+		A.oldtype1 AS oldtype,
+		lrf.start_time,
+		lrf.end_time
+		FROM(
+		SELECT
+		t2.ID AS ID1,
+		t2.`NAME` AS NAME1,
+		t2.BRAND AS BRAND1,
+		t2.INTRODUCTION AS INTRODUCTION1,
+		t2.FILE_PATH AS
+		FILE_PATH1,
+		t2.CREATE_DATE AS CREATE_DATE1,
+		t2.CREATOR AS CREATOR1,
+		t2.cv_type AS cv_type1,
+		live.class_no AS class_no1,
+		live.student_join_url AS student_join_url1,
+		live.student_token AS
+		student_token1,
+		live.start_date AS start_date1,
+		live.invalid_date AS
+		invalid_date1,
+		live.course_make_type AS course_make_type1,
+		(
+		CASE
+		WHEN
+		live.start_date &lt;= NOW()
+		AND live.invalid_date >= NOW() THEN
+		1
+		WHEN
+		live.start_date > NOW() THEN
+		2
+		WHEN live.invalid_date &lt; NOW()
+		AND
+		live.course_make_type != 1 THEN
+		3
+		WHEN live.course_make_type = 1 THEN
+		4
+		END
+		) AS oldtype1
+		FROM
+		cv t2,
+		cv_live live,
+		cv_schedule t3
+		WHERE
+		EXISTS (
+		SELECT
+		1
+		FROM
+		cv_set_schedule t4
+		JOIN cv_set t5 ON t4.cv_set_id = t5.id
+		JOIN cv_set_user_image t8 ON t5.id = t8.cv_set_id
+		<!-- PC端加入授权后,此处两行注释掉,使用下面三行替代 JOIN cv_set_system_site t6 ON t6.cv_set_id 
+			= t5.id JOIN system_site t7 ON t6.system_site_id = t7.id -->
+		JOIN cv_set_authorization csa ON csa.cv_set_id = t5.id
+		JOIN
+		cv_set_authorization_system_site csass ON csass.AUTHORIZATION_ID =
+		csa.ID
+		JOIN system_site t7 ON csass.SYSTEM_SITE_ID = t7.id
+		WHERE
+		t3.schedule_id = t4.cv_schedule_id
+		AND t5. STATUS =5
+		AND t2.id = live.cv_id
+		<!-- PC端加入授权后,此处两行注释掉,否则查询不到数据 AND t5.START_DATE &lt;= NOW() AND t5.END_DATE 
+			>= NOW() -->
+		)
+		AND t2.id = t3.cv_id
+		AND t2.cv_type = 2
+		) A
+		LEFT JOIN cv_live_study_ref
+		lrf
+		ON lrf.class_no = A.class_no1
+
+		) F
+		) C
+		LEFT JOIN cv_live_type_sort t9
+		ON t9.type = C.type
+		GROUP BY
+		C.id
+		ORDER
+		BY
+		t9.id ASC,
+		C.sDate DESC
+		) l where l.name like CONCAT('%',#{keyWord},'%')
+		or l.id in (select m.cv_id from cv_ref_teacher m inner join expert_info
+		n on n.id = m.expert_id where m.type = 1 and n.`NAME` like
+		CONCAT('%',#{keyWord},'%')) group by l.id
+		<!-- 名师 -->
+		union
+		SELECT e.id itemId,'' itemName,e.photo itemUrl,e.`NAME` itemTitleTeacher,
+			e.workunit_office itemPeopleNum, e.workunit itemHintTitle,
+			'2' AS itemType,'' AS itemStatus,
+			'' as startDate,
+			'' as endDate,
+			'' as makeType
+		FROM content_edition_ref c
+		LEFT JOIN expert_info e ON e.ID = c.expert_info_id
+		WHERE e.lockstate = 1 AND c.CHECK_STATE = 1 and e.personage = 1 and e.`NAME` like CONCAT('%',#{keyWord},'%')
+		<!-- ORDER BY CONVERT (e. NAME USING gbk) ASC  -->
+		<!-- 专委会 -->
+		union
+		select e.id itemId,e.`NAME` itemName,i.photo itemUrl,i.`NAME` itemTitleTeacher,
+			'' itemPeopleNum,i.workunit itemHintTitle,
+			'3' AS itemType,'' AS itemStatus,
+			'' as startDate,
+			'' as endDate,
+			'' as makeType
+		from content_edition_ref  c 
+		left JOIN expert_group e ON  c.EXPERT_ID = e.ID 
+		left join expert_info i on i.groupid = e.id
+		where e.parent = 0 and e.lockstate=1 and e.state = 1  and e.`NAME` like CONCAT('%',#{keyWord},'%')
+		group by e.id  
+		<!-- 根据单元名称 查询 所属的课程 -->
+		union
+		select t.id AS itemId,t.name as itemName,t.file_path AS itemUrl,e.`NAME` AS itemTitleTeacher,'0' AS itemPeopleNum,'0' AS itemHintTitle,
+		'1' AS itemType,t.cv_type AS itemStatus,'' AS startDate,'' AS endDate,'' AS makeType
+		from cv_unit cvunit left join cv_ref_unit cvrefunit on cvrefunit.unit_id = cvunit.id left join cv t on t.id = cvrefunit.cv_id
+		LEFT JOIN cv_schedule cve ON t.ID = cve.cv_id
+		LEFT JOIN cv_ref_teacher r ON r.cv_id = t.id
+		LEFT JOIN expert_info e ON e.ID = r.expert_id
+		LEFT JOIN cv_set_schedule cvs ON cve.SCHEDULE_ID = cvs.CV_SCHEDULE_ID
+		LEFT JOIN cv_set cs ON cvs.CV_SET_ID = cs.id
+		LEFT JOIN cv_set_authorization t6 ON t6.cv_set_id = cs.id
+		LEFT JOIN cv_set_authorization_system_site t7 ON t7.AUTHORIZATION_ID = t6.ID
+		where 1 = 1 and cs.`STATUS`=5 
+		AND t.cv_type != 2 and cvunit.`NAME` like CONCAT('%',#{keyWord},'%')
+		and (find_in_set('1', t.brand) or find_in_set('3', t.brand) or find_in_set('4', t.brand)or find_in_set('5', t.brand))
+		group by t.id
+		<!-- 根据单元名称 查询 所属的项目 -->
+		union
+		select t.id as itemId,t.name as itemName,t.file_path as itemUrl,
+		concat( case csa.CV_SET_LEVEL when 1 then '国家I类' when 2 then '省级I类' when 3 then
+		'市级I类' when 4 then '省级II类' when 5 then '市级II类' when 6 then ' ' end
+		,'',left(csa.CV_SET_SCORE,3),'学分') as itemTitleTeacher,
+		'0' as itemPeopleNum,'0' as itemHintTitle,'0' as itemType,CASE cost_type
+		when 0 then '免费' when 2 then '收费' else '学习卡' end as itemStatus,'' as
+		startDate,'' as endDate,'' as makeType
+			from cv_unit cvunit left join cv_ref_unit cvrefunit on cvrefunit.unit_id = cvunit.id left join cv c on c.id = cvrefunit.cv_id
+			LEFT JOIN cv_schedule cve ON c.ID = cve.cv_id
+			LEFT JOIN cv_set_schedule cvs ON cve.SCHEDULE_ID = cvs.CV_SCHEDULE_ID
+			LEFT JOIN cv_set t ON cvs.CV_SET_ID = t.id
+			LEFT JOIN cv_set_authorization csa ON csa.CV_SET_ID = t.id
+			LEFT JOIN cv_ref_teacher r ON r.cv_id = t.id
+			LEFT JOIN expert_info e ON e.ID = r.expert_id
+			WHERE 1 = 1
+			AND t.`STATUS` = 5
+			AND t.`NAME` like CONCAT('%',#{keyWord},'%')
+			AND csa.CV_SET_START_DATE &lt;= CURDATE() AND csa.CV_SET_END_DATE >= CURDATE()
+			<if test="provinceId != null">
+				and t.id in (SELECT DISTINCT(ccc.CV_SET_ID) FROM
+				cv_set_authorization_region csar LEFT JOIN cv_set_authorization ccc
+				ON ccc.id = csar.AUTHORIZATION_ID
+				WHERE csar.PROP_VAL_ID = #{provinceId})
+			</if>
+			<if test="provinceId == null">
+				and t.id in (SELECT ccc.CV_SET_ID FROM
+				cv_set_authorization_region csar
+				LEFT JOIN cv_set_authorization ccc ON
+				ccc.id = csar.AUTHORIZATION_ID
+				GROUP BY ccc.cv_set_id,ccc.id HAVING
+				count(1) = (SELECT count(1) FROM
+				exam_prop_val epv WHERE epv.type = 20))
+			</if>
+			<if test="domainName != null">
+				AND t.id IN (SELECT DISTINCT(CV_SET_ID) FROM
+				cv_set_authorization csa
+				LEFT JOIN cv_set_authorization_system_site
+				csass ON
+				csass.AUTHORIZATION_ID = csa.ID
+				LEFT JOIN system_site ss ON
+				csass.SYSTEM_SITE_ID = ss.id
+				WHERE ss.DOMAIN_NAME =#{domainName})
+			</if>
+			group by t.id
+		<!-- order by e.organizedate desc -->
+		) ll group by ll.itemId
+	</select>
+
+</mapper>

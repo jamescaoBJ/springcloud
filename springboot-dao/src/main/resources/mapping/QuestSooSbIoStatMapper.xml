@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooSbIoStatMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooSbIoStat">
+		<result column="FILE_NO" jdbcType="INTEGER" property="fileNo" />
+		<result column="TABLESPACE_NAME" jdbcType="VARCHAR" property="tablespaceName" />
+		<result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+		<result column="DEVICE_NAME" jdbcType="VARCHAR" property="deviceName" />
+		<result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+		<result column="PHYWRTS" jdbcType="INTEGER" property="phywrts" />
+		<result column="PHYRDS" jdbcType="INTEGER" property="phyrds" />
+		<result column="PHYBLKWRT" jdbcType="INTEGER" property="phyblkwrt" />
+		<result column="PHYBLKRD" jdbcType="INTEGER" property="phyblkrd" />
+		<result column="BLOCKS" jdbcType="INTEGER" property="blocks" />
+		<result column="TOT_IO" jdbcType="INTEGER" property="totIo" />
+		<result column="READTIM" jdbcType="INTEGER" property="readtim" />
+		<result column="WRITETIM" jdbcType="INTEGER" property="writetim" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooSbIoStat">
+		insert into quest_soo_sb_io_stat (FILE_NO, TABLESPACE_NAME, FILE_NAME,
+		DEVICE_NAME, SHORT_NAME, PHYWRTS,
+		PHYRDS, PHYBLKWRT, PHYBLKRD,
+		BLOCKS, TOT_IO, READTIM,
+		WRITETIM)
+		values (#{fileNo,jdbcType=INTEGER}, #{tablespaceName,jdbcType=VARCHAR},
+		#{fileName,jdbcType=VARCHAR},
+		#{deviceName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, #{phywrts,jdbcType=INTEGER},
+		#{phyrds,jdbcType=INTEGER}, #{phyblkwrt,jdbcType=INTEGER},
+		#{phyblkrd,jdbcType=INTEGER},
+		#{blocks,jdbcType=INTEGER}, #{totIo,jdbcType=INTEGER}, #{readtim,jdbcType=INTEGER},
+		#{writetim,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooSbIoStat">
+		insert into quest_soo_sb_io_stat
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fileNo != null">
+				FILE_NO,
+			</if>
+			<if test="tablespaceName != null">
+				TABLESPACE_NAME,
+			</if>
+			<if test="fileName != null">
+				FILE_NAME,
+			</if>
+			<if test="deviceName != null">
+				DEVICE_NAME,
+			</if>
+			<if test="shortName != null">
+				SHORT_NAME,
+			</if>
+			<if test="phywrts != null">
+				PHYWRTS,
+			</if>
+			<if test="phyrds != null">
+				PHYRDS,
+			</if>
+			<if test="phyblkwrt != null">
+				PHYBLKWRT,
+			</if>
+			<if test="phyblkrd != null">
+				PHYBLKRD,
+			</if>
+			<if test="blocks != null">
+				BLOCKS,
+			</if>
+			<if test="totIo != null">
+				TOT_IO,
+			</if>
+			<if test="readtim != null">
+				READTIM,
+			</if>
+			<if test="writetim != null">
+				WRITETIM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fileNo != null">
+				#{fileNo,jdbcType=INTEGER},
+			</if>
+			<if test="tablespaceName != null">
+				#{tablespaceName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				#{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceName != null">
+				#{deviceName,jdbcType=VARCHAR},
+			</if>
+			<if test="shortName != null">
+				#{shortName,jdbcType=VARCHAR},
+			</if>
+			<if test="phywrts != null">
+				#{phywrts,jdbcType=INTEGER},
+			</if>
+			<if test="phyrds != null">
+				#{phyrds,jdbcType=INTEGER},
+			</if>
+			<if test="phyblkwrt != null">
+				#{phyblkwrt,jdbcType=INTEGER},
+			</if>
+			<if test="phyblkrd != null">
+				#{phyblkrd,jdbcType=INTEGER},
+			</if>
+			<if test="blocks != null">
+				#{blocks,jdbcType=INTEGER},
+			</if>
+			<if test="totIo != null">
+				#{totIo,jdbcType=INTEGER},
+			</if>
+			<if test="readtim != null">
+				#{readtim,jdbcType=INTEGER},
+			</if>
+			<if test="writetim != null">
+				#{writetim,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

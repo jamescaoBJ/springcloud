@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.HysUserRolePropMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.HysUserRoleProp">
+		<result column="USERID" jdbcType="INTEGER" property="userid" />
+		<result column="ROLEID" jdbcType="INTEGER" property="roleid" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.HysUserRoleProp">
+		insert into hys_user_role_prop
+		(USERID, ROLEID)
+		values (#{userid,jdbcType=INTEGER},
+		#{roleid,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.HysUserRoleProp">
+		insert into hys_user_role_prop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				USERID,
+			</if>
+			<if test="roleid != null">
+				ROLEID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="roleid != null">
+				#{roleid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

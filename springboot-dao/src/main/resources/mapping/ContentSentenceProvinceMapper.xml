@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ContentSentenceProvinceMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.ContentSentenceProvince">
+		<result column="SENTENCE_ID" jdbcType="INTEGER" property="sentenceId" />
+		<result column="PROVINCE_ID" jdbcType="INTEGER" property="provinceId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ContentSentenceProvince">
+		insert into
+		content_sentence_province (SENTENCE_ID, PROVINCE_ID)
+		values
+		(#{sentenceId,jdbcType=INTEGER}, #{provinceId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ContentSentenceProvince">
+		insert into content_sentence_province
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sentenceId != null">
+				SENTENCE_ID,
+			</if>
+			<if test="provinceId != null">
+				PROVINCE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sentenceId != null">
+				#{sentenceId,jdbcType=INTEGER},
+			</if>
+			<if test="provinceId != null">
+				#{provinceId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ModelUserImageGeneralMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.ModelUserImageGeneral">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_IMAGE_ID" jdbcType="INTEGER" property="userImageId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_IMAGE_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from model_user_image_general
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from model_user_image_general
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ModelUserImageGeneral">
+		insert into model_user_image_general (ID, USER_IMAGE_ID)
+		values (#{id,jdbcType=INTEGER}, #{userImageId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ModelUserImageGeneral">
+		insert into model_user_image_general
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userImageId != null">
+				USER_IMAGE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userImageId != null">
+				#{userImageId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ModelUserImageGeneral">
+		update model_user_image_general
+		<set>
+			<if test="userImageId != null">
+				USER_IMAGE_ID = #{userImageId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ModelUserImageGeneral">
+		update model_user_image_general
+		set USER_IMAGE_ID = #{userImageId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

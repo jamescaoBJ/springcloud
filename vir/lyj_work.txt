@@ -1,0 +1,129 @@
+-- 266 项目判断当前用户是否可以观看，并且其他控制
+select t.USER_PROVINCE_ID from system_user_config t where t.USER_ID = 20;
+
+select t.CV_SET_ID from cv_region t  where  t.CV_SET_ID = 266 and  t.REGION_ID = 111000015;
+
+
+
+SELECT
+	t.*, v.id AS prop_val_id,
+	p. NAME AS typeName,
+	tt.prop_type_name AS c_type_name
+FROM
+	exam_prop_val t,
+	sub_sys_prop_val v,
+	sub_sys_prop p,
+	exam_prop_type tt
+WHERE
+	t.id = v.prop_val_id
+AND p.id = v.sys_prop_id
+AND tt.prop_type = t.c_type
+AND t.type = 20
+AND t. NAME LIKE '%'
+ORDER BY
+	cast(t. CODE AS signed)
+
+--  包含课程 
+-- 负责老师
+
+
+
+
+SELECT
+	c.*
+FROM
+	CV c
+INNER JOIN CV_SCHEDULE cs ON c.id = cs.CV_ID
+INNER JOIN CV_SET_SCHEDULE css ON cs.SCHEDULE_ID = css.CV_SCHEDULE_ID
+WHERE
+	css.CV_SET_ID = 266
+ORDER BY
+	cs.sequenceNum ASC
+
+
+select t1.expert_id as id, t2.name from cv t, cv_ref_teacher t1, expert_info t2 where t.id=t1.cv_id and t.id=1284 and t1.expert_id=t2.id and t1.type=1;
+select t1.expert_id as id, t2.name from cv t, cv_ref_teacher t1, expert_info t2 where t.id=t1.cv_id and t.id=1291 and t1.expert_id=t2.id and t1.type=1;
+
+-- 查询项目信息
+
+SELECT * FROM CV_SET WHERE ID = 266
+
+-- 查询项目负责人
+
+SELECT * FROM EXPERT_INFO WHERE ID in (  SELECT EXPERT_ID FROM CV_SET_EXPERT WHERE CV_SET_ID = 266 AND TYPE=1  )
+
+
+-- if 课程信息Type =2，
+-- -- 查询课程失效和开始信息
+SELECT * FROM cv_live t WHERE t.cv_id = 1284
+
+
+SELECT MAX(unit_make_type) as unitMakeType FROM CV_UNIT WHERE ID IN (  SELECT UNIT_ID FROM CV_REF_UNIT WHERE CV_ID = 1284 ) order by sequenceNum asc;
+
+SELECT * FROM CV_UNIT t WHERE ID IN (  SELECT UNIT_ID FROM CV_REF_UNIT WHERE CV_ID = 1284 ) AND t.unit_make_type = 1 order by sequenceNum asc
+
+
+
+-- 学习单元过滤
+
+
+
+SELECT
+	t.*
+FROM
+	log_study_cv_unit t,
+	cv_unit t1,
+	log_study_cv_unit_video t2
+WHERE
+	t.cv_unit_id = t1.id
+AND t.cv_unit_id = 5364
+AND t.system_user_id = 20
+AND t1.unit_make_type <> 2
+AND t1.id = t2.CV_UNIT_ID
+AND t2.videoPlayLength = 0
+AND EXISTS (
+	SELECT
+		1
+	FROM
+		cv_live t3
+	WHERE
+		t2.cv_id = t3.cv_id
+)
+-- 学习单元过滤（不知道为啥重查了？）
+
+select * from log_study_cv_unit where cv_unit_id =5364 and system_user_id = 20
+
+-- 判断是否为直播课程？
+
+SELECT * FROM cv_live t WHERE t.cv_id = 1284
+
+
+
+-- 最后阶段
+
+
+
+SELECT
+	cu.id,
+	lscu. STATUS AS logStatus,
+	lscu.LAST_UPDATE_DATE AS logStudylastUpdateDate,
+	cu. NAME,
+	cs.sequenceNum AS cvSequenceNum,
+	cu.sequenceNum AS sequenceNum
+FROM
+	CV_UNIT cu
+INNER JOIN cv_ref_unit cru ON cru.UNIT_ID = cu.id
+INNER JOIN CV_SCHEDULE cs ON cru.CV_ID = cs.CV_ID
+INNER JOIN CV_SET_SCHEDULE css ON cs.SCHEDULE_ID = css.CV_SCHEDULE_ID
+LEFT JOIN log_study_cv_unit lscu ON lscu.CV_UNIT_ID = cu.id
+AND lscu.CV_ID = cru.CV_ID
+AND lscu.SYSTEM_USER_ID = 20
+WHERE
+	css.CV_SET_ID = 266
+ORDER BY
+	lscu.LAST_UPDATE_DATE DESC,
+	cs.sequenceNum ASC,
+	cu.sequenceNum ASC
+
+-- 学习 logstatus 推测 1 正在学 
+-- project 和class 两种，项目类型使用 project

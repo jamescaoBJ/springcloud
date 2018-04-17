@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ContentEditionRefMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ContentEditionRef">
+		<id column="ORDERNUM" jdbcType="INTEGER" property="ordernum" />
+		<result column="EDITION_ID" jdbcType="INTEGER" property="editionId" />
+		<result column="REF_ID" jdbcType="INTEGER" property="refId" />
+		<result column="CV_ID" jdbcType="INTEGER" property="cvId" />
+		<result column="CHECK_STATE" jdbcType="INTEGER" property="checkState" />
+		<result column="sort" jdbcType="INTEGER" property="sort" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ORDERNUM, EDITION_ID, REF_ID, CV_ID, CHECK_STATE, sort
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from content_edition_ref
+		where ORDERNUM = #{ordernum,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		content_edition_ref
+		where ORDERNUM = #{ordernum,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ContentEditionRef">
+		insert into
+		content_edition_ref (ORDERNUM, EDITION_ID, REF_ID,
+		CV_ID, CHECK_STATE,
+		sort
+		)
+		values (#{ordernum,jdbcType=INTEGER},
+		#{editionId,jdbcType=INTEGER},
+		#{refId,jdbcType=INTEGER},
+		#{cvId,jdbcType=INTEGER}, #{checkState,jdbcType=INTEGER},
+		#{sort,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ContentEditionRef">
+		insert into content_edition_ref
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ordernum != null">
+				ORDERNUM,
+			</if>
+			<if test="editionId != null">
+				EDITION_ID,
+			</if>
+			<if test="refId != null">
+				REF_ID,
+			</if>
+			<if test="cvId != null">
+				CV_ID,
+			</if>
+			<if test="checkState != null">
+				CHECK_STATE,
+			</if>
+			<if test="sort != null">
+				sort,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ordernum != null">
+				#{ordernum,jdbcType=INTEGER},
+			</if>
+			<if test="editionId != null">
+				#{editionId,jdbcType=INTEGER},
+			</if>
+			<if test="refId != null">
+				#{refId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				#{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="checkState != null">
+				#{checkState,jdbcType=INTEGER},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ContentEditionRef">
+		update content_edition_ref
+		<set>
+			<if test="editionId != null">
+				EDITION_ID = #{editionId,jdbcType=INTEGER},
+			</if>
+			<if test="refId != null">
+				REF_ID = #{refId,jdbcType=INTEGER},
+			</if>
+			<if test="cvId != null">
+				CV_ID = #{cvId,jdbcType=INTEGER},
+			</if>
+			<if test="checkState != null">
+				CHECK_STATE = #{checkState,jdbcType=INTEGER},
+			</if>
+			<if test="sort != null">
+				sort = #{sort,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ORDERNUM = #{ordernum,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ContentEditionRef">
+		update
+		content_edition_ref
+		set EDITION_ID = #{editionId,jdbcType=INTEGER},
+		REF_ID = #{refId,jdbcType=INTEGER},
+		CV_ID = #{cvId,jdbcType=INTEGER},
+		CHECK_STATE = #{checkState,jdbcType=INTEGER},
+		sort =
+		#{sort,jdbcType=INTEGER}
+		where ORDERNUM = #{ordernum,jdbcType=INTEGER}
+	</update>
+</mapper>

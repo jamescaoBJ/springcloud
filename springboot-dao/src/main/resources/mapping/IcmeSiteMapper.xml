@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeSiteMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeSite">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="DOMAIN_NAME" jdbcType="VARCHAR" property="domainName" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="ALIAS_NAME" jdbcType="VARCHAR" property="aliasName" />
+		<result column="INDEX_URL" jdbcType="VARCHAR" property="indexUrl" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DOMAIN_NAME, CREATE_DATE, REMARK, STATUS, ALIAS_NAME,
+		INDEX_URL
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_site
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_site
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeSite">
+		insert into icme_site (ID,
+		DOMAIN_NAME, CREATE_DATE,
+		REMARK, STATUS, ALIAS_NAME,
+		INDEX_URL)
+		values
+		(#{id,jdbcType=INTEGER}, #{domainName,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{aliasName,jdbcType=VARCHAR},
+		#{indexUrl,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeSite">
+		insert into icme_site
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="domainName != null">
+				DOMAIN_NAME,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="aliasName != null">
+				ALIAS_NAME,
+			</if>
+			<if test="indexUrl != null">
+				INDEX_URL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="domainName != null">
+				#{domainName,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="aliasName != null">
+				#{aliasName,jdbcType=VARCHAR},
+			</if>
+			<if test="indexUrl != null">
+				#{indexUrl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeSite">
+		update icme_site
+		<set>
+			<if test="domainName != null">
+				DOMAIN_NAME = #{domainName,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="aliasName != null">
+				ALIAS_NAME = #{aliasName,jdbcType=VARCHAR},
+			</if>
+			<if test="indexUrl != null">
+				INDEX_URL = #{indexUrl,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeSite">
+		update icme_site
+		set DOMAIN_NAME = #{domainName,jdbcType=VARCHAR},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		ALIAS_NAME =
+		#{aliasName,jdbcType=VARCHAR},
+		INDEX_URL = #{indexUrl,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeOrgPostMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeOrgPost">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PARENT_ORG_ID" jdbcType="INTEGER" property="parentOrgId" />
+		<result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+		<result column="ORG_LEVLE" jdbcType="INTEGER" property="orgLevle" />
+		<result column="ORG_POST" jdbcType="INTEGER" property="orgPost" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="ORG_SHORT" jdbcType="VARCHAR" property="orgShort" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PARENT_ORG_ID, ORG_NAME, ORG_LEVLE, ORG_POST, STATUS,
+		SEQ, ORG_SHORT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_org_post
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_org_post
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeOrgPost">
+		insert into icme_org_post (ID,
+		PARENT_ORG_ID, ORG_NAME,
+		ORG_LEVLE, ORG_POST, STATUS,
+		SEQ, ORG_SHORT)
+		values (#{id,jdbcType=INTEGER}, #{parentOrgId,jdbcType=INTEGER},
+		#{orgName,jdbcType=VARCHAR},
+		#{orgLevle,jdbcType=INTEGER},
+		#{orgPost,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{seq,jdbcType=INTEGER}, #{orgShort,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeOrgPost">
+		insert into icme_org_post
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parentOrgId != null">
+				PARENT_ORG_ID,
+			</if>
+			<if test="orgName != null">
+				ORG_NAME,
+			</if>
+			<if test="orgLevle != null">
+				ORG_LEVLE,
+			</if>
+			<if test="orgPost != null">
+				ORG_POST,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="orgShort != null">
+				ORG_SHORT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentOrgId != null">
+				#{parentOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgLevle != null">
+				#{orgLevle,jdbcType=INTEGER},
+			</if>
+			<if test="orgPost != null">
+				#{orgPost,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="orgShort != null">
+				#{orgShort,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeOrgPost">
+		update icme_org_post
+		<set>
+			<if test="parentOrgId != null">
+				PARENT_ORG_ID = #{parentOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="orgName != null">
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgLevle != null">
+				ORG_LEVLE = #{orgLevle,jdbcType=INTEGER},
+			</if>
+			<if test="orgPost != null">
+				ORG_POST = #{orgPost,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="orgShort != null">
+				ORG_SHORT = #{orgShort,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeOrgPost">
+		update
+		icme_org_post
+		set PARENT_ORG_ID = #{parentOrgId,jdbcType=INTEGER},
+		ORG_NAME = #{orgName,jdbcType=VARCHAR},
+		ORG_LEVLE =
+		#{orgLevle,jdbcType=INTEGER},
+		ORG_POST = #{orgPost,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER},
+		ORG_SHORT = #{orgShort,jdbcType=VARCHAR}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

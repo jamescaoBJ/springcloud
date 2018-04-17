@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetRefereebookMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetRefereebook">
+		<result column="cv_set_id" jdbcType="INTEGER" property="cvSetId" />
+		<result column="book_name" jdbcType="VARCHAR" property="bookName" />
+		<result column="book_url" jdbcType="VARCHAR" property="bookUrl" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetRefereebook">
+		insert into cv_set_refereebook
+		(cv_set_id, book_name, book_url
+		)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{bookName,jdbcType=VARCHAR},
+		#{bookUrl,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetRefereebook">
+		insert into cv_set_refereebook
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				cv_set_id,
+			</if>
+			<if test="bookName != null">
+				book_name,
+			</if>
+			<if test="bookUrl != null">
+				book_url,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="bookName != null">
+				#{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="bookUrl != null">
+				#{bookUrl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

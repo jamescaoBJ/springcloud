@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CaseCaseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CaseCase">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="P_ID" jdbcType="INTEGER" property="pId" />
+		<result column="DISEASE_ID" jdbcType="INTEGER" property="diseaseId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="ONLINE_DATE" jdbcType="TIMESTAMP" property="onlineDate" />
+		<result column="CREATOR" jdbcType="INTEGER" property="creator" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="DELI_OPINION" jdbcType="VARCHAR" property="deliOpinion" />
+		<result column="DELI_MAN" jdbcType="VARCHAR" property="deliMan" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, P_ID, DISEASE_ID, CREATE_DATE, ONLINE_DATE, CREATOR,
+		STATE,
+		DELI_OPINION, DELI_MAN
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from case_case
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		case_case
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CaseCase">
+		insert into case_case (ID,
+		P_ID, DISEASE_ID,
+		CREATE_DATE, ONLINE_DATE, CREATOR,
+		STATE,
+		DELI_OPINION, DELI_MAN
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{pId,jdbcType=INTEGER},
+		#{diseaseId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP}, #{onlineDate,jdbcType=TIMESTAMP},
+		#{creator,jdbcType=INTEGER},
+		#{state,jdbcType=INTEGER},
+		#{deliOpinion,jdbcType=VARCHAR},
+		#{deliMan,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CaseCase">
+		insert into case_case
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="pId != null">
+				P_ID,
+			</if>
+			<if test="diseaseId != null">
+				DISEASE_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="onlineDate != null">
+				ONLINE_DATE,
+			</if>
+			<if test="creator != null">
+				CREATOR,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="deliOpinion != null">
+				DELI_OPINION,
+			</if>
+			<if test="deliMan != null">
+				DELI_MAN,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="pId != null">
+				#{pId,jdbcType=INTEGER},
+			</if>
+			<if test="diseaseId != null">
+				#{diseaseId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="onlineDate != null">
+				#{onlineDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="deliOpinion != null">
+				#{deliOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="deliMan != null">
+				#{deliMan,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CaseCase">
+		update case_case
+		<set>
+			<if test="pId != null">
+				P_ID = #{pId,jdbcType=INTEGER},
+			</if>
+			<if test="diseaseId != null">
+				DISEASE_ID = #{diseaseId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="onlineDate != null">
+				ONLINE_DATE = #{onlineDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				CREATOR = #{creator,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="deliOpinion != null">
+				DELI_OPINION = #{deliOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="deliMan != null">
+				DELI_MAN = #{deliMan,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CaseCase">
+		update case_case
+		set P_ID = #{pId,jdbcType=INTEGER},
+		DISEASE_ID =
+		#{diseaseId,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		ONLINE_DATE =
+		#{onlineDate,jdbcType=TIMESTAMP},
+		CREATOR =
+		#{creator,jdbcType=INTEGER},
+		STATE = #{state,jdbcType=INTEGER},
+		DELI_OPINION = #{deliOpinion,jdbcType=VARCHAR},
+		DELI_MAN =
+		#{deliMan,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

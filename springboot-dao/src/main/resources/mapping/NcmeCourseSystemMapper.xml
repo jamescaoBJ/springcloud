@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeCourseSystemMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeCourseSystem">
+		<result column="COURSE_ID" jdbcType="VARCHAR" property="courseId" />
+		<result column="SYS_ID" jdbcType="CHAR" property="sysId" />
+		<result column="WEIGHT" jdbcType="INTEGER" property="weight" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeCourseSystem">
+		insert into ncme_course_system (COURSE_ID, SYS_ID, WEIGHT
+		)
+		values (#{courseId,jdbcType=VARCHAR}, #{sysId,jdbcType=CHAR},
+		#{weight,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeCourseSystem">
+		insert into ncme_course_system
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="sysId != null">
+				SYS_ID,
+			</if>
+			<if test="weight != null">
+				WEIGHT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="courseId != null">
+				#{courseId,jdbcType=VARCHAR},
+			</if>
+			<if test="sysId != null">
+				#{sysId,jdbcType=CHAR},
+			</if>
+			<if test="weight != null">
+				#{weight,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

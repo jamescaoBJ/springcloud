@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentNoticeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentNotice">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="OBJECT" jdbcType="VARCHAR" property="object" />
+		<result column="SOURCE" jdbcType="VARCHAR" property="source" />
+		<result column="ADD_TIME" jdbcType="DATE" property="addTime" />
+		<result column="ADD_USER" jdbcType="VARCHAR" property="addUser" />
+		<result column="APPLICATION_ID" jdbcType="VARCHAR" property="applicationId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TITLE, CONTENT, OBJECT, SOURCE, ADD_TIME, ADD_USER, APPLICATION_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_notice
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_notice
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentNotice">
+		insert into train_content_notice (ID, TITLE, CONTENT,
+		OBJECT, SOURCE, ADD_TIME,
+		ADD_USER, APPLICATION_ID)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{object,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE},
+		#{addUser,jdbcType=VARCHAR}, #{applicationId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentNotice">
+		insert into train_content_notice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="object != null">
+				OBJECT,
+			</if>
+			<if test="source != null">
+				SOURCE,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="addUser != null">
+				ADD_USER,
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="object != null">
+				#{object,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=DATE},
+			</if>
+			<if test="addUser != null">
+				#{addUser,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationId != null">
+				#{applicationId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentNotice">
+		update train_content_notice
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="object != null">
+				OBJECT = #{object,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				SOURCE = #{source,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=DATE},
+			</if>
+			<if test="addUser != null">
+				ADD_USER = #{addUser,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentNotice">
+		update train_content_notice
+		set TITLE = #{title,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=VARCHAR},
+		OBJECT = #{object,jdbcType=VARCHAR},
+		SOURCE = #{source,jdbcType=VARCHAR},
+		ADD_TIME = #{addTime,jdbcType=DATE},
+		ADD_USER = #{addUser,jdbcType=VARCHAR},
+		APPLICATION_ID = #{applicationId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

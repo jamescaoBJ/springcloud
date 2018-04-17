@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmePayCardMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmePayCard">
+		<result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+		<result column="CARD_NAME" jdbcType="VARCHAR" property="cardName" />
+		<result column="START_DATE" jdbcType="DATE" property="startDate" />
+		<result column="END_DATE" jdbcType="DATE" property="endDate" />
+		<result column="CREDIT_SCOPE" jdbcType="VARCHAR" property="creditScope" />
+		<result column="CREDIT_SUM" jdbcType="INTEGER" property="creditSum" />
+		<result column="PRICE" jdbcType="INTEGER" property="price" />
+		<result column="EVP_VALUE" jdbcType="INTEGER" property="evpValue" />
+		<result column="IS_NETPAY" jdbcType="INTEGER" property="isNetpay" />
+		<result column="IS_SDSYNC" jdbcType="INTEGER" property="isSdsync" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmePayCard">
+		insert into ncme_pay_card (CARD_TYPE, CARD_NAME, START_DATE,
+		END_DATE, CREDIT_SCOPE, CREDIT_SUM,
+		PRICE, EVP_VALUE, IS_NETPAY,
+		IS_SDSYNC)
+		values (#{cardType,jdbcType=VARCHAR}, #{cardName,jdbcType=VARCHAR},
+		#{startDate,jdbcType=DATE},
+		#{endDate,jdbcType=DATE}, #{creditScope,jdbcType=VARCHAR}, #{creditSum,jdbcType=INTEGER},
+		#{price,jdbcType=INTEGER}, #{evpValue,jdbcType=INTEGER},
+		#{isNetpay,jdbcType=INTEGER},
+		#{isSdsync,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmePayCard">
+		insert into ncme_pay_card
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cardType != null">
+				CARD_TYPE,
+			</if>
+			<if test="cardName != null">
+				CARD_NAME,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="creditScope != null">
+				CREDIT_SCOPE,
+			</if>
+			<if test="creditSum != null">
+				CREDIT_SUM,
+			</if>
+			<if test="price != null">
+				PRICE,
+			</if>
+			<if test="evpValue != null">
+				EVP_VALUE,
+			</if>
+			<if test="isNetpay != null">
+				IS_NETPAY,
+			</if>
+			<if test="isSdsync != null">
+				IS_SDSYNC,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cardType != null">
+				#{cardType,jdbcType=VARCHAR},
+			</if>
+			<if test="cardName != null">
+				#{cardName,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=DATE},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=DATE},
+			</if>
+			<if test="creditScope != null">
+				#{creditScope,jdbcType=VARCHAR},
+			</if>
+			<if test="creditSum != null">
+				#{creditSum,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=INTEGER},
+			</if>
+			<if test="evpValue != null">
+				#{evpValue,jdbcType=INTEGER},
+			</if>
+			<if test="isNetpay != null">
+				#{isNetpay,jdbcType=INTEGER},
+			</if>
+			<if test="isSdsync != null">
+				#{isSdsync,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

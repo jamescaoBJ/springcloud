@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtSqlFetchMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooAtSqlFetch">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+		<result column="EXECUTION_ID" jdbcType="INTEGER" property="executionId" />
+		<result column="FETCH_ID" jdbcType="INTEGER" property="fetchId" />
+		<result column="FETCH_COUNT" jdbcType="INTEGER" property="fetchCount" />
+		<result column="CPU" jdbcType="INTEGER" property="cpu" />
+		<result column="ELAPSED" jdbcType="INTEGER" property="elapsed" />
+		<result column="PHYSICAL_READS" jdbcType="INTEGER" property="physicalReads" />
+		<result column="CONSISTENT_READS" jdbcType="INTEGER" property="consistentReads" />
+		<result column="CURRENT_READS" jdbcType="INTEGER" property="currentReads" />
+		<result column="LIBCACHE_MISSES" jdbcType="INTEGER" property="libcacheMisses" />
+		<result column="ROW_COUNT" jdbcType="INTEGER" property="rowCount" />
+		<result column="DEPTH" jdbcType="INTEGER" property="depth" />
+		<result column="OPTIMIZER_GOAL" jdbcType="INTEGER" property="optimizerGoal" />
+		<result column="TIM" jdbcType="INTEGER" property="tim" />
+		<result column="CONVERTED_TIM" jdbcType="DATE" property="convertedTim" />
+		<result column="END_TIM" jdbcType="INTEGER" property="endTim" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtSqlFetch">
+		insert into quest_soo_at_sql_fetch (TRACE_FILE_ID, SQL_ID, PARSE_ID,
+		EXECUTION_ID, FETCH_ID, FETCH_COUNT,
+		CPU, ELAPSED, PHYSICAL_READS,
+		CONSISTENT_READS, CURRENT_READS, LIBCACHE_MISSES,
+		ROW_COUNT, DEPTH, OPTIMIZER_GOAL,
+		TIM, CONVERTED_TIM, END_TIM
+		)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER},
+		#{executionId,jdbcType=INTEGER}, #{fetchId,jdbcType=INTEGER}, #{fetchCount,jdbcType=INTEGER},
+		#{cpu,jdbcType=INTEGER}, #{elapsed,jdbcType=INTEGER},
+		#{physicalReads,jdbcType=INTEGER},
+		#{consistentReads,jdbcType=INTEGER}, #{currentReads,jdbcType=INTEGER},
+		#{libcacheMisses,jdbcType=INTEGER},
+		#{rowCount,jdbcType=INTEGER}, #{depth,jdbcType=INTEGER}, #{optimizerGoal,jdbcType=INTEGER},
+		#{tim,jdbcType=INTEGER}, #{convertedTim,jdbcType=DATE},
+		#{endTim,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtSqlFetch">
+		insert into quest_soo_at_sql_fetch
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+			<if test="executionId != null">
+				EXECUTION_ID,
+			</if>
+			<if test="fetchId != null">
+				FETCH_ID,
+			</if>
+			<if test="fetchCount != null">
+				FETCH_COUNT,
+			</if>
+			<if test="cpu != null">
+				CPU,
+			</if>
+			<if test="elapsed != null">
+				ELAPSED,
+			</if>
+			<if test="physicalReads != null">
+				PHYSICAL_READS,
+			</if>
+			<if test="consistentReads != null">
+				CONSISTENT_READS,
+			</if>
+			<if test="currentReads != null">
+				CURRENT_READS,
+			</if>
+			<if test="libcacheMisses != null">
+				LIBCACHE_MISSES,
+			</if>
+			<if test="rowCount != null">
+				ROW_COUNT,
+			</if>
+			<if test="depth != null">
+				DEPTH,
+			</if>
+			<if test="optimizerGoal != null">
+				OPTIMIZER_GOAL,
+			</if>
+			<if test="tim != null">
+				TIM,
+			</if>
+			<if test="convertedTim != null">
+				CONVERTED_TIM,
+			</if>
+			<if test="endTim != null">
+				END_TIM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+			<if test="executionId != null">
+				#{executionId,jdbcType=INTEGER},
+			</if>
+			<if test="fetchId != null">
+				#{fetchId,jdbcType=INTEGER},
+			</if>
+			<if test="fetchCount != null">
+				#{fetchCount,jdbcType=INTEGER},
+			</if>
+			<if test="cpu != null">
+				#{cpu,jdbcType=INTEGER},
+			</if>
+			<if test="elapsed != null">
+				#{elapsed,jdbcType=INTEGER},
+			</if>
+			<if test="physicalReads != null">
+				#{physicalReads,jdbcType=INTEGER},
+			</if>
+			<if test="consistentReads != null">
+				#{consistentReads,jdbcType=INTEGER},
+			</if>
+			<if test="currentReads != null">
+				#{currentReads,jdbcType=INTEGER},
+			</if>
+			<if test="libcacheMisses != null">
+				#{libcacheMisses,jdbcType=INTEGER},
+			</if>
+			<if test="rowCount != null">
+				#{rowCount,jdbcType=INTEGER},
+			</if>
+			<if test="depth != null">
+				#{depth,jdbcType=INTEGER},
+			</if>
+			<if test="optimizerGoal != null">
+				#{optimizerGoal,jdbcType=INTEGER},
+			</if>
+			<if test="tim != null">
+				#{tim,jdbcType=INTEGER},
+			</if>
+			<if test="convertedTim != null">
+				#{convertedTim,jdbcType=DATE},
+			</if>
+			<if test="endTim != null">
+				#{endTim,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

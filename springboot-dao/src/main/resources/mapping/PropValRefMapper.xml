@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.PropValRefMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.PropValRef">
+		<result column="PROP_VAL1" jdbcType="INTEGER" property="propVal1" />
+		<result column="PROP_VAL2" jdbcType="INTEGER" property="propVal2" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.PropValRef">
+		insert into prop_val_ref (PROP_VAL1, PROP_VAL2)
+		values (#{propVal1,jdbcType=INTEGER}, #{propVal2,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.PropValRef">
+		insert into prop_val_ref
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="propVal1 != null">
+				PROP_VAL1,
+			</if>
+			<if test="propVal2 != null">
+				PROP_VAL2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="propVal1 != null">
+				#{propVal1,jdbcType=INTEGER},
+			</if>
+			<if test="propVal2 != null">
+				#{propVal2,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

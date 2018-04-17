@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemAccountRoleMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.SystemAccountRoleKey">
+		<id column="ACCOUNT_ID" jdbcType="INTEGER" property="accountId" />
+		<id column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.SystemAccountRoleKey">
+		delete from system_account_role
+		where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+		and ROLE_ID = #{roleId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemAccountRoleKey">
+		insert into system_account_role (ACCOUNT_ID, ROLE_ID)
+		values (#{accountId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemAccountRoleKey">
+		insert into system_account_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="accountId != null">
+				ACCOUNT_ID,
+			</if>
+			<if test="roleId != null">
+				ROLE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="accountId != null">
+				#{accountId,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

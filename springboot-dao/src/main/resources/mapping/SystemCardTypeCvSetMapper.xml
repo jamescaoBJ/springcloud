@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardTypeCvSetMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCardTypeCvSet">
+		<result column="CARDTYPE_ID" jdbcType="INTEGER" property="cardtypeId" />
+		<result column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardTypeCvSet">
+		insert into system_card_type_cv_set (CARDTYPE_ID, CV_SET_ID)
+		values (#{cardtypeId,jdbcType=INTEGER}, #{cvSetId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardTypeCvSet">
+		insert into system_card_type_cv_set
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cardtypeId != null">
+				CARDTYPE_ID,
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cardtypeId != null">
+				#{cardtypeId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<!-- 根据卡类型查询相关联的项目 -->
+	<select id="findCvSetListByCardType" resultMap="BaseResultMap">
+		select * from system_card_type_cv_set type_cv WHERE type_cv.CARDTYPE_ID =
+		#{cardtypeId,jdbcType=INTEGER}
+	</select>
+	<!-- 查询卡类型里是否包含该项目 -->
+	<select id="findListBycvSetId" resultMap="BaseResultMap">
+		select * from system_card_type_cv_set type_cv WHERE type_cv.CV_SET_ID =
+		#{cvSetId,jdbcType=INTEGER}
+	</select>
+</mapper>

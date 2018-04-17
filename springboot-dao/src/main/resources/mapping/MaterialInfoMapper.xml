@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.MaterialInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.MaterialInfo">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="FORMAT" jdbcType="VARCHAR" property="format" />
+		<result column="FILENAME" jdbcType="VARCHAR" property="filename" />
+		<result column="DURATION" jdbcType="VARCHAR" property="duration" />
+		<result column="SAVEPATH" jdbcType="VARCHAR" property="savepath" />
+		<result column="FPS" jdbcType="DOUBLE" property="fps" />
+		<result column="RESOLUTION" jdbcType="VARCHAR" property="resolution" />
+		<result column="NATIONAL_STATE" jdbcType="INTEGER" property="nationalState" />
+		<result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+		<result column="OTHER_SOURCE" jdbcType="VARCHAR" property="otherSource" />
+		<result column="EXPERTNAME" jdbcType="VARCHAR" property="expertname" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="UPLOAD_DATE" jdbcType="TIMESTAMP" property="uploadDate" />
+		<result column="DELI_DATE" jdbcType="TIMESTAMP" property="deliDate" />
+		<result column="DELI_OPINION" jdbcType="VARCHAR" property="deliOpinion" />
+		<result column="DELI_MAN" jdbcType="VARCHAR" property="deliMan" />
+		<result column="COGNIZE" jdbcType="INTEGER" property="cognize" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="SURNAME" jdbcType="VARCHAR" property="surname" />
+		<result column="EXPERTID" jdbcType="INTEGER" property="expertid" />
+		<result column="CREATORID" jdbcType="INTEGER" property="creatorid" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CODE, TYPE, FORMAT, FILENAME, DURATION, SAVEPATH, FPS, RESOLUTION,
+		NATIONAL_STATE,
+		SUMMARY, OTHER_SOURCE, EXPERTNAME, STATE, UPLOAD_DATE, DELI_DATE,
+		DELI_OPINION, DELI_MAN,
+		COGNIZE, NAME, SURNAME, EXPERTID, CREATORID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from material_info
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from material_info
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.MaterialInfo">
+		insert into material_info (ID, CODE, TYPE,
+		FORMAT, FILENAME, DURATION,
+		SAVEPATH, FPS, RESOLUTION,
+		NATIONAL_STATE, SUMMARY, OTHER_SOURCE,
+		EXPERTNAME, STATE, UPLOAD_DATE,
+		DELI_DATE, DELI_OPINION, DELI_MAN,
+		COGNIZE, NAME, SURNAME,
+		EXPERTID, CREATORID)
+		values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{format,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
+		#{savepath,jdbcType=VARCHAR}, #{fps,jdbcType=DOUBLE},
+		#{resolution,jdbcType=VARCHAR},
+		#{nationalState,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{otherSource,jdbcType=VARCHAR},
+		#{expertname,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},
+		#{uploadDate,jdbcType=TIMESTAMP},
+		#{deliDate,jdbcType=TIMESTAMP}, #{deliOpinion,jdbcType=VARCHAR}, #{deliMan,jdbcType=VARCHAR},
+		#{cognize,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{surname,jdbcType=VARCHAR},
+		#{expertid,jdbcType=INTEGER}, #{creatorid,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.MaterialInfo">
+		insert into material_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="format != null">
+				FORMAT,
+			</if>
+			<if test="filename != null">
+				FILENAME,
+			</if>
+			<if test="duration != null">
+				DURATION,
+			</if>
+			<if test="savepath != null">
+				SAVEPATH,
+			</if>
+			<if test="fps != null">
+				FPS,
+			</if>
+			<if test="resolution != null">
+				RESOLUTION,
+			</if>
+			<if test="nationalState != null">
+				NATIONAL_STATE,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="otherSource != null">
+				OTHER_SOURCE,
+			</if>
+			<if test="expertname != null">
+				EXPERTNAME,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="uploadDate != null">
+				UPLOAD_DATE,
+			</if>
+			<if test="deliDate != null">
+				DELI_DATE,
+			</if>
+			<if test="deliOpinion != null">
+				DELI_OPINION,
+			</if>
+			<if test="deliMan != null">
+				DELI_MAN,
+			</if>
+			<if test="cognize != null">
+				COGNIZE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="surname != null">
+				SURNAME,
+			</if>
+			<if test="expertid != null">
+				EXPERTID,
+			</if>
+			<if test="creatorid != null">
+				CREATORID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="format != null">
+				#{format,jdbcType=VARCHAR},
+			</if>
+			<if test="filename != null">
+				#{filename,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				#{duration,jdbcType=VARCHAR},
+			</if>
+			<if test="savepath != null">
+				#{savepath,jdbcType=VARCHAR},
+			</if>
+			<if test="fps != null">
+				#{fps,jdbcType=DOUBLE},
+			</if>
+			<if test="resolution != null">
+				#{resolution,jdbcType=VARCHAR},
+			</if>
+			<if test="nationalState != null">
+				#{nationalState,jdbcType=INTEGER},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="otherSource != null">
+				#{otherSource,jdbcType=VARCHAR},
+			</if>
+			<if test="expertname != null">
+				#{expertname,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="uploadDate != null">
+				#{uploadDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deliDate != null">
+				#{deliDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deliOpinion != null">
+				#{deliOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="deliMan != null">
+				#{deliMan,jdbcType=VARCHAR},
+			</if>
+			<if test="cognize != null">
+				#{cognize,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="surname != null">
+				#{surname,jdbcType=VARCHAR},
+			</if>
+			<if test="expertid != null">
+				#{expertid,jdbcType=INTEGER},
+			</if>
+			<if test="creatorid != null">
+				#{creatorid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.MaterialInfo">
+		update material_info
+		<set>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="format != null">
+				FORMAT = #{format,jdbcType=VARCHAR},
+			</if>
+			<if test="filename != null">
+				FILENAME = #{filename,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				DURATION = #{duration,jdbcType=VARCHAR},
+			</if>
+			<if test="savepath != null">
+				SAVEPATH = #{savepath,jdbcType=VARCHAR},
+			</if>
+			<if test="fps != null">
+				FPS = #{fps,jdbcType=DOUBLE},
+			</if>
+			<if test="resolution != null">
+				RESOLUTION = #{resolution,jdbcType=VARCHAR},
+			</if>
+			<if test="nationalState != null">
+				NATIONAL_STATE = #{nationalState,jdbcType=INTEGER},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="otherSource != null">
+				OTHER_SOURCE = #{otherSource,jdbcType=VARCHAR},
+			</if>
+			<if test="expertname != null">
+				EXPERTNAME = #{expertname,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="uploadDate != null">
+				UPLOAD_DATE = #{uploadDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deliDate != null">
+				DELI_DATE = #{deliDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deliOpinion != null">
+				DELI_OPINION = #{deliOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="deliMan != null">
+				DELI_MAN = #{deliMan,jdbcType=VARCHAR},
+			</if>
+			<if test="cognize != null">
+				COGNIZE = #{cognize,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="surname != null">
+				SURNAME = #{surname,jdbcType=VARCHAR},
+			</if>
+			<if test="expertid != null">
+				EXPERTID = #{expertid,jdbcType=INTEGER},
+			</if>
+			<if test="creatorid != null">
+				CREATORID = #{creatorid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.MaterialInfo">
+		update material_info
+		set CODE = #{code,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		FORMAT = #{format,jdbcType=VARCHAR},
+		FILENAME = #{filename,jdbcType=VARCHAR},
+		DURATION = #{duration,jdbcType=VARCHAR},
+		SAVEPATH = #{savepath,jdbcType=VARCHAR},
+		FPS = #{fps,jdbcType=DOUBLE},
+		RESOLUTION = #{resolution,jdbcType=VARCHAR},
+		NATIONAL_STATE = #{nationalState,jdbcType=INTEGER},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		OTHER_SOURCE = #{otherSource,jdbcType=VARCHAR},
+		EXPERTNAME = #{expertname,jdbcType=VARCHAR},
+		STATE = #{state,jdbcType=INTEGER},
+		UPLOAD_DATE = #{uploadDate,jdbcType=TIMESTAMP},
+		DELI_DATE = #{deliDate,jdbcType=TIMESTAMP},
+		DELI_OPINION = #{deliOpinion,jdbcType=VARCHAR},
+		DELI_MAN = #{deliMan,jdbcType=VARCHAR},
+		COGNIZE = #{cognize,jdbcType=INTEGER},
+		NAME = #{name,jdbcType=VARCHAR},
+		SURNAME = #{surname,jdbcType=VARCHAR},
+		EXPERTID = #{expertid,jdbcType=INTEGER},
+		CREATORID = #{creatorid,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

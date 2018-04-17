@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmePaycardCourseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmePaycardCourse">
+		<result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+		<result column="COURSE_ID" jdbcType="VARCHAR" property="courseId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmePaycardCourse">
+		insert into ncme_paycard_course (CARD_TYPE, COURSE_ID)
+		values (#{cardType,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmePaycardCourse">
+		insert into ncme_paycard_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cardType != null">
+				CARD_TYPE,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cardType != null">
+				#{cardType,jdbcType=VARCHAR},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

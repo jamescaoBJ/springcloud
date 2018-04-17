@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemCardSetOrderMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemCardSetOrder">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CARD_TYPE_ID" jdbcType="INTEGER" property="cardTypeId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="USEFUL_DATE" jdbcType="VARCHAR" property="usefulDate" />
+		<result column="PRICE" jdbcType="DOUBLE" property="price" />
+		<result column="AMOUNT" jdbcType="DOUBLE" property="amount" />
+		<result column="PAY_DATE" jdbcType="VARCHAR" property="payDate" />
+		<result column="PAYMODE_CODE" jdbcType="CHAR" property="paymodeCode" />
+		<result column="ORDER_NUMBER" jdbcType="VARCHAR" property="orderNumber" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="ORDER_TYPE" jdbcType="INTEGER" property="orderType" />
+		<result column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName" />
+		<result column="CARD_NUMBER" jdbcType="VARCHAR" property="cardNumber" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CARD_TYPE_ID, USER_ID, USEFUL_DATE, PRICE, AMOUNT, PAY_DATE,
+		PAYMODE_CODE, ORDER_NUMBER,
+		STATUS, ORDER_TYPE, CV_SET_ID, ITEM_NAME, CARD_NUMBER
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_card_set_order
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 我的学习卡 -->
+	<select id="cardList" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		*
+		FROM
+		system_card_set_order AS card_order,
+		system_card_type AS card_type
+		WHERE 1=1
+		<if test="status == '1'.toString()">
+
+
+
+			and card_order.USER_ID = #{id}
+			AND card_type.ID = card_order.CARD_TYPE_ID
+			AND UNIX_TIMESTAMP(card_order.USEFUL_DATE) > UNIX_TIMESTAMP(NOW())
+			GROUP BY
+			card_order.PAY_DATE DESC
+
+		</if>
+		<if test="status == '0'.toString()">
+
+
+
+
+			and card_order.USER_ID = #{id}
+			AND card_type.ID = card_order.CARD_TYPE_ID
+			AND UNIX_TIMESTAMP(card_order.USEFUL_DATE) &lt; UNIX_TIMESTAMP(NOW())
+			GROUP BY
+			card_order.PAY_DATE DESC;
+
+		</if>
+
+
+
+	</select>
+
+
+	<resultMap id="CardMap" type="com.ncme.springboot.footstone.response.Record">
+
+		<collection property="list"
+			column="{cardNumber=cardNumber,cardType=cardType,userId=userId}"
+			select="cardCvSet" javaType="ArrayList" />
+	</resultMap>
+
+	<!-- 学习卡详情获取 -->
+	<select id="cardDetails" resultMap="CardMap">
+
+
+		SELECT
+		card_order.ID as cardId,
+
+		card_type.CARD_TYPE_NAME as cardTypeName ,
+		card_order.CARD_NUMBER as cardNumber,
+		card_type.END_DATE as usefulDate,
+		card_order.CARD_TYPE as cardType,
+		#{userId} as userId
+
+
+
+		FROM
+		system_card AS card_order,
+		system_card_type AS card_type WHERE 1=1
+
+		AND card_type.ID = card_order.CARD_TYPE and card_order.CARD_NUMBER =
+		#{cardNumber} and CARD_TYPE = #{cardType}
+
+
+
+	</select>
+
+	<select id="cardCvSet" parameterType="map"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT	t2.id as projectId,t2.name as projectName,
+			concat(
+				case t3.cv_set_level
+				when 1 then '国家I类'
+				when 2 then	'省级I类'
+				when 3 then '市级I类'
+				when 4 then '省级II类'
+				when 5 then '市级II类'
+				when 6
+				then '无' end ,'',if(t3.cv_set_score>0,left(t3.cv_set_score,3),''),'学分') as projectTitle
+		FROM system_card_type_cv_set t1
+		LEFT JOIN cv_set t2 ON t2.id = t1.CV_SET_ID
+		join cv_set_authorization t3 on t3.cv_set_id = t2.id
+		WHERE
+		t2.`STATUS` = 5
+		AND t1.CARDTYPE_ID = #{cardType};
+
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_card_set_order
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemCardSetOrder">
+		insert into system_card_set_order (ID, CARD_TYPE_ID, USER_ID,
+		USEFUL_DATE, PRICE, AMOUNT,
+		PAY_DATE, PAYMODE_CODE, ORDER_NUMBER,
+		STATUS, ORDER_TYPE, CV_SET_ID,
+		ITEM_NAME, CARD_NUMBER)
+		values (#{id,jdbcType=INTEGER}, #{cardTypeId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{usefulDate,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE},
+		#{payDate,jdbcType=VARCHAR}, #{paymodeCode,jdbcType=CHAR},
+		#{orderNumber,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, #{cvSetId,jdbcType=INTEGER},
+		#{itemName,jdbcType=VARCHAR}, #{cardNumber,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemCardSetOrder">
+		insert into system_card_set_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cardTypeId != null">
+				CARD_TYPE_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="usefulDate != null">
+				USEFUL_DATE,
+			</if>
+			<if test="price != null">
+				PRICE,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="payDate != null">
+				PAY_DATE,
+			</if>
+			<if test="paymodeCode != null">
+				PAYMODE_CODE,
+			</if>
+			<if test="orderNumber != null">
+				ORDER_NUMBER,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE,
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="itemName != null">
+				ITEM_NAME,
+			</if>
+			<if test="cardNumber != null">
+				CARD_NUMBER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cardTypeId != null">
+				#{cardTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="usefulDate != null">
+				#{usefulDate,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DOUBLE},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="payDate != null">
+				#{payDate,jdbcType=VARCHAR},
+			</if>
+			<if test="paymodeCode != null">
+				#{paymodeCode,jdbcType=CHAR},
+			</if>
+			<if test="orderNumber != null">
+				#{orderNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="itemName != null">
+				#{itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="cardNumber != null">
+				#{cardNumber,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemCardSetOrder">
+		update system_card_set_order
+		<set>
+			<if test="cardTypeId != null">
+				CARD_TYPE_ID = #{cardTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="usefulDate != null">
+				USEFUL_DATE = #{usefulDate,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				PRICE = #{price,jdbcType=DOUBLE},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="payDate != null">
+				PAY_DATE = #{payDate,jdbcType=VARCHAR},
+			</if>
+			<if test="paymodeCode != null">
+				PAYMODE_CODE = #{paymodeCode,jdbcType=CHAR},
+			</if>
+			<if test="orderNumber != null">
+				ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="itemName != null">
+				ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="cardNumber != null">
+				CARD_NUMBER = #{cardNumber,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemCardSetOrder">
+		update system_card_set_order
+		set CARD_TYPE_ID = #{cardTypeId,jdbcType=INTEGER},
+		USER_ID = #{userId,jdbcType=INTEGER},
+		USEFUL_DATE = #{usefulDate,jdbcType=VARCHAR},
+		PRICE = #{price,jdbcType=DOUBLE},
+		AMOUNT = #{amount,jdbcType=DOUBLE},
+		PAY_DATE = #{payDate,jdbcType=VARCHAR},
+		PAYMODE_CODE = #{paymodeCode,jdbcType=CHAR},
+		ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+		CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+		ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+		CARD_NUMBER = #{cardNumber,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 通过用户id和项目id查询订单是否存在 -->
+	<select id="findByUidProid" parameterType="com.ncme.springboot.model.SystemCardSetOrder"
+		resultMap="BaseResultMap">
+		select * from system_card_set_order card_order
+		WHERE card_order.USER_ID = #{cvSet.userId,jdbcType=INTEGER}
+		<if test="cvSet.cvSetId != null and cvSet.cvSetId != ''">
+			and card_order.CV_SET_ID = #{cvSet.cvSetId,jdbcType=INTEGER}
+		</if>
+		<!-- <if test="cardTypeId != null and cardTypeId != ''">
+			and card_order.card_type_id = #{cvSet.cardTypeId,jdbcType=INTEGER}
+		</if> -->
+		<if test="cardTypeList != null">
+			and card_order.card_type_id in 
+			<foreach collection="cardTypeList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+		</if>
+		<if test="cardNumber != null and cardNumber != ''">
+			and card_order.CARD_NUMBER = #{cvSet.cardNumber,jdbcType=VARCHAR}
+		</if>
+		
+	</select>
+</mapper>

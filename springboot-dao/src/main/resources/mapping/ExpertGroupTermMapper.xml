@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExpertGroupTermMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExpertGroupTerm">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+		<result column="STARTDATE" jdbcType="DATE" property="startdate" />
+		<result column="ENDDATE" jdbcType="DATE" property="enddate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, GROUPID, STARTDATE, ENDDATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from expert_group_term
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		expert_group_term
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExpertGroupTerm">
+		insert into expert_group_term
+		(ID, GROUPID, STARTDATE,
+		ENDDATE)
+		values (#{id,jdbcType=INTEGER},
+		#{groupid,jdbcType=INTEGER},
+		#{startdate,jdbcType=DATE},
+		#{enddate,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExpertGroupTerm">
+		insert into expert_group_term
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="groupid != null">
+				GROUPID,
+			</if>
+			<if test="startdate != null">
+				STARTDATE,
+			</if>
+			<if test="enddate != null">
+				ENDDATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="groupid != null">
+				#{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=DATE},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExpertGroupTerm">
+		update expert_group_term
+		<set>
+			<if test="groupid != null">
+				GROUPID = #{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="startdate != null">
+				STARTDATE = #{startdate,jdbcType=DATE},
+			</if>
+			<if test="enddate != null">
+				ENDDATE = #{enddate,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExpertGroupTerm">
+		update
+		expert_group_term
+		set GROUPID = #{groupid,jdbcType=INTEGER},
+		STARTDATE =
+		#{startdate,jdbcType=DATE},
+		ENDDATE = #{enddate,jdbcType=DATE}
+		where ID
+		= #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

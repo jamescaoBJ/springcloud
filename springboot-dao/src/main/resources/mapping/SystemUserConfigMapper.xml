@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemUserConfigMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemUserConfig">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="STUDY_COURSE_TYPE_ID" jdbcType="INTEGER"
+			property="studyCourseTypeId" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="USER_TYPE" jdbcType="INTEGER" property="userType" />
+		<result column="USER_PROVINCE_ID" jdbcType="INTEGER" property="userProvinceId" />
+		<result column="USER_CITY_ID" jdbcType="INTEGER" property="userCityId" />
+		<result column="USER_COUNTIES_ID" jdbcType="INTEGER" property="userCountiesId" />
+		<result column="IS_ENABLE" jdbcType="INTEGER" property="isEnable" />
+		<result column="USER_INDUSTRY_ID" jdbcType="INTEGER" property="userIndustryId" />
+		<result column="USER_STREET_ID" jdbcType="INTEGER" property="userStreetId" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, STUDY_COURSE_TYPE_ID, LAST_UPDATE_DATE, USER_TYPE,
+		USER_PROVINCE_ID,
+		USER_CITY_ID, USER_COUNTIES_ID, IS_ENABLE, USER_INDUSTRY_ID, USER_STREET_ID,
+		ADDRESS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_user_config
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_user_config
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemUserConfig">
+		insert into system_user_config (ID, USER_ID, STUDY_COURSE_TYPE_ID,
+		LAST_UPDATE_DATE, USER_TYPE, USER_PROVINCE_ID,
+		USER_CITY_ID, USER_COUNTIES_ID, IS_ENABLE,
+		USER_INDUSTRY_ID, USER_STREET_ID, ADDRESS
+		)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{studyCourseTypeId,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP}, #{userType,jdbcType=INTEGER},
+		#{userProvinceId,jdbcType=INTEGER},
+		#{userCityId,jdbcType=INTEGER}, #{userCountiesId,jdbcType=INTEGER}, #{isEnable,jdbcType=INTEGER},
+		#{userIndustryId,jdbcType=INTEGER}, #{userStreetId,jdbcType=INTEGER},
+		#{address,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemUserConfig">
+		insert into system_user_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="studyCourseTypeId != null">
+				STUDY_COURSE_TYPE_ID,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="userType != null">
+				USER_TYPE,
+			</if>
+			<if test="userProvinceId != null">
+				USER_PROVINCE_ID,
+			</if>
+			<if test="userCityId != null">
+				USER_CITY_ID,
+			</if>
+			<if test="userCountiesId != null">
+				USER_COUNTIES_ID,
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE,
+			</if>
+			<if test="userIndustryId != null">
+				USER_INDUSTRY_ID,
+			</if>
+			<if test="userStreetId != null">
+				USER_STREET_ID,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseTypeId != null">
+				#{studyCourseTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userType != null">
+				#{userType,jdbcType=INTEGER},
+			</if>
+			<if test="userProvinceId != null">
+				#{userProvinceId,jdbcType=INTEGER},
+			</if>
+			<if test="userCityId != null">
+				#{userCityId,jdbcType=INTEGER},
+			</if>
+			<if test="userCountiesId != null">
+				#{userCountiesId,jdbcType=INTEGER},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=INTEGER},
+			</if>
+			<if test="userIndustryId != null">
+				#{userIndustryId,jdbcType=INTEGER},
+			</if>
+			<if test="userStreetId != null">
+				#{userStreetId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemUserConfig">
+		update system_user_config
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseTypeId != null">
+				STUDY_COURSE_TYPE_ID = #{studyCourseTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userType != null">
+				USER_TYPE = #{userType,jdbcType=INTEGER},
+			</if>
+			<if test="userProvinceId != null">
+				USER_PROVINCE_ID = #{userProvinceId,jdbcType=INTEGER},
+			</if>
+			<if test="userCityId != null">
+				USER_CITY_ID = #{userCityId,jdbcType=INTEGER},
+			</if>
+			<if test="userCountiesId != null">
+				USER_COUNTIES_ID = #{userCountiesId,jdbcType=INTEGER},
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+			</if>
+			<if test="userIndustryId != null">
+				USER_INDUSTRY_ID = #{userIndustryId,jdbcType=INTEGER},
+			</if>
+			<if test="userStreetId != null">
+				USER_STREET_ID = #{userStreetId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemUserConfig">
+		update system_user_config
+		set USER_ID = #{userId,jdbcType=INTEGER},
+		STUDY_COURSE_TYPE_ID = #{studyCourseTypeId,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		USER_TYPE = #{userType,jdbcType=INTEGER},
+		USER_PROVINCE_ID = #{userProvinceId,jdbcType=INTEGER},
+		USER_CITY_ID = #{userCityId,jdbcType=INTEGER},
+		USER_COUNTIES_ID = #{userCountiesId,jdbcType=INTEGER},
+		IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+		USER_INDUSTRY_ID = #{userIndustryId,jdbcType=INTEGER},
+		USER_STREET_ID = #{userStreetId,jdbcType=INTEGER},
+		ADDRESS = #{address,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据用户id查询用户地址等信息 -->
+	<select id="selectByUserId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_user_config
+		where USER_ID = #{userId,jdbcType=INTEGER}
+	</select>
+</mapper>

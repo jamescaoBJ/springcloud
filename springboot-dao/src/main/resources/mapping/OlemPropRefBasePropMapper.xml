@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.OlemPropRefBasePropMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.OlemPropRefBaseProp">
+		<result column="OLEM_PROP_ID" jdbcType="INTEGER" property="olemPropId" />
+		<result column="BASE_PROP_ID" jdbcType="INTEGER" property="basePropId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.OlemPropRefBaseProp">
+		insert into olem_prop_ref_base_prop (OLEM_PROP_ID, BASE_PROP_ID)
+		values (#{olemPropId,jdbcType=INTEGER}, #{basePropId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.OlemPropRefBaseProp">
+		insert into olem_prop_ref_base_prop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="olemPropId != null">
+				OLEM_PROP_ID,
+			</if>
+			<if test="basePropId != null">
+				BASE_PROP_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="olemPropId != null">
+				#{olemPropId,jdbcType=INTEGER},
+			</if>
+			<if test="basePropId != null">
+				#{basePropId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetReferencelatelyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.CvSetReferencelately">
+		<result column="cv_set_id" jdbcType="INTEGER" property="cvSetId" />
+		<result column="reference_name" jdbcType="VARCHAR" property="referenceName" />
+		<result column="reference_url" jdbcType="VARCHAR" property="referenceUrl" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetReferencelately">
+		insert into
+		cv_set_referencelately (cv_set_id, reference_name, reference_url
+		)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{referenceName,jdbcType=VARCHAR},
+		#{referenceUrl,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetReferencelately">
+		insert into cv_set_referencelately
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				cv_set_id,
+			</if>
+			<if test="referenceName != null">
+				reference_name,
+			</if>
+			<if test="referenceUrl != null">
+				reference_url,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="referenceName != null">
+				#{referenceName,jdbcType=VARCHAR},
+			</if>
+			<if test="referenceUrl != null">
+				#{referenceUrl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

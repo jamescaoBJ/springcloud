@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooPlanTableMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooPlanTable">
+		<result column="STATEMENT_ID" jdbcType="VARCHAR" property="statementId" />
+		<result column="TIMESTAMP" jdbcType="DATE" property="timestamp" />
+		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+		<result column="OPERATION" jdbcType="VARCHAR" property="operation" />
+		<result column="OPTIONS" jdbcType="VARCHAR" property="options" />
+		<result column="OBJECT_NODE" jdbcType="VARCHAR" property="objectNode" />
+		<result column="OBJECT_OWNER" jdbcType="VARCHAR" property="objectOwner" />
+		<result column="OBJECT_NAME" jdbcType="VARCHAR" property="objectName" />
+		<result column="OBJECT_INSTANCE" jdbcType="INTEGER" property="objectInstance" />
+		<result column="OBJECT_TYPE" jdbcType="VARCHAR" property="objectType" />
+		<result column="SEARCH_COLUMNS" jdbcType="INTEGER" property="searchColumns" />
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="POSITION" jdbcType="INTEGER" property="position" />
+		<result column="COLLECTOR" jdbcType="VARCHAR" property="collector" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="HASH_VALUE" jdbcType="INTEGER" property="hashValue" />
+		<result column="OPTIMIZER" jdbcType="VARCHAR" property="optimizer" />
+		<result column="COST" jdbcType="INTEGER" property="cost" />
+		<result column="CARDINALITY" jdbcType="INTEGER" property="cardinality" />
+		<result column="BYTES" jdbcType="INTEGER" property="bytes" />
+		<result column="OTHER_TAG" jdbcType="VARCHAR" property="otherTag" />
+		<result column="PARTITION_START" jdbcType="VARCHAR" property="partitionStart" />
+		<result column="PARTITION_STOP" jdbcType="VARCHAR" property="partitionStop" />
+		<result column="PARTITION_ID" jdbcType="INTEGER" property="partitionId" />
+		<result column="JOIN_TEXT" jdbcType="VARCHAR" property="joinText" />
+		<result column="FILTER_TEXT" jdbcType="VARCHAR" property="filterText" />
+		<result column="VIEW_TEXT" jdbcType="VARCHAR" property="viewText" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.ncme.springboot.model.QuestSooPlanTable">
+		<result column="OTHER" jdbcType="LONGVARCHAR" property="other" />
+	</resultMap>
+	<sql id="Blob_Column_List">
+		OTHER
+	</sql>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooPlanTable">
+		insert into quest_soo_plan_table (STATEMENT_ID, TIMESTAMP, REMARKS,
+		OPERATION, OPTIONS, OBJECT_NODE,
+		OBJECT_OWNER, OBJECT_NAME, OBJECT_INSTANCE,
+		OBJECT_TYPE, SEARCH_COLUMNS, ID,
+		PARENT_ID, POSITION, COLLECTOR,
+		ADDRESS, HASH_VALUE, OPTIMIZER,
+		COST, CARDINALITY, BYTES,
+		OTHER_TAG, PARTITION_START, PARTITION_STOP,
+		PARTITION_ID, JOIN_TEXT, FILTER_TEXT,
+		VIEW_TEXT, OTHER)
+		values (#{statementId,jdbcType=VARCHAR}, #{timestamp,jdbcType=DATE},
+		#{remarks,jdbcType=VARCHAR},
+		#{operation,jdbcType=VARCHAR}, #{options,jdbcType=VARCHAR}, #{objectNode,jdbcType=VARCHAR},
+		#{objectOwner,jdbcType=VARCHAR}, #{objectName,jdbcType=VARCHAR},
+		#{objectInstance,jdbcType=INTEGER},
+		#{objectType,jdbcType=VARCHAR}, #{searchColumns,jdbcType=INTEGER}, #{id,jdbcType=INTEGER},
+		#{parentId,jdbcType=INTEGER}, #{position,jdbcType=INTEGER},
+		#{collector,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{hashValue,jdbcType=INTEGER}, #{optimizer,jdbcType=VARCHAR},
+		#{cost,jdbcType=INTEGER}, #{cardinality,jdbcType=INTEGER},
+		#{bytes,jdbcType=INTEGER},
+		#{otherTag,jdbcType=VARCHAR}, #{partitionStart,jdbcType=VARCHAR},
+		#{partitionStop,jdbcType=VARCHAR},
+		#{partitionId,jdbcType=INTEGER}, #{joinText,jdbcType=VARCHAR}, #{filterText,jdbcType=VARCHAR},
+		#{viewText,jdbcType=VARCHAR}, #{other,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooPlanTable">
+		insert into quest_soo_plan_table
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="statementId != null">
+				STATEMENT_ID,
+			</if>
+			<if test="timestamp != null">
+				TIMESTAMP,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="options != null">
+				OPTIONS,
+			</if>
+			<if test="objectNode != null">
+				OBJECT_NODE,
+			</if>
+			<if test="objectOwner != null">
+				OBJECT_OWNER,
+			</if>
+			<if test="objectName != null">
+				OBJECT_NAME,
+			</if>
+			<if test="objectInstance != null">
+				OBJECT_INSTANCE,
+			</if>
+			<if test="objectType != null">
+				OBJECT_TYPE,
+			</if>
+			<if test="searchColumns != null">
+				SEARCH_COLUMNS,
+			</if>
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="position != null">
+				POSITION,
+			</if>
+			<if test="collector != null">
+				COLLECTOR,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="hashValue != null">
+				HASH_VALUE,
+			</if>
+			<if test="optimizer != null">
+				OPTIMIZER,
+			</if>
+			<if test="cost != null">
+				COST,
+			</if>
+			<if test="cardinality != null">
+				CARDINALITY,
+			</if>
+			<if test="bytes != null">
+				BYTES,
+			</if>
+			<if test="otherTag != null">
+				OTHER_TAG,
+			</if>
+			<if test="partitionStart != null">
+				PARTITION_START,
+			</if>
+			<if test="partitionStop != null">
+				PARTITION_STOP,
+			</if>
+			<if test="partitionId != null">
+				PARTITION_ID,
+			</if>
+			<if test="joinText != null">
+				JOIN_TEXT,
+			</if>
+			<if test="filterText != null">
+				FILTER_TEXT,
+			</if>
+			<if test="viewText != null">
+				VIEW_TEXT,
+			</if>
+			<if test="other != null">
+				OTHER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="statementId != null">
+				#{statementId,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=DATE},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="options != null">
+				#{options,jdbcType=VARCHAR},
+			</if>
+			<if test="objectNode != null">
+				#{objectNode,jdbcType=VARCHAR},
+			</if>
+			<if test="objectOwner != null">
+				#{objectOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="objectName != null">
+				#{objectName,jdbcType=VARCHAR},
+			</if>
+			<if test="objectInstance != null">
+				#{objectInstance,jdbcType=INTEGER},
+			</if>
+			<if test="objectType != null">
+				#{objectType,jdbcType=VARCHAR},
+			</if>
+			<if test="searchColumns != null">
+				#{searchColumns,jdbcType=INTEGER},
+			</if>
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="position != null">
+				#{position,jdbcType=INTEGER},
+			</if>
+			<if test="collector != null">
+				#{collector,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="hashValue != null">
+				#{hashValue,jdbcType=INTEGER},
+			</if>
+			<if test="optimizer != null">
+				#{optimizer,jdbcType=VARCHAR},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=INTEGER},
+			</if>
+			<if test="cardinality != null">
+				#{cardinality,jdbcType=INTEGER},
+			</if>
+			<if test="bytes != null">
+				#{bytes,jdbcType=INTEGER},
+			</if>
+			<if test="otherTag != null">
+				#{otherTag,jdbcType=VARCHAR},
+			</if>
+			<if test="partitionStart != null">
+				#{partitionStart,jdbcType=VARCHAR},
+			</if>
+			<if test="partitionStop != null">
+				#{partitionStop,jdbcType=VARCHAR},
+			</if>
+			<if test="partitionId != null">
+				#{partitionId,jdbcType=INTEGER},
+			</if>
+			<if test="joinText != null">
+				#{joinText,jdbcType=VARCHAR},
+			</if>
+			<if test="filterText != null">
+				#{filterText,jdbcType=VARCHAR},
+			</if>
+			<if test="viewText != null">
+				#{viewText,jdbcType=VARCHAR},
+			</if>
+			<if test="other != null">
+				#{other,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

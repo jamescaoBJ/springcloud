@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvsetQualifyMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvsetQualify">
+		<result column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<result column="DELI_MAN_ID" jdbcType="INTEGER" property="deliManId" />
+		<result column="OPINION" jdbcType="VARCHAR" property="opinion" />
+		<result column="OPINION_TYPE" jdbcType="VARCHAR" property="opinionType" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvsetQualify">
+		insert into cvset_qualify
+		(CV_SET_ID, DELI_MAN_ID, OPINION,
+		OPINION_TYPE)
+		values
+		(#{cvSetId,jdbcType=INTEGER}, #{deliManId,jdbcType=INTEGER},
+		#{opinion,jdbcType=VARCHAR},
+		#{opinionType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvsetQualify">
+		insert into cvset_qualify
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="deliManId != null">
+				DELI_MAN_ID,
+			</if>
+			<if test="opinion != null">
+				OPINION,
+			</if>
+			<if test="opinionType != null">
+				OPINION_TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="deliManId != null">
+				#{deliManId,jdbcType=INTEGER},
+			</if>
+			<if test="opinion != null">
+				#{opinion,jdbcType=VARCHAR},
+			</if>
+			<if test="opinionType != null">
+				#{opinionType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

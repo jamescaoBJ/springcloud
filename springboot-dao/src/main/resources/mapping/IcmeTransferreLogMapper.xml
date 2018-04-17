@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeTransferreLogMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeTransferreLog">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TRANS_OUT_ORG_ID" jdbcType="INTEGER" property="transOutOrgId" />
+		<result column="TRANS_IN_ORG_ID" jdbcType="INTEGER" property="transInOrgId" />
+		<result column="TRANS_OUT_DATE" jdbcType="TIMESTAMP" property="transOutDate" />
+		<result column="TRANS_IN_DATE" jdbcType="DATE" property="transInDate" />
+		<result column="ICME_USER_ID" jdbcType="INTEGER" property="icmeUserId" />
+		<result column="TRANS_OUT_USER_ID" jdbcType="INTEGER" property="transOutUserId" />
+		<result column="TRANS_IN_USER_ID" jdbcType="INTEGER" property="transInUserId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TRANS_OUT_ORG_ID, TRANS_IN_ORG_ID, TRANS_OUT_DATE,
+		TRANS_IN_DATE,
+		ICME_USER_ID,
+		TRANS_OUT_USER_ID, TRANS_IN_USER_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_transferre_log
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_transferre_log
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeTransferreLog">
+		insert into
+		icme_transferre_log (ID, TRANS_OUT_ORG_ID, TRANS_IN_ORG_ID,
+		TRANS_OUT_DATE, TRANS_IN_DATE, ICME_USER_ID,
+		TRANS_OUT_USER_ID,
+		TRANS_IN_USER_ID)
+		values (#{id,jdbcType=INTEGER},
+		#{transOutOrgId,jdbcType=INTEGER},
+		#{transInOrgId,jdbcType=INTEGER},
+		#{transOutDate,jdbcType=TIMESTAMP}, #{transInDate,jdbcType=DATE},
+		#{icmeUserId,jdbcType=INTEGER},
+		#{transOutUserId,jdbcType=INTEGER},
+		#{transInUserId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeTransferreLog">
+		insert into icme_transferre_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="transOutOrgId != null">
+				TRANS_OUT_ORG_ID,
+			</if>
+			<if test="transInOrgId != null">
+				TRANS_IN_ORG_ID,
+			</if>
+			<if test="transOutDate != null">
+				TRANS_OUT_DATE,
+			</if>
+			<if test="transInDate != null">
+				TRANS_IN_DATE,
+			</if>
+			<if test="icmeUserId != null">
+				ICME_USER_ID,
+			</if>
+			<if test="transOutUserId != null">
+				TRANS_OUT_USER_ID,
+			</if>
+			<if test="transInUserId != null">
+				TRANS_IN_USER_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="transOutOrgId != null">
+				#{transOutOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="transInOrgId != null">
+				#{transInOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="transOutDate != null">
+				#{transOutDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="transInDate != null">
+				#{transInDate,jdbcType=DATE},
+			</if>
+			<if test="icmeUserId != null">
+				#{icmeUserId,jdbcType=INTEGER},
+			</if>
+			<if test="transOutUserId != null">
+				#{transOutUserId,jdbcType=INTEGER},
+			</if>
+			<if test="transInUserId != null">
+				#{transInUserId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeTransferreLog">
+		update icme_transferre_log
+		<set>
+			<if test="transOutOrgId != null">
+				TRANS_OUT_ORG_ID = #{transOutOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="transInOrgId != null">
+				TRANS_IN_ORG_ID = #{transInOrgId,jdbcType=INTEGER},
+			</if>
+			<if test="transOutDate != null">
+				TRANS_OUT_DATE = #{transOutDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="transInDate != null">
+				TRANS_IN_DATE = #{transInDate,jdbcType=DATE},
+			</if>
+			<if test="icmeUserId != null">
+				ICME_USER_ID = #{icmeUserId,jdbcType=INTEGER},
+			</if>
+			<if test="transOutUserId != null">
+				TRANS_OUT_USER_ID = #{transOutUserId,jdbcType=INTEGER},
+			</if>
+			<if test="transInUserId != null">
+				TRANS_IN_USER_ID = #{transInUserId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeTransferreLog">
+		update
+		icme_transferre_log
+		set TRANS_OUT_ORG_ID =
+		#{transOutOrgId,jdbcType=INTEGER},
+		TRANS_IN_ORG_ID =
+		#{transInOrgId,jdbcType=INTEGER},
+		TRANS_OUT_DATE =
+		#{transOutDate,jdbcType=TIMESTAMP},
+		TRANS_IN_DATE =
+		#{transInDate,jdbcType=DATE},
+		ICME_USER_ID =
+		#{icmeUserId,jdbcType=INTEGER},
+		TRANS_OUT_USER_ID =
+		#{transOutUserId,jdbcType=INTEGER},
+		TRANS_IN_USER_ID =
+		#{transInUserId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

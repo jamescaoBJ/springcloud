@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCoursewareMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.StudyCourseware">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="TIMES" jdbcType="INTEGER" property="times" />
+		<result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+		<result column="KEY_WORD" jdbcType="VARCHAR" property="keyWord" />
+		<result column="TEACHER_NAME" jdbcType="VARCHAR" property="teacherName" />
+		<result column="TEACHER_TITLE" jdbcType="VARCHAR" property="teacherTitle" />
+		<result column="TEACHER_UNIT" jdbcType="VARCHAR" property="teacherUnit" />
+		<result column="MAKE_YEAR" jdbcType="VARCHAR" property="makeYear" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="MEANING" jdbcType="VARCHAR" property="meaning" />
+		<result column="GAINS" jdbcType="VARCHAR" property="gains" />
+		<result column="ATTENTIONS" jdbcType="VARCHAR" property="attentions" />
+		<result column="PATH" jdbcType="VARCHAR" property="path" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+		<result column="PUBLISH_PATH" jdbcType="VARCHAR" property="publishPath" />
+		<result column="IS_PUBLISH" jdbcType="INTEGER" property="isPublish" />
+		<result column="RELATIVE_ADDRESS" jdbcType="VARCHAR" property="relativeAddress" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="CLASS_HOURS" jdbcType="DOUBLE" property="classHours" />
+		<result column="AS_PATH" jdbcType="VARCHAR" property="asPath" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CODE, NAME, TYPE, TIMES, SUMMARY, KEY_WORD, TEACHER_NAME,
+		TEACHER_TITLE, TEACHER_UNIT,
+		MAKE_YEAR, REMARK, MEANING, GAINS, ATTENTIONS, PATH, STATUS, FILE_PATH,
+		PUBLISH_PATH,
+		IS_PUBLISH, RELATIVE_ADDRESS, LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, CREATE_DATE,
+		CREATE_USER_ID, CLASS_HOURS, AS_PATH
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from study_courseware
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from study_courseware
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCourseware">
+		insert into study_courseware (ID, CODE, NAME,
+		TYPE, TIMES, SUMMARY,
+		KEY_WORD, TEACHER_NAME, TEACHER_TITLE,
+		TEACHER_UNIT, MAKE_YEAR, REMARK,
+		MEANING, GAINS, ATTENTIONS,
+		PATH, STATUS, FILE_PATH,
+		PUBLISH_PATH, IS_PUBLISH, RELATIVE_ADDRESS,
+		LAST_UPDATE_DATE, LAST_UPDATE_USER_ID, CREATE_DATE,
+		CREATE_USER_ID, CLASS_HOURS, AS_PATH
+		)
+		values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR},
+		#{keyWord,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR},
+		#{teacherTitle,jdbcType=VARCHAR},
+		#{teacherUnit,jdbcType=VARCHAR}, #{makeYear,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{meaning,jdbcType=VARCHAR}, #{gains,jdbcType=VARCHAR},
+		#{attentions,jdbcType=VARCHAR},
+		#{path,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{filePath,jdbcType=VARCHAR},
+		#{publishPath,jdbcType=VARCHAR}, #{isPublish,jdbcType=INTEGER},
+		#{relativeAddress,jdbcType=VARCHAR},
+		#{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{lastUpdateUserId,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=INTEGER}, #{classHours,jdbcType=DOUBLE}, #{asPath,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCourseware">
+		insert into study_courseware
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="times != null">
+				TIMES,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="keyWord != null">
+				KEY_WORD,
+			</if>
+			<if test="teacherName != null">
+				TEACHER_NAME,
+			</if>
+			<if test="teacherTitle != null">
+				TEACHER_TITLE,
+			</if>
+			<if test="teacherUnit != null">
+				TEACHER_UNIT,
+			</if>
+			<if test="makeYear != null">
+				MAKE_YEAR,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="meaning != null">
+				MEANING,
+			</if>
+			<if test="gains != null">
+				GAINS,
+			</if>
+			<if test="attentions != null">
+				ATTENTIONS,
+			</if>
+			<if test="path != null">
+				PATH,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="filePath != null">
+				FILE_PATH,
+			</if>
+			<if test="publishPath != null">
+				PUBLISH_PATH,
+			</if>
+			<if test="isPublish != null">
+				IS_PUBLISH,
+			</if>
+			<if test="relativeAddress != null">
+				RELATIVE_ADDRESS,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="classHours != null">
+				CLASS_HOURS,
+			</if>
+			<if test="asPath != null">
+				AS_PATH,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				#{times,jdbcType=INTEGER},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWord != null">
+				#{keyWord,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherName != null">
+				#{teacherName,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherTitle != null">
+				#{teacherTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherUnit != null">
+				#{teacherUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="makeYear != null">
+				#{makeYear,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="meaning != null">
+				#{meaning,jdbcType=VARCHAR},
+			</if>
+			<if test="gains != null">
+				#{gains,jdbcType=VARCHAR},
+			</if>
+			<if test="attentions != null">
+				#{attentions,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				#{path,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="filePath != null">
+				#{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="publishPath != null">
+				#{publishPath,jdbcType=VARCHAR},
+			</if>
+			<if test="isPublish != null">
+				#{isPublish,jdbcType=INTEGER},
+			</if>
+			<if test="relativeAddress != null">
+				#{relativeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="classHours != null">
+				#{classHours,jdbcType=DOUBLE},
+			</if>
+			<if test="asPath != null">
+				#{asPath,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.StudyCourseware">
+		update study_courseware
+		<set>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				TIMES = #{times,jdbcType=INTEGER},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWord != null">
+				KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherName != null">
+				TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherTitle != null">
+				TEACHER_TITLE = #{teacherTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherUnit != null">
+				TEACHER_UNIT = #{teacherUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="makeYear != null">
+				MAKE_YEAR = #{makeYear,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="meaning != null">
+				MEANING = #{meaning,jdbcType=VARCHAR},
+			</if>
+			<if test="gains != null">
+				GAINS = #{gains,jdbcType=VARCHAR},
+			</if>
+			<if test="attentions != null">
+				ATTENTIONS = #{attentions,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				PATH = #{path,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="filePath != null">
+				FILE_PATH = #{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="publishPath != null">
+				PUBLISH_PATH = #{publishPath,jdbcType=VARCHAR},
+			</if>
+			<if test="isPublish != null">
+				IS_PUBLISH = #{isPublish,jdbcType=INTEGER},
+			</if>
+			<if test="relativeAddress != null">
+				RELATIVE_ADDRESS = #{relativeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="classHours != null">
+				CLASS_HOURS = #{classHours,jdbcType=DOUBLE},
+			</if>
+			<if test="asPath != null">
+				AS_PATH = #{asPath,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.StudyCourseware">
+		update study_courseware
+		set CODE = #{code,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		TIMES = #{times,jdbcType=INTEGER},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+		TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+		TEACHER_TITLE = #{teacherTitle,jdbcType=VARCHAR},
+		TEACHER_UNIT = #{teacherUnit,jdbcType=VARCHAR},
+		MAKE_YEAR = #{makeYear,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		MEANING = #{meaning,jdbcType=VARCHAR},
+		GAINS = #{gains,jdbcType=VARCHAR},
+		ATTENTIONS = #{attentions,jdbcType=VARCHAR},
+		PATH = #{path,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		FILE_PATH = #{filePath,jdbcType=VARCHAR},
+		PUBLISH_PATH = #{publishPath,jdbcType=VARCHAR},
+		IS_PUBLISH = #{isPublish,jdbcType=INTEGER},
+		RELATIVE_ADDRESS = #{relativeAddress,jdbcType=VARCHAR},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+		CLASS_HOURS = #{classHours,jdbcType=DOUBLE},
+		AS_PATH = #{asPath,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

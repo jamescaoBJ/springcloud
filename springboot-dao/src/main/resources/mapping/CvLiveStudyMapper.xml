@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvLiveStudyMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvLiveStudy">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="class_no" jdbcType="VARCHAR" property="classNo" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="joinTime" jdbcType="BIGINT" property="jointime" />
+		<result column="leaveTime" jdbcType="BIGINT" property="leavetime" />
+		<result column="ip" jdbcType="VARCHAR" property="ip" />
+		<result column="device" jdbcType="INTEGER" property="device" />
+		<result column="useful_length" jdbcType="INTEGER" property="usefulLength" />
+		<result column="company" jdbcType="VARCHAR" property="company" />
+		<result column="area" jdbcType="VARCHAR" property="area" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, class_no, nickname, mobile, joinTime,
+		leaveTime, ip, device,
+		useful_length,
+		company, area, name
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_live_study
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_live_study
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvLiveStudy">
+		insert into cv_live_study (id,
+		user_id, class_no,
+		nickname, mobile, joinTime,
+		leaveTime, ip, device,
+		useful_length, company, area,
+		name)
+		values (#{id,jdbcType=INTEGER},
+		#{userId,jdbcType=BIGINT},
+		#{classNo,jdbcType=VARCHAR},
+		#{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+		#{jointime,jdbcType=BIGINT},
+		#{leavetime,jdbcType=BIGINT},
+		#{ip,jdbcType=VARCHAR},
+		#{device,jdbcType=INTEGER},
+		#{usefulLength,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR},
+		#{area,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvLiveStudy">
+		insert into cv_live_study
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="classNo != null">
+				class_no,
+			</if>
+			<if test="nickname != null">
+				nickname,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="jointime != null">
+				joinTime,
+			</if>
+			<if test="leavetime != null">
+				leaveTime,
+			</if>
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="device != null">
+				device,
+			</if>
+			<if test="usefulLength != null">
+				useful_length,
+			</if>
+			<if test="company != null">
+				company,
+			</if>
+			<if test="area != null">
+				area,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="classNo != null">
+				#{classNo,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null">
+				#{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="jointime != null">
+				#{jointime,jdbcType=BIGINT},
+			</if>
+			<if test="leavetime != null">
+				#{leavetime,jdbcType=BIGINT},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				#{device,jdbcType=INTEGER},
+			</if>
+			<if test="usefulLength != null">
+				#{usefulLength,jdbcType=INTEGER},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				#{area,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvLiveStudy">
+		update cv_live_study
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="classNo != null">
+				class_no = #{classNo,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null">
+				nickname = #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="jointime != null">
+				joinTime = #{jointime,jdbcType=BIGINT},
+			</if>
+			<if test="leavetime != null">
+				leaveTime = #{leavetime,jdbcType=BIGINT},
+			</if>
+			<if test="ip != null">
+				ip = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				device = #{device,jdbcType=INTEGER},
+			</if>
+			<if test="usefulLength != null">
+				useful_length = #{usefulLength,jdbcType=INTEGER},
+			</if>
+			<if test="company != null">
+				company = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				area = #{area,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvLiveStudy">
+		update
+		cv_live_study
+		set user_id = #{userId,jdbcType=BIGINT},
+		class_no =
+		#{classNo,jdbcType=VARCHAR},
+		nickname = #{nickname,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		joinTime =
+		#{jointime,jdbcType=BIGINT},
+		leaveTime = #{leavetime,jdbcType=BIGINT},
+		ip = #{ip,jdbcType=VARCHAR},
+		device = #{device,jdbcType=INTEGER},
+		useful_length = #{usefulLength,jdbcType=INTEGER},
+		company =
+		#{company,jdbcType=VARCHAR},
+		area = #{area,jdbcType=VARCHAR},
+		name =
+		#{name,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

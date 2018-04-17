@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPaperTactic3Mapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamPaperTactic3">
+		<result column="TACTIC_ID" jdbcType="INTEGER" property="tacticId" />
+		<result column="POINT2_ID" jdbcType="INTEGER" property="point2Id" />
+		<result column="POINT2_NAME" jdbcType="VARCHAR" property="point2Name" />
+		<result column="COGNIZE_ID" jdbcType="INTEGER" property="cognizeId" />
+		<result column="COGNIZE_NAME" jdbcType="VARCHAR" property="cognizeName" />
+		<result column="TITLE_ID" jdbcType="INTEGER" property="titleId" />
+		<result column="TITLE_NAME" jdbcType="VARCHAR" property="titleName" />
+		<result column="source_id" jdbcType="INTEGER" property="sourceId" />
+		<result column="source_name" jdbcType="VARCHAR" property="sourceName" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPaperTactic3">
+		insert into exam_paper_tactic3
+		(TACTIC_ID, POINT2_ID, POINT2_NAME,
+		COGNIZE_ID, COGNIZE_NAME, TITLE_ID,
+		TITLE_NAME, source_id, source_name
+		)
+		values
+		(#{tacticId,jdbcType=INTEGER}, #{point2Id,jdbcType=INTEGER},
+		#{point2Name,jdbcType=VARCHAR},
+		#{cognizeId,jdbcType=INTEGER},
+		#{cognizeName,jdbcType=VARCHAR}, #{titleId,jdbcType=INTEGER},
+		#{titleName,jdbcType=VARCHAR}, #{sourceId,jdbcType=INTEGER},
+		#{sourceName,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPaperTactic3">
+		insert into exam_paper_tactic3
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tacticId != null">
+				TACTIC_ID,
+			</if>
+			<if test="point2Id != null">
+				POINT2_ID,
+			</if>
+			<if test="point2Name != null">
+				POINT2_NAME,
+			</if>
+			<if test="cognizeId != null">
+				COGNIZE_ID,
+			</if>
+			<if test="cognizeName != null">
+				COGNIZE_NAME,
+			</if>
+			<if test="titleId != null">
+				TITLE_ID,
+			</if>
+			<if test="titleName != null">
+				TITLE_NAME,
+			</if>
+			<if test="sourceId != null">
+				source_id,
+			</if>
+			<if test="sourceName != null">
+				source_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tacticId != null">
+				#{tacticId,jdbcType=INTEGER},
+			</if>
+			<if test="point2Id != null">
+				#{point2Id,jdbcType=INTEGER},
+			</if>
+			<if test="point2Name != null">
+				#{point2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="cognizeId != null">
+				#{cognizeId,jdbcType=INTEGER},
+			</if>
+			<if test="cognizeName != null">
+				#{cognizeName,jdbcType=VARCHAR},
+			</if>
+			<if test="titleId != null">
+				#{titleId,jdbcType=INTEGER},
+			</if>
+			<if test="titleName != null">
+				#{titleName,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceId != null">
+				#{sourceId,jdbcType=INTEGER},
+			</if>
+			<if test="sourceName != null">
+				#{sourceName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

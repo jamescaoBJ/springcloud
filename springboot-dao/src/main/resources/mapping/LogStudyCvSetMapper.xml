@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogStudyCvSetMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.LogStudyCvSet">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SYSTEM_USER_ID" jdbcType="INTEGER" property="systemUserId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="IS_APPLY_CREDIT" jdbcType="INTEGER" property="isApplyCredit" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="APPLY_DATE" jdbcType="TIMESTAMP" property="applyDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SYSTEM_USER_ID, SITE_ID, CV_SET_ID, STATE, IS_APPLY_CREDIT,
+		LAST_UPDATE_DATE,
+		APPLY_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_set
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from log_study_cv_set
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogStudyCvSet">
+		insert into log_study_cv_set (ID, SYSTEM_USER_ID, SITE_ID,
+		CV_SET_ID, STATE, IS_APPLY_CREDIT,
+		LAST_UPDATE_DATE, APPLY_DATE)
+		values (#{id,jdbcType=INTEGER}, #{systemUserId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{cvSetId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{isApplyCredit,jdbcType=INTEGER},
+		#{lastUpdateDate,jdbcType=TIMESTAMP}, #{applyDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogStudyCvSet">
+		insert into log_study_cv_set
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="isApplyCredit != null">
+				IS_APPLY_CREDIT,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="applyDate != null">
+				APPLY_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="systemUserId != null">
+				#{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="isApplyCredit != null">
+				#{isApplyCredit,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="applyDate != null">
+				#{applyDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogStudyCvSet">
+		update log_study_cv_set
+		<set>
+			<if test="systemUserId != null">
+				SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				SITE_ID = #{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="cvSetId != null">
+				CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="isApplyCredit != null">
+				IS_APPLY_CREDIT = #{isApplyCredit,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="applyDate != null">
+				APPLY_DATE = #{applyDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogStudyCvSet">
+		update log_study_cv_set
+		set SYSTEM_USER_ID = #{systemUserId,jdbcType=INTEGER},
+		SITE_ID = #{siteId,jdbcType=INTEGER},
+		CV_SET_ID = #{cvSetId,jdbcType=INTEGER},
+		STATE = #{state,jdbcType=INTEGER},
+		IS_APPLY_CREDIT = #{isApplyCredit,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		APPLY_DATE = #{applyDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据项目id查询学习日志表 -->
+	<select id="listLogStudyByCvSetId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study_cv_set
+		where cv_set_id = #{cvSetId,jdbcType=INTEGER}
+		<if test="userId != null and userId !=0">
+			and system_user_id = #{userId,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- 年度报告获得已完成项目个数 -->
+	<select id="getCompletedCvSetNum" resultType="java.lang.Integer">
+		SELECT
+			count(t.ID)
+		FROM
+			log_study_cv_set t
+		JOIN cv_set t1 ON t.cv_set_id = t1.id
+		JOIN cv_set_authorization t2 ON t2.cv_set_id = t1.id
+		JOIN cv_set_authorization_system_site t3 ON t3.AUTHORIZATION_ID = t2.id
+		JOIN system_site t4 ON t3.system_site_id = t4.id
+		WHERE t.system_user_id = #{userId,jdbcType=INTEGER}
+		AND t4.domain_name = #{domainName,jdbcType=VARCHAR}
+		and t.state = 2
+		and year(t.LAST_UPDATE_DATE)= #{year,jdbcType=INTEGER}
+	</select>
+</mapper>

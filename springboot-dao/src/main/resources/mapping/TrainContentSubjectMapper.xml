@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentSubjectMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentSubject">
+		<id column="SUBJECT_ID" jdbcType="INTEGER" property="subjectId" />
+		<result column="SUBJECT_NAME" jdbcType="VARCHAR" property="subjectName" />
+		<result column="ORDERBY" jdbcType="INTEGER" property="orderby" />
+		<result column="APPLICATIONID" jdbcType="VARCHAR" property="applicationid" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		SUBJECT_ID, SUBJECT_NAME, ORDERBY, APPLICATIONID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_subject
+		where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_subject
+		where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentSubject">
+		insert into train_content_subject (SUBJECT_ID, SUBJECT_NAME, ORDERBY,
+		APPLICATIONID)
+		values (#{subjectId,jdbcType=INTEGER}, #{subjectName,jdbcType=VARCHAR},
+		#{orderby,jdbcType=INTEGER},
+		#{applicationid,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentSubject">
+		insert into train_content_subject
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="subjectId != null">
+				SUBJECT_ID,
+			</if>
+			<if test="subjectName != null">
+				SUBJECT_NAME,
+			</if>
+			<if test="orderby != null">
+				ORDERBY,
+			</if>
+			<if test="applicationid != null">
+				APPLICATIONID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=INTEGER},
+			</if>
+			<if test="subjectName != null">
+				#{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderby != null">
+				#{orderby,jdbcType=INTEGER},
+			</if>
+			<if test="applicationid != null">
+				#{applicationid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentSubject">
+		update train_content_subject
+		<set>
+			<if test="subjectName != null">
+				SUBJECT_NAME = #{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderby != null">
+				ORDERBY = #{orderby,jdbcType=INTEGER},
+			</if>
+			<if test="applicationid != null">
+				APPLICATIONID = #{applicationid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentSubject">
+		update train_content_subject
+		set SUBJECT_NAME = #{subjectName,jdbcType=VARCHAR},
+		ORDERBY = #{orderby,jdbcType=INTEGER},
+		APPLICATIONID = #{applicationid,jdbcType=VARCHAR}
+		where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+	</update>
+</mapper>

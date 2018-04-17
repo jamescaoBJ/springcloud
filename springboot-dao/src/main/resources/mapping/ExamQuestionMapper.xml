@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamQuestionMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamQuestion">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="QUESTION_LABEL_ID" jdbcType="INTEGER" property="questionLabelId" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="GRADE" jdbcType="INTEGER" property="grade" />
+		<result column="DIFFER" jdbcType="INTEGER" property="differ" />
+		<result column="ANALYSE" jdbcType="VARCHAR" property="analyse" />
+		<result column="SOURCE" jdbcType="VARCHAR" property="source" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="AUTHOR" jdbcType="VARCHAR" property="author" />
+		<result column="ONLINE_DATE" jdbcType="TIMESTAMP" property="onlineDate" />
+		<result column="ISNOT_MULTIMEDIA" jdbcType="INTEGER" property="isnotMultimedia" />
+		<result column="PRACTICE_SCORE" jdbcType="DOUBLE" property="practiceScore" />
+		<result column="SOURCE2" jdbcType="INTEGER" property="source2" />
+		<result column="CHECKER" jdbcType="VARCHAR" property="checker" />
+		<result column="SURNAME" jdbcType="VARCHAR" property="surname" />
+		<result column="OPINION" jdbcType="VARCHAR" property="opinion" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, QUESTION_LABEL_ID, PARENT_ID, CONTENT, STATE, GRADE,
+		DIFFER, ANALYSE,
+		SOURCE,
+		SEQ, CREATE_DATE, AUTHOR, ONLINE_DATE,
+		ISNOT_MULTIMEDIA, PRACTICE_SCORE,
+		SOURCE2,
+		CHECKER, SURNAME, OPINION
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_question
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_question
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamQuestion">
+		insert into exam_question (ID,
+		QUESTION_LABEL_ID, PARENT_ID,
+		CONTENT, STATE, GRADE,
+		DIFFER, ANALYSE,
+		SOURCE,
+		SEQ, CREATE_DATE, AUTHOR,
+		ONLINE_DATE, ISNOT_MULTIMEDIA,
+		PRACTICE_SCORE,
+		SOURCE2, CHECKER, SURNAME,
+		OPINION)
+		values
+		(#{id,jdbcType=INTEGER}, #{questionLabelId,jdbcType=INTEGER},
+		#{parentId,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR},
+		#{state,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER},
+		#{differ,jdbcType=INTEGER}, #{analyse,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{seq,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP}, #{author,jdbcType=VARCHAR},
+		#{onlineDate,jdbcType=TIMESTAMP}, #{isnotMultimedia,jdbcType=INTEGER},
+		#{practiceScore,jdbcType=DOUBLE},
+		#{source2,jdbcType=INTEGER},
+		#{checker,jdbcType=VARCHAR}, #{surname,jdbcType=VARCHAR},
+		#{opinion,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamQuestion">
+		insert into exam_question
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="questionLabelId != null">
+				QUESTION_LABEL_ID,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="differ != null">
+				DIFFER,
+			</if>
+			<if test="analyse != null">
+				ANALYSE,
+			</if>
+			<if test="source != null">
+				SOURCE,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="author != null">
+				AUTHOR,
+			</if>
+			<if test="onlineDate != null">
+				ONLINE_DATE,
+			</if>
+			<if test="isnotMultimedia != null">
+				ISNOT_MULTIMEDIA,
+			</if>
+			<if test="practiceScore != null">
+				PRACTICE_SCORE,
+			</if>
+			<if test="source2 != null">
+				SOURCE2,
+			</if>
+			<if test="checker != null">
+				CHECKER,
+			</if>
+			<if test="surname != null">
+				SURNAME,
+			</if>
+			<if test="opinion != null">
+				OPINION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="questionLabelId != null">
+				#{questionLabelId,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=INTEGER},
+			</if>
+			<if test="differ != null">
+				#{differ,jdbcType=INTEGER},
+			</if>
+			<if test="analyse != null">
+				#{analyse,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="onlineDate != null">
+				#{onlineDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isnotMultimedia != null">
+				#{isnotMultimedia,jdbcType=INTEGER},
+			</if>
+			<if test="practiceScore != null">
+				#{practiceScore,jdbcType=DOUBLE},
+			</if>
+			<if test="source2 != null">
+				#{source2,jdbcType=INTEGER},
+			</if>
+			<if test="checker != null">
+				#{checker,jdbcType=VARCHAR},
+			</if>
+			<if test="surname != null">
+				#{surname,jdbcType=VARCHAR},
+			</if>
+			<if test="opinion != null">
+				#{opinion,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamQuestion">
+		update exam_question
+		<set>
+			<if test="questionLabelId != null">
+				QUESTION_LABEL_ID = #{questionLabelId,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=INTEGER},
+			</if>
+			<if test="differ != null">
+				DIFFER = #{differ,jdbcType=INTEGER},
+			</if>
+			<if test="analyse != null">
+				ANALYSE = #{analyse,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				SOURCE = #{source,jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="author != null">
+				AUTHOR = #{author,jdbcType=VARCHAR},
+			</if>
+			<if test="onlineDate != null">
+				ONLINE_DATE = #{onlineDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isnotMultimedia != null">
+				ISNOT_MULTIMEDIA = #{isnotMultimedia,jdbcType=INTEGER},
+			</if>
+			<if test="practiceScore != null">
+				PRACTICE_SCORE = #{practiceScore,jdbcType=DOUBLE},
+			</if>
+			<if test="source2 != null">
+				SOURCE2 = #{source2,jdbcType=INTEGER},
+			</if>
+			<if test="checker != null">
+				CHECKER = #{checker,jdbcType=VARCHAR},
+			</if>
+			<if test="surname != null">
+				SURNAME = #{surname,jdbcType=VARCHAR},
+			</if>
+			<if test="opinion != null">
+				OPINION = #{opinion,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamQuestion">
+		update
+		exam_question
+		set QUESTION_LABEL_ID =
+		#{questionLabelId,jdbcType=INTEGER},
+		PARENT_ID =
+		#{parentId,jdbcType=INTEGER},
+		CONTENT = #{content,jdbcType=VARCHAR},
+		STATE = #{state,jdbcType=INTEGER},
+		GRADE = #{grade,jdbcType=INTEGER},
+		DIFFER = #{differ,jdbcType=INTEGER},
+		ANALYSE =
+		#{analyse,jdbcType=VARCHAR},
+		SOURCE = #{source,jdbcType=VARCHAR},
+		SEQ =
+		#{seq,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		AUTHOR = #{author,jdbcType=VARCHAR},
+		ONLINE_DATE = #{onlineDate,jdbcType=TIMESTAMP},
+		ISNOT_MULTIMEDIA =
+		#{isnotMultimedia,jdbcType=INTEGER},
+		PRACTICE_SCORE =
+		#{practiceScore,jdbcType=DOUBLE},
+		SOURCE2 =
+		#{source2,jdbcType=INTEGER},
+		CHECKER = #{checker,jdbcType=VARCHAR},
+		SURNAME = #{surname,jdbcType=VARCHAR},
+		OPINION =
+		#{opinion,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据试卷id查询试题列表 -->
+	<select id="getQuestionByPaperId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select t.* from exam_question t, exam_paper_question t1
+		where t.id = t1.question_id and t1.paper_id =
+		#{paperId,jdbcType=INTEGER}
+		order by t.question_label_id, t1.seq
+	</select>
+	<!-- 根据parentId查询子试题 -->
+	<select id="listQuestionByParentId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from exam_question where parent_id =
+		#{parentId,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamTestpaperMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamTestpaper">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="CHILD_PAPER_NUM" jdbcType="INTEGER" property="childPaperNum" />
+		<result column="TYPE_ID" jdbcType="INTEGER" property="typeId" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="PAPER_SCORE" jdbcType="DOUBLE" property="paperScore" />
+		<result column="PAPER_MODE" jdbcType="INTEGER" property="paperMode" />
+		<result column="QUESTION_NUM" jdbcType="INTEGER" property="questionNum" />
+		<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />
+		<result column="GRADE" jdbcType="INTEGER" property="grade" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="USEFUL_DATE" jdbcType="DATE" property="usefulDate" />
+		<result column="PAPER_PLAN_TYPE" jdbcType="INTEGER" property="paperPlanType" />
+		<result column="EXAMINATION_TIME" jdbcType="INTEGER" property="examinationTime" />
+		<result column="REDO_NUM" jdbcType="INTEGER" property="redoNum" />
+		<result column="ISNOT_VIEW_SCORE" jdbcType="INTEGER" property="isnotViewScore" />
+		<result column="ISNOT_EXP_PAPER" jdbcType="INTEGER" property="isnotExpPaper" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PARENT_ID, CHILD_PAPER_NUM, TYPE_ID, NAME, PAPER_SCORE,
+		PAPER_MODE,
+		QUESTION_NUM,
+		CREATE_DATE, GRADE, STATE, USEFUL_DATE,
+		PAPER_PLAN_TYPE, EXAMINATION_TIME,
+		REDO_NUM,
+		ISNOT_VIEW_SCORE,
+		ISNOT_EXP_PAPER
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_testpaper
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_testpaper
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamTestpaper">
+		insert into exam_testpaper
+		(ID, PARENT_ID, CHILD_PAPER_NUM,
+		TYPE_ID, NAME, PAPER_SCORE,
+		PAPER_MODE, QUESTION_NUM, CREATE_DATE,
+		GRADE, STATE, USEFUL_DATE,
+		PAPER_PLAN_TYPE, EXAMINATION_TIME, REDO_NUM,
+		ISNOT_VIEW_SCORE,
+		ISNOT_EXP_PAPER)
+		values (#{id,jdbcType=INTEGER},
+		#{parentId,jdbcType=INTEGER},
+		#{childPaperNum,jdbcType=INTEGER},
+		#{typeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{paperScore,jdbcType=DOUBLE},
+		#{paperMode,jdbcType=INTEGER},
+		#{questionNum,jdbcType=INTEGER},
+		#{createDate,jdbcType=DATE},
+		#{grade,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
+		#{usefulDate,jdbcType=DATE},
+		#{paperPlanType,jdbcType=INTEGER},
+		#{examinationTime,jdbcType=INTEGER}, #{redoNum,jdbcType=INTEGER},
+		#{isnotViewScore,jdbcType=INTEGER}, #{isnotExpPaper,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamTestpaper">
+		insert into exam_testpaper
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="childPaperNum != null">
+				CHILD_PAPER_NUM,
+			</if>
+			<if test="typeId != null">
+				TYPE_ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="paperScore != null">
+				PAPER_SCORE,
+			</if>
+			<if test="paperMode != null">
+				PAPER_MODE,
+			</if>
+			<if test="questionNum != null">
+				QUESTION_NUM,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="usefulDate != null">
+				USEFUL_DATE,
+			</if>
+			<if test="paperPlanType != null">
+				PAPER_PLAN_TYPE,
+			</if>
+			<if test="examinationTime != null">
+				EXAMINATION_TIME,
+			</if>
+			<if test="redoNum != null">
+				REDO_NUM,
+			</if>
+			<if test="isnotViewScore != null">
+				ISNOT_VIEW_SCORE,
+			</if>
+			<if test="isnotExpPaper != null">
+				ISNOT_EXP_PAPER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="childPaperNum != null">
+				#{childPaperNum,jdbcType=INTEGER},
+			</if>
+			<if test="typeId != null">
+				#{typeId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="paperScore != null">
+				#{paperScore,jdbcType=DOUBLE},
+			</if>
+			<if test="paperMode != null">
+				#{paperMode,jdbcType=INTEGER},
+			</if>
+			<if test="questionNum != null">
+				#{questionNum,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="usefulDate != null">
+				#{usefulDate,jdbcType=DATE},
+			</if>
+			<if test="paperPlanType != null">
+				#{paperPlanType,jdbcType=INTEGER},
+			</if>
+			<if test="examinationTime != null">
+				#{examinationTime,jdbcType=INTEGER},
+			</if>
+			<if test="redoNum != null">
+				#{redoNum,jdbcType=INTEGER},
+			</if>
+			<if test="isnotViewScore != null">
+				#{isnotViewScore,jdbcType=INTEGER},
+			</if>
+			<if test="isnotExpPaper != null">
+				#{isnotExpPaper,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamTestpaper">
+		update exam_testpaper
+		<set>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="childPaperNum != null">
+				CHILD_PAPER_NUM = #{childPaperNum,jdbcType=INTEGER},
+			</if>
+			<if test="typeId != null">
+				TYPE_ID = #{typeId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="paperScore != null">
+				PAPER_SCORE = #{paperScore,jdbcType=DOUBLE},
+			</if>
+			<if test="paperMode != null">
+				PAPER_MODE = #{paperMode,jdbcType=INTEGER},
+			</if>
+			<if test="questionNum != null">
+				QUESTION_NUM = #{questionNum,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="usefulDate != null">
+				USEFUL_DATE = #{usefulDate,jdbcType=DATE},
+			</if>
+			<if test="paperPlanType != null">
+				PAPER_PLAN_TYPE = #{paperPlanType,jdbcType=INTEGER},
+			</if>
+			<if test="examinationTime != null">
+				EXAMINATION_TIME = #{examinationTime,jdbcType=INTEGER},
+			</if>
+			<if test="redoNum != null">
+				REDO_NUM = #{redoNum,jdbcType=INTEGER},
+			</if>
+			<if test="isnotViewScore != null">
+				ISNOT_VIEW_SCORE = #{isnotViewScore,jdbcType=INTEGER},
+			</if>
+			<if test="isnotExpPaper != null">
+				ISNOT_EXP_PAPER = #{isnotExpPaper,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamTestpaper">
+		update
+		exam_testpaper
+		set PARENT_ID = #{parentId,jdbcType=INTEGER},
+		CHILD_PAPER_NUM = #{childPaperNum,jdbcType=INTEGER},
+		TYPE_ID =
+		#{typeId,jdbcType=INTEGER},
+		NAME = #{name,jdbcType=VARCHAR},
+		PAPER_SCORE = #{paperScore,jdbcType=DOUBLE},
+		PAPER_MODE =
+		#{paperMode,jdbcType=INTEGER},
+		QUESTION_NUM =
+		#{questionNum,jdbcType=INTEGER},
+		CREATE_DATE =
+		#{createDate,jdbcType=DATE},
+		GRADE = #{grade,jdbcType=INTEGER},
+		STATE =
+		#{state,jdbcType=INTEGER},
+		USEFUL_DATE = #{usefulDate,jdbcType=DATE},
+		PAPER_PLAN_TYPE = #{paperPlanType,jdbcType=INTEGER},
+		EXAMINATION_TIME =
+		#{examinationTime,jdbcType=INTEGER},
+		REDO_NUM =
+		#{redoNum,jdbcType=INTEGER},
+		ISNOT_VIEW_SCORE =
+		#{isnotViewScore,jdbcType=INTEGER},
+		ISNOT_EXP_PAPER =
+		#{isnotExpPaper,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

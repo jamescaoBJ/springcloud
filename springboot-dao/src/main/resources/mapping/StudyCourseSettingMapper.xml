@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCourseSettingMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.StudyCourseSetting">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TIME" jdbcType="REAL" property="time" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+		<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />
+		<result column="UPDATE_DATE" jdbcType="DATE" property="updateDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TIME, STATUS, CREATOR, CREATE_DATE, UPDATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from study_course_setting
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from study_course_setting
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCourseSetting">
+		insert into study_course_setting (ID, TIME, STATUS,
+		CREATOR, CREATE_DATE, UPDATE_DATE
+		)
+		values (#{id,jdbcType=INTEGER}, #{time,jdbcType=REAL},
+		#{status,jdbcType=INTEGER},
+		#{creator,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCourseSetting">
+		insert into study_course_setting
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="time != null">
+				TIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="creator != null">
+				CREATOR,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=REAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.StudyCourseSetting">
+		update study_course_setting
+		<set>
+			<if test="time != null">
+				TIME = #{time,jdbcType=REAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="creator != null">
+				CREATOR = #{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.StudyCourseSetting">
+		update study_course_setting
+		set TIME = #{time,jdbcType=REAL},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATOR = #{creator,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=DATE},
+		UPDATE_DATE = #{updateDate,jdbcType=DATE}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

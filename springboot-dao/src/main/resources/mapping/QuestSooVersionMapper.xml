@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooVersionMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooVersion">
+		<result column="SOO_FULL_VERSION" jdbcType="VARCHAR" property="sooFullVersion" />
+		<result column="SOO_BIN_VERSION" jdbcType="VARCHAR" property="sooBinVersion" />
+		<result column="SOO_OBJ_VERSION" jdbcType="VARCHAR" property="sooObjVersion" />
+		<result column="QC_FULL_VERSION" jdbcType="VARCHAR" property="qcFullVersion" />
+		<result column="MDK_FULL_VERSION" jdbcType="VARCHAR" property="mdkFullVersion" />
+		<result column="AGENT_FULL_VERSION" jdbcType="VARCHAR"
+			property="agentFullVersion" />
+		<result column="ORACLE_VERSION" jdbcType="VARCHAR" property="oracleVersion" />
+		<result column="ORACLE_BANNER" jdbcType="VARCHAR" property="oracleBanner" />
+		<result column="SERVER_MACHINE_NAME" jdbcType="VARCHAR"
+			property="serverMachineName" />
+		<result column="AGENT_PACKAGE_SOO" jdbcType="VARCHAR" property="agentPackageSoo" />
+		<result column="AGENT_PACKAGE_UNIX" jdbcType="VARCHAR"
+			property="agentPackageUnix" />
+		<result column="AGENT_PACKAGE_WINDOWS" jdbcType="VARCHAR"
+			property="agentPackageWindows" />
+		<result column="MDK_NOTE" jdbcType="VARCHAR" property="mdkNote" />
+		<result column="SOO_NOTE" jdbcType="VARCHAR" property="sooNote" />
+		<result column="AGENT_NOTE" jdbcType="VARCHAR" property="agentNote" />
+		<result column="QC_NOTE" jdbcType="VARCHAR" property="qcNote" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooVersion">
+		insert into quest_soo_version (SOO_FULL_VERSION, SOO_BIN_VERSION,
+		SOO_OBJ_VERSION,
+		QC_FULL_VERSION, MDK_FULL_VERSION, AGENT_FULL_VERSION,
+		ORACLE_VERSION, ORACLE_BANNER, SERVER_MACHINE_NAME,
+		AGENT_PACKAGE_SOO, AGENT_PACKAGE_UNIX, AGENT_PACKAGE_WINDOWS,
+		MDK_NOTE, SOO_NOTE, AGENT_NOTE,
+		QC_NOTE, NOTE)
+		values (#{sooFullVersion,jdbcType=VARCHAR},
+		#{sooBinVersion,jdbcType=VARCHAR}, #{sooObjVersion,jdbcType=VARCHAR},
+		#{qcFullVersion,jdbcType=VARCHAR}, #{mdkFullVersion,jdbcType=VARCHAR},
+		#{agentFullVersion,jdbcType=VARCHAR},
+		#{oracleVersion,jdbcType=VARCHAR}, #{oracleBanner,jdbcType=VARCHAR},
+		#{serverMachineName,jdbcType=VARCHAR},
+		#{agentPackageSoo,jdbcType=VARCHAR},
+		#{agentPackageUnix,jdbcType=VARCHAR},
+		#{agentPackageWindows,jdbcType=VARCHAR},
+		#{mdkNote,jdbcType=VARCHAR}, #{sooNote,jdbcType=VARCHAR}, #{agentNote,jdbcType=VARCHAR},
+		#{qcNote,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooVersion">
+		insert into quest_soo_version
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sooFullVersion != null">
+				SOO_FULL_VERSION,
+			</if>
+			<if test="sooBinVersion != null">
+				SOO_BIN_VERSION,
+			</if>
+			<if test="sooObjVersion != null">
+				SOO_OBJ_VERSION,
+			</if>
+			<if test="qcFullVersion != null">
+				QC_FULL_VERSION,
+			</if>
+			<if test="mdkFullVersion != null">
+				MDK_FULL_VERSION,
+			</if>
+			<if test="agentFullVersion != null">
+				AGENT_FULL_VERSION,
+			</if>
+			<if test="oracleVersion != null">
+				ORACLE_VERSION,
+			</if>
+			<if test="oracleBanner != null">
+				ORACLE_BANNER,
+			</if>
+			<if test="serverMachineName != null">
+				SERVER_MACHINE_NAME,
+			</if>
+			<if test="agentPackageSoo != null">
+				AGENT_PACKAGE_SOO,
+			</if>
+			<if test="agentPackageUnix != null">
+				AGENT_PACKAGE_UNIX,
+			</if>
+			<if test="agentPackageWindows != null">
+				AGENT_PACKAGE_WINDOWS,
+			</if>
+			<if test="mdkNote != null">
+				MDK_NOTE,
+			</if>
+			<if test="sooNote != null">
+				SOO_NOTE,
+			</if>
+			<if test="agentNote != null">
+				AGENT_NOTE,
+			</if>
+			<if test="qcNote != null">
+				QC_NOTE,
+			</if>
+			<if test="note != null">
+				NOTE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sooFullVersion != null">
+				#{sooFullVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="sooBinVersion != null">
+				#{sooBinVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="sooObjVersion != null">
+				#{sooObjVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="qcFullVersion != null">
+				#{qcFullVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="mdkFullVersion != null">
+				#{mdkFullVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="agentFullVersion != null">
+				#{agentFullVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="oracleVersion != null">
+				#{oracleVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="oracleBanner != null">
+				#{oracleBanner,jdbcType=VARCHAR},
+			</if>
+			<if test="serverMachineName != null">
+				#{serverMachineName,jdbcType=VARCHAR},
+			</if>
+			<if test="agentPackageSoo != null">
+				#{agentPackageSoo,jdbcType=VARCHAR},
+			</if>
+			<if test="agentPackageUnix != null">
+				#{agentPackageUnix,jdbcType=VARCHAR},
+			</if>
+			<if test="agentPackageWindows != null">
+				#{agentPackageWindows,jdbcType=VARCHAR},
+			</if>
+			<if test="mdkNote != null">
+				#{mdkNote,jdbcType=VARCHAR},
+			</if>
+			<if test="sooNote != null">
+				#{sooNote,jdbcType=VARCHAR},
+			</if>
+			<if test="agentNote != null">
+				#{agentNote,jdbcType=VARCHAR},
+			</if>
+			<if test="qcNote != null">
+				#{qcNote,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

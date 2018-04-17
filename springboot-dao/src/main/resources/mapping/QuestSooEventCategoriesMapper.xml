@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooEventCategoriesMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooEventCategories">
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="TOPCATEGORY" jdbcType="VARCHAR" property="topcategory" />
+		<result column="SUBCATEGORY" jdbcType="VARCHAR" property="subcategory" />
+		<result column="CATEGORY" jdbcType="VARCHAR" property="category" />
+		<result column="SEG_STAT" jdbcType="VARCHAR" property="segStat" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooEventCategories">
+		insert into quest_soo_event_categories (NAME, TOPCATEGORY, SUBCATEGORY,
+		CATEGORY, SEG_STAT)
+		values (#{name,jdbcType=VARCHAR}, #{topcategory,jdbcType=VARCHAR},
+		#{subcategory,jdbcType=VARCHAR},
+		#{category,jdbcType=VARCHAR}, #{segStat,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooEventCategories">
+		insert into quest_soo_event_categories
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="topcategory != null">
+				TOPCATEGORY,
+			</if>
+			<if test="subcategory != null">
+				SUBCATEGORY,
+			</if>
+			<if test="category != null">
+				CATEGORY,
+			</if>
+			<if test="segStat != null">
+				SEG_STAT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="topcategory != null">
+				#{topcategory,jdbcType=VARCHAR},
+			</if>
+			<if test="subcategory != null">
+				#{subcategory,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=VARCHAR},
+			</if>
+			<if test="segStat != null">
+				#{segStat,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

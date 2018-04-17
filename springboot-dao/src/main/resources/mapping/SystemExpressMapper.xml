@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemExpressMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemExpress">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SITE" jdbcType="VARCHAR" property="site" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CODE, NAME, DESCRIPTION, CREATE_DATE, STATUS, SITE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_express
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_express
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemExpress">
+		insert into system_express (ID, CODE, NAME,
+		DESCRIPTION, CREATE_DATE, STATUS,
+		SITE)
+		values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER},
+		#{site,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemExpress">
+		insert into system_express
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="site != null">
+				SITE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="site != null">
+				#{site,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemExpress">
+		update system_express
+		<set>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="site != null">
+				SITE = #{site,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemExpress">
+		update system_express
+		set CODE = #{code,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER},
+		SITE = #{site,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

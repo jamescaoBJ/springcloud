@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeManageFuncMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeManageFunc">
+		<result column="FUNC_ID" jdbcType="VARCHAR" property="funcId" />
+		<result column="PR_ID" jdbcType="VARCHAR" property="prId" />
+		<result column="ORDER_ID" jdbcType="INTEGER" property="orderId" />
+		<result column="FUNC_NAME" jdbcType="VARCHAR" property="funcName" />
+		<result column="KIND" jdbcType="INTEGER" property="kind" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeManageFunc">
+		insert into ncme_manage_func (FUNC_ID, PR_ID, ORDER_ID,
+		FUNC_NAME, KIND, DESCRIPTION
+		)
+		values (#{funcId,jdbcType=VARCHAR}, #{prId,jdbcType=VARCHAR},
+		#{orderId,jdbcType=INTEGER},
+		#{funcName,jdbcType=VARCHAR}, #{kind,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeManageFunc">
+		insert into ncme_manage_func
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="funcId != null">
+				FUNC_ID,
+			</if>
+			<if test="prId != null">
+				PR_ID,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="funcName != null">
+				FUNC_NAME,
+			</if>
+			<if test="kind != null">
+				KIND,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="funcId != null">
+				#{funcId,jdbcType=VARCHAR},
+			</if>
+			<if test="prId != null">
+				#{prId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="funcName != null">
+				#{funcName,jdbcType=VARCHAR},
+			</if>
+			<if test="kind != null">
+				#{kind,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

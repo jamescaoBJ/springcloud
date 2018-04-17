@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentSurveyQuestionMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.TrainContentSurveyQuestion">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SURVEYID" jdbcType="INTEGER" property="surveyid" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="OPTIONS_A" jdbcType="VARCHAR" property="optionsA" />
+		<result column="OPTIONS_B" jdbcType="VARCHAR" property="optionsB" />
+		<result column="OPTIONS_C" jdbcType="VARCHAR" property="optionsC" />
+		<result column="OPTIONS_D" jdbcType="VARCHAR" property="optionsD" />
+		<result column="OPTIONS_E" jdbcType="VARCHAR" property="optionsE" />
+		<result column="OPTIONS_F" jdbcType="VARCHAR" property="optionsF" />
+		<result column="OPTIONS_G" jdbcType="VARCHAR" property="optionsG" />
+		<result column="OPTIONS_H" jdbcType="VARCHAR" property="optionsH" />
+		<result column="OPTIONS_I" jdbcType="VARCHAR" property="optionsI" />
+		<result column="OPTIONS_J" jdbcType="VARCHAR" property="optionsJ" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SURVEYID, TITLE, OPTIONS_A, OPTIONS_B, OPTIONS_C, OPTIONS_D,
+		OPTIONS_E, OPTIONS_F,
+		OPTIONS_G, OPTIONS_H, OPTIONS_I, OPTIONS_J, TYPE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_survey_question
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_survey_question
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.ncme.springboot.model.TrainContentSurveyQuestion">
+		insert into train_content_survey_question (ID, SURVEYID, TITLE,
+		OPTIONS_A, OPTIONS_B, OPTIONS_C,
+		OPTIONS_D, OPTIONS_E, OPTIONS_F,
+		OPTIONS_G, OPTIONS_H, OPTIONS_I,
+		OPTIONS_J, TYPE)
+		values (#{id,jdbcType=INTEGER}, #{surveyid,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{optionsA,jdbcType=VARCHAR}, #{optionsB,jdbcType=VARCHAR}, #{optionsC,jdbcType=VARCHAR},
+		#{optionsD,jdbcType=VARCHAR}, #{optionsE,jdbcType=VARCHAR},
+		#{optionsF,jdbcType=VARCHAR},
+		#{optionsG,jdbcType=VARCHAR}, #{optionsH,jdbcType=VARCHAR}, #{optionsI,jdbcType=VARCHAR},
+		#{optionsJ,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.ncme.springboot.model.TrainContentSurveyQuestion">
+		insert into train_content_survey_question
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="surveyid != null">
+				SURVEYID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="optionsA != null">
+				OPTIONS_A,
+			</if>
+			<if test="optionsB != null">
+				OPTIONS_B,
+			</if>
+			<if test="optionsC != null">
+				OPTIONS_C,
+			</if>
+			<if test="optionsD != null">
+				OPTIONS_D,
+			</if>
+			<if test="optionsE != null">
+				OPTIONS_E,
+			</if>
+			<if test="optionsF != null">
+				OPTIONS_F,
+			</if>
+			<if test="optionsG != null">
+				OPTIONS_G,
+			</if>
+			<if test="optionsH != null">
+				OPTIONS_H,
+			</if>
+			<if test="optionsI != null">
+				OPTIONS_I,
+			</if>
+			<if test="optionsJ != null">
+				OPTIONS_J,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="surveyid != null">
+				#{surveyid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsA != null">
+				#{optionsA,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsB != null">
+				#{optionsB,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsC != null">
+				#{optionsC,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsD != null">
+				#{optionsD,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsE != null">
+				#{optionsE,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsF != null">
+				#{optionsF,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsG != null">
+				#{optionsG,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsH != null">
+				#{optionsH,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsI != null">
+				#{optionsI,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsJ != null">
+				#{optionsJ,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.ncme.springboot.model.TrainContentSurveyQuestion">
+		update train_content_survey_question
+		<set>
+			<if test="surveyid != null">
+				SURVEYID = #{surveyid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsA != null">
+				OPTIONS_A = #{optionsA,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsB != null">
+				OPTIONS_B = #{optionsB,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsC != null">
+				OPTIONS_C = #{optionsC,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsD != null">
+				OPTIONS_D = #{optionsD,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsE != null">
+				OPTIONS_E = #{optionsE,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsF != null">
+				OPTIONS_F = #{optionsF,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsG != null">
+				OPTIONS_G = #{optionsG,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsH != null">
+				OPTIONS_H = #{optionsH,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsI != null">
+				OPTIONS_I = #{optionsI,jdbcType=VARCHAR},
+			</if>
+			<if test="optionsJ != null">
+				OPTIONS_J = #{optionsJ,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.ncme.springboot.model.TrainContentSurveyQuestion">
+		update train_content_survey_question
+		set SURVEYID = #{surveyid,jdbcType=INTEGER},
+		TITLE = #{title,jdbcType=VARCHAR},
+		OPTIONS_A = #{optionsA,jdbcType=VARCHAR},
+		OPTIONS_B = #{optionsB,jdbcType=VARCHAR},
+		OPTIONS_C = #{optionsC,jdbcType=VARCHAR},
+		OPTIONS_D = #{optionsD,jdbcType=VARCHAR},
+		OPTIONS_E = #{optionsE,jdbcType=VARCHAR},
+		OPTIONS_F = #{optionsF,jdbcType=VARCHAR},
+		OPTIONS_G = #{optionsG,jdbcType=VARCHAR},
+		OPTIONS_H = #{optionsH,jdbcType=VARCHAR},
+		OPTIONS_I = #{optionsI,jdbcType=VARCHAR},
+		OPTIONS_J = #{optionsJ,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

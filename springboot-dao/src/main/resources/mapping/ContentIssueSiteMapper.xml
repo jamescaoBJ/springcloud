@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ContentIssueSiteMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ContentIssueSiteKey">
+		<id column="ISSUE_ID" jdbcType="INTEGER" property="issueId" />
+		<id column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.ContentIssueSiteKey">
+		delete from
+		content_issue_site
+		where ISSUE_ID = #{issueId,jdbcType=INTEGER}
+		and
+		SITE_ID = #{siteId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ContentIssueSiteKey">
+		insert into content_issue_site
+		(ISSUE_ID, SITE_ID)
+		values (#{issueId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ContentIssueSiteKey">
+		insert into content_issue_site
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="issueId != null">
+				ISSUE_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="issueId != null">
+				#{issueId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeCourseCreditHistoryMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.NcmeCourseCreditHistory">
+		<result column="CREDIT_YEAR" jdbcType="VARCHAR" property="creditYear" />
+		<result column="COURSE_ID" jdbcType="VARCHAR" property="courseId" />
+		<result column="COURSE_NAME" jdbcType="VARCHAR" property="courseName" />
+		<result column="ORGAN_ID" jdbcType="VARCHAR" property="organId" />
+		<result column="ORGAN_NAME" jdbcType="VARCHAR" property="organName" />
+		<result column="CREDIT_TYPE" jdbcType="VARCHAR" property="creditType" />
+		<result column="COURSE_TYPE" jdbcType="INTEGER" property="courseType" />
+		<result column="CREDIT_NUM" jdbcType="REAL" property="creditNum" />
+		<result column="EVP_VALUE" jdbcType="INTEGER" property="evpValue" />
+		<result column="COURSE_SERIAL" jdbcType="VARCHAR" property="courseSerial" />
+		<result column="REQUEST" jdbcType="VARCHAR" property="request" />
+		<result column="RE_STUDY_FLAG" jdbcType="INTEGER" property="reStudyFlag" />
+		<result column="CREDIT_DATE" jdbcType="TIMESTAMP" property="creditDate" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeCourseCreditHistory">
+		insert into ncme_course_credit_history (CREDIT_YEAR, COURSE_ID, COURSE_NAME,
+		ORGAN_ID, ORGAN_NAME, CREDIT_TYPE,
+		COURSE_TYPE, CREDIT_NUM, EVP_VALUE,
+		COURSE_SERIAL, REQUEST, RE_STUDY_FLAG,
+		CREDIT_DATE)
+		values (#{creditYear,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR},
+		#{courseName,jdbcType=VARCHAR},
+		#{organId,jdbcType=VARCHAR}, #{organName,jdbcType=VARCHAR}, #{creditType,jdbcType=VARCHAR},
+		#{courseType,jdbcType=INTEGER}, #{creditNum,jdbcType=REAL},
+		#{evpValue,jdbcType=INTEGER},
+		#{courseSerial,jdbcType=VARCHAR}, #{request,jdbcType=VARCHAR}, #{reStudyFlag,jdbcType=INTEGER},
+		#{creditDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeCourseCreditHistory">
+		insert into ncme_course_credit_history
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="creditYear != null">
+				CREDIT_YEAR,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="courseName != null">
+				COURSE_NAME,
+			</if>
+			<if test="organId != null">
+				ORGAN_ID,
+			</if>
+			<if test="organName != null">
+				ORGAN_NAME,
+			</if>
+			<if test="creditType != null">
+				CREDIT_TYPE,
+			</if>
+			<if test="courseType != null">
+				COURSE_TYPE,
+			</if>
+			<if test="creditNum != null">
+				CREDIT_NUM,
+			</if>
+			<if test="evpValue != null">
+				EVP_VALUE,
+			</if>
+			<if test="courseSerial != null">
+				COURSE_SERIAL,
+			</if>
+			<if test="request != null">
+				REQUEST,
+			</if>
+			<if test="reStudyFlag != null">
+				RE_STUDY_FLAG,
+			</if>
+			<if test="creditDate != null">
+				CREDIT_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="creditYear != null">
+				#{creditYear,jdbcType=VARCHAR},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=VARCHAR},
+			</if>
+			<if test="courseName != null">
+				#{courseName,jdbcType=VARCHAR},
+			</if>
+			<if test="organId != null">
+				#{organId,jdbcType=VARCHAR},
+			</if>
+			<if test="organName != null">
+				#{organName,jdbcType=VARCHAR},
+			</if>
+			<if test="creditType != null">
+				#{creditType,jdbcType=VARCHAR},
+			</if>
+			<if test="courseType != null">
+				#{courseType,jdbcType=INTEGER},
+			</if>
+			<if test="creditNum != null">
+				#{creditNum,jdbcType=REAL},
+			</if>
+			<if test="evpValue != null">
+				#{evpValue,jdbcType=INTEGER},
+			</if>
+			<if test="courseSerial != null">
+				#{courseSerial,jdbcType=VARCHAR},
+			</if>
+			<if test="request != null">
+				#{request,jdbcType=VARCHAR},
+			</if>
+			<if test="reStudyFlag != null">
+				#{reStudyFlag,jdbcType=INTEGER},
+			</if>
+			<if test="creditDate != null">
+				#{creditDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+</mapper>

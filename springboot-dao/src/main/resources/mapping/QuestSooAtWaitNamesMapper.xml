@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtWaitNamesMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooAtWaitNames">
+		<result column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+		<result column="NAM" jdbcType="VARCHAR" property="nam" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtWaitNames">
+		insert into quest_soo_at_wait_names (EVENT_ID, NAM)
+		values (#{eventId,jdbcType=INTEGER}, #{nam,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtWaitNames">
+		insert into quest_soo_at_wait_names
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="eventId != null">
+				EVENT_ID,
+			</if>
+			<if test="nam != null">
+				NAM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="eventId != null">
+				#{eventId,jdbcType=INTEGER},
+			</if>
+			<if test="nam != null">
+				#{nam,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

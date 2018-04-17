@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeSiteScoreTypeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeSiteScoreType">
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="SCORE_TYPE_ID" jdbcType="INTEGER" property="scoreTypeId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeSiteScoreType">
+		insert into
+		icme_site_score_type (SITE_ID, SCORE_TYPE_ID)
+		values
+		(#{siteId,jdbcType=INTEGER}, #{scoreTypeId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeSiteScoreType">
+		insert into icme_site_score_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="scoreTypeId != null">
+				SCORE_TYPE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="scoreTypeId != null">
+				#{scoreTypeId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

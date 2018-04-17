@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.LogStudyMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.LogStudy">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="SITE_ID" jdbcType="INTEGER" property="siteId" />
+		<result column="STUDY_COURSE_ID" jdbcType="INTEGER" property="studyCourseId" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="STUDY_COURSE_TYPE_ID" jdbcType="INTEGER"
+			property="studyCourseTypeId" />
+		<result column="NCME_SUBJECT_ID" jdbcType="VARCHAR" property="ncmeSubjectId" />
+		<result column="YEAR" jdbcType="VARCHAR" property="year" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, SITE_ID, STUDY_COURSE_ID, STATE, LAST_UPDATE_DATE,
+		STUDY_COURSE_TYPE_ID,
+		NCME_SUBJECT_ID, YEAR
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from log_study
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from log_study
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.LogStudy">
+		insert into log_study (ID, USER_ID, SITE_ID,
+		STUDY_COURSE_ID, STATE, LAST_UPDATE_DATE,
+		STUDY_COURSE_TYPE_ID, NCME_SUBJECT_ID, YEAR
+		)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{siteId,jdbcType=INTEGER},
+		#{studyCourseId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{studyCourseTypeId,jdbcType=INTEGER},
+		#{ncmeSubjectId,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.LogStudy">
+		insert into log_study
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="siteId != null">
+				SITE_ID,
+			</if>
+			<if test="studyCourseId != null">
+				STUDY_COURSE_ID,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="studyCourseTypeId != null">
+				STUDY_COURSE_TYPE_ID,
+			</if>
+			<if test="ncmeSubjectId != null">
+				NCME_SUBJECT_ID,
+			</if>
+			<if test="year != null">
+				YEAR,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				#{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseId != null">
+				#{studyCourseId,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="studyCourseTypeId != null">
+				#{studyCourseTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="ncmeSubjectId != null">
+				#{ncmeSubjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.LogStudy">
+		update log_study
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="siteId != null">
+				SITE_ID = #{siteId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCourseId != null">
+				STUDY_COURSE_ID = #{studyCourseId,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="studyCourseTypeId != null">
+				STUDY_COURSE_TYPE_ID = #{studyCourseTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="ncmeSubjectId != null">
+				NCME_SUBJECT_ID = #{ncmeSubjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.LogStudy">
+		update log_study
+		set USER_ID = #{userId,jdbcType=INTEGER},
+		SITE_ID = #{siteId,jdbcType=INTEGER},
+		STUDY_COURSE_ID = #{studyCourseId,jdbcType=INTEGER},
+		STATE = #{state,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		STUDY_COURSE_TYPE_ID = #{studyCourseTypeId,jdbcType=INTEGER},
+		NCME_SUBJECT_ID = #{ncmeSubjectId,jdbcType=VARCHAR},
+		YEAR = #{year,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentCourseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentCourse">
+		<id column="COURSE_ID" jdbcType="INTEGER" property="courseId" />
+		<result column="CME_COURSE_ID" jdbcType="VARCHAR" property="cmeCourseId" />
+		<result column="COURSE_NAME" jdbcType="VARCHAR" property="courseName" />
+		<result column="SUBJECT_ID" jdbcType="INTEGER" property="subjectId" />
+		<result column="SCORE" jdbcType="DOUBLE" property="score" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="TYPE" jdbcType="VARCHAR" property="type" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		COURSE_ID, CME_COURSE_ID, COURSE_NAME, SUBJECT_ID, SCORE, STATUS, TYPE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_course
+		where COURSE_ID = #{courseId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_course
+		where COURSE_ID = #{courseId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentCourse">
+		insert into train_content_course (COURSE_ID, CME_COURSE_ID, COURSE_NAME,
+		SUBJECT_ID, SCORE, STATUS,
+		TYPE)
+		values (#{courseId,jdbcType=INTEGER}, #{cmeCourseId,jdbcType=VARCHAR},
+		#{courseName,jdbcType=VARCHAR},
+		#{subjectId,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER},
+		#{type,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentCourse">
+		insert into train_content_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="cmeCourseId != null">
+				CME_COURSE_ID,
+			</if>
+			<if test="courseName != null">
+				COURSE_NAME,
+			</if>
+			<if test="subjectId != null">
+				SUBJECT_ID,
+			</if>
+			<if test="score != null">
+				SCORE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="courseId != null">
+				#{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="cmeCourseId != null">
+				#{cmeCourseId,jdbcType=VARCHAR},
+			</if>
+			<if test="courseName != null">
+				#{courseName,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentCourse">
+		update train_content_course
+		<set>
+			<if test="cmeCourseId != null">
+				CME_COURSE_ID = #{cmeCourseId,jdbcType=VARCHAR},
+			</if>
+			<if test="courseName != null">
+				COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectId != null">
+				SUBJECT_ID = #{subjectId,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				SCORE = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where COURSE_ID = #{courseId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentCourse">
+		update train_content_course
+		set CME_COURSE_ID = #{cmeCourseId,jdbcType=VARCHAR},
+		COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+		SUBJECT_ID = #{subjectId,jdbcType=INTEGER},
+		SCORE = #{score,jdbcType=DOUBLE},
+		STATUS = #{status,jdbcType=INTEGER},
+		TYPE = #{type,jdbcType=VARCHAR}
+		where COURSE_ID = #{courseId,jdbcType=INTEGER}
+	</update>
+</mapper>

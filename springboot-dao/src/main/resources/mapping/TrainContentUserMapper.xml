@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentUserMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentUser">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="ACCOUNT_ID" jdbcType="INTEGER" property="accountId" />
+		<result column="APPLICATIONID" jdbcType="VARCHAR" property="applicationid" />
+		<result column="ACCOUNT_NAME" jdbcType="VARCHAR" property="accountName" />
+		<result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+		<result column="USER_NUM" jdbcType="VARCHAR" property="userNum" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="USER_SEX" jdbcType="VARCHAR" property="userSex" />
+		<result column="USER_BIRTHDAY" jdbcType="DATE" property="userBirthday" />
+		<result column="USER_FLAG" jdbcType="INTEGER" property="userFlag" />
+		<result column="ACCOUNT_PASSWORD" jdbcType="VARCHAR" property="accountPassword" />
+		<result column="USER_BEGINTIME" jdbcType="DATE" property="userBegintime" />
+		<result column="USER_ENDTIME" jdbcType="DATE" property="userEndtime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, ACCOUNT_ID, APPLICATIONID, ACCOUNT_NAME, ROLE_ID, USER_NUM,
+		USER_NAME,
+		USER_SEX, USER_BIRTHDAY, USER_FLAG, ACCOUNT_PASSWORD, USER_BEGINTIME,
+		USER_ENDTIME
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_user
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_user
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentUser">
+		insert into train_content_user (ID, USER_ID, ACCOUNT_ID,
+		APPLICATIONID, ACCOUNT_NAME, ROLE_ID,
+		USER_NUM, USER_NAME, USER_SEX,
+		USER_BIRTHDAY, USER_FLAG, ACCOUNT_PASSWORD,
+		USER_BEGINTIME, USER_ENDTIME)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR},
+		#{accountId,jdbcType=INTEGER},
+		#{applicationid,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER},
+		#{userNum,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+		#{userSex,jdbcType=VARCHAR},
+		#{userBirthday,jdbcType=DATE}, #{userFlag,jdbcType=INTEGER}, #{accountPassword,jdbcType=VARCHAR},
+		#{userBegintime,jdbcType=DATE}, #{userEndtime,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentUser">
+		insert into train_content_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="accountId != null">
+				ACCOUNT_ID,
+			</if>
+			<if test="applicationid != null">
+				APPLICATIONID,
+			</if>
+			<if test="accountName != null">
+				ACCOUNT_NAME,
+			</if>
+			<if test="roleId != null">
+				ROLE_ID,
+			</if>
+			<if test="userNum != null">
+				USER_NUM,
+			</if>
+			<if test="userName != null">
+				USER_NAME,
+			</if>
+			<if test="userSex != null">
+				USER_SEX,
+			</if>
+			<if test="userBirthday != null">
+				USER_BIRTHDAY,
+			</if>
+			<if test="userFlag != null">
+				USER_FLAG,
+			</if>
+			<if test="accountPassword != null">
+				ACCOUNT_PASSWORD,
+			</if>
+			<if test="userBegintime != null">
+				USER_BEGINTIME,
+			</if>
+			<if test="userEndtime != null">
+				USER_ENDTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="accountId != null">
+				#{accountId,jdbcType=INTEGER},
+			</if>
+			<if test="applicationid != null">
+				#{applicationid,jdbcType=VARCHAR},
+			</if>
+			<if test="accountName != null">
+				#{accountName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="userNum != null">
+				#{userNum,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				#{userSex,jdbcType=VARCHAR},
+			</if>
+			<if test="userBirthday != null">
+				#{userBirthday,jdbcType=DATE},
+			</if>
+			<if test="userFlag != null">
+				#{userFlag,jdbcType=INTEGER},
+			</if>
+			<if test="accountPassword != null">
+				#{accountPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userBegintime != null">
+				#{userBegintime,jdbcType=DATE},
+			</if>
+			<if test="userEndtime != null">
+				#{userEndtime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentUser">
+		update train_content_user
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="accountId != null">
+				ACCOUNT_ID = #{accountId,jdbcType=INTEGER},
+			</if>
+			<if test="applicationid != null">
+				APPLICATIONID = #{applicationid,jdbcType=VARCHAR},
+			</if>
+			<if test="accountName != null">
+				ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				ROLE_ID = #{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="userNum != null">
+				USER_NUM = #{userNum,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				USER_NAME = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				USER_SEX = #{userSex,jdbcType=VARCHAR},
+			</if>
+			<if test="userBirthday != null">
+				USER_BIRTHDAY = #{userBirthday,jdbcType=DATE},
+			</if>
+			<if test="userFlag != null">
+				USER_FLAG = #{userFlag,jdbcType=INTEGER},
+			</if>
+			<if test="accountPassword != null">
+				ACCOUNT_PASSWORD = #{accountPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userBegintime != null">
+				USER_BEGINTIME = #{userBegintime,jdbcType=DATE},
+			</if>
+			<if test="userEndtime != null">
+				USER_ENDTIME = #{userEndtime,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentUser">
+		update train_content_user
+		set USER_ID = #{userId,jdbcType=VARCHAR},
+		ACCOUNT_ID = #{accountId,jdbcType=INTEGER},
+		APPLICATIONID = #{applicationid,jdbcType=VARCHAR},
+		ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+		ROLE_ID = #{roleId,jdbcType=INTEGER},
+		USER_NUM = #{userNum,jdbcType=VARCHAR},
+		USER_NAME = #{userName,jdbcType=VARCHAR},
+		USER_SEX = #{userSex,jdbcType=VARCHAR},
+		USER_BIRTHDAY = #{userBirthday,jdbcType=DATE},
+		USER_FLAG = #{userFlag,jdbcType=INTEGER},
+		ACCOUNT_PASSWORD = #{accountPassword,jdbcType=VARCHAR},
+		USER_BEGINTIME = #{userBegintime,jdbcType=DATE},
+		USER_ENDTIME = #{userEndtime,jdbcType=DATE}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

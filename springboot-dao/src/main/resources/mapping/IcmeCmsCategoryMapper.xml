@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeCmsCategoryMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeCmsCategory">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="ORDER_BY" jdbcType="INTEGER" property="orderBy" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />
+		<result column="IS_OPEN" jdbcType="INTEGER" property="isOpen" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="LINK_URL" jdbcType="VARCHAR" property="linkUrl" />
+		<result column="APPLICATION_ID" jdbcType="VARCHAR" property="applicationId" />
+		<result column="CATEGORY_LEVEL" jdbcType="INTEGER" property="categoryLevel" />
+		<result column="RELATED_ID" jdbcType="INTEGER" property="relatedId" />
+		<result column="IS_LOOK" jdbcType="INTEGER" property="isLook" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.ncme.springboot.model.IcmeCmsCategory">
+		<result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TITLE, ORDER_BY, PARENT_ID, CREATE_DATE, IS_OPEN, TYPE,
+		LINK_URL,
+		APPLICATION_ID,
+		CATEGORY_LEVEL, RELATED_ID, IS_LOOK, STATUS
+	</sql>
+	<sql id="Blob_Column_List">
+		CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from icme_cms_category
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_cms_category
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeCmsCategory">
+		insert into icme_cms_category
+		(ID, TITLE, ORDER_BY,
+		PARENT_ID, CREATE_DATE, IS_OPEN,
+		TYPE, LINK_URL,
+		APPLICATION_ID,
+		CATEGORY_LEVEL, RELATED_ID, IS_LOOK,
+		STATUS, CONTENT)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{orderBy,jdbcType=INTEGER},
+		#{parentId,jdbcType=INTEGER},
+		#{createDate,jdbcType=DATE}, #{isOpen,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER}, #{linkUrl,jdbcType=VARCHAR},
+		#{applicationId,jdbcType=VARCHAR},
+		#{categoryLevel,jdbcType=INTEGER},
+		#{relatedId,jdbcType=INTEGER}, #{isLook,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeCmsCategory">
+		insert into icme_cms_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="orderBy != null">
+				ORDER_BY,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="isOpen != null">
+				IS_OPEN,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="linkUrl != null">
+				LINK_URL,
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID,
+			</if>
+			<if test="categoryLevel != null">
+				CATEGORY_LEVEL,
+			</if>
+			<if test="relatedId != null">
+				RELATED_ID,
+			</if>
+			<if test="isLook != null">
+				IS_LOOK,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="isOpen != null">
+				#{isOpen,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="linkUrl != null">
+				#{linkUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationId != null">
+				#{applicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryLevel != null">
+				#{categoryLevel,jdbcType=INTEGER},
+			</if>
+			<if test="relatedId != null">
+				#{relatedId,jdbcType=INTEGER},
+			</if>
+			<if test="isLook != null">
+				#{isLook,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeCmsCategory">
+		update icme_cms_category
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="orderBy != null">
+				ORDER_BY = #{orderBy,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="isOpen != null">
+				IS_OPEN = #{isOpen,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="linkUrl != null">
+				LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryLevel != null">
+				CATEGORY_LEVEL = #{categoryLevel,jdbcType=INTEGER},
+			</if>
+			<if test="relatedId != null">
+				RELATED_ID = #{relatedId,jdbcType=INTEGER},
+			</if>
+			<if test="isLook != null">
+				IS_LOOK = #{isLook,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ncme.springboot.model.IcmeCmsCategory">
+		update
+		icme_cms_category
+		set TITLE = #{title,jdbcType=VARCHAR},
+		ORDER_BY =
+		#{orderBy,jdbcType=INTEGER},
+		PARENT_ID = #{parentId,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=DATE},
+		IS_OPEN =
+		#{isOpen,jdbcType=INTEGER},
+		TYPE = #{type,jdbcType=INTEGER},
+		LINK_URL =
+		#{linkUrl,jdbcType=VARCHAR},
+		APPLICATION_ID =
+		#{applicationId,jdbcType=VARCHAR},
+		CATEGORY_LEVEL =
+		#{categoryLevel,jdbcType=INTEGER},
+		RELATED_ID =
+		#{relatedId,jdbcType=INTEGER},
+		IS_LOOK = #{isLook,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		CONTENT =
+		#{content,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeCmsCategory">
+		update
+		icme_cms_category
+		set TITLE = #{title,jdbcType=VARCHAR},
+		ORDER_BY =
+		#{orderBy,jdbcType=INTEGER},
+		PARENT_ID = #{parentId,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=DATE},
+		IS_OPEN =
+		#{isOpen,jdbcType=INTEGER},
+		TYPE = #{type,jdbcType=INTEGER},
+		LINK_URL =
+		#{linkUrl,jdbcType=VARCHAR},
+		APPLICATION_ID =
+		#{applicationId,jdbcType=VARCHAR},
+		CATEGORY_LEVEL =
+		#{categoryLevel,jdbcType=INTEGER},
+		RELATED_ID =
+		#{relatedId,jdbcType=INTEGER},
+		IS_LOOK = #{isLook,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

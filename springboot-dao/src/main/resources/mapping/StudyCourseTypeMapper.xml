@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCourseTypeMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.StudyCourseType">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="COURSE_TYPE_NAME" jdbcType="VARCHAR" property="courseTypeName" />
+		<result column="PARENT_COURSE_TYPE_ID" jdbcType="INTEGER"
+			property="parentCourseTypeId" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="ALL_CLASS_HOURS" jdbcType="INTEGER" property="allClassHours" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="EXAMINE_REQUIRE" jdbcType="VARCHAR" property="examineRequire" />
+		<result column="TRAIN_PRINCIPLES" jdbcType="VARCHAR" property="trainPrinciples" />
+		<result column="INTRODUCTION" jdbcType="VARCHAR" property="introduction" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+		<result column="IS_LAST_LEVEL" jdbcType="INTEGER" property="isLastLevel" />
+		<result column="LAST_UPDATE_USER_ID" jdbcType="INTEGER"
+			property="lastUpdateUserId" />
+		<result column="CREATE_USER_ID" jdbcType="INTEGER" property="createUserId" />
+		<result column="IS_FREE" jdbcType="INTEGER" property="isFree" />
+		<result column="LAYER" jdbcType="INTEGER" property="layer" />
+		<result column="SUBJECT_ID" jdbcType="VARCHAR" property="subjectId" />
+		<result column="SUBJECT_NAME" jdbcType="VARCHAR" property="subjectName" />
+		<result column="SUBJECT2_ID" jdbcType="VARCHAR" property="subject2Id" />
+		<result column="SUBJECT2_NAME" jdbcType="VARCHAR" property="subject2Name" />
+		<result column="GUIDE" jdbcType="VARCHAR" property="guide" />
+		<result column="EXP_ID" jdbcType="VARCHAR" property="expId" />
+		<result column="KEY_GUIDE" jdbcType="VARCHAR" property="keyGuide" />
+		<result column="PRAC_GUIDE" jdbcType="VARCHAR" property="pracGuide" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, COURSE_TYPE_NAME, PARENT_COURSE_TYPE_ID, SEQ, ALL_CLASS_HOURS, TYPE,
+		EXAMINE_REQUIRE,
+		TRAIN_PRINCIPLES, INTRODUCTION, STATUS, CREATE_DATE, LAST_UPDATE_DATE, IS_LAST_LEVEL,
+		LAST_UPDATE_USER_ID, CREATE_USER_ID, IS_FREE, LAYER, SUBJECT_ID,
+		SUBJECT_NAME, SUBJECT2_ID,
+		SUBJECT2_NAME, GUIDE, EXP_ID, KEY_GUIDE, PRAC_GUIDE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from study_course_type
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from study_course_type
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCourseType">
+		insert into study_course_type (ID, COURSE_TYPE_NAME, PARENT_COURSE_TYPE_ID,
+		SEQ, ALL_CLASS_HOURS, TYPE,
+		EXAMINE_REQUIRE, TRAIN_PRINCIPLES, INTRODUCTION,
+		STATUS, CREATE_DATE, LAST_UPDATE_DATE,
+		IS_LAST_LEVEL, LAST_UPDATE_USER_ID, CREATE_USER_ID,
+		IS_FREE, LAYER, SUBJECT_ID,
+		SUBJECT_NAME, SUBJECT2_ID, SUBJECT2_NAME,
+		GUIDE, EXP_ID, KEY_GUIDE,
+		PRAC_GUIDE)
+		values (#{id,jdbcType=INTEGER}, #{courseTypeName,jdbcType=VARCHAR},
+		#{parentCourseTypeId,jdbcType=INTEGER},
+		#{seq,jdbcType=INTEGER}, #{allClassHours,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+		#{examineRequire,jdbcType=VARCHAR},
+		#{trainPrinciples,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{lastUpdateDate,jdbcType=TIMESTAMP},
+		#{isLastLevel,jdbcType=INTEGER}, #{lastUpdateUserId,jdbcType=INTEGER},
+		#{createUserId,jdbcType=INTEGER},
+		#{isFree,jdbcType=INTEGER}, #{layer,jdbcType=INTEGER}, #{subjectId,jdbcType=VARCHAR},
+		#{subjectName,jdbcType=VARCHAR}, #{subject2Id,jdbcType=VARCHAR},
+		#{subject2Name,jdbcType=VARCHAR},
+		#{guide,jdbcType=VARCHAR}, #{expId,jdbcType=VARCHAR}, #{keyGuide,jdbcType=VARCHAR},
+		#{pracGuide,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCourseType">
+		insert into study_course_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="courseTypeName != null">
+				COURSE_TYPE_NAME,
+			</if>
+			<if test="parentCourseTypeId != null">
+				PARENT_COURSE_TYPE_ID,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="allClassHours != null">
+				ALL_CLASS_HOURS,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="examineRequire != null">
+				EXAMINE_REQUIRE,
+			</if>
+			<if test="trainPrinciples != null">
+				TRAIN_PRINCIPLES,
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+			<if test="isLastLevel != null">
+				IS_LAST_LEVEL,
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="isFree != null">
+				IS_FREE,
+			</if>
+			<if test="layer != null">
+				LAYER,
+			</if>
+			<if test="subjectId != null">
+				SUBJECT_ID,
+			</if>
+			<if test="subjectName != null">
+				SUBJECT_NAME,
+			</if>
+			<if test="subject2Id != null">
+				SUBJECT2_ID,
+			</if>
+			<if test="subject2Name != null">
+				SUBJECT2_NAME,
+			</if>
+			<if test="guide != null">
+				GUIDE,
+			</if>
+			<if test="expId != null">
+				EXP_ID,
+			</if>
+			<if test="keyGuide != null">
+				KEY_GUIDE,
+			</if>
+			<if test="pracGuide != null">
+				PRAC_GUIDE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="courseTypeName != null">
+				#{courseTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentCourseTypeId != null">
+				#{parentCourseTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="allClassHours != null">
+				#{allClassHours,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="examineRequire != null">
+				#{examineRequire,jdbcType=VARCHAR},
+			</if>
+			<if test="trainPrinciples != null">
+				#{trainPrinciples,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isLastLevel != null">
+				#{isLastLevel,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateUserId != null">
+				#{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="isFree != null">
+				#{isFree,jdbcType=INTEGER},
+			</if>
+			<if test="layer != null">
+				#{layer,jdbcType=INTEGER},
+			</if>
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectName != null">
+				#{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="subject2Id != null">
+				#{subject2Id,jdbcType=VARCHAR},
+			</if>
+			<if test="subject2Name != null">
+				#{subject2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="guide != null">
+				#{guide,jdbcType=VARCHAR},
+			</if>
+			<if test="expId != null">
+				#{expId,jdbcType=VARCHAR},
+			</if>
+			<if test="keyGuide != null">
+				#{keyGuide,jdbcType=VARCHAR},
+			</if>
+			<if test="pracGuide != null">
+				#{pracGuide,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.StudyCourseType">
+		update study_course_type
+		<set>
+			<if test="courseTypeName != null">
+				COURSE_TYPE_NAME = #{courseTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentCourseTypeId != null">
+				PARENT_COURSE_TYPE_ID = #{parentCourseTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="allClassHours != null">
+				ALL_CLASS_HOURS = #{allClassHours,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="examineRequire != null">
+				EXAMINE_REQUIRE = #{examineRequire,jdbcType=VARCHAR},
+			</if>
+			<if test="trainPrinciples != null">
+				TRAIN_PRINCIPLES = #{trainPrinciples,jdbcType=VARCHAR},
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isLastLevel != null">
+				IS_LAST_LEVEL = #{isLastLevel,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateUserId != null">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="isFree != null">
+				IS_FREE = #{isFree,jdbcType=INTEGER},
+			</if>
+			<if test="layer != null">
+				LAYER = #{layer,jdbcType=INTEGER},
+			</if>
+			<if test="subjectId != null">
+				SUBJECT_ID = #{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectName != null">
+				SUBJECT_NAME = #{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="subject2Id != null">
+				SUBJECT2_ID = #{subject2Id,jdbcType=VARCHAR},
+			</if>
+			<if test="subject2Name != null">
+				SUBJECT2_NAME = #{subject2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="guide != null">
+				GUIDE = #{guide,jdbcType=VARCHAR},
+			</if>
+			<if test="expId != null">
+				EXP_ID = #{expId,jdbcType=VARCHAR},
+			</if>
+			<if test="keyGuide != null">
+				KEY_GUIDE = #{keyGuide,jdbcType=VARCHAR},
+			</if>
+			<if test="pracGuide != null">
+				PRAC_GUIDE = #{pracGuide,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.StudyCourseType">
+		update study_course_type
+		set COURSE_TYPE_NAME = #{courseTypeName,jdbcType=VARCHAR},
+		PARENT_COURSE_TYPE_ID = #{parentCourseTypeId,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER},
+		ALL_CLASS_HOURS = #{allClassHours,jdbcType=INTEGER},
+		TYPE = #{type,jdbcType=INTEGER},
+		EXAMINE_REQUIRE = #{examineRequire,jdbcType=VARCHAR},
+		TRAIN_PRINCIPLES = #{trainPrinciples,jdbcType=VARCHAR},
+		INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+		IS_LAST_LEVEL = #{isLastLevel,jdbcType=INTEGER},
+		LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=INTEGER},
+		CREATE_USER_ID = #{createUserId,jdbcType=INTEGER},
+		IS_FREE = #{isFree,jdbcType=INTEGER},
+		LAYER = #{layer,jdbcType=INTEGER},
+		SUBJECT_ID = #{subjectId,jdbcType=VARCHAR},
+		SUBJECT_NAME = #{subjectName,jdbcType=VARCHAR},
+		SUBJECT2_ID = #{subject2Id,jdbcType=VARCHAR},
+		SUBJECT2_NAME = #{subject2Name,jdbcType=VARCHAR},
+		GUIDE = #{guide,jdbcType=VARCHAR},
+		EXP_ID = #{expId,jdbcType=VARCHAR},
+		KEY_GUIDE = #{keyGuide,jdbcType=VARCHAR},
+		PRAC_GUIDE = #{pracGuide,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

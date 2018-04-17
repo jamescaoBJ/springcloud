@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExpertGroupValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExpertGroupVal">
+		<result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+		<result column="EXPERTID" jdbcType="INTEGER" property="expertid" />
+		<result column="office" jdbcType="INTEGER" property="office" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExpertGroupVal">
+		insert into expert_group_val
+		(GROUPID, EXPERTID, office
+		)
+		values (#{groupid,jdbcType=INTEGER},
+		#{expertid,jdbcType=INTEGER},
+		#{office,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExpertGroupVal">
+		insert into expert_group_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="groupid != null">
+				GROUPID,
+			</if>
+			<if test="expertid != null">
+				EXPERTID,
+			</if>
+			<if test="office != null">
+				office,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="groupid != null">
+				#{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="expertid != null">
+				#{expertid,jdbcType=INTEGER},
+			</if>
+			<if test="office != null">
+				#{office,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

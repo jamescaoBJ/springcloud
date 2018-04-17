@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ContentIssueMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ContentIssue">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="STARTDATE" jdbcType="DATE" property="startdate" />
+		<result column="ENDDATE" jdbcType="DATE" property="enddate" />
+		<result column="ORDERNUM" jdbcType="INTEGER" property="ordernum" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE, TITLE, STARTDATE, ENDDATE, ORDERNUM, CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from content_issue
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		content_issue
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ContentIssue">
+		insert into content_issue (ID,
+		TYPE, TITLE,
+		STARTDATE, ENDDATE, ORDERNUM,
+		CONTENT)
+		values
+		(#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{startdate,jdbcType=DATE},
+		#{enddate,jdbcType=DATE}, #{ordernum,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ContentIssue">
+		insert into content_issue
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="startdate != null">
+				STARTDATE,
+			</if>
+			<if test="enddate != null">
+				ENDDATE,
+			</if>
+			<if test="ordernum != null">
+				ORDERNUM,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=DATE},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=DATE},
+			</if>
+			<if test="ordernum != null">
+				#{ordernum,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ContentIssue">
+		update content_issue
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				STARTDATE = #{startdate,jdbcType=DATE},
+			</if>
+			<if test="enddate != null">
+				ENDDATE = #{enddate,jdbcType=DATE},
+			</if>
+			<if test="ordernum != null">
+				ORDERNUM = #{ordernum,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ContentIssue">
+		update
+		content_issue
+		set TYPE = #{type,jdbcType=INTEGER},
+		TITLE =
+		#{title,jdbcType=VARCHAR},
+		STARTDATE = #{startdate,jdbcType=DATE},
+		ENDDATE = #{enddate,jdbcType=DATE},
+		ORDERNUM =
+		#{ordernum,jdbcType=INTEGER},
+		CONTENT = #{content,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

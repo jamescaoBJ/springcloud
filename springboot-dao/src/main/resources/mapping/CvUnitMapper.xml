@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvUnitMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvUnit">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="POINT" jdbcType="INTEGER" property="point" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="ISBOUND" jdbcType="INTEGER" property="isbound" />
+		<result column="quota" jdbcType="DOUBLE" property="quota" />
+		<result column="sequenceNum" jdbcType="INTEGER" property="sequencenum" />
+		<result column="unit_make_type" jdbcType="INTEGER" property="unitMakeType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, TYPE, POINT, STATE, CONTENT, ISBOUND, quota,
+		sequenceNum,
+		unit_make_type
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cv_unit
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		cv_unit
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvUnit">
+		insert into cv_unit (ID, NAME,
+		TYPE,
+		POINT, STATE, CONTENT,
+		ISBOUND, quota, sequenceNum,
+		unit_make_type)
+		values (#{id,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{point,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR},
+		#{isbound,jdbcType=INTEGER},
+		#{quota,jdbcType=DOUBLE},
+		#{sequencenum,jdbcType=INTEGER},
+		#{unitMakeType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvUnit">
+		insert into cv_unit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="point != null">
+				POINT,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="isbound != null">
+				ISBOUND,
+			</if>
+			<if test="quota != null">
+				quota,
+			</if>
+			<if test="sequencenum != null">
+				sequenceNum,
+			</if>
+			<if test="unitMakeType != null">
+				unit_make_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="point != null">
+				#{point,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="isbound != null">
+				#{isbound,jdbcType=INTEGER},
+			</if>
+			<if test="quota != null">
+				#{quota,jdbcType=DOUBLE},
+			</if>
+			<if test="sequencenum != null">
+				#{sequencenum,jdbcType=INTEGER},
+			</if>
+			<if test="unitMakeType != null">
+				#{unitMakeType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CvUnit">
+		update cv_unit
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="point != null">
+				POINT = #{point,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="isbound != null">
+				ISBOUND = #{isbound,jdbcType=INTEGER},
+			</if>
+			<if test="quota != null">
+				quota = #{quota,jdbcType=DOUBLE},
+			</if>
+			<if test="sequencenum != null">
+				sequenceNum = #{sequencenum,jdbcType=INTEGER},
+			</if>
+			<if test="unitMakeType != null">
+				unit_make_type = #{unitMakeType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CvUnit">
+		update cv_unit
+		set
+		NAME = #{name,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		POINT
+		= #{point,jdbcType=INTEGER},
+		STATE = #{state,jdbcType=INTEGER},
+		CONTENT
+		= #{content,jdbcType=VARCHAR},
+		ISBOUND = #{isbound,jdbcType=INTEGER},
+		quota = #{quota,jdbcType=DOUBLE},
+		sequenceNum =
+		#{sequencenum,jdbcType=INTEGER},
+		unit_make_type =
+		#{unitMakeType,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据课程id统计该课程的任务点 -->
+	<select id="countPoints" resultType="java.lang.Integer">
+		SELECT COUNT(DISTINCT u.id)
+		FROM cv_unit u
+		LEFT JOIN cv_ref_unit r ON u.ID = r.UNIT_ID
+		WHERE 
+			r.CV_ID IN (SELECT cv.id FROM cv LEFT JOIN cv_schedule sch ON cv.id = sch.CV_ID
+						LEFT JOIN cv_set_schedule ssch ON ssch.CV_SCHEDULE_ID = sch.SCHEDULE_ID
+						WHERE ssch.CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+						)
+			<if test="isPoint == 1">
+				and u.`point` = 1
+			</if>
+	</select>
+	<!-- 根据项目id查询用户已经完成的课程任务点个数 -->
+	<select id="completedLogUnits" resultType="java.lang.Integer">
+		SELECT COUNT(DISTINCT l.CV_UNIT_ID)
+		FROM log_study_cv_unit l
+		LEFT JOIN cv_unit u ON	l.CV_UNIT_ID = u.ID
+		WHERE l.STATUS = 2 AND
+		l.SYSTEM_USER_ID =	#{userId,jdbcType=INTEGER}
+		AND l.LOG_STUDY_CV_SET_ID =	#{cvSetId,jdbcType=INTEGER}
+		<if test="isPoint == 1">
+			AND u.`point` = 1
+		</if>
+	</select>
+	<!-- 根据课程id返回单元信息 -->
+	<select id="getUnitListByCvId" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		cu.id,cu.name,cu.type,cu.`point`,cu.state,cu.isBound,cu.quota,cu.sequenceNum,gci.class_content
+		as content,
+		gci.media_type as mediaType,gci.media_id as mediaId
+		from
+		cv_unit cu
+		LEFT JOIN cv_ref_unit cru on cu.ID = cru.unit_id
+		left join
+		group_class_info gci on gci.class_id = cu.id
+		where cru.cv_id =
+		#{cvId,jdbcType=INTEGER}
+		order by cu.sequenceNum asc
+	</select>
+	<!-- 根据项目Id和userId查询单元的学习记录信息 -->
+	<select id="queryUnitLogStudyByCvSetIdAndUserId" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT cru.cv_id as cvId,cu.id as unitId,lscu.STATUS as
+		logStatus,lscu.LAST_UPDATE_DATE as logStudylastUpdateDate,
+		cu.name
+		,cs.sequenceNum as cvSequenceNum,cu.sequenceNum as
+		sequenceNum,t.cv_type as cvType
+		FROM CV_UNIT cu
+		inner join cv_ref_unit
+		cru on cru.UNIT_ID = cu.id
+		inner join cv t on t.id = cru.CV_ID
+		inner
+		join CV_SCHEDULE cs on cru.CV_ID = cs.CV_ID
+		inner join CV_SET_SCHEDULE
+		css on cs.SCHEDULE_ID = css.CV_SCHEDULE_ID
+		left join log_study_cv_unit
+		lscu on lscu.CV_UNIT_ID = cu.id and lscu.CV_ID
+		= cru.CV_ID
+		WHERE
+		css.CV_SET_ID = #{cvSetId,jdbcType=INTEGER} and lscu.SYSTEM_USER_ID =
+		#{userId,jdbcType=INTEGER}
+		order by lscu.LAST_UPDATE_DATE
+		desc,cs.sequenceNum asc, cu.sequenceNum asc
+	</select>
+	<!-- 根据单元Id和userId查询单元的学习记录信息、单元信息 -->
+	<select id="getCVUnitLogStudyByUnitIdAndUserId" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT distinct cu.id,cu.name,cu.type,cu.`point`,cu.isBound,cu.quota,
+		lscu.STATUS as logStatus,gci.class_content as content,
+		gci.media_type
+		as mediaType,gci.media_id as mediaId 
+		FROM
+		CV_UNIT cu
+		left join log_study_cv_unit lscu on lscu.CV_UNIT_ID = cu.id
+		left join group_class_info gci on gci.class_id = cu.id
+		WHERE cu.id =
+		#{unitId,jdbcType=INTEGER} and lscu.SYSTEM_USER_ID =
+		#{userId,jdbcType=INTEGER}
+	</select>
+	<!-- 根据单元id得到随堂考试试卷id，试卷名称，达标要求 -->
+	<select id="getExamPaperByUnitId" parameterType="java.lang.Integer"
+		resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT cu.quota as unitQuota,gci.class_parent_name as
+		paperName,ep.paper_id
+		as paperId,gci.media_id as examId
+		from cv_unit cu
+		left join group_class_info gci on cu.id = gci.class_id
+		left join
+		exam_exam_paper ep on ep.exam_id = gci.media_id
+		where cu.id = #{unitId}
+	</select>
+	<!-- 查询课程下总的任务点单元数量 -->
+	<select id="getPointsByCvId" resultType="java.lang.Integer">
+		select COUNT(DISTINCT u.id) from cv_unit u
+		LEFT JOIN cv_ref_unit r on
+		u.ID=r.UNIT_ID
+		where u.`POINT` = 1 and r.CV_ID =
+		#{cvId,jdbcType=INTEGER}
+		<if test="unitMakeType != null">
+			and u.unit_make_type = #{unitMakeType,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- 查询会员已学过的任务点单元数量 -->
+	<select id="getCompletePointsByUIdAndCvId" resultType="java.lang.Integer">
+		select COUNT(DISTINCT l.CV_UNIT_ID) from log_study_cv_unit l
+		LEFT JOIN
+		cv_unit u on l.CV_UNIT_ID=u.ID
+		where u.`point`=1 and l.STATUS=2 and
+		l.SYSTEM_USER_ID =
+		#{userId,jdbcType=INTEGER} and l.CV_ID =
+		#{cvId,jdbcType=INTEGER}
+		<if test="unitMakeType != null">
+			and u.unit_make_type = #{unitMakeType,jdbcType=INTEGER}
+		</if>
+	</select>
+</mapper>

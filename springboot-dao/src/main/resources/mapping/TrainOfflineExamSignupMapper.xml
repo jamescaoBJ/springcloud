@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainOfflineExamSignupMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.TrainOfflineExamSignup">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PROJECT_CLASS_ID" jdbcType="INTEGER" property="projectClassId" />
+		<result column="STUDENT_ID" jdbcType="INTEGER" property="studentId" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROJECT_CLASS_ID, STUDENT_ID, STATUS, CREATE_DATE, LAST_UPDATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_offline_exam_signup
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_offline_exam_signup
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainOfflineExamSignup">
+		insert into train_offline_exam_signup (ID, PROJECT_CLASS_ID, STUDENT_ID,
+		STATUS, CREATE_DATE, LAST_UPDATE_DATE
+		)
+		values (#{id,jdbcType=INTEGER}, #{projectClassId,jdbcType=INTEGER},
+		#{studentId,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{lastUpdateDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainOfflineExamSignup">
+		insert into train_offline_exam_signup
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="projectClassId != null">
+				PROJECT_CLASS_ID,
+			</if>
+			<if test="studentId != null">
+				STUDENT_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="projectClassId != null">
+				#{projectClassId,jdbcType=INTEGER},
+			</if>
+			<if test="studentId != null">
+				#{studentId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainOfflineExamSignup">
+		update train_offline_exam_signup
+		<set>
+			<if test="projectClassId != null">
+				PROJECT_CLASS_ID = #{projectClassId,jdbcType=INTEGER},
+			</if>
+			<if test="studentId != null">
+				STUDENT_ID = #{studentId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainOfflineExamSignup">
+		update train_offline_exam_signup
+		set PROJECT_CLASS_ID = #{projectClassId,jdbcType=INTEGER},
+		STUDENT_ID = #{studentId,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

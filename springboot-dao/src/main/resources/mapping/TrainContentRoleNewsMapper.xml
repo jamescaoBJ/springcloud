@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentRoleNewsMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.TrainContentRoleNews">
+		<id column="NEWS_ID" jdbcType="INTEGER" property="newsId" />
+		<result column="TITLE" jdbcType="VARCHAR" property="title" />
+		<result column="SUB_TITLE" jdbcType="VARCHAR" property="subTitle" />
+		<result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="KEYWORDS" jdbcType="VARCHAR" property="keywords" />
+		<result column="ORIGINAL" jdbcType="VARCHAR" property="original" />
+		<result column="AUTHOR" jdbcType="VARCHAR" property="author" />
+		<result column="CREATEDATE" jdbcType="DATE" property="createdate" />
+		<result column="EDITDATE" jdbcType="DATE" property="editdate" />
+		<result column="IMG" jdbcType="VARCHAR" property="img" />
+		<result column="CATEGORY_ID" jdbcType="INTEGER" property="categoryId" />
+		<result column="URL" jdbcType="VARCHAR" property="url" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.ncme.springboot.model.TrainContentRoleNews">
+		<result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		NEWS_ID, TITLE, SUB_TITLE, SUMMARY, TYPE, KEYWORDS, ORIGINAL, AUTHOR,
+		CREATEDATE,
+		EDITDATE, IMG, CATEGORY_ID, URL
+	</sql>
+	<sql id="Blob_Column_List">
+		CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from train_content_role_news
+		where NEWS_ID = #{newsId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_role_news
+		where NEWS_ID = #{newsId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentRoleNews">
+		insert into train_content_role_news (NEWS_ID, TITLE, SUB_TITLE,
+		SUMMARY, TYPE, KEYWORDS,
+		ORIGINAL, AUTHOR, CREATEDATE,
+		EDITDATE, IMG, CATEGORY_ID,
+		URL, CONTENT)
+		values (#{newsId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{subTitle,jdbcType=VARCHAR},
+		#{summary,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR},
+		#{original,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+		#{createdate,jdbcType=DATE},
+		#{editdate,jdbcType=DATE}, #{img,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER},
+		#{url,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentRoleNews">
+		insert into train_content_role_news
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="newsId != null">
+				NEWS_ID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="subTitle != null">
+				SUB_TITLE,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="keywords != null">
+				KEYWORDS,
+			</if>
+			<if test="original != null">
+				ORIGINAL,
+			</if>
+			<if test="author != null">
+				AUTHOR,
+			</if>
+			<if test="createdate != null">
+				CREATEDATE,
+			</if>
+			<if test="editdate != null">
+				EDITDATE,
+			</if>
+			<if test="img != null">
+				IMG,
+			</if>
+			<if test="categoryId != null">
+				CATEGORY_ID,
+			</if>
+			<if test="url != null">
+				URL,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="newsId != null">
+				#{newsId,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subTitle != null">
+				#{subTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="keywords != null">
+				#{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="original != null">
+				#{original,jdbcType=VARCHAR},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=DATE},
+			</if>
+			<if test="editdate != null">
+				#{editdate,jdbcType=DATE},
+			</if>
+			<if test="img != null">
+				#{img,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentRoleNews">
+		update train_content_role_news
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subTitle != null">
+				SUB_TITLE = #{subTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="keywords != null">
+				KEYWORDS = #{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="original != null">
+				ORIGINAL = #{original,jdbcType=VARCHAR},
+			</if>
+			<if test="author != null">
+				AUTHOR = #{author,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				CREATEDATE = #{createdate,jdbcType=DATE},
+			</if>
+			<if test="editdate != null">
+				EDITDATE = #{editdate,jdbcType=DATE},
+			</if>
+			<if test="img != null">
+				IMG = #{img,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where NEWS_ID = #{newsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ncme.springboot.model.TrainContentRoleNews">
+		update train_content_role_news
+		set TITLE = #{title,jdbcType=VARCHAR},
+		SUB_TITLE = #{subTitle,jdbcType=VARCHAR},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		KEYWORDS = #{keywords,jdbcType=VARCHAR},
+		ORIGINAL = #{original,jdbcType=VARCHAR},
+		AUTHOR = #{author,jdbcType=VARCHAR},
+		CREATEDATE = #{createdate,jdbcType=DATE},
+		EDITDATE = #{editdate,jdbcType=DATE},
+		IMG = #{img,jdbcType=VARCHAR},
+		CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
+		URL = #{url,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=LONGVARCHAR}
+		where NEWS_ID = #{newsId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentRoleNews">
+		update train_content_role_news
+		set TITLE = #{title,jdbcType=VARCHAR},
+		SUB_TITLE = #{subTitle,jdbcType=VARCHAR},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		KEYWORDS = #{keywords,jdbcType=VARCHAR},
+		ORIGINAL = #{original,jdbcType=VARCHAR},
+		AUTHOR = #{author,jdbcType=VARCHAR},
+		CREATEDATE = #{createdate,jdbcType=DATE},
+		EDITDATE = #{editdate,jdbcType=DATE},
+		IMG = #{img,jdbcType=VARCHAR},
+		CATEGORY_ID = #{categoryId,jdbcType=INTEGER},
+		URL = #{url,jdbcType=VARCHAR}
+		where NEWS_ID = #{newsId,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooAtExecutionPlanMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooAtExecutionPlan">
+		<result column="TRACE_FILE_ID" jdbcType="INTEGER" property="traceFileId" />
+		<result column="SQL_ID" jdbcType="INTEGER" property="sqlId" />
+		<result column="PARSE_ID" jdbcType="INTEGER" property="parseId" />
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="CNT" jdbcType="INTEGER" property="cnt" />
+		<result column="PID" jdbcType="INTEGER" property="pid" />
+		<result column="POS" jdbcType="INTEGER" property="pos" />
+		<result column="OBJ" jdbcType="INTEGER" property="obj" />
+		<result column="CR" jdbcType="INTEGER" property="cr" />
+		<result column="PR" jdbcType="INTEGER" property="pr" />
+		<result column="PW" jdbcType="INTEGER" property="pw" />
+		<result column="TIME_US" jdbcType="INTEGER" property="timeUs" />
+		<result column="OPERATION_ID" jdbcType="INTEGER" property="operationId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooAtExecutionPlan">
+		insert into quest_soo_at_execution_plan (TRACE_FILE_ID, SQL_ID, PARSE_ID,
+		ID, CNT, PID, POS,
+		OBJ, CR, PR, PW,
+		TIME_US, OPERATION_ID)
+		values (#{traceFileId,jdbcType=INTEGER}, #{sqlId,jdbcType=INTEGER},
+		#{parseId,jdbcType=INTEGER},
+		#{id,jdbcType=INTEGER}, #{cnt,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER},
+		#{pos,jdbcType=INTEGER},
+		#{obj,jdbcType=INTEGER}, #{cr,jdbcType=INTEGER}, #{pr,jdbcType=INTEGER},
+		#{pw,jdbcType=INTEGER},
+		#{timeUs,jdbcType=INTEGER}, #{operationId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooAtExecutionPlan">
+		insert into quest_soo_at_execution_plan
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				TRACE_FILE_ID,
+			</if>
+			<if test="sqlId != null">
+				SQL_ID,
+			</if>
+			<if test="parseId != null">
+				PARSE_ID,
+			</if>
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cnt != null">
+				CNT,
+			</if>
+			<if test="pid != null">
+				PID,
+			</if>
+			<if test="pos != null">
+				POS,
+			</if>
+			<if test="obj != null">
+				OBJ,
+			</if>
+			<if test="cr != null">
+				CR,
+			</if>
+			<if test="pr != null">
+				PR,
+			</if>
+			<if test="pw != null">
+				PW,
+			</if>
+			<if test="timeUs != null">
+				TIME_US,
+			</if>
+			<if test="operationId != null">
+				OPERATION_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="traceFileId != null">
+				#{traceFileId,jdbcType=INTEGER},
+			</if>
+			<if test="sqlId != null">
+				#{sqlId,jdbcType=INTEGER},
+			</if>
+			<if test="parseId != null">
+				#{parseId,jdbcType=INTEGER},
+			</if>
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cnt != null">
+				#{cnt,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="pos != null">
+				#{pos,jdbcType=INTEGER},
+			</if>
+			<if test="obj != null">
+				#{obj,jdbcType=INTEGER},
+			</if>
+			<if test="cr != null">
+				#{cr,jdbcType=INTEGER},
+			</if>
+			<if test="pr != null">
+				#{pr,jdbcType=INTEGER},
+			</if>
+			<if test="pw != null">
+				#{pw,jdbcType=INTEGER},
+			</if>
+			<if test="timeUs != null">
+				#{timeUs,jdbcType=INTEGER},
+			</if>
+			<if test="operationId != null">
+				#{operationId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

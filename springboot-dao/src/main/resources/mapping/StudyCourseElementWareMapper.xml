@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCourseElementWareMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.StudyCourseElementWare">
+		<result column="STUDY_COURSE_ELEMENT_ID" jdbcType="INTEGER"
+			property="studyCourseElementId" />
+		<result column="STUDY_COURSEWARE_ID" jdbcType="INTEGER"
+			property="studyCoursewareId" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCourseElementWare">
+		insert into study_course_element_ware (STUDY_COURSE_ELEMENT_ID,
+		STUDY_COURSEWARE_ID
+		)
+		values (#{studyCourseElementId,jdbcType=INTEGER},
+		#{studyCoursewareId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCourseElementWare">
+		insert into study_course_element_ware
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="studyCourseElementId != null">
+				STUDY_COURSE_ELEMENT_ID,
+			</if>
+			<if test="studyCoursewareId != null">
+				STUDY_COURSEWARE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="studyCourseElementId != null">
+				#{studyCourseElementId,jdbcType=INTEGER},
+			</if>
+			<if test="studyCoursewareId != null">
+				#{studyCoursewareId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.IcmeAppInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.IcmeAppInfo">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="APP_NAME" jdbcType="VARCHAR" property="appName" />
+		<result column="APK_NAME" jdbcType="VARCHAR" property="apkName" />
+		<result column="VERSION_CODE" jdbcType="VARCHAR" property="versionCode" />
+		<result column="VERSION_NAME" jdbcType="VARCHAR" property="versionName" />
+		<result column="VERSION_PATH" jdbcType="VARCHAR" property="versionPath" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, APP_NAME, APK_NAME, VERSION_CODE, VERSION_NAME,
+		VERSION_PATH
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from icme_app_info
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		icme_app_info
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.IcmeAppInfo">
+		insert into icme_app_info (ID,
+		APP_NAME, APK_NAME,
+		VERSION_CODE, VERSION_NAME, VERSION_PATH
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{appName,jdbcType=VARCHAR},
+		#{apkName,jdbcType=VARCHAR},
+		#{versionCode,jdbcType=VARCHAR},
+		#{versionName,jdbcType=VARCHAR}, #{versionPath,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.IcmeAppInfo">
+		insert into icme_app_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="appName != null">
+				APP_NAME,
+			</if>
+			<if test="apkName != null">
+				APK_NAME,
+			</if>
+			<if test="versionCode != null">
+				VERSION_CODE,
+			</if>
+			<if test="versionName != null">
+				VERSION_NAME,
+			</if>
+			<if test="versionPath != null">
+				VERSION_PATH,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="appName != null">
+				#{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="apkName != null">
+				#{apkName,jdbcType=VARCHAR},
+			</if>
+			<if test="versionCode != null">
+				#{versionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="versionName != null">
+				#{versionName,jdbcType=VARCHAR},
+			</if>
+			<if test="versionPath != null">
+				#{versionPath,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.IcmeAppInfo">
+		update icme_app_info
+		<set>
+			<if test="appName != null">
+				APP_NAME = #{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="apkName != null">
+				APK_NAME = #{apkName,jdbcType=VARCHAR},
+			</if>
+			<if test="versionCode != null">
+				VERSION_CODE = #{versionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="versionName != null">
+				VERSION_NAME = #{versionName,jdbcType=VARCHAR},
+			</if>
+			<if test="versionPath != null">
+				VERSION_PATH = #{versionPath,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.IcmeAppInfo">
+		update
+		icme_app_info
+		set APP_NAME = #{appName,jdbcType=VARCHAR},
+		APK_NAME =
+		#{apkName,jdbcType=VARCHAR},
+		VERSION_CODE =
+		#{versionCode,jdbcType=VARCHAR},
+		VERSION_NAME =
+		#{versionName,jdbcType=VARCHAR},
+		VERSION_PATH =
+		#{versionPath,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

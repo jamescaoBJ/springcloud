@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.NcmeOrderCouponCardMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.NcmeOrderCouponCard">
+		<result column="COUPON_CODE" jdbcType="VARCHAR" property="couponCode" />
+		<result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.NcmeOrderCouponCard">
+		insert into ncme_order_coupon_card (COUPON_CODE, CARD_TYPE)
+		values (#{couponCode,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.NcmeOrderCouponCard">
+		insert into ncme_order_coupon_card
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="couponCode != null">
+				COUPON_CODE,
+			</if>
+			<if test="cardType != null">
+				CARD_TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="couponCode != null">
+				#{couponCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cardType != null">
+				#{cardType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

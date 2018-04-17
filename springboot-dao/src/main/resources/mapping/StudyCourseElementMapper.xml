@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.StudyCourseElementMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.StudyCourseElement">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="COURSE_ELEMENT_TYPE" jdbcType="INTEGER"
+			property="courseElementType" />
+		<result column="COURSE_ID" jdbcType="INTEGER" property="courseId" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP"
+			property="lastUpdateDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, COURSE_ELEMENT_TYPE, COURSE_ID, SEQ, STATUS, LAST_UPDATE_DATE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from study_course_element
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from study_course_element
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.StudyCourseElement">
+		insert into study_course_element (ID, COURSE_ELEMENT_TYPE, COURSE_ID,
+		SEQ, STATUS, LAST_UPDATE_DATE
+		)
+		values (#{id,jdbcType=INTEGER}, #{courseElementType,jdbcType=INTEGER},
+		#{courseId,jdbcType=INTEGER},
+		#{seq,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.StudyCourseElement">
+		insert into study_course_element
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="courseElementType != null">
+				COURSE_ELEMENT_TYPE,
+			</if>
+			<if test="courseId != null">
+				COURSE_ID,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="courseElementType != null">
+				#{courseElementType,jdbcType=INTEGER},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.StudyCourseElement">
+		update study_course_element
+		<set>
+			<if test="courseElementType != null">
+				COURSE_ELEMENT_TYPE = #{courseElementType,jdbcType=INTEGER},
+			</if>
+			<if test="courseId != null">
+				COURSE_ID = #{courseId,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="lastUpdateDate != null">
+				LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.StudyCourseElement">
+		update study_course_element
+		set COURSE_ELEMENT_TYPE = #{courseElementType,jdbcType=INTEGER},
+		COURSE_ID = #{courseId,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

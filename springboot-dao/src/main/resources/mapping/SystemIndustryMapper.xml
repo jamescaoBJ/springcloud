@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SystemIndustryMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SystemIndustry">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="INDUSTRY_NAME" jdbcType="VARCHAR" property="industryName" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="SEQ" jdbcType="INTEGER" property="seq" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PARENT_ID, INDUSTRY_NAME, STATUS, SEQ
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_industry
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_industry
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SystemIndustry">
+		insert into system_industry (ID, PARENT_ID, INDUSTRY_NAME,
+		STATUS, SEQ)
+		values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER},
+		#{industryName,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SystemIndustry">
+		insert into system_industry
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="industryName != null">
+				INDUSTRY_NAME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="seq != null">
+				SEQ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="industryName != null">
+				#{industryName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SystemIndustry">
+		update system_industry
+		<set>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="industryName != null">
+				INDUSTRY_NAME = #{industryName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="seq != null">
+				SEQ = #{seq,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SystemIndustry">
+		update system_industry
+		set PARENT_ID = #{parentId,jdbcType=INTEGER},
+		INDUSTRY_NAME = #{industryName,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		SEQ = #{seq,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

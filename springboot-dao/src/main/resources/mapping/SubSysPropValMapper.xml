@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.SubSysPropValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.SubSysPropVal">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="SYS_PROP_ID" jdbcType="INTEGER" property="sysPropId" />
+		<result column="PROP_VAL_ID" jdbcType="INTEGER" property="propValId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SYS_PROP_ID, PROP_VAL_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sub_sys_prop_val
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sub_sys_prop_val
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.SubSysPropVal">
+		insert into sub_sys_prop_val (ID, SYS_PROP_ID, PROP_VAL_ID
+		)
+		values (#{id,jdbcType=INTEGER}, #{sysPropId,jdbcType=INTEGER},
+		#{propValId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.SubSysPropVal">
+		insert into sub_sys_prop_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="sysPropId != null">
+				SYS_PROP_ID,
+			</if>
+			<if test="propValId != null">
+				PROP_VAL_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="sysPropId != null">
+				#{sysPropId,jdbcType=INTEGER},
+			</if>
+			<if test="propValId != null">
+				#{propValId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.SubSysPropVal">
+		update sub_sys_prop_val
+		<set>
+			<if test="sysPropId != null">
+				SYS_PROP_ID = #{sysPropId,jdbcType=INTEGER},
+			</if>
+			<if test="propValId != null">
+				PROP_VAL_ID = #{propValId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.SubSysPropVal">
+		update sub_sys_prop_val
+		set SYS_PROP_ID = #{sysPropId,jdbcType=INTEGER},
+		PROP_VAL_ID = #{propValId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

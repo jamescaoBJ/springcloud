@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamIcdPropMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamIcdProp">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="TYPE" jdbcType="INTEGER" property="type" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="NAME_EN" jdbcType="VARCHAR" property="nameEn" />
+		<result column="HINT" jdbcType="VARCHAR" property="hint" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE, NAME, CODE, NAME_EN, HINT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_icd_prop
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_icd_prop
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamIcdProp">
+		insert into exam_icd_prop (ID,
+		TYPE, NAME,
+		CODE, NAME_EN, HINT)
+		values (#{id,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR}, #{nameEn,jdbcType=VARCHAR},
+		#{hint,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamIcdProp">
+		insert into exam_icd_prop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="nameEn != null">
+				NAME_EN,
+			</if>
+			<if test="hint != null">
+				HINT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="nameEn != null">
+				#{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="hint != null">
+				#{hint,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamIcdProp">
+		update exam_icd_prop
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="nameEn != null">
+				NAME_EN = #{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="hint != null">
+				HINT = #{hint,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamIcdProp">
+		update
+		exam_icd_prop
+		set TYPE = #{type,jdbcType=INTEGER},
+		NAME =
+		#{name,jdbcType=VARCHAR},
+		CODE = #{code,jdbcType=VARCHAR},
+		NAME_EN =
+		#{nameEn,jdbcType=VARCHAR},
+		HINT = #{hint,jdbcType=VARCHAR}
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

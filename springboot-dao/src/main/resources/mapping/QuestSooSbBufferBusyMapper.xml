@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooSbBufferBusyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ncme.springboot.model.QuestSooSbBufferBusy">
+		<result column="CLASS" jdbcType="VARCHAR" property="class" />
+		<result column="WAITS" jdbcType="INTEGER" property="waits" />
+		<result column="PCT_OF_COUNT" jdbcType="INTEGER" property="pctOfCount" />
+		<result column="PCT_OF_TIME" jdbcType="INTEGER" property="pctOfTime" />
+		<result column="LOGICAL_READS" jdbcType="INTEGER" property="logicalReads" />
+		<result column="RATIO" jdbcType="INTEGER" property="ratio" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+		<result column="TIME" jdbcType="INTEGER" property="time" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooSbBufferBusy">
+		insert into quest_soo_sb_buffer_busy (CLASS, WAITS, PCT_OF_COUNT,
+		PCT_OF_TIME, LOGICAL_READS, RATIO,
+		NOTE, TIME)
+		values (#{class,jdbcType=VARCHAR}, #{waits,jdbcType=INTEGER},
+		#{pctOfCount,jdbcType=INTEGER},
+		#{pctOfTime,jdbcType=INTEGER}, #{logicalReads,jdbcType=INTEGER}, #{ratio,jdbcType=INTEGER},
+		#{note,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooSbBufferBusy">
+		insert into quest_soo_sb_buffer_busy
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="class != null">
+				CLASS,
+			</if>
+			<if test="waits != null">
+				WAITS,
+			</if>
+			<if test="pctOfCount != null">
+				PCT_OF_COUNT,
+			</if>
+			<if test="pctOfTime != null">
+				PCT_OF_TIME,
+			</if>
+			<if test="logicalReads != null">
+				LOGICAL_READS,
+			</if>
+			<if test="ratio != null">
+				RATIO,
+			</if>
+			<if test="note != null">
+				NOTE,
+			</if>
+			<if test="time != null">
+				TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="class != null">
+				#{class,jdbcType=VARCHAR},
+			</if>
+			<if test="waits != null">
+				#{waits,jdbcType=INTEGER},
+			</if>
+			<if test="pctOfCount != null">
+				#{pctOfCount,jdbcType=INTEGER},
+			</if>
+			<if test="pctOfTime != null">
+				#{pctOfTime,jdbcType=INTEGER},
+			</if>
+			<if test="logicalReads != null">
+				#{logicalReads,jdbcType=INTEGER},
+			</if>
+			<if test="ratio != null">
+				#{ratio,jdbcType=INTEGER},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

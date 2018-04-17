@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.GroupClassInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.GroupClassInfo">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="class_id" jdbcType="BIGINT" property="classId" />
+		<result column="class_name" jdbcType="VARCHAR" property="className" />
+		<result column="class_parent_id" jdbcType="BIGINT" property="classParentId" />
+		<result column="class_parent_name" jdbcType="VARCHAR" property="classParentName" />
+		<result column="class_content" jdbcType="VARCHAR" property="classContent" />
+		<result column="state" jdbcType="INTEGER" property="state" />
+		<result column="create_date" jdbcType="DATE" property="createDate" />
+		<result column="template_type" jdbcType="VARCHAR" property="templateType" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="comp_index" jdbcType="INTEGER" property="compIndex" />
+		<result column="media_type" jdbcType="VARCHAR" property="mediaType" />
+		<result column="media_id" jdbcType="VARCHAR" property="mediaId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, class_id, class_name, class_parent_id,
+		class_parent_name,
+		class_content, state,
+		create_date, template_type,
+		remark, comp_index, media_type, media_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from group_class_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		group_class_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.GroupClassInfo">
+		insert into group_class_info
+		(id, class_id, class_name,
+		class_parent_id, class_parent_name,
+		class_content,
+		state, create_date, template_type,
+		remark, comp_index,
+		media_type,
+		media_id)
+		values (#{id,jdbcType=BIGINT},
+		#{classId,jdbcType=BIGINT},
+		#{className,jdbcType=VARCHAR},
+		#{classParentId,jdbcType=BIGINT}, #{classParentName,jdbcType=VARCHAR},
+		#{classContent,jdbcType=VARCHAR},
+		#{state,jdbcType=INTEGER},
+		#{createDate,jdbcType=DATE}, #{templateType,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{compIndex,jdbcType=INTEGER},
+		#{mediaType,jdbcType=VARCHAR},
+		#{mediaId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.GroupClassInfo">
+		insert into group_class_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="classId != null">
+				class_id,
+			</if>
+			<if test="className != null">
+				class_name,
+			</if>
+			<if test="classParentId != null">
+				class_parent_id,
+			</if>
+			<if test="classParentName != null">
+				class_parent_name,
+			</if>
+			<if test="classContent != null">
+				class_content,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="templateType != null">
+				template_type,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="compIndex != null">
+				comp_index,
+			</if>
+			<if test="mediaType != null">
+				media_type,
+			</if>
+			<if test="mediaId != null">
+				media_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="classId != null">
+				#{classId,jdbcType=BIGINT},
+			</if>
+			<if test="className != null">
+				#{className,jdbcType=VARCHAR},
+			</if>
+			<if test="classParentId != null">
+				#{classParentId,jdbcType=BIGINT},
+			</if>
+			<if test="classParentName != null">
+				#{classParentName,jdbcType=VARCHAR},
+			</if>
+			<if test="classContent != null">
+				#{classContent,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="templateType != null">
+				#{templateType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="compIndex != null">
+				#{compIndex,jdbcType=INTEGER},
+			</if>
+			<if test="mediaType != null">
+				#{mediaType,jdbcType=VARCHAR},
+			</if>
+			<if test="mediaId != null">
+				#{mediaId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.GroupClassInfo">
+		update group_class_info
+		<set>
+			<if test="classId != null">
+				class_id = #{classId,jdbcType=BIGINT},
+			</if>
+			<if test="className != null">
+				class_name = #{className,jdbcType=VARCHAR},
+			</if>
+			<if test="classParentId != null">
+				class_parent_id = #{classParentId,jdbcType=BIGINT},
+			</if>
+			<if test="classParentName != null">
+				class_parent_name = #{classParentName,jdbcType=VARCHAR},
+			</if>
+			<if test="classContent != null">
+				class_content = #{classContent,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="templateType != null">
+				template_type = #{templateType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="compIndex != null">
+				comp_index = #{compIndex,jdbcType=INTEGER},
+			</if>
+			<if test="mediaType != null">
+				media_type = #{mediaType,jdbcType=VARCHAR},
+			</if>
+			<if test="mediaId != null">
+				media_id = #{mediaId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.GroupClassInfo">
+		update
+		group_class_info
+		set class_id = #{classId,jdbcType=BIGINT},
+		class_name =
+		#{className,jdbcType=VARCHAR},
+		class_parent_id =
+		#{classParentId,jdbcType=BIGINT},
+		class_parent_name =
+		#{classParentName,jdbcType=VARCHAR},
+		class_content =
+		#{classContent,jdbcType=VARCHAR},
+		state = #{state,jdbcType=INTEGER},
+		create_date = #{createDate,jdbcType=DATE},
+		template_type =
+		#{templateType,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		comp_index = #{compIndex,jdbcType=INTEGER},
+		media_type =
+		#{mediaType,jdbcType=VARCHAR},
+		media_id = #{mediaId,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<!-- 根据单元id查询组课信息 -->
+	<select id="getClassInfoByUnitId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select gci.*
+		from group_class_info gci
+		left join cv_unit cu on
+		gci.class_id = cu.ID
+		where cu.id = #{unitId,jdbcType=INTEGER}
+	</select>
+</mapper>

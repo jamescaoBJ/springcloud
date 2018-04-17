@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.QuestSooBufferBusyMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.QuestSooBufferBusy">
+		<result column="TIMESTAMP" jdbcType="DATE" property="timestamp" />
+		<result column="P1" jdbcType="INTEGER" property="p1" />
+		<result column="P2" jdbcType="INTEGER" property="p2" />
+		<result column="P3" jdbcType="INTEGER" property="p3" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.QuestSooBufferBusy">
+		insert into quest_soo_buffer_busy (TIMESTAMP, P1, P2,
+		P3)
+		values (#{timestamp,jdbcType=DATE}, #{p1,jdbcType=INTEGER},
+		#{p2,jdbcType=INTEGER},
+		#{p3,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.QuestSooBufferBusy">
+		insert into quest_soo_buffer_busy
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="timestamp != null">
+				TIMESTAMP,
+			</if>
+			<if test="p1 != null">
+				P1,
+			</if>
+			<if test="p2 != null">
+				P2,
+			</if>
+			<if test="p3 != null">
+				P3,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=DATE},
+			</if>
+			<if test="p1 != null">
+				#{p1,jdbcType=INTEGER},
+			</if>
+			<if test="p2 != null">
+				#{p2,jdbcType=INTEGER},
+			</if>
+			<if test="p3 != null">
+				#{p3,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

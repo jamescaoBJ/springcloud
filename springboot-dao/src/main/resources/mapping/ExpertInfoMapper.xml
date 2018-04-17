@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExpertInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExpertInfo">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="CODE" jdbcType="VARCHAR" property="code" />
+		<result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+		<result column="SUBGROUPID" jdbcType="INTEGER" property="subgroupid" />
+		<result column="OFFICE" jdbcType="INTEGER" property="office" />
+		<result column="TERM" jdbcType="INTEGER" property="term" />
+		<result column="JOB" jdbcType="INTEGER" property="job" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="BREAKDATE" jdbcType="DATE" property="breakdate" />
+		<result column="LOCKSTATE" jdbcType="INTEGER" property="lockstate" />
+		<result column="WORKUNIT" jdbcType="VARCHAR" property="workunit" />
+		<result column="WORKUNIT_OFFICE" jdbcType="INTEGER" property="workunitOffice" />
+		<result column="PHONE1" jdbcType="VARCHAR" property="phone1" />
+		<result column="PHONE2" jdbcType="VARCHAR" property="phone2" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="CLERKNAME" jdbcType="VARCHAR" property="clerkname" />
+		<result column="CLERKPHONE" jdbcType="VARCHAR" property="clerkphone" />
+		<result column="BANK" jdbcType="VARCHAR" property="bank" />
+		<result column="BANKCARD" jdbcType="VARCHAR" property="bankcard" />
+		<result column="IDENTITYNUM" jdbcType="VARCHAR" property="identitynum" />
+		<result column="PHOTO" jdbcType="VARCHAR" property="photo" />
+		<result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="username" />
+		<result column="ISNATION" jdbcType="INTEGER" property="isnation" />
+		<result column="PERSONAGE" jdbcType="INTEGER" property="personage" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="WORKUNITTYPE" jdbcType="VARCHAR" property="workunittype" />
+		<result column="B" jdbcType="INTEGER" property="b" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, CODE, GROUPID, SUBGROUPID, OFFICE, TERM, JOB,
+		STATE, BREAKDATE,
+		LOCKSTATE,
+		WORKUNIT, WORKUNIT_OFFICE, PHONE1, PHONE2,
+		EMAIL, CLERKNAME, CLERKPHONE, BANK,
+		BANKCARD,
+		IDENTITYNUM, PHOTO,
+		SUMMARY, USERNAME, ISNATION, PERSONAGE, USER_ID, WORKUNITTYPE,
+		B
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from expert_info
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		expert_info
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExpertInfo">
+		insert into expert_info (ID,
+		NAME, CODE,
+		GROUPID, SUBGROUPID, OFFICE,
+		TERM, JOB, STATE, BREAKDATE,
+		LOCKSTATE, WORKUNIT, WORKUNIT_OFFICE,
+		PHONE1, PHONE2, EMAIL,
+		CLERKNAME,
+		CLERKPHONE, BANK,
+		BANKCARD, IDENTITYNUM, PHOTO,
+		SUMMARY, USERNAME,
+		ISNATION,
+		PERSONAGE, USER_ID, WORKUNITTYPE,
+		B)
+		values
+		(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{groupid,jdbcType=INTEGER},
+		#{subgroupid,jdbcType=INTEGER}, #{office,jdbcType=INTEGER},
+		#{term,jdbcType=INTEGER}, #{job,jdbcType=INTEGER},
+		#{state,jdbcType=INTEGER}, #{breakdate,jdbcType=DATE},
+		#{lockstate,jdbcType=INTEGER}, #{workunit,jdbcType=VARCHAR},
+		#{workunitOffice,jdbcType=INTEGER},
+		#{phone1,jdbcType=VARCHAR},
+		#{phone2,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+		#{clerkname,jdbcType=VARCHAR}, #{clerkphone,jdbcType=VARCHAR},
+		#{bank,jdbcType=VARCHAR},
+		#{bankcard,jdbcType=VARCHAR},
+		#{identitynum,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
+		#{summary,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+		#{isnation,jdbcType=INTEGER},
+		#{personage,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER}, #{workunittype,jdbcType=VARCHAR},
+		#{b,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExpertInfo">
+		insert into expert_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="groupid != null">
+				GROUPID,
+			</if>
+			<if test="subgroupid != null">
+				SUBGROUPID,
+			</if>
+			<if test="office != null">
+				OFFICE,
+			</if>
+			<if test="term != null">
+				TERM,
+			</if>
+			<if test="job != null">
+				JOB,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="breakdate != null">
+				BREAKDATE,
+			</if>
+			<if test="lockstate != null">
+				LOCKSTATE,
+			</if>
+			<if test="workunit != null">
+				WORKUNIT,
+			</if>
+			<if test="workunitOffice != null">
+				WORKUNIT_OFFICE,
+			</if>
+			<if test="phone1 != null">
+				PHONE1,
+			</if>
+			<if test="phone2 != null">
+				PHONE2,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="clerkname != null">
+				CLERKNAME,
+			</if>
+			<if test="clerkphone != null">
+				CLERKPHONE,
+			</if>
+			<if test="bank != null">
+				BANK,
+			</if>
+			<if test="bankcard != null">
+				BANKCARD,
+			</if>
+			<if test="identitynum != null">
+				IDENTITYNUM,
+			</if>
+			<if test="photo != null">
+				PHOTO,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="isnation != null">
+				ISNATION,
+			</if>
+			<if test="personage != null">
+				PERSONAGE,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="workunittype != null">
+				WORKUNITTYPE,
+			</if>
+			<if test="b != null">
+				B,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				#{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="subgroupid != null">
+				#{subgroupid,jdbcType=INTEGER},
+			</if>
+			<if test="office != null">
+				#{office,jdbcType=INTEGER},
+			</if>
+			<if test="term != null">
+				#{term,jdbcType=INTEGER},
+			</if>
+			<if test="job != null">
+				#{job,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="breakdate != null">
+				#{breakdate,jdbcType=DATE},
+			</if>
+			<if test="lockstate != null">
+				#{lockstate,jdbcType=INTEGER},
+			</if>
+			<if test="workunit != null">
+				#{workunit,jdbcType=VARCHAR},
+			</if>
+			<if test="workunitOffice != null">
+				#{workunitOffice,jdbcType=INTEGER},
+			</if>
+			<if test="phone1 != null">
+				#{phone1,jdbcType=VARCHAR},
+			</if>
+			<if test="phone2 != null">
+				#{phone2,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="clerkname != null">
+				#{clerkname,jdbcType=VARCHAR},
+			</if>
+			<if test="clerkphone != null">
+				#{clerkphone,jdbcType=VARCHAR},
+			</if>
+			<if test="bank != null">
+				#{bank,jdbcType=VARCHAR},
+			</if>
+			<if test="bankcard != null">
+				#{bankcard,jdbcType=VARCHAR},
+			</if>
+			<if test="identitynum != null">
+				#{identitynum,jdbcType=VARCHAR},
+			</if>
+			<if test="photo != null">
+				#{photo,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="isnation != null">
+				#{isnation,jdbcType=INTEGER},
+			</if>
+			<if test="personage != null">
+				#{personage,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="workunittype != null">
+				#{workunittype,jdbcType=VARCHAR},
+			</if>
+			<if test="b != null">
+				#{b,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExpertInfo">
+		update expert_info
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				GROUPID = #{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="subgroupid != null">
+				SUBGROUPID = #{subgroupid,jdbcType=INTEGER},
+			</if>
+			<if test="office != null">
+				OFFICE = #{office,jdbcType=INTEGER},
+			</if>
+			<if test="term != null">
+				TERM = #{term,jdbcType=INTEGER},
+			</if>
+			<if test="job != null">
+				JOB = #{job,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="breakdate != null">
+				BREAKDATE = #{breakdate,jdbcType=DATE},
+			</if>
+			<if test="lockstate != null">
+				LOCKSTATE = #{lockstate,jdbcType=INTEGER},
+			</if>
+			<if test="workunit != null">
+				WORKUNIT = #{workunit,jdbcType=VARCHAR},
+			</if>
+			<if test="workunitOffice != null">
+				WORKUNIT_OFFICE = #{workunitOffice,jdbcType=INTEGER},
+			</if>
+			<if test="phone1 != null">
+				PHONE1 = #{phone1,jdbcType=VARCHAR},
+			</if>
+			<if test="phone2 != null">
+				PHONE2 = #{phone2,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="clerkname != null">
+				CLERKNAME = #{clerkname,jdbcType=VARCHAR},
+			</if>
+			<if test="clerkphone != null">
+				CLERKPHONE = #{clerkphone,jdbcType=VARCHAR},
+			</if>
+			<if test="bank != null">
+				BANK = #{bank,jdbcType=VARCHAR},
+			</if>
+			<if test="bankcard != null">
+				BANKCARD = #{bankcard,jdbcType=VARCHAR},
+			</if>
+			<if test="identitynum != null">
+				IDENTITYNUM = #{identitynum,jdbcType=VARCHAR},
+			</if>
+			<if test="photo != null">
+				PHOTO = #{photo,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				USERNAME = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="isnation != null">
+				ISNATION = #{isnation,jdbcType=INTEGER},
+			</if>
+			<if test="personage != null">
+				PERSONAGE = #{personage,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="workunittype != null">
+				WORKUNITTYPE = #{workunittype,jdbcType=VARCHAR},
+			</if>
+			<if test="b != null">
+				B = #{b,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExpertInfo">
+		update expert_info
+		set NAME = #{name,jdbcType=VARCHAR},
+		CODE = #{code,jdbcType=VARCHAR},
+		GROUPID = #{groupid,jdbcType=INTEGER},
+		SUBGROUPID =
+		#{subgroupid,jdbcType=INTEGER},
+		OFFICE = #{office,jdbcType=INTEGER},
+		TERM = #{term,jdbcType=INTEGER},
+		JOB = #{job,jdbcType=INTEGER},
+		STATE =
+		#{state,jdbcType=INTEGER},
+		BREAKDATE = #{breakdate,jdbcType=DATE},
+		LOCKSTATE = #{lockstate,jdbcType=INTEGER},
+		WORKUNIT =
+		#{workunit,jdbcType=VARCHAR},
+		WORKUNIT_OFFICE =
+		#{workunitOffice,jdbcType=INTEGER},
+		PHONE1 =
+		#{phone1,jdbcType=VARCHAR},
+		PHONE2 = #{phone2,jdbcType=VARCHAR},
+		EMAIL =
+		#{email,jdbcType=VARCHAR},
+		CLERKNAME = #{clerkname,jdbcType=VARCHAR},
+		CLERKPHONE = #{clerkphone,jdbcType=VARCHAR},
+		BANK =
+		#{bank,jdbcType=VARCHAR},
+		BANKCARD = #{bankcard,jdbcType=VARCHAR},
+		IDENTITYNUM = #{identitynum,jdbcType=VARCHAR},
+		PHOTO =
+		#{photo,jdbcType=VARCHAR},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		USERNAME = #{username,jdbcType=VARCHAR},
+		ISNATION =
+		#{isnation,jdbcType=INTEGER},
+		PERSONAGE =
+		#{personage,jdbcType=INTEGER},
+		USER_ID = #{userId,jdbcType=INTEGER},
+		WORKUNITTYPE = #{workunittype,jdbcType=VARCHAR},
+		B =
+		#{b,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getTeachersByPage" parameterType="com.ncme.springboot.model.ExpertInfo"
+		resultType="com.ncme.springboot.model.ExpertInfo">
+
+		select * from expert_info e where e.personage= #{personage}
+
+		<if test="name != null">
+			and e.name like CONCAT('%', #{name}, '%')
+		</if>
+
+		order by convert(e.name using gbk) asc
+	</select>
+
+
+	<select id="getTeachersByPageRecord" parameterType="com.ncme.springboot.model.ExpertInfo"
+		resultType="com.ncme.springboot.footstone.response.Record">
+
+		select * from expert_info e where e.personage= #{personage}
+
+		<if test="name != null">
+			and e.name like CONCAT('%', #{name}, '%')
+		</if>
+
+		order by convert(e.name using gbk) asc
+	</select>
+
+	<select id="getExportById" resultType="com.ncme.springboot.model.ExpertInfo">
+
+		select * from expert_info
+		e where e.id = #{id} and e.personage= #{personage}
+		order by
+		convert(e.name using gbk) asc
+
+	</select>
+
+	<delete id="deleteExpertPropVal" parameterType="java.lang.Integer">
+		delete from
+		expert_prop_val
+		where expertid = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteExpertGroupVal" parameterType="java.lang.Integer">
+		delete from
+		expert_group_val
+		where expertid = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteCvRefTeacher" parameterType="java.lang.Integer">
+		delete from
+		cv_ref_teacher
+		where EXPERT_ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 根据项目id查询项目负责人或者示教教师 -->
+	<select id="listExpertByCvSetId" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT
+		t2.name as
+		expertName,t2.photo,t2.summary,t3.NAME AS jobName
+		from cv_set_expert t
+		join expert_info t2 on t.expert_id = t2.id
+		left join exam_prop_val t3
+		on t2.job = t3.id
+		where t.cv_set_id = #{cvSetId,jdbcType=INTEGER} and
+		t.type =
+		#{type,jdbcType=INTEGER}
+	</select>
+	
+	<select id="listTeachersByCvSetId" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT t6.name as jobName , t5.name as propNames,t4.name as expertName,t4.photo,t4.summary
+		FROM cv_set_schedule t 
+		LEFT JOIN cv_schedule t2  ON t2.SCHEDULE_ID = t.CV_SCHEDULE_ID 
+		LEFT JOIN cv_ref_teacher t3 ON t3.CV_ID = t2.CV_ID 
+		LEFT JOIN expert_info t4 ON t4.ID = t3.EXPERT_ID 
+		left join expert_prop_val v on v.EXPERTID = t4.id 
+		LEFT JOIN exam_prop_val t5 ON t5.id=v.PROPID 
+		left join exam_prop_val t6 on t6.ID=t4.JOB 
+		WHERE t.cv_set_id = #{cvSetId,jdbcType=INTEGER} AND t3.type =1
+	</select>
+	
+	<!-- 获取名师列表 -->
+	<select id="getFamousTeacherList" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+		SELECT e.id teacherId,e.`NAME` teacherName,e.photo teacherUrl,e.workunit_office teacherPost,e.workunit teacherHospital 
+		FROM content_edition_ref c
+		LEFT JOIN expert_info e ON e.ID = c.expert_info_id
+		WHERE e.lockstate = 1 AND c.CHECK_STATE = 1 and e.personage = 1
+		ORDER BY CONVERT (e. NAME USING gbk) ASC
+	</select>
+	
+	<!-- 获取专家负责的项目数量 (目前查询条件：项目为 线上的,并在有效期内的)-->
+	<select id="getProjectNumByExpertId" resultType="java.lang.Integer">
+		select COUNT(0) from (
+		select t.id from cv_set t
+		LEFT JOIN cv_set_authorization csa ON csa.CV_SET_ID = t.id
+		LEFT JOIN cv_set_authorization_region csar ON csar.AUTHORIZATION_ID = csa.id
+		left join cv_set_expert cse on cse.cv_set_id = t.id 
+		left join expert_info e on e.id = cse.expert_id 
+		where 1=1 and t.`STATUS` = 5 and cse.type = 1 
+		AND csa.CV_SET_START_DATE &lt;= CURDATE() AND csa.CV_SET_END_DATE >= CURDATE()
+		and e.id = #{expertId}
+		group by t.id
+		) l
+	</select>
+	
+	<!-- 获取专委会列表 -->
+	<select id="getCommitteeList" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+		select e.id specialId,i.`NAME` specialName,i.photo specialUrl,e.`NAME` specialTitle,i.workunit specialHospital
+		from content_edition_ref  c 
+		left JOIN expert_group e ON  c.EXPERT_ID = e.ID 
+		left join expert_info i on i.groupid = e.id
+		where e.parent = 0 and e.lockstate=1 and e.state = 1  
+		group by e.id  
+		order by e.organizedate desc
+	</select>
+	
+	<!-- 根据专委会ID,获取专委会详情 -->
+	<select id="getCommitteeDetail" parameterType="map" resultType="com.ncme.springboot.footstone.response.Record">
+		select e.id specialId,e.SUMMARY specialIntroudce,i.`NAME` specialName,i.WORKUNIT_OFFICE specialPost,i.workunit specialHospital,
+		i.summary expertIntroudce,i.photo specialUrl
+		from content_edition_ref  c 
+		left JOIN expert_group e ON  c.EXPERT_ID = e.ID 
+		left join expert_info i on i.groupid = e.id
+		where e.parent = 0 and e.lockstate=1 and e.state = 1  and e.id = #{specialId}
+		group by e.id  
+	</select>
+	
+	<!-- 根据专委会ID获取副主任委员信息 -->
+	<select id="getViceSpecial" resultType="com.ncme.springboot.footstone.response.Record">
+		<choose>  
+             <when test="type==2">select t.`NAME` vname,t.workunit vhospital </when>  
+             <when test="type==3">select t.`NAME` sname,t.workunit shospital </when>  
+        </choose>
+		from expert_info t 
+		left join expert_office_val eo on t.id = eo.expertid 
+		where t.groupid = #{specialId} and eo.officeid in (#{type}) and t.lockstate=1 
+		group by t.id order by convert(t.name using gbk)
+	</select>
+	
+	<!-- 根据专委会ID获取学组信息 -->
+	<select id="getLearnGroup" resultType="com.ncme.springboot.footstone.response.Record">
+		select DISTINCT e.id,e.`NAME` lTitle from expert_group e left join expert_group_term t on e.id=t.groupid 
+		where e.id>0  and e.lockstate = 1  and e.parent = #{specialId}  order by e.id desc
+	</select>
+	
+	<!-- 根据学组ID,获取学组下的学员(包含学组长)信息 -->
+	<select id="getLearnGroupMember" resultType="com.ncme.springboot.footstone.response.Record">
+		select t.`NAME` lname,t.workunit lhospital from expert_info t where t.subgroupid = #{id} 
+		and t.lockstate=1 order by convert(t.name using gbk)
+	</select>
+	
+</mapper>

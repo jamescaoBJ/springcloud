@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetExpertMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetExpertKey">
+		<id column="CV_SET_ID" jdbcType="INTEGER" property="cvSetId" />
+		<id column="EXPERT_ID" jdbcType="INTEGER" property="expertId" />
+		<id column="TYPE" jdbcType="INTEGER" property="type" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ncme.springboot.model.CvSetExpertKey">
+		delete from
+		cv_set_expert
+		where CV_SET_ID = #{cvSetId,jdbcType=INTEGER}
+		and
+		EXPERT_ID = #{expertId,jdbcType=INTEGER}
+		and TYPE =
+		#{type,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetExpertKey">
+		insert into cv_set_expert
+		(CV_SET_ID, EXPERT_ID, TYPE
+		)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{expertId,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetExpertKey">
+		insert into cv_set_expert
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				CV_SET_ID,
+			</if>
+			<if test="expertId != null">
+				EXPERT_ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="expertId != null">
+				#{expertId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExamPaperTacticMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExamPaperTactic">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="paper_id" jdbcType="INTEGER" property="paperId" />
+		<result column="TACTIC_NAME" jdbcType="VARCHAR" property="tacticName" />
+		<result column="QUESTION_TYPE_ID" jdbcType="VARCHAR" property="questionTypeId" />
+		<result column="question_type_name" jdbcType="VARCHAR"
+			property="questionTypeName" />
+		<result column="EXAM_PAPER_TYPE_ID" jdbcType="INTEGER"
+			property="examPaperTypeId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, paper_id, TACTIC_NAME, QUESTION_TYPE_ID,
+		question_type_name,
+		EXAM_PAPER_TYPE_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from exam_paper_tactic
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		exam_paper_tactic
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExamPaperTactic">
+		insert into exam_paper_tactic
+		(ID, paper_id, TACTIC_NAME,
+		QUESTION_TYPE_ID, question_type_name,
+		EXAM_PAPER_TYPE_ID
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{paperId,jdbcType=INTEGER},
+		#{tacticName,jdbcType=VARCHAR},
+		#{questionTypeId,jdbcType=VARCHAR},
+		#{questionTypeName,jdbcType=VARCHAR},
+		#{examPaperTypeId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExamPaperTactic">
+		insert into exam_paper_tactic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="paperId != null">
+				paper_id,
+			</if>
+			<if test="tacticName != null">
+				TACTIC_NAME,
+			</if>
+			<if test="questionTypeId != null">
+				QUESTION_TYPE_ID,
+			</if>
+			<if test="questionTypeName != null">
+				question_type_name,
+			</if>
+			<if test="examPaperTypeId != null">
+				EXAM_PAPER_TYPE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="paperId != null">
+				#{paperId,jdbcType=INTEGER},
+			</if>
+			<if test="tacticName != null">
+				#{tacticName,jdbcType=VARCHAR},
+			</if>
+			<if test="questionTypeId != null">
+				#{questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="questionTypeName != null">
+				#{questionTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="examPaperTypeId != null">
+				#{examPaperTypeId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.ExamPaperTactic">
+		update exam_paper_tactic
+		<set>
+			<if test="paperId != null">
+				paper_id = #{paperId,jdbcType=INTEGER},
+			</if>
+			<if test="tacticName != null">
+				TACTIC_NAME = #{tacticName,jdbcType=VARCHAR},
+			</if>
+			<if test="questionTypeId != null">
+				QUESTION_TYPE_ID = #{questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="questionTypeName != null">
+				question_type_name =
+				#{questionTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="examPaperTypeId != null">
+				EXAM_PAPER_TYPE_ID = #{examPaperTypeId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.ExamPaperTactic">
+		update
+		exam_paper_tactic
+		set paper_id = #{paperId,jdbcType=INTEGER},
+		TACTIC_NAME = #{tacticName,jdbcType=VARCHAR},
+		QUESTION_TYPE_ID =
+		#{questionTypeId,jdbcType=VARCHAR},
+		question_type_name =
+		#{questionTypeName,jdbcType=VARCHAR},
+		EXAM_PAPER_TYPE_ID =
+		#{examPaperTypeId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

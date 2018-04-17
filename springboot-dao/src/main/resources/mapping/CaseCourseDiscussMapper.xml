@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CaseCourseDiscussMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CaseCourseDiscuss">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="DISEASEID" jdbcType="INTEGER" property="diseaseid" />
+		<result column="PROP" jdbcType="VARCHAR" property="prop" />
+		<result column="ANALYSIS" jdbcType="VARCHAR" property="analysis" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DISEASEID, PROP, ANALYSIS
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from case_course_discuss
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		case_course_discuss
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CaseCourseDiscuss">
+		insert into
+		case_course_discuss (ID, DISEASEID, PROP,
+		ANALYSIS)
+		values
+		(#{id,jdbcType=INTEGER}, #{diseaseid,jdbcType=INTEGER},
+		#{prop,jdbcType=VARCHAR},
+		#{analysis,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CaseCourseDiscuss">
+		insert into case_course_discuss
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="diseaseid != null">
+				DISEASEID,
+			</if>
+			<if test="prop != null">
+				PROP,
+			</if>
+			<if test="analysis != null">
+				ANALYSIS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="diseaseid != null">
+				#{diseaseid,jdbcType=INTEGER},
+			</if>
+			<if test="prop != null">
+				#{prop,jdbcType=VARCHAR},
+			</if>
+			<if test="analysis != null">
+				#{analysis,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.CaseCourseDiscuss">
+		update case_course_discuss
+		<set>
+			<if test="diseaseid != null">
+				DISEASEID = #{diseaseid,jdbcType=INTEGER},
+			</if>
+			<if test="prop != null">
+				PROP = #{prop,jdbcType=VARCHAR},
+			</if>
+			<if test="analysis != null">
+				ANALYSIS = #{analysis,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.CaseCourseDiscuss">
+		update
+		case_course_discuss
+		set DISEASEID = #{diseaseid,jdbcType=INTEGER},
+		PROP
+		= #{prop,jdbcType=VARCHAR},
+		ANALYSIS = #{analysis,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

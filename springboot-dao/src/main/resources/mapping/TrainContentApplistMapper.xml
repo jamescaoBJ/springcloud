@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.TrainContentApplistMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.TrainContentApplist">
+		<id column="APP_ID" jdbcType="INTEGER" property="appId" />
+		<result column="APP_NAME" jdbcType="VARCHAR" property="appName" />
+		<result column="APP_URL" jdbcType="VARCHAR" property="appUrl" />
+		<result column="APPLICATION_ID" jdbcType="VARCHAR" property="applicationId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		APP_ID, APP_NAME, APP_URL, APPLICATION_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from train_content_applist
+		where APP_ID = #{appId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from train_content_applist
+		where APP_ID = #{appId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ncme.springboot.model.TrainContentApplist">
+		insert into train_content_applist (APP_ID, APP_NAME, APP_URL,
+		APPLICATION_ID)
+		values (#{appId,jdbcType=INTEGER}, #{appName,jdbcType=VARCHAR},
+		#{appUrl,jdbcType=VARCHAR},
+		#{applicationId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.TrainContentApplist">
+		insert into train_content_applist
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="appId != null">
+				APP_ID,
+			</if>
+			<if test="appName != null">
+				APP_NAME,
+			</if>
+			<if test="appUrl != null">
+				APP_URL,
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="appId != null">
+				#{appId,jdbcType=INTEGER},
+			</if>
+			<if test="appName != null">
+				#{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="appUrl != null">
+				#{appUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationId != null">
+				#{applicationId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ncme.springboot.model.TrainContentApplist">
+		update train_content_applist
+		<set>
+			<if test="appName != null">
+				APP_NAME = #{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="appUrl != null">
+				APP_URL = #{appUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="applicationId != null">
+				APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where APP_ID = #{appId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ncme.springboot.model.TrainContentApplist">
+		update train_content_applist
+		set APP_NAME = #{appName,jdbcType=VARCHAR},
+		APP_URL = #{appUrl,jdbcType=VARCHAR},
+		APPLICATION_ID = #{applicationId,jdbcType=VARCHAR}
+		where APP_ID = #{appId,jdbcType=INTEGER}
+	</update>
+</mapper>

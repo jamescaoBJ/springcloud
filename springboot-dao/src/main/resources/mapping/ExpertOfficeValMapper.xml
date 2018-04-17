@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.ExpertOfficeValMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.ExpertOfficeVal">
+		<result column="OFFICEID" jdbcType="INTEGER" property="officeid" />
+		<result column="EXPERTID" jdbcType="INTEGER" property="expertid" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.ExpertOfficeVal">
+		insert into expert_office_val
+		(OFFICEID, EXPERTID)
+		values (#{officeid,jdbcType=INTEGER},
+		#{expertid,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.ExpertOfficeVal">
+		insert into expert_office_val
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="officeid != null">
+				OFFICEID,
+			</if>
+			<if test="expertid != null">
+				EXPERTID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="officeid != null">
+				#{officeid,jdbcType=INTEGER},
+			</if>
+			<if test="expertid != null">
+				#{expertid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

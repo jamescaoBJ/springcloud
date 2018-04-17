@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncme.springboot.mapper.CvSetKnowledgebaseMapper">
+	<resultMap id="BaseResultMap" type="com.ncme.springboot.model.CvSetKnowledgebase">
+		<result column="cv_set_id" jdbcType="INTEGER" property="cvSetId" />
+		<result column="knowledgebase_name" jdbcType="VARCHAR"
+			property="knowledgebaseName" />
+		<result column="knowledgebase_url" jdbcType="VARCHAR" property="knowledgebaseUrl" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ncme.springboot.model.CvSetKnowledgebase">
+		insert into
+		cv_set_knowledgebase (cv_set_id, knowledgebase_name,
+		knowledgebase_url
+		)
+		values (#{cvSetId,jdbcType=INTEGER},
+		#{knowledgebaseName,jdbcType=VARCHAR},
+		#{knowledgebaseUrl,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ncme.springboot.model.CvSetKnowledgebase">
+		insert into cv_set_knowledgebase
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				cv_set_id,
+			</if>
+			<if test="knowledgebaseName != null">
+				knowledgebase_name,
+			</if>
+			<if test="knowledgebaseUrl != null">
+				knowledgebase_url,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cvSetId != null">
+				#{cvSetId,jdbcType=INTEGER},
+			</if>
+			<if test="knowledgebaseName != null">
+				#{knowledgebaseName,jdbcType=VARCHAR},
+			</if>
+			<if test="knowledgebaseUrl != null">
+				#{knowledgebaseUrl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>
